@@ -1,0 +1,19 @@
+{
+  "name": "get-shit-done",
+  "version": "0.0.1",
+  "description": "a calendar task manager to help you get shit done",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vincentbollaert/get-shit-done.git"
+  },
+  "author": "Vincent Bollaert",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vincentbollaert/get-shit-done/issues"
+  },
+  "homepage": "https://github.com/vincentbollaert/get-shit-done#readme"
+}
