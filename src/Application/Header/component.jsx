@@ -19,7 +19,7 @@ const Wrap = styled.div`
 
 const Header = () => (
   <Wrap>
-    <Github href="https://github.com/vincentbollaert/react-boilerplate-simple" target="_blank" rel="noopener noreferrer">
+    <Github href="https://github.com/vincentbollaert/get-shit-done" target="_blank" rel="noopener noreferrer">
       GitHub
     </Github>
   </Wrap>

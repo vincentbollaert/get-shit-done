@@ -26,9 +26,9 @@ const PageSpacer = styled.div`
   width: 100%;
   max-width: 92rem;
 
-  ${media.sm`
+  ${media.sm} {
     padding: 6rem 8.2rem;
-  `};
+  };
 `
 const ContentWrap = styled.div`
   position: relative;
