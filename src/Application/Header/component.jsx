@@ -13,8 +13,8 @@ const Wrap = styled.div`
   display: flex;
   align-items: center;
   padding: ${SIZE_LG};
-  background-color: ${WHITE};
-  box-shadow: ${BOX_SHADOW_LIGHT};
+  /* background-color: ${WHITE}; */
+  /* box-shadow: ${BOX_SHADOW_LIGHT}; */
 `
 
 const Header = () => (

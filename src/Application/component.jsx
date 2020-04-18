@@ -14,25 +14,25 @@ const GlobalStyle = createGlobalStyle`
 const PageWrap = styled.div`
   display: grid;
   grid-template:
-    "header header" 6rem
-    "main main" auto
-    / 16rem auto;
+    "header" 6rem
+    "main" auto;
   height: 100vh;
 `
 const PageSpacer = styled.div`
   grid-area: main;
   margin: 0 auto;
-  padding: ${SIZE_XLG} 4.2rem;
+  /* padding: ${SIZE_XLG} 4.2rem; */
   width: 100%;
-  max-width: 92rem;
+  /* max-width: 92rem; */
 
   ${media.sm} {
-    padding: 6rem 8.2rem;
+    padding: 0 2.4rem;
+    padding-bottom: 2.4rem;
   };
 `
 const ContentWrap = styled.div`
   position: relative;
-  padding: 2.8rem 0;
+  padding: 2rem 0;
   height: 100%;
   background-color: ${WHITE};
   box-shadow: ${BOX_SHADOW_LIGHT};

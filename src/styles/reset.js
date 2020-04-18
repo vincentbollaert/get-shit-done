@@ -69,9 +69,19 @@ export default `
   }
   table {
     border-collapse: collapse;
+    table-layout: fixed;
+    text-align: center;
     width: 100%;
   }
   th {
     text-align: left;
+  }
+  td {
+    padding: 11px 0;
+
+    &:hover {
+      color: transparent;
+      background-color: #eee;
+    }
   }
 `
