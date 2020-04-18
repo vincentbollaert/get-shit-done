@@ -1,6 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import styled from 'styled-components'
+import { WHITE } from '../../styles'
 
 const STYLE_SLEEP = '#5bccff38'
 const STYLE_WORK = '#efc55352'
@@ -16,27 +17,24 @@ const Column = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  /* box-shadow: 1px 0 0 0px #eee; */
-/* 
+  border-left: 1px solid #eee;
+  
   &:first-child {
-    box-shadow: 1px 0 0 0px red, -1px 0 0 0px red;
-  }; */
-
-  /* &:last-child {
-    box-shadow: none;
-  }; */
+    border-left: 0;
+  };
 `
 const Cell = styled.div`
   display: flex;
   flex-grow: 1;
   justify-content: center;
   align-items: center;
-  box-shadow: inset 1px 0 0 #eee;
-  ${p => p.accentColor && `box-shadow: inset 1px 0px 0 0px ${p.accentColor}`};
-  ${p => p.accentColor && `background-color: ${p.accentColor}`};
-
-  ${p => p.isFirst && `box-shadow: inset 1px 2px 0 0px ${p.accentColor}`};
-  ${p => p.isLast && `box-shadow: inset 1px -2px 0 0px ${p.accentColor}`};
+  ${p => p.accentColor && `
+    box-shadow: inset 4px 0px 0 0px ${WHITE}, inset -4px 0px 0 0px ${WHITE};
+    background-color: ${p.accentColor};
+    
+    ${p.isFirst && `box-shadow: inset 4px 0px 0 0px ${WHITE}, inset -4px 0px 0 0px ${WHITE}, inset 0px 4px 0 0px ${WHITE}`};
+    ${p.isLast && `box-shadow: inset 4px 0px 0 0px ${WHITE}, inset -4px 0px 0 0px ${WHITE}, inset 0px -4px 0 0px ${WHITE}`};
+  `};
 
   /* &:first-child {
     box-shadow: 0px 1px 0 0px red, 0px -1px 0 0px red;
