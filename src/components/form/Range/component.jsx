@@ -4,8 +4,8 @@ import styled from 'styled-components'
 import { AMAZONITE, WHITE } from '../../../styles'
 import { STYLE_BORDER_COLOR } from '../constants'
 
-const STYLE_THUMB_SIZE = '2.4rem'
-const STYLE_TRACK_HEIGHT = '0.4rem'
+const STYLE_THUMB_SIZE = '3rem'
+const STYLE_TRACK_HEIGHT = '0.9rem'
 const TEST = '#5bccff'
 
 const STYLES_THUMB = `
@@ -13,30 +13,25 @@ const STYLES_THUMB = `
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 0;
+  top: 50%;
   transform: translate(-50%, -50%);
   width: ${STYLE_THUMB_SIZE};
   height: ${STYLE_THUMB_SIZE};
   border-radius: 50%;
-  background-color: ${TEST};
+  background-color: ${WHITE};
   font-weight: bold;
-  color: ${WHITE};
-  font-size: 9px;
-  cursor: pointer;
-  transition: box-shadow 0.2s ease-out;
-
-  &:active {
-    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
-    background-color: ${AMAZONITE};
-  };
+  color: ${TEST};
+  font-size: 11px;
+  box-shadow: 0px 1px 5px -2px #8a8a8abf;
 `
 
 const Wrap = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   position: relative;
+  justify-content: center;
   width: 160px;
+  height: ${STYLE_THUMB_SIZE};
 `
 const InnerWrap = styled.div`
   position: relative;
@@ -45,7 +40,9 @@ const InnerWrap = styled.div`
 `
 const Track = styled.div`
   height: 100%;
-  background-color: ${STYLE_BORDER_COLOR};
+  background-color: rgba(188, 188, 188, 0.5);
+  border-radius: 4px;
+  box-shadow: inset 0 2px 5px -3px #8a8a8abf;
 `
 
 const ProgressBar = styled.div`
@@ -55,6 +52,7 @@ const ProgressBar = styled.div`
   right: ${p => p.right}%;
   height: 100%;
   background-color: ${TEST};
+  box-shadow: inset 0 2px 5px -3px #07567a80;
 `
 const Thumb = styled.div`
   ${STYLES_THUMB};
