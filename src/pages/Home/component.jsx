@@ -3,6 +3,7 @@ import moment from 'moment'
 import styled from 'styled-components'
 import { WHITE, BOX_SHADOW_LIGHT } from '../../styles'
 import { RangeField } from '../../components/form'
+import useFilterHours from '../../hooks/useFilterHours'
 
 const STYLE_SLEEP = '#5bccff38'
 const STYLE_WORK = '#efc55352'
@@ -102,10 +103,6 @@ const Cell = styled.div`
     ${p.isLast && `box-shadow: inset 0px -4px 0 0px ${WHITE}`};
     ${p.isOnly && `box-shadow: inset 0px 4px 0 0px ${WHITE}, inset 0px -4px 0 0px ${WHITE}`};
   `};
-
-  /* &:first-child {
-    box-shadow: 0px 1px 0 0px red, 0px -1px 0 0px red;
-  }; */
 `
 
 const data = {
@@ -115,27 +112,33 @@ const data = {
 }
 
 const Home = () => {
+  const [hoursToShow, setHoursToShow] = useFilterHours()
   const monthDaysTotal = moment().daysInMonth()
   const monthDays = Array(monthDaysTotal).fill(null).map((day, index) => index + 1)
-
-  const hoursInDay = Array(24).fill(null).map((item, index) => index)
-  console.log(monthDays)
 
   return (
     <Wrap>
       <PageActions>
-        <RangeField label="some label" max={24} idFrom="min" idTo="max" valueFrom={7} valueTo={20} />
+        <RangeField
+          min={0}
+          max={23}
+          idFrom="min"
+          idTo="max"
+          valueFrom={hoursToShow[0]}
+          valueTo={hoursToShow[hoursToShow.length - 1]}
+          onChange={setHoursToShow}
+        />
       </PageActions>
       <Paper>
         <CalendarWrap>
           <HourLabels>
-            {hoursInDay.map((hour) => <HourLabel key={hour}>{hour}</HourLabel>)}
+            {hoursToShow.map((hour) => <HourLabel key={hour}>{hour}</HourLabel>)}
           </HourLabels>
           <Row>
             {monthDays.map((day, index) => (
               <Column key={day} isCurrentWeek={index > 2 && index < 10} isCurrentDay={index === 4}>
                 <DayLabel>{day}</DayLabel>
-                {hoursInDay.map((hour) => {
+                {hoursToShow.map((hour) => {
                   let accentColor = null
                   let isFirst = false
                   let isLast = false
