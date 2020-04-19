@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import styled, { createGlobalStyle } from 'styled-components'
 import 'normalize.css'
-import { reset, media, BOX_SHADOW_LIGHT, WHITE, SIZE_XLG } from '../styles'
+import { reset, media, SIZE_XLG } from '../styles'
 
 import { homePath } from './paths'
 import Header from './Header/component'
@@ -30,13 +30,6 @@ const PageSpacer = styled.div`
     padding-bottom: 2.4rem;
   };
 `
-const ContentWrap = styled.div`
-  position: relative;
-  padding: 2rem 0;
-  height: 100%;
-  background-color: ${WHITE};
-  box-shadow: ${BOX_SHADOW_LIGHT};
-`
 
 const Application = () => {
   return (
@@ -45,12 +38,10 @@ const Application = () => {
       <PageWrap>
         <Header />
         <PageSpacer>
-          <ContentWrap>
-            <Switch>
-              <Route exact path={homePath()} component={Home} />
-              <Redirect to={homePath()} />
-            </Switch>
-          </ContentWrap>
+          <Switch>
+            <Route exact path={homePath()} component={Home} />
+            <Redirect to={homePath()} />
+          </Switch>
         </PageSpacer>
       </PageWrap>
     </Router>

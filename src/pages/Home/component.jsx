@@ -1,13 +1,30 @@
 import React from 'react'
 import moment from 'moment'
 import styled from 'styled-components'
-import { WHITE } from '../../styles'
+import { WHITE, BOX_SHADOW_LIGHT } from '../../styles'
+import { RangeField } from '../../components/form'
+import useFilterHours from '../../hooks/useFilterHours'
 
 const STYLE_SLEEP = '#5bccff38'
 const STYLE_WORK = '#efc55352'
 const STYLE_MORNING_ROUTINE = '#3deb7c4a'
 
 const Wrap = styled.div`
+  height: 100%;
+`
+const PageActions = styled.div`
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: flex-end;
+`
+const Paper = styled.div`
+  position: relative;
+  padding: 2rem 0;
+  height: 100%;
+  background-color: ${WHITE};
+  box-shadow: ${BOX_SHADOW_LIGHT};
+`
+const CalendarWrap = styled.div`
   display: flex;
   flex-direction: row;
   height: 100%;
@@ -86,10 +103,6 @@ const Cell = styled.div`
     ${p.isLast && `box-shadow: inset 0px -4px 0 0px ${WHITE}`};
     ${p.isOnly && `box-shadow: inset 0px 4px 0 0px ${WHITE}, inset 0px -4px 0 0px ${WHITE}`};
   `};
-
-  /* &:first-child {
-    box-shadow: 0px 1px 0 0px red, 0px -1px 0 0px red;
-  }; */
 `
 
 const data = {
@@ -99,49 +112,62 @@ const data = {
 }
 
 const Home = () => {
+  const [hoursToShow, setHoursToShow] = useFilterHours()
   const monthDaysTotal = moment().daysInMonth()
   const monthDays = Array(monthDaysTotal).fill(null).map((day, index) => index + 1)
 
-  const hoursInDay = Array(24).fill(null).map((item, index) => index)
-  console.log(monthDays)
-
   return (
     <Wrap>
-      <HourLabels>
-        {hoursInDay.map((hour) => <HourLabel key={hour}>{hour}</HourLabel>)}
-      </HourLabels>
-      <Row>
-        {monthDays.map((day, index) => (
-          <Column key={day} isCurrentWeek={index > 2 && index < 10} isCurrentDay={index === 4}>
-            <DayLabel>{day}</DayLabel>
-            {hoursInDay.map((hour) => {
-              let accentColor = null
-              let isFirst = false
-              let isLast = false
-              let isOnly = false
-              if (data.sleep.includes(hour)) {
-                accentColor = STYLE_SLEEP
-                isFirst = hour === data.sleep[0]
-                isLast = hour === data.sleep[data.sleep.length - 1]
-                isOnly = data.sleep.length === 1
-              } else if (data.work.includes(hour)) {
-                accentColor = STYLE_WORK
-                isFirst = hour === data.work[0]
-                isLast = hour === data.work[data.work.length - 1]
-                isOnly = data.work.length === 1
-              } else if (data.morningRoutine.includes(hour)) {
-                accentColor = STYLE_MORNING_ROUTINE
-                isFirst = hour === data.morningRoutine[0]
-                isLast = hour === data.morningRoutine[data.morningRoutine.length - 1]
-                isOnly = data.morningRoutine.length === 1
-              }
-              return (
-                <Cell key={hour} accentColor={accentColor} isFirst={isFirst} isLast={isLast} isOnly={isOnly}></Cell>
-              )
-            })}
-          </Column>
-        ))}
-      </Row>
+      <PageActions>
+        <RangeField
+          min={0}
+          max={23}
+          idFrom="min"
+          idTo="max"
+          valueFrom={hoursToShow[0]}
+          valueTo={hoursToShow[hoursToShow.length - 1]}
+          onChange={setHoursToShow}
+        />
+      </PageActions>
+      <Paper>
+        <CalendarWrap>
+          <HourLabels>
+            {hoursToShow.map((hour) => <HourLabel key={hour}>{hour}</HourLabel>)}
+          </HourLabels>
+          <Row>
+            {monthDays.map((day, index) => (
+              <Column key={day} isCurrentWeek={index > 2 && index < 10} isCurrentDay={index === 4}>
+                <DayLabel>{day}</DayLabel>
+                {hoursToShow.map((hour) => {
+                  let accentColor = null
+                  let isFirst = false
+                  let isLast = false
+                  let isOnly = false
+                  if (data.sleep.includes(hour)) {
+                    accentColor = STYLE_SLEEP
+                    isFirst = hour === data.sleep[0]
+                    isLast = hour === data.sleep[data.sleep.length - 1]
+                    isOnly = data.sleep.length === 1
+                  } else if (data.work.includes(hour)) {
+                    accentColor = STYLE_WORK
+                    isFirst = hour === data.work[0]
+                    isLast = hour === data.work[data.work.length - 1]
+                    isOnly = data.work.length === 1
+                  } else if (data.morningRoutine.includes(hour)) {
+                    accentColor = STYLE_MORNING_ROUTINE
+                    isFirst = hour === data.morningRoutine[0]
+                    isLast = hour === data.morningRoutine[data.morningRoutine.length - 1]
+                    isOnly = data.morningRoutine.length === 1
+                  }
+                  return (
+                    <Cell key={hour} accentColor={accentColor} isFirst={isFirst} isLast={isLast} isOnly={isOnly}></Cell>
+                  )
+                })}
+              </Column>
+            ))}
+          </Row>
+        </CalendarWrap>
+      </Paper>
     </Wrap>
   )
 }
