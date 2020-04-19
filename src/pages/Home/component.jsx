@@ -5,22 +5,22 @@ import { WHITE, BOX_SHADOW_LIGHT } from '../../styles'
 import { RangeField } from '../../components/form'
 import useFilterHours from '../../hooks/useFilterHours'
 
+const STYLE_HEADER_HEIGHT = '6rem'
 const STYLE_SLEEP = '#5bccff38'
 const STYLE_WORK = '#efc55352'
 const STYLE_MORNING_ROUTINE = '#3deb7c4a'
 
-const Wrap = styled.div`
-  height: 100%;
-`
+const Wrap = styled.div``
 const PageActions = styled.div`
   display: flex;
-  margin-bottom: 20px;
   justify-content: flex-end;
+  align-items: center;
+  height: ${STYLE_HEADER_HEIGHT};
 `
 const Paper = styled.div`
   position: relative;
   padding: 2rem 0;
-  height: 100%;
+  height: calc(100% - ${STYLE_HEADER_HEIGHT});
   background-color: ${WHITE};
   box-shadow: ${BOX_SHADOW_LIGHT};
 `
