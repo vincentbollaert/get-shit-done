@@ -22,6 +22,7 @@
     }
   },
   "rules": {
+    "react/prop-types": 0, // hide prop-type warnings for initial dev
     "react/require-extension": 0,
     "react/forbid-prop-types": 0,
     "react/jsx-filename-extension": [0, { "extensions": [".test.js", ".jsx"] }],
