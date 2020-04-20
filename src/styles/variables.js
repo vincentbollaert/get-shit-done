@@ -24,11 +24,10 @@ export const SIZE_XLG = `${SIZE_XLG_UNIT}rem`
 
 
 // colors
+export const SKY_BLUE = '#78E0FF'
 export const LIGHT_SEA_GREEN = '#21baa6'
 export const AMAZONITE = '#03d2b6'
 export const STEEL_BLUE = '#607D8B'
-// export const RACKLEY = '#5a93af'
-
 
 export const PASTEL_GREEN = '#7bd37c'
 export const SUNSET_ORANGE = '#ff5d5d'
