@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { actions } from '../../../state/todos/reducer'
-import { SIZE_XLG, SIZE_SM, SIZE_LG } from '../../../styles'
+import { SIZE_XLG, SIZE_SM } from '../../../styles'
 import binSvg from '../../../assets/svg/bin.svg'
 import Svg from '../../../components/Svg/component'
 
@@ -15,12 +15,13 @@ const Wrap = styled.div`
 const Title = styled.div`
   font-weight: bold;
   text-transform: uppercase;
-  margin-bottom: ${SIZE_LG};
+  margin-bottom: 3.4rem;
 `
 const Todo = styled.div`
   position: relative;
   display: flex;
   margin-bottom: ${SIZE_SM};
+  line-height: 1.5;
 
   &:last-child {
     margin-bottom: 0;
@@ -56,7 +57,7 @@ const Remove = styled(Svg)`
 `
 
 const Todos = () => {
-  const { todos, groups } = useSelector(state => state.todos)
+  const { todos } = useSelector(state => state.todos)
   const dispatch = useDispatch()
   console.log(todos)
 

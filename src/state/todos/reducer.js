@@ -1,21 +1,20 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit'
 
-// export const increment = createAction('increment')
-// export const decrement = createAction('decrement')
-
-// export default createReducer(0, {
-//   [increment]: (state, action) => state + action.payload,
-//   [decrement]: (state, action) => state - action.payload
-// })
-
 const initialState = {
-  groups: [{
-    groupName: 'development',
-    id: nanoid(),
-  }, {
-    groupName: 'health',
-    id: nanoid(),
-  }],
+  groups: [
+    {
+      groupName: 'development',
+      id: nanoid(),
+    },
+    {
+      groupName: 'career',
+      id: nanoid(),
+    },
+    {
+      groupName: 'health',
+      id: nanoid(),
+    },
+  ],
   todos: [
     {
       id: nanoid(),
@@ -49,7 +48,22 @@ const initialState = {
     },
     {
       id: nanoid(),
-      todoName: 'add renaming',
+      todoName: 'finalise resume',
+      isDone: false,
+    },
+    {
+      id: nanoid(),
+      todoName: 'complete courses',
+      isDone: false,
+    },
+    {
+      id: nanoid(),
+      todoName: 'stretch',
+      isDone: false,
+    },
+    {
+      id: nanoid(),
+      todoName: 'make Mai a kickass meal',
       isDone: false,
     },
   ]
