@@ -1,5 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { v4 as uuid } from 'uuid'
+import { createSlice, nanoid } from '@reduxjs/toolkit'
 
 // export const increment = createAction('increment')
 // export const decrement = createAction('decrement')
@@ -12,44 +11,44 @@ import { v4 as uuid } from 'uuid'
 const initialState = {
   groups: [{
     groupName: 'development',
-    id: uuid(),
+    id: nanoid(),
   }, {
     groupName: 'health',
-    id: uuid(),
+    id: nanoid(),
   }],
   todos: [
     {
-      id: uuid(),
+      id: nanoid(),
       todoName: 'finish this todo',
       isDone: false,
     },
     {
-      id: uuid(),
+      id: nanoid(),
       todoName: 'add an input to add new todos',
       isDone: false,
     },
     {
-      id: uuid(),
+      id: nanoid(),
       todoName: 'add validation to input',
       isDone: false,
     },
     {
-      id: uuid(),
+      id: nanoid(),
       todoName: 'add toast for removing todos',
       isDone: false,
     },
     {
-      id: uuid(),
+      id: nanoid(),
       todoName: 'add conditional styling for isDone',
       isDone: false,
     },
     {
-      id: uuid(),
+      id: nanoid(),
       todoName: 'add grouping',
       isDone: false,
     },
     {
-      id: uuid(),
+      id: nanoid(),
       todoName: 'add renaming',
       isDone: false,
     },
@@ -61,12 +60,12 @@ export const { reducer, actions } = createSlice({
   initialState: initialState,
   reducers: {
     add: ({ todos }, { payload }) => todos.push(payload),
-    remove: ({ todos }, { payload }) => todos.filter(x => x.id === payload),
+    remove: (state, { payload }) => ({ ...state, todos: state.todos.filter(x => x.id !== payload) }), // return & don't mod
     update: ({ todos }, { payload }) => {
       const todo = todos.find(x => x.id === payload)
       return todo.todoName = payload.todoName
     },
-    toggleIsDone: ({ todos }, { payload }) => {
+    toggleIsDone: ({ todos }, { payload }) => { // OR mod & don't return
       const todo = todos.find(x => x.id === payload)
       todo.isDone = !todo.isDone
     }
