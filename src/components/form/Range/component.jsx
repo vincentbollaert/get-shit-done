@@ -2,7 +2,6 @@ import React from 'react'
 import { string, number, func } from 'prop-types'
 import styled from 'styled-components'
 import { AMAZONITE, WHITE } from '../../../styles'
-import { STYLE_BORDER_COLOR } from '../constants'
 
 const STYLE_THUMB_SIZE = '3rem'
 const STYLE_TRACK_HEIGHT = '0.9rem'
