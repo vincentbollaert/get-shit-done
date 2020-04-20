@@ -5,7 +5,7 @@ import 'normalize.css'
 import { reset, media, SIZE_XLG } from '../styles'
 
 import { homePath } from './paths'
-import Home from '../pages/Home/component'
+import Home from '../pages/Home/container'
 
 const GlobalStyle = createGlobalStyle`
   ${reset};
