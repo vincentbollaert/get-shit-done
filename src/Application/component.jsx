@@ -1,11 +1,13 @@
 import React from 'react'
+import store from './root/store'
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import styled, { createGlobalStyle } from 'styled-components'
 import 'normalize.css'
-import { reset, media, SIZE_XLG } from '../styles'
+import { reset } from '../styles'
 
 import { homePath } from './paths'
 import Home from '../pages/Home/container'
+import { Provider } from 'react-redux'
 
 const GlobalStyle = createGlobalStyle`
   ${reset};
@@ -19,15 +21,17 @@ const PageWrap = styled.div`
 
 const Application = () => {
   return (
-    <Router>
-      <GlobalStyle />
-      <PageWrap>
-        <Switch>
-          <Route exact path={homePath()} component={Home} />
-          <Redirect to={homePath()} />
-        </Switch>
-      </PageWrap>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <GlobalStyle />
+        <PageWrap>
+          <Switch>
+            <Route exact path={homePath()} component={Home} />
+            <Redirect to={homePath()} />
+          </Switch>
+        </PageWrap>
+      </Router>
+    </Provider>
   )
 }
 
