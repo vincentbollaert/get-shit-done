@@ -50,12 +50,6 @@ const Remove = styled(Svg)`
   width: 1.6rem;
   height: 1.6rem;
   cursor: pointer;
-  opacity: 0.4;
-
-  &:hover {
-    fill: red;
-    opacity: 1;
-  };
 `
 
 const Todos = () => {
@@ -75,7 +69,7 @@ const Todos = () => {
             {todoName}
           </Name>
           <Actions>
-            <Remove svg={binSvg} onClick={() => dispatch(actions.remove(id))} />
+            <Remove isDanger theme="light" svg={binSvg} onClick={() => dispatch(actions.remove(id))} />
           </Actions>
         </Todo>
       ))}

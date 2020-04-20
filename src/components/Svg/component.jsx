@@ -1,7 +1,7 @@
 import React from 'react'
-import { string, number, func } from 'prop-types'
+import { string, number, func, bool } from 'prop-types'
 import styled from 'styled-components'
-import { SONIC_SILVER } from '../../styles'
+import { SONIC_SILVER, SUNSET_ORANGE, GAINSBORO, JET } from '../../styles'
 
 const Wrap = styled.span`
   display: flex;
@@ -10,14 +10,19 @@ const Wrap = styled.span`
   height: ${props => props.size}rem;
   fill: ${p => p.theme === 'light' ? SONIC_SILVER : 'red'};
 
+  &:hover {
+    fill: ${p => p.isDanger ? SUNSET_ORANGE : p.theme === 'light' ? GAINSBORO : JET};
+  };
+
   svg {
     width: 100%;
     height: 100%;
   };
 `
 
-const Svg = ({ theme, svg, size, className, onClick }) => (
+const Svg = ({ isDanger, theme, svg, size, className, onClick }) => (
   <Wrap
+    isDanger={isDanger}
     theme={theme}
     size={size}
     className={className}
@@ -27,6 +32,7 @@ const Svg = ({ theme, svg, size, className, onClick }) => (
 )
 
 Svg.propTypes = {
+  isDanger: bool,
   theme: string,
   svg: string.isRequired,
   size: number,
@@ -35,6 +41,7 @@ Svg.propTypes = {
 }
 
 Svg.defaultProps = {
+  isDanger: false,
   theme: 'light',
   size: 2.4,
   onClick() {},
