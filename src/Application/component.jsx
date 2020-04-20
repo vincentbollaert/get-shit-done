@@ -6,7 +6,7 @@ import 'normalize.css'
 import { reset } from '../styles'
 
 import { homePath } from './paths'
-import Home from '../pages/Home/container'
+import Home from '../pages/Home/component'
 import { Provider } from 'react-redux'
 
 const GlobalStyle = createGlobalStyle`

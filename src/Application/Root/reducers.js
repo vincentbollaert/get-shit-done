@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import todosReducer from '../../state/todos/reducer'
+import { reducer as todosReducer } from '../../state/todos/reducer'
 
 export default combineReducers({
   todos: todosReducer,

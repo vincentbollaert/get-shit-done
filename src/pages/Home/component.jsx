@@ -120,8 +120,7 @@ const data = {
   work: [9, 10, 11, 12, 13, 14, 15, 16],
 }
 
-const Home = ({ todos }) => {
-  console.log('todos', todos)
+const Home = () => {
   const [hoursToShow, setHoursToShow] = useFilterHours()
   const monthDaysTotal = moment().daysInMonth()
   const monthDays = Array(monthDaysTotal).fill(null).map((day, index) => index + 1)
