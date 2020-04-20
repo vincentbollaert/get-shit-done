@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { actions } from '../../../state/todos/reducer'
-import { SIZE_XLG, SIZE_SM } from '../../../styles'
+import { SIZE_XLG, SIZE_XSM, QUICK_SILVER, ISABELLINE } from '../../../styles'
 import binSvg from '../../../assets/svg/bin.svg'
 import Svg from '../../../components/Svg/component'
 
@@ -12,7 +12,7 @@ const Wrap = styled.div`
   width: 240px;
   background-color: #444;
   padding: ${SIZE_XLG};
-  color: #eee;
+  color: ${ISABELLINE};
 `
 const Title = styled.div`
   font-weight: bold;
@@ -22,17 +22,16 @@ const Title = styled.div`
 const Todo = styled.div`
   position: relative;
   display: flex;
-  margin-bottom: ${SIZE_SM};
+  align-items: center;
+  padding: ${SIZE_XSM} 1.6rem ${SIZE_XSM} 0;
+  cursor: pointer;
   line-height: 1.5;
 
-  &:last-child {
-    margin-bottom: 0;
+  &:hover {
+    color: ${QUICK_SILVER};
   };
 `
 const Name = styled.div`
-  padding-right: 1.6rem;
-  cursor: pointer;
-
   ${p => p.isDone && `
     opacity: 0.6;
   `};
