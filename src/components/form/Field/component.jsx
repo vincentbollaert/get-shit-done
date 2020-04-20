@@ -1,6 +1,6 @@
 import React, { memo, useState } from 'react'
 import styled from 'styled-components'
-import { SIZE_XSM, SONIC_SILVER, GRAY_X11 } from '../../../styles'
+import { SIZE_XSM, SIZE_SM, SONIC_SILVER, GRAY_X11 } from '../../../styles'
 
 import Svg from '../../Svg/component'
 import Placeholder from '../Placeholder/component'
@@ -10,7 +10,6 @@ import {
   STYLE_UNDERLINE_LIGHT,
   STYLE_UNDERLINE_ERROR,
   STYLE_UNDERLINE_HOVER_LIGHT,
-  STYLE_HAS_VALUE_PADDING,
   STYLE_HEIGHT,
 } from '../shared'
 import ErrorField from '../../error/Field/component'
@@ -23,7 +22,7 @@ const Wrap = styled.div`
   color: ${p => p.theme === 'light' ? STYLE_COLOR_LIGHT : STYLE_COLOR_DARK};
 `
 const Input = styled.input`
-  ${p => p.value && `padding: ${STYLE_HAS_VALUE_PADDING}`};
+  padding-top: ${SIZE_SM};
   width: 100%;
   height: ${STYLE_HEIGHT};
   box-shadow: ${p => p.isError ? STYLE_UNDERLINE_ERROR : STYLE_UNDERLINE_LIGHT};
