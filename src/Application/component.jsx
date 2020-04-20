@@ -1,5 +1,5 @@
 import React from 'react'
-import store from './root/store'
+import store from './Root/store'
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import styled, { createGlobalStyle } from 'styled-components'
 import 'normalize.css'
