@@ -7,17 +7,21 @@ const Wrap = styled.div`
   width: 240px;
   background-color: #444;
 `
+const Todo = styled.div`
+`
 
 const Todos = () => {
-  const todos = useSelector(state => state.todos)
+  const { todos, groups } = useSelector(state => state.todos)
   const dispatch = useDispatch()
-  // console.log(actions)
+  console.log(todos)
 
   return (
     <Wrap>
-      {todos}
-      <button onClick={() => dispatch(actions.increment())}>increment</button>
-      <button onClick={() => dispatch(actions.decrement())}>decrement</button>
+      {todos.map(({ id, todoName, groupId }) => (
+        <Todo key={id}>{todoName}</Todo>
+      ))}
+      {/* <button onClick={() => dispatch(actions.increment())}>increment</button>
+      <button onClick={() => dispatch(actions.decrement())}>decrement</button> */}
       I am todos
     </Wrap>
   )

@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { v4 as uuid } from 'uuid'
 
 // export const increment = createAction('increment')
 // export const decrement = createAction('decrement')
@@ -8,14 +9,30 @@ import { createSlice } from '@reduxjs/toolkit'
 //   [decrement]: (state, action) => state - action.payload
 // })
 
+const initialState = {
+  groups: [{
+    groupName: 'development',
+    id: uuid(),
+  }, {
+    groupName: 'health',
+    id: uuid(),
+  }],
+  todos: [{
+    id: uuid(),
+    todoName: 'finish this todo',
+  }]
+}
 
 export const { reducer, actions } = createSlice({
   name: 'todos',
-  initialState: 0,
+  initialState: initialState,
   reducers: {
-    increment: (state, action) => state + 1,
-    decrement: (state, action) => state - 1,
-    deletePost(state, action) {}
+    add: ({ todos }, { payload }) => todos.push(payload),
+    remove: ({ todos }, { payload }) => todos.filter(x => x.id === payload.id),
+    update: ({ todos }, { payload }) => {
+      const todo = todos.find(x => x.id === payload.id)
+      return todo.todoName = payload.todoName
+    }
   }
 })
 
