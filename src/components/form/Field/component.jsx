@@ -7,9 +7,9 @@ import Placeholder from '../Placeholder/component'
 import {
   STYLE_COLOR_LIGHT,
   STYLE_COLOR_DARK,
-  STYLE_UNDERLINE,
+  STYLE_UNDERLINE_LIGHT,
   STYLE_UNDERLINE_ERROR,
-  STYLE_UNDERLINE_HAS_VALUE,
+  STYLE_UNDERLINE_HOVER_LIGHT,
   STYLE_HAS_VALUE_PADDING,
   STYLE_HEIGHT,
 } from '../shared'
@@ -26,13 +26,13 @@ const Input = styled.input`
   ${p => p.value && `padding: ${STYLE_HAS_VALUE_PADDING}`};
   width: 100%;
   height: ${STYLE_HEIGHT};
-  box-shadow: ${p => p.isError ? STYLE_UNDERLINE_ERROR : STYLE_UNDERLINE};
+  box-shadow: ${p => p.isError ? STYLE_UNDERLINE_ERROR : STYLE_UNDERLINE_LIGHT};
   background-color: transparent;
   color: inherit;
 
   &:hover {
     ${p => !p.isError && `
-      box-shadow: ${STYLE_UNDERLINE_HAS_VALUE};
+      box-shadow: ${STYLE_UNDERLINE_HOVER_LIGHT};
 
       & ~ .${CN_FIELD_SVG} {
         fill: ${SONIC_SILVER};
