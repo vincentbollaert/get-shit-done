@@ -73,7 +73,11 @@ export const { reducer, actions } = createSlice({
   name: 'todos',
   initialState: initialState,
   reducers: {
-    add: ({ todos }, { payload }) => todos.push(payload),
+    add({ todos }, { payload }) { todos.push({
+      id: nanoid(),
+      isDone: false,
+      todoName: payload,
+    }) },
     remove: (state, { payload }) => ({ ...state, todos: state.todos.filter(x => x.id !== payload) }), // return & don't mod
     update: ({ todos }, { payload }) => {
       const todo = todos.find(x => x.id === payload)

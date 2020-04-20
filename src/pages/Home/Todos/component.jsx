@@ -6,6 +6,8 @@ import { SIZE_XLG, SIZE_SM } from '../../../styles'
 import binSvg from '../../../assets/svg/bin.svg'
 import Svg from '../../../components/Svg/component'
 
+import AddNewTodo from '../AddNewTodo/component'
+
 const Wrap = styled.div`
   width: 240px;
   background-color: #444;
@@ -59,13 +61,15 @@ const Remove = styled(Svg)`
 const Todos = () => {
   const { todos } = useSelector(state => state.todos)
   const dispatch = useDispatch()
+  const addNewTodo = ({ todo }) => dispatch(actions.add(todo))
   console.log(todos)
 
   return (
     <Wrap>
       <Title>Todos</Title>
-
-      {todos.map(({ id, todoName, isDone, groupId }) => (
+      
+      <AddNewTodo addNewTodo={addNewTodo} />
+      {todos.map(({ id, todoName, isDone }) => (
         <Todo key={id}>
           <Name isDone={isDone} onClick={() => dispatch(actions.toggleIsDone(id))}>
             {todoName}
