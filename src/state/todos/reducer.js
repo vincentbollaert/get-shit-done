@@ -17,10 +17,43 @@ const initialState = {
     groupName: 'health',
     id: uuid(),
   }],
-  todos: [{
-    id: uuid(),
-    todoName: 'finish this todo',
-  }]
+  todos: [
+    {
+      id: uuid(),
+      todoName: 'finish this todo',
+      isDone: false,
+    },
+    {
+      id: uuid(),
+      todoName: 'add an input to add new todos',
+      isDone: false,
+    },
+    {
+      id: uuid(),
+      todoName: 'add validation to input',
+      isDone: false,
+    },
+    {
+      id: uuid(),
+      todoName: 'add toast for removing todos',
+      isDone: false,
+    },
+    {
+      id: uuid(),
+      todoName: 'add conditional styling for isDone',
+      isDone: false,
+    },
+    {
+      id: uuid(),
+      todoName: 'add grouping',
+      isDone: false,
+    },
+    {
+      id: uuid(),
+      todoName: 'add renaming',
+      isDone: false,
+    },
+  ]
 }
 
 export const { reducer, actions } = createSlice({
@@ -28,10 +61,14 @@ export const { reducer, actions } = createSlice({
   initialState: initialState,
   reducers: {
     add: ({ todos }, { payload }) => todos.push(payload),
-    remove: ({ todos }, { payload }) => todos.filter(x => x.id === payload.id),
+    remove: ({ todos }, { payload }) => todos.filter(x => x.id === payload),
     update: ({ todos }, { payload }) => {
-      const todo = todos.find(x => x.id === payload.id)
+      const todo = todos.find(x => x.id === payload)
       return todo.todoName = payload.todoName
+    },
+    toggleIsDone: ({ todos }, { payload }) => {
+      const todo = todos.find(x => x.id === payload)
+      todo.isDone = !todo.isDone
     }
   }
 })
