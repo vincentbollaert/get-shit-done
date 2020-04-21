@@ -18,9 +18,9 @@ const ToastWrap = styled.div`
 `
 const Toast = styled.div`
   padding: ${SIZE_XLG};
-  padding-right: 8rem;
+  padding-right: 8.8rem;
   width: 100%;
-  max-width: 30rem;
+  width: 30rem;
   line-height: 1.4;
   background: ${SUNSET_ORANGE};
   color: ${WHITE};
@@ -31,7 +31,17 @@ const Toast = styled.div`
     opacity: 0.5;
   };
 `
-const Message = styled.div``
+const Prefix = styled.span`
+  margin-right: ${SIZE_SM};
+  border-right: 1px solid #ffffff5e;
+  padding-right: ${SIZE_SM};
+  font-weight: bold;
+`
+const Message = styled.div`
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+`
 const Undo = styled.div`
   position: absolute;
   right: ${SIZE_LG};
@@ -50,10 +60,10 @@ const ToastMessages = () => {
 
   return (
     <Wrap>
-      {toastMessages.map(({ id, message, undoFunction}) => (
+      {toastMessages.map(({ id, message, messagePrefix, undoFunction}) => (
         <ToastWrap key={id}>
-          <Toast onClick={() => dispatch(actions.remove(id))}>
-            <Message>{message}</Message>
+          <Toast onClick={() => dispatch(actions.removeToast(id))}>
+            <Message><Prefix>{messagePrefix}</Prefix>{message}</Message>
           </Toast>
           <Undo>undo</Undo>
         </ToastWrap>
