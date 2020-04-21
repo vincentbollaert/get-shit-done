@@ -1,11 +1,12 @@
 import React from 'react'
 import moment from 'moment'
 import styled from 'styled-components'
-import { media, WHITE, BOX_SHADOW_LIGHT } from '../../styles'
+import { WHITE, BOX_SHADOW_LIGHT } from '../../styles'
 import { RangeField } from '../../components/form'
 import Toast from '../../components/Toast/component'
 import useFilterHours from '../../hooks/useFilterHours'
 
+import Sidebar from './Sidebar/component'
 import Todos from './Todos/component'
 
 const STYLE_HEADER_HEIGHT = '6rem'
@@ -14,11 +15,12 @@ const STYLE_WORK = '#efc55352'
 const STYLE_MORNING_ROUTINE = '#3deb7c4a'
 
 const PageWrap = styled.div`
-  display: grid;
+  display: flex;
   overflow: hidden;
-  grid-template: "main sidebar" / auto 240px;
+  position: relative;
 `
 const Wrap = styled.div`
+  flex-grow: 1;
   padding: 2.4rem;
 `
 const PageActions = styled.div`
@@ -181,9 +183,9 @@ const Home = () => {
           <Toast />
         </Paper>
       </Wrap>
-      <Todos>
-
-      </Todos>
+      <Sidebar>
+        <Todos />
+      </Sidebar>
     </PageWrap>
   )
 }

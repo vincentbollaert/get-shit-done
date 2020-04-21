@@ -3,18 +3,12 @@ import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { actions as todoActions } from '../../../state/todos/reducer'
 import { actions as toastActions } from '../../../components/Toast/reducer'
-import { SIZE_XLG, SIZE_XSM, QUICK_SILVER, ISABELLINE } from '../../../styles'
+import { SIZE_XSM, QUICK_SILVER } from '../../../styles'
 import binSvg from '../../../assets/svg/bin.svg'
 import Svg from '../../../components/Svg/component'
 
 import AddNewTodo from '../AddNewTodo/component'
 
-const Wrap = styled.div`
-  width: 240px;
-  background-color: #444;
-  padding: ${SIZE_XLG};
-  color: ${ISABELLINE};
-`
 const Title = styled.div`
   font-weight: bold;
   text-transform: uppercase;
@@ -61,10 +55,9 @@ const Todos = () => {
     dispatch(remove(id))
     dispatch(toastActions.addToast({ prefix: 'task removed', message: name }))
   }
-  // console.log(todos)
 
   return (
-    <Wrap>
+    <>
       <Title>Todos</Title>
       
       <AddNewTodo addNewTodo={onAddNewTodo} />
@@ -78,7 +71,7 @@ const Todos = () => {
           </Actions>
         </Todo>
       ))}
-    </Wrap>
+    </>
   )
 }
 
