@@ -3,7 +3,7 @@ import moment from 'moment'
 import styled from 'styled-components'
 import { media, WHITE, BOX_SHADOW_LIGHT } from '../../styles'
 import { RangeField } from '../../components/form'
-import ToastMessages from '../../components/ToastMessages/component'
+import Toast from '../../components/Toast/component'
 import useFilterHours from '../../hooks/useFilterHours'
 
 import Todos from './Todos/component'
@@ -178,7 +178,7 @@ const Home = () => {
               ))}
             </Row>
           </CalendarWrap>
-          <ToastMessages />
+          <Toast />
         </Paper>
       </Wrap>
       <Todos>

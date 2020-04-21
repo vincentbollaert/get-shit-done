@@ -10,17 +10,9 @@ const Wrap = styled.div`
   position: absolute;
   right: 24px;
   bottom: 24px;
-`
-const ToastWrap = styled.div`
-  position: absolute;
-  right: 0;
-  bottom: ${p => p.index * 10}px;
-  z-index: ${p => -p.index};
   display: flex;
   align-items: center;
-  margin-top: ${SIZE_MD};
   cursor: pointer;
-  transform: ${p => `scale(${p.scaling})`};
 `
 const Toast = styled.div`
   padding: ${SIZE_XLG};
@@ -62,25 +54,23 @@ const Undo = styled.div`
 `
 
 const ToastMessages = () => {
-  const { toastMessages } = useSelector(state => state.toastMessages)
+  const { message, messagePrefix } = useSelector(state => state.toast.toast)
   const dispatch = useDispatch()
-  const onRemove = (id) => { dispatch(actions.removeToast(id)) }
-  const onUndo = (id) => {
+  const onRemove = () => { dispatch(actions.removeToast()) }
+  const onUndo = () => {
     dispatch({ type: 'UNDO' })
-    onRemove(id)
+    onRemove()
   }
 
   return (
-    <Wrap>
-      {toastMessages.map(({ id, message, messagePrefix, undoFunction}, index) => (
-        <ToastWrap key={id} index={index} scaling={1 - index / 10}>
-          <Toast onClick={() => onRemove(id)}>
-            <Message><Prefix>{messagePrefix}</Prefix>{message}</Message>
-          </Toast>
-          <Undo onClick={() => onUndo(id)}>undo</Undo>
-        </ToastWrap>
-      ))}
-    </Wrap>
+    !message ? null : (
+      <Wrap>
+        <Toast onClick={() => onRemove()}>
+          <Message><Prefix>{messagePrefix}</Prefix>{message}</Message>
+        </Toast>
+        <Undo onClick={() => onUndo()}>undo</Undo>
+      </Wrap>
+    )
   )
 }
 
