@@ -1,6 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { SIZE_MD, SIZE_XLG, WHITE, SUNSET_ORANGE, SIZE_LG, SIZE_SM } from '../../styles'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { actions } from './reducer'
 
 const Wrap = styled.div`
   position: absolute;
@@ -41,26 +44,15 @@ const Undo = styled.div`
   border-radius: 21px;
 `
 
-const data = [
-  {
-    id: 1,
-    message: 'task removed: finish these todos'
-  },
-  {
-    id: 1,
-    message: 'task removed: get our a bit'
-  },
-  {
-    id: 1,
-    message: 'task removed: finalise the design of this toast component'
-  },
-]
 const ToastMessages = () => {
+  const { toastMessages } = useSelector(state => state.toastMessages)
+  const dispatch = useDispatch()
+
   return (
     <Wrap>
-      {data.map(({ id, message, undoFunction}) => (
+      {toastMessages.map(({ id, message, undoFunction}) => (
         <ToastWrap key={id}>
-          <Toast>
+          <Toast onClick={() => dispatch(actions.remove(id))}>
             <Message>{message}</Message>
           </Toast>
           <Undo>undo</Undo>

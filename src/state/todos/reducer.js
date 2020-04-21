@@ -78,12 +78,14 @@ export const { reducer, actions } = createSlice({
       isDone: false,
       todoName: payload,
     }) },
-    remove: (state, { payload }) => ({ ...state, todos: state.todos.filter(x => x.id !== payload) }), // return & don't mod
+    remove(state, { payload }) {
+      state.todos = state.todos.filter(x => x.id !== payload)
+    },
     update: ({ todos }, { payload }) => {
       const todo = todos.find(x => x.id === payload)
       return todo.todoName = payload.todoName
     },
-    toggleIsDone: ({ todos }, { payload }) => { // OR mod & don't return
+    toggleIsDone: ({ todos }, { payload }) => {
       const todo = todos.find(x => x.id === payload)
       todo.isDone = !todo.isDone
     }
