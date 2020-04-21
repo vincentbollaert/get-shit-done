@@ -1,6 +1,9 @@
 import { combineReducers } from 'redux'
-import { reducer as todosReducer } from '../../state/todos/reducer'
+import undoable from '../../state/undoable'
+import { reducer as todos } from '../../state/todos/reducer'
+import { reducer as toast } from '../../components/Toast/reducer'
 
 export default combineReducers({
-  todos: todosReducer,
+  todos: undoable(todos),
+  toast,
 })
