@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
-import { actions } from '../../../state/todos/reducer'
+import { actions as todoActions } from '../../../state/todos/reducer'
+import { actions as toastActions } from '../../../components/ToastMessages/reducer'
 import { SIZE_XLG, SIZE_XSM, QUICK_SILVER, ISABELLINE } from '../../../styles'
 import binSvg from '../../../assets/svg/bin.svg'
 import Svg from '../../../components/Svg/component'
@@ -52,23 +53,28 @@ const Remove = styled(Svg)`
 `
 
 const Todos = () => {
+  const { add, remove, toggleIsDone } = todoActions
   const { todos } = useSelector(state => state.todos)
   const dispatch = useDispatch()
-  const addNewTodo = ({ todo }) => dispatch(actions.add(todo))
+  const onAddNewTodo = ({ todo }) => { dispatch(add(todo)) }
+  const onRemoveTodo = (id, name) => {
+    dispatch(remove(id))
+    dispatch(toastActions.addToast({ prefix: 'task removed', message: name }))
+  }
   console.log(todos)
 
   return (
     <Wrap>
       <Title>Todos</Title>
       
-      <AddNewTodo addNewTodo={addNewTodo} />
+      <AddNewTodo addNewTodo={onAddNewTodo} />
       {todos.map(({ id, todoName, isDone }) => (
         <Todo key={id}>
-          <Name isDone={isDone} onClick={() => dispatch(actions.toggleIsDone(id))}>
+          <Name isDone={isDone} onClick={() => dispatch(toggleIsDone(id))}>
             {todoName}
           </Name>
           <Actions>
-            <Remove isDanger theme="light" svg={binSvg} onClick={() => dispatch(actions.remove(id))} />
+            <Remove isDanger theme="light" svg={binSvg} onClick={() => onRemoveTodo(id, todoName)} />
           </Actions>
         </Todo>
       ))}
