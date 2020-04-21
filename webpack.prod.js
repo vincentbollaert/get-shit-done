@@ -4,7 +4,6 @@ import merge from 'webpack-merge'
 import common from './webpack.common'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import TerserPlugin from 'terser-webpack-plugin'
-import OptimizeJsPlugin from 'optimize-js-plugin'
 import OptimizeCssnanoPlugin from '@intervolga/optimize-cssnano-plugin'
 import CompressionPlugin from 'compression-webpack-plugin'
 
@@ -46,7 +45,6 @@ module.exports = merge(common, {
       minRatio: 0.8,
       deleteOriginalAssets: false,
     }),
-    new OptimizeJsPlugin({ sourceMap: false }),
     new OptimizeCssnanoPlugin({
       cssnanoOptions: {
         preset: ['default', {
