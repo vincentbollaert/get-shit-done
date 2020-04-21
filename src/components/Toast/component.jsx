@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect, memo, useState, useRef } from 'react'
 import styled from 'styled-components'
-import { SIZE_MD, SIZE_XLG, WHITE, SUNSET_ORANGE, SIZE_LG, SIZE_SM } from '../../styles'
+import { SIZE_MD, SIZE_XLG, WHITE, SUNSET_ORANGE, SIZE_LG, SIZE_SM, SIZE_XSM } from '../../styles'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { actions } from './reducer'
@@ -14,11 +14,11 @@ const Wrap = styled.div`
   align-items: center;
   cursor: pointer;
 `
-const Toast = styled.div`
+const InnerWrap = styled.div`
   padding: ${SIZE_XLG};
-  padding-right: 8.8rem;
+  padding-right: 10rem;
   width: 100%;
-  width: 30rem;
+  width: 32rem;
   line-height: 1.4;
   background: ${SUNSET_ORANGE};
   color: ${WHITE};
@@ -52,26 +52,56 @@ const Undo = styled.div`
   font-size: 10px;
   border-radius: 21px;
 `
+const TimeRemaining = styled.span`
+  margin-left: ${SIZE_XSM};
+  font-weight: bold;
+`
 
-const ToastMessages = () => {
+function Toast() {
+  const timeoutIdRef = useRef(null)
+  const timeRemainingRef = useRef(null)
+  const [timeRemaining, setTimeRemaining] = useState(5)
   const { message, messagePrefix } = useSelector(state => state.toast.toast)
   const dispatch = useDispatch()
+  timeRemainingRef.current = timeRemaining
+
   const onRemove = () => { dispatch(actions.removeToast()) }
   const onUndo = () => {
     dispatch({ type: 'UNDO' })
     onRemove()
   }
+  const onUpdateTimer = () => {
+    setTimeRemaining(t => t - 1)
+    if (timeRemainingRef.current === 0) {
+      onRemove()
+    }
+  }
+
+  useEffect(() => {
+    if (message) {
+      timeoutIdRef.current = setInterval(() => onUpdateTimer(), 1000)
+    }
+
+    return () => {
+      clearTimeout(timeoutIdRef.current)
+      setTimeRemaining(5)
+    }
+  }, [message])
+
 
   return (
     !message ? null : (
       <Wrap>
-        <Toast onClick={() => onRemove()}>
+        <InnerWrap onClick={onRemove}>
           <Message><Prefix>{messagePrefix}</Prefix>{message}</Message>
-        </Toast>
-        <Undo onClick={() => onUndo()}>undo</Undo>
+        </InnerWrap>
+        <Undo onClick={onUndo}>
+          undo
+          <TimeRemaining>{timeRemaining}</TimeRemaining>
+        </Undo>
       </Wrap>
     )
   )
 }
 
-export default ToastMessages
+export default React.memo(Toast)

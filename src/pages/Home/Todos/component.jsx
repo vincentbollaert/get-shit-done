@@ -61,7 +61,7 @@ const Todos = () => {
     dispatch(remove(id))
     dispatch(toastActions.addToast({ prefix: 'task removed', message: name }))
   }
-  console.log(todos)
+  // console.log(todos)
 
   return (
     <Wrap>
