@@ -54,7 +54,7 @@ const Remove = styled(Svg)`
 
 const Todos = () => {
   const { add, remove, toggleIsDone } = todoActions
-  const { todos } = useSelector(state => state.todos)
+  const { todos } = useSelector(state => state.todos.present)
   const dispatch = useDispatch()
   const onAddNewTodo = ({ todo }) => { dispatch(add(todo)) }
   const onRemoveTodo = (id, name) => {
