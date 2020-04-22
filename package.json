@@ -15,7 +15,8 @@
   "license": "MIT",
   "scripts": {
     "develop": "webpack-dev-server --config-register @babel/register --config webpack.dev.js --progress --watch",
-    "production": "webpack --config-register @babel/register --config webpack.prod.js"
+    "production": "webpack --config-register @babel/register --config webpack.prod.js",
+    "production:preview": "http-server public"
   },
   "dependencies": {
     "@babel/polyfill": "^7.8.7",
@@ -62,6 +63,7 @@
     "file-loader": "^6.0.0",
     "html-loader": "^1.0.0",
     "html-webpack-plugin": "^4.0.1",
+    "http-server": "^0.12.1",
     "mini-css-extract-plugin": "^0.9.0",
     "raw-loader": "^4.0.0",
     "sass-loader": "^8.0.2",
@@ -72,6 +74,7 @@
     "webpack-cli": "3.3.11",
     "webpack-dev-middleware": "^3.7.2",
     "webpack-dev-server": "^3.10.3",
-    "webpack-hot-middleware": "^2.25.0"
+    "webpack-hot-middleware": "^2.25.0",
+    "workbox-webpack-plugin": "^5.1.2"
   }
 }
