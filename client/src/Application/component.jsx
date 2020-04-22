@@ -1,13 +1,15 @@
-import React from 'react'
-import store from './Root/store'
+import React, { useState } from 'react'
+import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import styled, { createGlobalStyle } from 'styled-components'
+import store from './Root/store'
 import 'normalize.css'
 import { reset } from '../styles'
 
 import { homePath } from './paths'
 import Home from '../pages/Home/component'
-import { Provider } from 'react-redux'
+import SWUpdate from '../components/SWUpdate/component'
+import UseServiceWorker from '../hooks/useServiceWorker'
 
 const GlobalStyle = createGlobalStyle`
   ${reset};
@@ -20,6 +22,8 @@ const PageWrap = styled.div`
 `
 
 const Application = () => {
+  const [isUpdateAvailable] = UseServiceWorker(false)
+
   return (
     <Provider store={store}>
       <Router>
@@ -29,6 +33,7 @@ const Application = () => {
             <Route exact path={homePath()} component={Home} />
             <Redirect to={homePath()} />
           </Switch>
+          <SWUpdate isUpdateAvailable={isUpdateAvailable} />
         </PageWrap>
       </Router>
     </Provider>

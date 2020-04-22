@@ -6,6 +6,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import TerserPlugin from 'terser-webpack-plugin'
 import OptimizeCssnanoPlugin from '@intervolga/optimize-cssnano-plugin'
 import CompressionPlugin from 'compression-webpack-plugin'
+import { GenerateSW } from 'workbox-webpack-plugin'
 
 module.exports = merge(common, {
   mode: 'production',
@@ -19,15 +20,25 @@ module.exports = merge(common, {
   },
 
   optimization: {
+    minimize: true,
     minimizer: [
-      new TerserPlugin({ cache: true, parallel: true }),
+      new TerserPlugin({
+        parallel: true,
+        terserOptions: {
+          ecma: 6,
+          output: {
+            comments: false,
+          },
+        },
+        extractComments: false,
+      }),
     ],
     splitChunks: {
       cacheGroups: {
-        commons: {
+        vendors: {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendor',
-          chunks: 'initial'
+          chunks: 'all'
         }
       },
     },
@@ -36,12 +47,22 @@ module.exports = merge(common, {
     removeEmptyChunks: false,
   },
   plugins: [
+    new GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true,
+      maximumFileSizeToCacheInBytes: 10000000,
+    }),
+    new CompressionPlugin({
+      filename: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.js$|\.css$|\.html$/,
+      minRatio: 0.8,
+    }),
     new CompressionPlugin({
       filename: '[path].br[query]',
       algorithm: 'brotliCompress',
       test: /\.(js|css|html|svg)$/,
       compressionOptions: { level: 11 },
-      threshold: 10240,
       minRatio: 0.8,
       deleteOriginalAssets: false,
     }),
@@ -53,6 +74,6 @@ module.exports = merge(common, {
           },
         }],
       },
-    })
+    }),
   ]
 })

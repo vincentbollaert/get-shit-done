@@ -4,6 +4,7 @@ import webpack from 'webpack'
 import HtmlWebPackPlugin from 'html-webpack-plugin'
 import path from 'path'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const entryPath = './src/index.jsx'
 const outputPath = './public'
@@ -33,7 +34,7 @@ const config = {
 
   module: {
     rules: [
-      { test: /\.(js|jsx)$/, use: 'babel-loader' },
+      { test: /\.(js|jsx)$/, use: 'babel-loader', exclude: [/node_modules/] },
       { test: /\.html$/, use: 'html-loader' },
       { test: /\.md$/, use: [ 'html-loader', 'highlight-loader', 'markdown-loader'] },
       { test: /\.svg$/, use: 'raw-loader' },
@@ -53,6 +54,7 @@ const config = {
   },
 
   plugins: [
+    new BundleAnalyzerPlugin(),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
     new MiniCssExtractPlugin({
       fileName: 'style.css',
@@ -62,11 +64,6 @@ const config = {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('development'),
-      },
-    }),
   ],
 }
 
