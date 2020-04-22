@@ -6,6 +6,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import TerserPlugin from 'terser-webpack-plugin'
 import OptimizeCssnanoPlugin from '@intervolga/optimize-cssnano-plugin'
 import CompressionPlugin from 'compression-webpack-plugin'
+import { GenerateSW } from 'workbox-webpack-plugin'
 
 module.exports = merge(common, {
   mode: 'production',
@@ -46,6 +47,11 @@ module.exports = merge(common, {
     removeEmptyChunks: false,
   },
   plugins: [
+    new GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true,
+      maximumFileSizeToCacheInBytes: 10000000,
+    }),
     new CompressionPlugin({
       filename: '[path].gz[query]',
       algorithm: 'gzip',
@@ -68,6 +74,6 @@ module.exports = merge(common, {
           },
         }],
       },
-    })
+    }),
   ]
 })

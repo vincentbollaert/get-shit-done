@@ -4,7 +4,6 @@ import webpack from 'webpack'
 import HtmlWebPackPlugin from 'html-webpack-plugin'
 import path from 'path'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import { GenerateSW } from 'workbox-webpack-plugin'
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const entryPath = './src/index.jsx'
@@ -56,14 +55,6 @@ const config = {
 
   plugins: [
     new BundleAnalyzerPlugin(),
-    // new InjectManifest({
-    //   swSrc: './src/service-worker.js',
-    // }),
-    new GenerateSW({
-      clientsClaim: true,
-      skipWaiting: true,
-      // maximumFileSizeToCacheInBytes: 10000000,
-    }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
     new MiniCssExtractPlugin({
       fileName: 'style.css',
