@@ -19,15 +19,25 @@ module.exports = merge(common, {
   },
 
   optimization: {
+    minimize: true,
     minimizer: [
-      new TerserPlugin({ cache: true, parallel: true }),
+      new TerserPlugin({
+        parallel: true,
+        terserOptions: {
+          ecma: 6,
+          output: {
+            comments: false,
+          },
+        },
+        extractComments: false,
+      }),
     ],
     splitChunks: {
       cacheGroups: {
-        commons: {
+        vendors: {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendor',
-          chunks: 'initial'
+          chunks: 'all'
         }
       },
     },
