@@ -4,7 +4,7 @@ import webpack from 'webpack'
 import HtmlWebPackPlugin from 'html-webpack-plugin'
 import path from 'path'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import { InjectManifest } from 'workbox-webpack-plugin'
+import { GenerateSW } from 'workbox-webpack-plugin'
 
 const entryPath = './src/index.jsx'
 const outputPath = './public'
@@ -54,8 +54,12 @@ const config = {
   },
 
   plugins: [
-    new InjectManifest({
-      swSrc: './src/service-worker.js',
+    // new InjectManifest({
+    //   swSrc: './src/service-worker.js',
+    // }),
+    new GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true,
     }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
     new MiniCssExtractPlugin({
