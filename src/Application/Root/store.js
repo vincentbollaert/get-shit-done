@@ -1,16 +1,9 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
-import { createPromise } from 'redux-promise-middleware'
+import { configureStore } from '@reduxjs/toolkit'
 
 import reducers from './reducers'
 
 const store = configureStore({
   reducer: reducers,
-  middleware: [
-    ...getDefaultMiddleware(),
-    createPromise({
-      promiseTypeSuffixes: ['REQUEST', 'SUCCESS', 'FAIL']
-    }),
-  ],
 })
 
 if (process.env.NODE_ENV !== 'production' && module.hot) {

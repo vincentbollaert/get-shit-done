@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import moment from 'moment'
 import styled from 'styled-components'
 import { WHITE, BOX_SHADOW_LIGHT } from '../../styles'
@@ -6,8 +6,11 @@ import { RangeField } from '../../components/form'
 import Toast from '../../components/Toast/component'
 import useFilterHours from '../../hooks/useFilterHours'
 
-import Sidebar from './Sidebar/component'
-import Todos from './Todos/component'
+// import Sidebar from './Sidebar/component'
+// import Todos from './Todos/component'
+
+const Todos = React.lazy(() => import('./Todos/component'))
+const Sidebar = React.lazy(() => import('./Sidebar/component'))
 
 const STYLE_HEADER_HEIGHT = '6rem'
 const STYLE_SLEEP = '#5bccff38'
@@ -183,9 +186,12 @@ const Home = () => {
           <Toast />
         </Paper>
       </Wrap>
-      <Sidebar>
-        <Todos />
-      </Sidebar>
+      
+      <Suspense fallback={<div>Loading...</div>}>
+        <Sidebar>
+          <Todos />
+        </Sidebar>
+      </Suspense>
     </PageWrap>
   )
 }
