@@ -32,7 +32,7 @@ const PageWrap = styled.div`
 `
 const Wrap = styled.div`
   flex-grow: 1;
-  padding-top: 2.4rem;
+  padding: 2.4rem 0;
   position: relative;
   background-color: #333;
 `
@@ -128,6 +128,11 @@ const DayLabel = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  
+  ${p => p.isBottom && `
+    top: 100%;
+    bottom: auto;
+  `};
 
   ${p => p.isCurrentDay && `
     color: #333;
@@ -237,6 +242,7 @@ const Home = () => {
                       <Cell key={hour} accentColor={accentColor} isFirst={isFirst} isLast={isLast} isOnly={isOnly}></Cell>
                     )
                   })}
+                  <DayLabel isBottom isCurrentDay={isCurrentDay}>{day} {dayOfWeek}</DayLabel>
                 </Column>
               )
             })}
