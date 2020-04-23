@@ -35,7 +35,7 @@ const CurrentTime = () => {
   }
 
   useEffect(() => {
-    window.setInterval(updateTime, 1000)
+    // window.setInterval(updateTime, 1000)
   }, [])
 
   return (
