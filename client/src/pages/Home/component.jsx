@@ -13,6 +13,7 @@ import { WHITE, BOX_SHADOW_LIGHT } from '../../styles'
 import { RangeField } from '../../components/form'
 import Toast from '../../components/Toast/component'
 import useFilterHours from '../../hooks/useFilterHours'
+import CurrentTime from './CurrentTime/component'
 
 // import Sidebar from './Sidebar/component'
 // import Todos from './Todos/component'
@@ -166,17 +167,18 @@ const Home = () => {
             </HourLabels>
             <Row>
               {monthDays.map((date, index) => {
-                // console.log(day)
                 const day = format(date, 'd')
                 const dayOfWeek = format(date, 'EEEEE')
+                const isCurrentDay = isToday(date)
 
                 return (
                   <Column
                     key={day}
                     isCurrentWeek={isThisWeek(date, { weekStartsOn: 1 })}
-                    isCurrentDay={isToday(date)}
+                    isCurrentDay={isCurrentDay}
                   >
                     <DayLabel>{day} {dayOfWeek}</DayLabel>
+                    {isCurrentDay && <CurrentTime date={date} />}
                     {hoursToShow.map((hour) => {
                       let accentColor = null
                       let isFirst = false
