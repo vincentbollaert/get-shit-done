@@ -20,6 +20,7 @@ import CurrentTime from './CurrentTime/component'
 
 const Todos = React.lazy(() => import('./Todos/component'))
 const Sidebar = React.lazy(() => import('./Sidebar/component'))
+import HourLabels from './HourLabels/component'
 
 const STYLE_SLEEP = '#5bccff38'
 const STYLE_WORK = '#efc55352'
@@ -40,40 +41,6 @@ const CalendarWrap = styled.div`
   display: flex;
   height: 100%;
   background-color: ${WHITE};
-`
-const HourLabels = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 12px 0 12px 8px;
-  background-color: #333;
-`
-const HourLabel = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-  padding-right: 4px;
-  text-align: center;
-  font-size: 10px;
-  color: #c4c4c4;
-
-  &::before {
-    display: block;
-    content: '';
-    position: absolute;
-    right: 0;
-    width: 6px;
-    height: 1px;
-    bottom: 0;
-    background-color: #ffffff42;
-  };
-
-  &:last-child {
-    &::before {
-      display: none;
-    };
-  };
 `
 const Row = styled.div`
   display: flex;
@@ -188,7 +155,7 @@ const Home = () => {
     start: sub(lastDayOfMonth(new Date()), { days: getDaysInMonth(new Date()) - 1 }),
     end: lastDayOfMonth(new Date())
   })
-  console.log(monthDays)
+  console.log(hoursToShow)
 
   return (
     <PageWrap>
@@ -205,9 +172,7 @@ const Home = () => {
           />
         </PageActions> */}
         <CalendarWrap>
-          <HourLabels>
-            {hoursToShow.map((hour) => <HourLabel key={hour}>{hour}</HourLabel>)}
-          </HourLabels>
+          <HourLabels hoursToShow={hoursToShow} setHoursToShow={setHoursToShow} />
           <Row>
             {monthDays.map((date, index) => {
               const day = format(date, 'd')
