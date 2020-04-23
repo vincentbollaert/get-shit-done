@@ -21,7 +21,6 @@ import CurrentTime from './CurrentTime/component'
 const Todos = React.lazy(() => import('./Todos/component'))
 const Sidebar = React.lazy(() => import('./Sidebar/component'))
 
-const STYLE_HEADER_HEIGHT = '6rem'
 const STYLE_SLEEP = '#5bccff38'
 const STYLE_WORK = '#efc55352'
 const STYLE_MORNING_ROUTINE = '#3deb7c4a'
@@ -33,30 +32,20 @@ const PageWrap = styled.div`
 `
 const Wrap = styled.div`
   flex-grow: 1;
-  padding: 2.4rem;
-`
-const PageActions = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  height: ${STYLE_HEADER_HEIGHT};
-`
-const Paper = styled.div`
+  padding: 2.4rem 0;
   position: relative;
-  padding: 2rem 0;
-  height: calc(100% - ${STYLE_HEADER_HEIGHT});
-  background-color: ${WHITE};
-  box-shadow: ${BOX_SHADOW_LIGHT};
+  background-color: #333;
 `
 const CalendarWrap = styled.div`
   display: flex;
-  flex-direction: row;
   height: 100%;
+  background-color: ${WHITE};
 `
 const HourLabels = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 4px 0 4px 8px;
+  padding: 12px 0 12px 8px;
+  background-color: #333;
 `
 const HourLabel = styled.div`
   position: relative;
@@ -74,10 +63,16 @@ const HourLabel = styled.div`
     content: '';
     position: absolute;
     right: 0;
-    width: 4px;
+    width: 6px;
     height: 1px;
     bottom: 0;
-    background-color: #e0e0e0;
+    background-color: #ffffff42;
+  };
+
+  &:last-child {
+    &::before {
+      display: none;
+    };
   };
 `
 const Row = styled.div`
@@ -92,7 +87,15 @@ const Column = styled.div`
   position: relative;
   opacity: 0.8;
   border-left: 1px solid #eee;
-  padding: 4px;
+  padding: 12px 4px;
+
+  &:first-child {
+    padding-left: 12px;
+  };
+
+  &:last-child {
+    padding-right: 12px;
+  };
 
   ${p => p.isCurrentWeek && `
     flex-grow: 2;
@@ -100,7 +103,11 @@ const Column = styled.div`
   `};
 
   ${p => p.isCurrentDay && `
-    background-color: whitesmoke;
+    border-left: 1px solid #333;
+
+    & + ${Column} {
+      border-left: 1px solid #333;
+    };
   `};
   
   &:last-child {
@@ -109,24 +116,61 @@ const Column = styled.div`
 `
 const DayLabel = styled.div`
   position: absolute;
-  top: -10px;
   right: 0;
   left: 0;
   text-align: center;
   font-size: 10px;
   color: #c4c4c4;
+  background: #333;
+  height: 24px;
+  bottom: 100%;
+  top: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  ${p => p.isBottom && `
+    top: 100%;
+    bottom: auto;
+
+    &::before {
+      top: 0;
+      bottom: auto;
+    };
+  `};
+
+  ${p => p.isCurrentDay && `
+    color: #333;
+    background-color: ${WHITE};
+  `};
+
+  &::before {
+    display: block;
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 1px;
+    height: 6px;
+    bottom: 0;
+    background-color: #ffffff42;
+
+    ${Column}:last-child & {
+      display: none;
+    };
+  };
 `
 const Cell = styled.div`
   display: flex;
   flex-grow: 1;
   justify-content: center;
   align-items: center;
+  border-radius: 2px;
   ${p => p.accentColor && `
     background-color: ${p.accentColor};
     
-    ${p.isFirst && `box-shadow: inset 0px 4px 0 0px ${WHITE}`};
-    ${p.isLast && `box-shadow: inset 0px -4px 0 0px ${WHITE}`};
-    ${p.isOnly && `box-shadow: inset 0px 4px 0 0px ${WHITE}, inset 0px -4px 0 0px ${WHITE}`};
+    ${p.isFirst && `box-shadow: inset 0px 2px 0 0px ${WHITE};`};
+    ${p.isLast && `box-shadow: inset 0px -2px 0 0px ${WHITE};`};
+    ${p.isOnly && `box-shadow: inset 0px 2px 0 0px ${WHITE}, inset 0px -2px 0 0px ${WHITE};`};
   `};
 `
 
@@ -149,7 +193,7 @@ const Home = () => {
   return (
     <PageWrap>
       <Wrap>
-        <PageActions>
+        {/* <PageActions>
           <RangeField
             min={0}
             max={23}
@@ -159,58 +203,57 @@ const Home = () => {
             valueTo={hoursToShow[hoursToShow.length - 1]}
             onChange={setHoursToShow}
           />
-        </PageActions>
-        <Paper>
-          <CalendarWrap>
-            <HourLabels>
-              {hoursToShow.map((hour) => <HourLabel key={hour}>{hour}</HourLabel>)}
-            </HourLabels>
-            <Row>
-              {monthDays.map((date, index) => {
-                const day = format(date, 'd')
-                const dayOfWeek = format(date, 'EEEEE')
-                const isCurrentDay = isToday(date)
+        </PageActions> */}
+        <CalendarWrap>
+          <HourLabels>
+            {hoursToShow.map((hour) => <HourLabel key={hour}>{hour}</HourLabel>)}
+          </HourLabels>
+          <Row>
+            {monthDays.map((date, index) => {
+              const day = format(date, 'd')
+              const dayOfWeek = format(date, 'EEEEE')
+              const isCurrentDay = isToday(date)
 
-                return (
-                  <Column
-                    key={day}
-                    isCurrentWeek={isThisWeek(date, { weekStartsOn: 1 })}
-                    isCurrentDay={isCurrentDay}
-                  >
-                    <DayLabel>{day} {dayOfWeek}</DayLabel>
-                    {isCurrentDay && <CurrentTime date={date} />}
-                    {hoursToShow.map((hour) => {
-                      let accentColor = null
-                      let isFirst = false
-                      let isLast = false
-                      let isOnly = false
-                      if (data.sleep.includes(hour)) {
-                        accentColor = STYLE_SLEEP
-                        isFirst = hour === data.sleep[0]
-                        isLast = hour === data.sleep[data.sleep.length - 1]
-                        isOnly = data.sleep.length === 1
-                      } else if (data.work.includes(hour)) {
-                        accentColor = STYLE_WORK
-                        isFirst = hour === data.work[0]
-                        isLast = hour === data.work[data.work.length - 1]
-                        isOnly = data.work.length === 1
-                      } else if (data.morningRoutine.includes(hour)) {
-                        accentColor = STYLE_MORNING_ROUTINE
-                        isFirst = hour === data.morningRoutine[0]
-                        isLast = hour === data.morningRoutine[data.morningRoutine.length - 1]
-                        isOnly = data.morningRoutine.length === 1
-                      }
-                      return (
-                        <Cell key={hour} accentColor={accentColor} isFirst={isFirst} isLast={isLast} isOnly={isOnly}></Cell>
-                      )
-                    })}
-                  </Column>
-                )
-              })}
-            </Row>
-          </CalendarWrap>
-          <Toast />
-        </Paper>
+              return (
+                <Column
+                  key={day}
+                  isCurrentWeek={isThisWeek(date, { weekStartsOn: 1 })}
+                  isCurrentDay={isCurrentDay}
+                >
+                  <DayLabel isCurrentDay={isCurrentDay}>{day} {dayOfWeek}</DayLabel>
+                  {isCurrentDay && <CurrentTime date={date} />}
+                  {hoursToShow.map((hour) => {
+                    let accentColor = null
+                    let isFirst = false
+                    let isLast = false
+                    let isOnly = false
+                    if (data.sleep.includes(hour)) {
+                      accentColor = STYLE_SLEEP
+                      isFirst = hour === data.sleep[0]
+                      isLast = hour === data.sleep[data.sleep.length - 1]
+                      isOnly = data.sleep.length === 1
+                    } else if (data.work.includes(hour)) {
+                      accentColor = STYLE_WORK
+                      isFirst = hour === data.work[0]
+                      isLast = hour === data.work[data.work.length - 1]
+                      isOnly = data.work.length === 1
+                    } else if (data.morningRoutine.includes(hour)) {
+                      accentColor = STYLE_MORNING_ROUTINE
+                      isFirst = hour === data.morningRoutine[0]
+                      isLast = hour === data.morningRoutine[data.morningRoutine.length - 1]
+                      isOnly = data.morningRoutine.length === 1
+                    }
+                    return (
+                      <Cell key={hour} accentColor={accentColor} isFirst={isFirst} isLast={isLast} isOnly={isOnly}></Cell>
+                    )
+                  })}
+                  <DayLabel isBottom isCurrentDay={isCurrentDay}>{day} {dayOfWeek}</DayLabel>
+                </Column>
+              )
+            })}
+          </Row>
+        </CalendarWrap>
+        <Toast />
       </Wrap>
       
       <Suspense fallback={<div>Loading...</div>}>

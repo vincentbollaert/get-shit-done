@@ -10,16 +10,25 @@ const Wrap = styled.div`
   top: ${p => p.top}%;
   right: 0;
   left: 0;
-  display: flex;
-  justify-content: flex-end;
-  border-bottom: 1px solid #ff5d5d;
-  margin: 0 4px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 6px;
+    background: #333333;
+    border-radius: 50%;
+    left: -3px;
+    top: -3px;
+  };
 `
 const Time = styled.span`
-  padding: 4px;
-  font-size: 10px;
-  background-color: #ff5d5d;
-  color: #fff;
+  padding: 4px 8px;
+  font-size: 11px;
+  position: absolute;
+  top: 0;
+  color: #333333;
+  transform: translateY(-50%);
 `
 const MINUTES_IN_DAY = 1440
 
@@ -35,7 +44,7 @@ const CurrentTime = () => {
   }
 
   useEffect(() => {
-    window.setInterval(updateTime, 1000)
+    // window.setInterval(updateTime, 1000)
   }, [])
 
   return (
