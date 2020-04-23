@@ -21,7 +21,6 @@ import CurrentTime from './CurrentTime/component'
 const Todos = React.lazy(() => import('./Todos/component'))
 const Sidebar = React.lazy(() => import('./Sidebar/component'))
 
-const STYLE_HEADER_HEIGHT = '6rem'
 const STYLE_SLEEP = '#5bccff38'
 const STYLE_WORK = '#efc55352'
 const STYLE_MORNING_ROUTINE = '#3deb7c4a'
@@ -34,6 +33,7 @@ const PageWrap = styled.div`
 const Wrap = styled.div`
   flex-grow: 1;
   padding-top: 2.4rem;
+  position: relative;
   background-color: #333;
 `
 const CalendarWrap = styled.div`
@@ -103,7 +103,11 @@ const Column = styled.div`
   `};
 
   ${p => p.isCurrentDay && `
-    background-color: whitesmoke;
+    border-left: 1px solid #333;
+
+    & + ${Column} {
+      border-left: 1px solid #333;
+    };
   `};
   
   &:last-child {
@@ -124,6 +128,11 @@ const DayLabel = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  ${p => p.isCurrentDay && `
+    color: #333;
+    background-color: ${WHITE};
+  `};
 
   &::before {
     display: block;
@@ -201,7 +210,7 @@ const Home = () => {
                   isCurrentWeek={isThisWeek(date, { weekStartsOn: 1 })}
                   isCurrentDay={isCurrentDay}
                 >
-                  <DayLabel>{day} {dayOfWeek}</DayLabel>
+                  <DayLabel isCurrentDay={isCurrentDay}>{day} {dayOfWeek}</DayLabel>
                   {isCurrentDay && <CurrentTime date={date} />}
                   {hoursToShow.map((hour) => {
                     let accentColor = null
