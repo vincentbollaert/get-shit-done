@@ -132,6 +132,11 @@ const DayLabel = styled.div`
   ${p => p.isBottom && `
     top: 100%;
     bottom: auto;
+
+    &::before {
+      top: 0;
+      bottom: auto;
+    };
   `};
 
   ${p => p.isCurrentDay && `
