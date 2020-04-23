@@ -4,12 +4,12 @@ import webpack from 'webpack'
 import HtmlWebPackPlugin from 'html-webpack-plugin'
 import path from 'path'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const entryPath = './src/index.jsx'
 const outputPath = './public'
 const PUBLIC_PATH = '/'
 
+const supportedLocales = ['en']
 const config = {
   entry: {
     main: path.resolve(__dirname, entryPath),
@@ -54,8 +54,11 @@ const config = {
   },
 
   plugins: [
-    new BundleAnalyzerPlugin(),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
+    new webpack.ContextReplacementPlugin(
+      /date\-fns[\/\\]/,
+      new RegExp(`[/\\\\\](${supportedLocales.join('|')})[/\\\\\]`)
+    ),
     new MiniCssExtractPlugin({
       fileName: 'style.css',
     }),
