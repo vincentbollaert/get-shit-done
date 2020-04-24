@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
+import UseSetCustomRange from '../../../hooks/useSetCustomRange'
+
 const Wrap = styled.div`
   display: flex;
   flex-direction: column;
@@ -54,32 +56,17 @@ const HourLabel = styled.div`
 `
 
 const HourLabels = ({ hoursToShow, setHoursToShow }) => {
-  const [{ from, fromSet }, setFrom] = useState({ from: 0, fromSet: false })
-  const [{ to, toSet }, setTo] = useState({ to: 23, toSet: false })
-
-  const onClick = (hour) => {
-    if (!fromSet) {
-      setFrom({ from: hour, fromSet: true })
-    } else if (!toSet) {
-      setTo({ to: hour, toSet: true })
-      setHoursToShow({ from, to: hour })
-    }
-    if (fromSet && toSet) {
-      setFrom({ from: 0, fromSet: false })
-      setTo({ to: 23, toSet: false })
-      setHoursToShow({ from: 0, to: 23 })
-    }
-  }
+  const [{ isCustom, from, to }, onSetCustom] = UseSetCustomRange({ from: 0, to: 23, cb: setHoursToShow })
 
   return (
     <Wrap>
       {hoursToShow.map((hour) => (
         <HourLabel
           isFrom={hour === from}
-          isCustomSet={fromSet && toSet}
-          isCustomFrom={fromSet && !toSet}
+          isCustomSet={isCustom}
+          // isCustomFrom={fromCustom !== undefined && toCustom === undefined}
           key={hour}
-          onClick={() => onClick(hour)}
+          onClick={() => onSetCustom(hour)}
         >
           {hour}
         </HourLabel>
