@@ -88,6 +88,7 @@ const DayLabels = styled.div`
   background: #333;
 `
 const DayLabel = styled.div`
+  position: relative;
   text-align: center;
   flex-grow: 1;
   display: flex;
@@ -120,8 +121,14 @@ const DayLabel = styled.div`
 
   ${p => p.isCurrentDay && `
     color: #333;
-    border-bottom: 4px solid ${WHITE};
+    border-bottom: none;
     background-color: ${WHITE};
+
+    & + ${DayLabel} {
+      &::before {
+        display: none;
+      };
+    };
   `};
 
   &:hover {
@@ -132,13 +139,13 @@ const DayLabel = styled.div`
     display: block;
     content: '';
     position: absolute;
-    right: 0;
+    left: 0;
     width: 1px;
     height: 6px;
-    bottom: 0;
+    bottom: -4px;
     background-color: #ffffff42;
 
-    ${Column}:last-child & {
+    ${Column}:first-child & {
       display: none;
     };
   };
