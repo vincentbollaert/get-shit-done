@@ -34,7 +34,6 @@ const PageWrap = styled.div`
 const Wrap = styled.div`
   display: flex;
   flex-grow: 1;
-  /* padding: 2.4rem 0; */
   position: relative;
   background-color: #333;
 `
@@ -51,6 +50,10 @@ const Column = styled.div`
   flex-grow: 1;
   position: relative;
   border-left: 1px solid #eee;
+
+  &:first-child {
+    border-left: 0;
+  }
 
   ${p => p.isCurrentWeek && `
     flex-grow: 2;
@@ -71,7 +74,6 @@ const HourSlots = styled.div`
   padding: 12px 4px;
 
   ${Column}:last-child & {
-    border-right: 2px solid ${WHITE};
     padding-right: 12px;
   }
 
@@ -89,14 +91,27 @@ const DayLabel = styled.div`
   text-align: center;
   flex-grow: 1;
   display: flex;
+  flex-shrink: 0;
+  flex-basis: 0;
+  border-left: 1px solid #333;
   justify-content: center;
   align-items: center;
-  padding-top: 8px;
+  padding: 8px 4px 0;
   border-bottom: 4px solid #333;
   transition: padding 0.1s ease-out;
 
+  &:last-child {
+    padding-right: 12px;
+  }
+
+  &:first-child {
+    padding-left: 12px;
+    border-left: 0;
+  };
+
   ${DayLabels}:hover & {
-    padding: 16px 0;
+    padding-top: 16px;
+    padding-bottom: 16px;
   }
 
   ${p => p.isCurrentWeek && `
@@ -105,13 +120,13 @@ const DayLabel = styled.div`
 
   ${p => p.isCurrentDay && `
     color: #333;
+    border-bottom: 4px solid ${WHITE};
     background-color: ${WHITE};
   `};
 
   &:hover {
     background-color: #444;
   };
-
 
   &::before {
     display: block;
