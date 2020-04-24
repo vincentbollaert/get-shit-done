@@ -99,6 +99,7 @@ const DayLabel = styled.div`
   align-items: center;
   padding: 8px 4px 0;
   border-bottom: 4px solid #333;
+  cursor: pointer;
   transition: padding 0.1s ease-out;
 
   &:last-child {
@@ -108,11 +109,19 @@ const DayLabel = styled.div`
   &:first-child {
     padding-left: 12px;
     border-left: 0;
+
+    &::before {
+      display: none;
+    };
   };
 
   ${DayLabels}:hover & {
     padding-top: 16px;
     padding-bottom: 16px;
+
+    &::before {
+      display: none;
+    };
   }
 
   ${p => p.isCurrentWeek && `
@@ -144,10 +153,6 @@ const DayLabel = styled.div`
     height: 6px;
     bottom: -4px;
     background-color: #ffffff42;
-
-    ${Column}:first-child & {
-      display: none;
-    };
   };
 `
 const Calendar = styled.div`
