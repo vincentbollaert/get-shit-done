@@ -20,7 +20,8 @@ const UseSetCustomRange = ({ from, to, cb }) => {
 
   return [
     {
-      isCustom: fromCustom !== undefined && toCustom !== undefined,
+      isCustomSet: fromCustom !== undefined && toCustom !== undefined,
+      isSetInProgress: fromCustom !== undefined && toCustom === undefined,
       from: fromCustom || fromDefault,
       to: toCustom || toDefault,
     },
