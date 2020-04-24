@@ -9,7 +9,7 @@ const UseSetCustomRange = ({ from, to, cb }) => {
       setCustom({ fromCustom: hour })
     } else {
       setCustom({ toCustom: hour, fromCustom })
-      cb({ from: fromCustom, to: hour })
+      cb({ from: Math.min(fromCustom, hour), to: Math.max(fromCustom, hour) })
     }
 
     if (fromCustom !== undefined && toCustom !== undefined) {
