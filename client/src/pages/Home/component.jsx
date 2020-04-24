@@ -32,41 +32,28 @@ const PageWrap = styled.div`
   position: relative;
 `
 const Wrap = styled.div`
+  display: flex;
   flex-grow: 1;
-  padding: 2.4rem 0;
+  /* padding: 2.4rem 0; */
   position: relative;
   background-color: #333;
 `
 const CalendarWrap = styled.div`
   display: flex;
-  height: 100%;
-  background-color: ${WHITE};
-`
-const Row = styled.div`
-  display: flex;
+  flex-direction: column;
   flex-grow: 1;
   height: 100%;
+  background-color: ${WHITE};
 `
 const Column = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   position: relative;
-  opacity: 0.8;
   border-left: 1px solid #eee;
-  padding: 12px 4px;
-
-  &:first-child {
-    padding-left: 12px;
-  };
-
-  &:last-child {
-    padding-right: 12px;
-  };
 
   ${p => p.isCurrentWeek && `
     flex-grow: 2;
-    opacity: 1;
   `};
 
   ${p => p.isCurrentDay && `
@@ -76,40 +63,55 @@ const Column = styled.div`
       border-left: 1px solid #333;
     };
   `};
-  
-  &:last-child {
+`
+const HourSlots = styled.div`
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 4px;
+
+  ${Column}:last-child & {
     border-right: 2px solid ${WHITE};
+    padding-right: 12px;
+  }
+
+  ${Column}:first-child & {
+    padding-left: 12px;
   };
 `
-const DayLabel = styled.div`
-  position: absolute;
-  right: 0;
-  left: 0;
-  text-align: center;
+const DayLabels = styled.div`
+  display: flex;
   font-size: 10px;
   color: #c4c4c4;
   background: #333;
-  height: 24px;
-  bottom: 100%;
-  top: auto;
+`
+const DayLabel = styled.div`
+  text-align: center;
+  flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  ${p => p.isBottom && `
-    top: 100%;
-    bottom: auto;
+  padding-top: 8px;
+  border-bottom: 4px solid #333;
+  transition: padding 0.1s ease-out;
 
-    &::before {
-      top: 0;
-      bottom: auto;
-    };
+  ${DayLabels}:hover & {
+    padding: 16px 0;
+  }
+
+  ${p => p.isCurrentWeek && `
+    flex-grow: 2;
   `};
 
   ${p => p.isCurrentDay && `
     color: #333;
     background-color: ${WHITE};
   `};
+
+  &:hover {
+    background-color: #444;
+  };
+
 
   &::before {
     display: block;
@@ -125,6 +127,10 @@ const DayLabel = styled.div`
       display: none;
     };
   };
+`
+const Calendar = styled.div`
+  display: flex;
+  flex-grow: 1;
 `
 const Cell = styled.div`
   display: flex;
@@ -171,12 +177,24 @@ const Home = () => {
             onChange={setHoursToShow}
           />
         </PageActions> */}
+        <HourLabels hoursToShow={hoursToShow} setHoursToShow={setHoursToShow} />
         <CalendarWrap>
-          <HourLabels hoursToShow={hoursToShow} setHoursToShow={setHoursToShow} />
-          <Row>
-            {monthDays.map((date, index) => {
+          <DayLabels>
+            {monthDays.map((date) => {
               const day = format(date, 'd')
               const dayOfWeek = format(date, 'EEEEE')
+              const isCurrentDay = isToday(date)
+
+              return (
+                <DayLabel key={day} isCurrentDay={isCurrentDay} isCurrentWeek={isThisWeek(date, { weekStartsOn: 1 })}>
+                  {day} {dayOfWeek}
+                </DayLabel>
+              )
+            })}
+          </DayLabels>
+          <Calendar>
+            {monthDays.map((date) => {
+              const day = format(date, 'd')
               const isCurrentDay = isToday(date)
 
               return (
@@ -185,38 +203,56 @@ const Home = () => {
                   isCurrentWeek={isThisWeek(date, { weekStartsOn: 1 })}
                   isCurrentDay={isCurrentDay}
                 >
-                  <DayLabel isCurrentDay={isCurrentDay}>{day} {dayOfWeek}</DayLabel>
                   {isCurrentDay && <CurrentTime date={date} />}
-                  {hoursToShow.map((hour) => {
-                    let accentColor = null
-                    let isFirst = false
-                    let isLast = false
-                    let isOnly = false
-                    if (data.sleep.includes(hour)) {
-                      accentColor = STYLE_SLEEP
-                      isFirst = hour === data.sleep[0]
-                      isLast = hour === data.sleep[data.sleep.length - 1]
-                      isOnly = data.sleep.length === 1
-                    } else if (data.work.includes(hour)) {
-                      accentColor = STYLE_WORK
-                      isFirst = hour === data.work[0]
-                      isLast = hour === data.work[data.work.length - 1]
-                      isOnly = data.work.length === 1
-                    } else if (data.morningRoutine.includes(hour)) {
-                      accentColor = STYLE_MORNING_ROUTINE
-                      isFirst = hour === data.morningRoutine[0]
-                      isLast = hour === data.morningRoutine[data.morningRoutine.length - 1]
-                      isOnly = data.morningRoutine.length === 1
-                    }
-                    return (
-                      <Cell key={hour} accentColor={accentColor} isFirst={isFirst} isLast={isLast} isOnly={isOnly}></Cell>
-                    )
-                  })}
-                  <DayLabel isBottom isCurrentDay={isCurrentDay}>{day} {dayOfWeek}</DayLabel>
+                  <HourSlots>
+                    {hoursToShow.map((hour) => {
+                      let accentColor = null
+                      let isFirst = false
+                      let isLast = false
+                      let isOnly = false
+                      if (data.sleep.includes(hour)) {
+                        accentColor = STYLE_SLEEP
+                        isFirst = hour === data.sleep[0]
+                        isLast = hour === data.sleep[data.sleep.length - 1]
+                        isOnly = data.sleep.length === 1
+                      } else if (data.work.includes(hour)) {
+                        accentColor = STYLE_WORK
+                        isFirst = hour === data.work[0]
+                        isLast = hour === data.work[data.work.length - 1]
+                        isOnly = data.work.length === 1
+                      } else if (data.morningRoutine.includes(hour)) {
+                        accentColor = STYLE_MORNING_ROUTINE
+                        isFirst = hour === data.morningRoutine[0]
+                        isLast = hour === data.morningRoutine[data.morningRoutine.length - 1]
+                        isOnly = data.morningRoutine.length === 1
+                      }
+                      return (
+                        <Cell key={hour} accentColor={accentColor} isFirst={isFirst} isLast={isLast} isOnly={isOnly}></Cell>
+                      )
+                    })}
+                  </HourSlots>
                 </Column>
               )
             })}
-          </Row>
+          </Calendar>
+          
+          {/* {monthDays.map((date) => {
+            const day = format(date, 'd')
+            const dayOfWeek = format(date, 'EEEEE')
+            const isCurrentDay = isToday(date)
+
+            return (
+              <Column
+                key={day}
+                isCurrentWeek={isThisWeek(date, { weekStartsOn: 1 })}
+                isCurrentDay={isCurrentDay}
+              >
+                <DayLabel isCurrentDay={isCurrentDay}>
+                  {day} {dayOfWeek}
+                </DayLabel>
+              </Column>
+            )
+          })} */}
         </CalendarWrap>
         <Toast />
       </Wrap>
