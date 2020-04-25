@@ -1,4 +1,5 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit'
+import format from 'date-fns/format'
 import { MONTH_DAYS, HOURS_IN_DAY } from '../../constants'
 
 
@@ -26,6 +27,7 @@ const initialState = {
     date,
   })),
   hoursAxis: HOURS_IN_DAY,
+  daysAxis: MONTH_DAYS,
 }
 
 export const { reducer, actions } = createSlice({
@@ -34,6 +36,9 @@ export const { reducer, actions } = createSlice({
   reducers: {
     filterHours(state, { payload: { from, to } }) {
       state.hoursAxis = HOURS_IN_DAY.filter(hour => hour >= from && hour <= to)
+    },
+    filterDays(state, { payload: { from, to } }) {
+      state.daysAxis = MONTH_DAYS.filter(day => Number(format(day, 'd')) >= from && Number(format(day, 'd')) <= to)
     },
   }
 })

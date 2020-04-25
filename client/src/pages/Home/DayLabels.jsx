@@ -7,6 +7,8 @@ import isThisWeek from 'date-fns/isThisWeek'
 import { WHITE } from '../../styles'
 import UseFilterRange from '../../hooks/useFilterRange'
 import UseHighlightFilteredRange from '../../hooks/useHighlightFIlteredRange'
+import { useSelector } from 'react-redux'
+import { actions } from '../../state/calendar/reducer'
 
 const Wrap = styled.div`
   display: flex;
@@ -98,13 +100,14 @@ const DayLabel = styled.div`
   };
 `
 
-const DayLabels = ({ daysToShow, setDaysToShow }) => {
-  console.log(daysToShow)
-  const [{ isFiltered, isBeingFiltered, from }, onFilter] = UseFilterRange({ from: 1, to: 23, cb: setDaysToShow })
+const DayLabels = () => {
+  const { daysAxis } = useSelector(state => state.calendar)
+  console.log(daysAxis)
+  const [{ isFiltered, isBeingFiltered, from }, onFilter] = UseFilterRange({ from: 1, to: 23, cb: actions.filterDays })
   const [filteredRange, highlightFilteredRange] = UseHighlightFilteredRange({ isBeingFiltered, isFiltered, from })
   return (
     <Wrap>
-      {daysToShow.map((date) => {
+      {daysAxis.map((date) => {
         const day = Number(format(date, 'd'))
         const dayOfWeek = format(date, 'EEEEE')
         const isCurrentDay = isToday(date)

@@ -3,7 +3,6 @@ import React, { Suspense } from 'react'
 import styled from 'styled-components'
 import { WHITE } from '../../styles'
 import Toast from '../../components/Toast/component'
-import useFilterHours from '../../hooks/useFilterHours'
 
 const Todos = React.lazy(() => import('./Todos'))
 const Sidebar = React.lazy(() => import('./Sidebar'))
@@ -41,8 +40,8 @@ const Home = () => {
       <Wrap>
         <HourLabels />
         <CalendarWrap>
-          <DayLabels daysToShow={daysToShow} setDaysToShow={setDaysToShow} />
-          <Calendar daysToShow={daysToShow} />
+          <DayLabels setDaysToShow={setDaysToShow} />
+          <Calendar />
         </CalendarWrap>
         <Toast />
       </Wrap>
