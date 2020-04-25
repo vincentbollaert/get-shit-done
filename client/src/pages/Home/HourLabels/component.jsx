@@ -32,6 +32,14 @@ const HourLabel = styled.div`
     padding: 0 16px;
   };
 
+  ${p => p.isBeingFiltered && `
+    padding: 0 16px;
+
+    &::before {
+      display: none;
+    };
+  `};
+
   ${p => p.isActive && `
     background-color: #444;
     box-shadow: inset 4px 0 0 0px #333, inset -4px 0 0 0px #333
@@ -67,6 +75,7 @@ const HourLabels = ({ hoursToShow, setHoursToShow }) => {
     <Wrap>
       {hoursToShow.map((hour) => (
         <HourLabel
+          isBeingFiltered={isBeingFiltered}
           isFiltered={isFiltered}
           isActive={filteredRange.includes(hour)}
           key={hour}
