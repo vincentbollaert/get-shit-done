@@ -57,10 +57,16 @@ const HourSlots = styled.div`
 `
 const Cell = styled.div`
   display: flex;
-  flex-grow: 1;
+  flex-grow: ${p => p.flex};
   justify-content: center;
+  flex-shrink: 0;
+  flex-basis: 0;
   align-items: center;
   border-radius: 2px;
+  box-shadow: inset 0 0 0 1px red;
+
+  ${p => p.isDummy && `box-shadow: inset 0 0 0 1px green`};
+
   ${p => p.accentColor && `
     background-color: ${p.accentColor};
     
@@ -79,6 +85,7 @@ const Calendar = () => {
         const day = format(date, 'd')
         const isCurrentDay = isToday(date)
         const tasks = allTasksByDay.find(x => x.date === date).tasks
+        console.log(tasks)
 
         return (
           <Column
@@ -88,21 +95,30 @@ const Calendar = () => {
           >
             {isCurrentDay && <CurrentTime date={date} />}
             <HourSlots>
-              {hoursAxis.map((hour) => {
-                // show tasks corresponding to THIS hour
-                const task = tasks.find(x => x.time[0] <= hour && x.time[1] >= hour) || {}
-                const taskName = task.name || ''
+              {tasks.map(({ time, name }, taskI) => {
 
+                // show these tasks
+                // use flex - determine height 
+                // flex value PER HOUR = hoursAxis length / tasks length
+                // each task gets [1] - [0] * ^ flex value
+                // if gap between tasks, fill with placeholder task flex = length
+                const isFirstTask = taskI === 0
+                const isLastTask = taskI === tasks.length - 1
+                // const 
+                const gapBefore = !isFirstTask && time[0] - tasks[taskI - 1].time[1]
+                const gapAfter = isLastTask && hoursAxis[hoursAxis.length - 1] + 1 - time[1]
+                console.log(hoursAxis)
+                // if (gapBefore) {
+                //   console.log('gapBefore is ' + gapBefore)
+                // }
                 return (
-                  <Cell
-                    key={hour}
-                    // accentColor={accentColor}
-                    // isFirst={isFirst}
-                    // isLast={isLast}
-                    // isOnly={isOnly}
-                  >
-                    {taskName}
-                  </Cell>
+                  <>
+                    <Cell isDummy key={taskI} flex={gapBefore} />
+                    <Cell key={name} flex={time[1] - time[0]}>
+                      {name}
+                    </Cell>
+                    {isLastTask && <Cell isDummy key={taskI} flex={gapAfter} />}
+                  </>
                 )
               })}
             </HourSlots>
