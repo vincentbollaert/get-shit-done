@@ -25,7 +25,7 @@ const HourLabel = styled.div`
 
   &:hover {
     background-color: ${p => p.isFiltered ? 'inherit' : '#444'};
-    cursor: ${p => p.isCustomSet ? 'inherit' : 'pointer'};
+    cursor: ${p => p.isFiltered ? 'inherit' : 'pointer'};
   };
 
   ${Wrap}:hover & {
