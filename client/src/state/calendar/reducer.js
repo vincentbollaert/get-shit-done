@@ -38,7 +38,7 @@ export const { reducer, actions } = createSlice({
       state.hoursAxis = HOURS_IN_DAY.filter(hour => hour >= from && hour <= to)
     },
     filterDays(state, { payload: { from, to } }) {
-      state.daysAxis = MONTH_DAYS.filter(day => Number(format(day, 'd')) >= from && Number(format(day, 'd')) <= to)
+      state.daysAxis = MONTH_DAYS.filter(day => format(day, 'd') >= from && format(day, 'd') <= to)
     },
   }
 })
