@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import styled, { createGlobalStyle } from 'styled-components'
 import store from './Root/store'
-import 'normalize.css'
+// import 'normalize.css'
 import { reset } from '../styles'
 
 import { homePath } from './paths'
