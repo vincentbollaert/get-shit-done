@@ -9,8 +9,7 @@ import isThisWeek from 'date-fns/isThisWeek'
 import sub from 'date-fns/sub'
 
 import styled from 'styled-components'
-import { WHITE, BOX_SHADOW_LIGHT } from '../../styles'
-import { RangeField } from '../../components/form'
+import { WHITE } from '../../styles'
 import Toast from '../../components/Toast/component'
 import useFilterHours from '../../hooks/useFilterHours'
 import CurrentTime from './CurrentTime/component'
@@ -21,6 +20,8 @@ import CurrentTime from './CurrentTime/component'
 const Todos = React.lazy(() => import('./Todos/component'))
 const Sidebar = React.lazy(() => import('./Sidebar/component'))
 import HourLabels from './HourLabels/component'
+import DayLabels from './DayLabels/component'
+import { HOURS_IN_DAY } from '../../constants'
 
 const STYLE_SLEEP = '#5bccff38'
 const STYLE_WORK = '#efc55352'
@@ -81,80 +82,6 @@ const HourSlots = styled.div`
     padding-left: 12px;
   };
 `
-const DayLabels = styled.div`
-  display: flex;
-  font-size: 10px;
-  color: #c4c4c4;
-  background: #333;
-`
-const DayLabel = styled.div`
-  position: relative;
-  text-align: center;
-  flex-grow: 1;
-  display: flex;
-  flex-shrink: 0;
-  flex-basis: 0;
-  border-left: 1px solid #333;
-  justify-content: center;
-  align-items: center;
-  padding: 8px 4px 0;
-  border-bottom: 4px solid #333;
-  cursor: pointer;
-  transition: padding 0.1s ease-out;
-
-  &:last-child {
-    padding-right: 12px;
-  }
-
-  &:first-child {
-    padding-left: 12px;
-    border-left: 0;
-
-    &::before {
-      display: none;
-    };
-  };
-
-  ${DayLabels}:hover & {
-    padding-top: 16px;
-    padding-bottom: 16px;
-
-    &::before {
-      display: none;
-    };
-  }
-
-  ${p => p.isCurrentWeek && `
-    flex-grow: 2;
-  `};
-
-  ${p => p.isCurrentDay && `
-    color: #333;
-    border-bottom: none;
-    background-color: ${WHITE};
-
-    & + ${DayLabel} {
-      &::before {
-        display: none;
-      };
-    };
-  `};
-
-  &:hover {
-    background-color: #444;
-  };
-
-  &::before {
-    display: block;
-    content: '';
-    position: absolute;
-    left: 0;
-    width: 1px;
-    height: 6px;
-    bottom: -4px;
-    background-color: #ffffff42;
-  };
-`
 const Calendar = styled.div`
   display: flex;
   flex-grow: 1;
@@ -181,13 +108,14 @@ const data = {
 }
 
 const Home = () => {
-  const [hoursToShow, setHoursToShow] = useFilterHours()
   // const monthDaysTotal = getDaysInMonth(new Date())
   // const monthDays = Array(monthDaysTotal).fill(null).map((day, index) => index + 1)
   const monthDays = eachDayOfInterval({
     start: sub(lastDayOfMonth(new Date()), { days: getDaysInMonth(new Date()) - 1 }),
     end: lastDayOfMonth(new Date())
   })
+  const [hoursToShow, setHoursToShow] = useFilterHours(HOURS_IN_DAY)
+  const [daysToShow, setDaysToShow] = useFilterHours(monthDays)
   console.log(hoursToShow)
 
   return (
@@ -206,21 +134,9 @@ const Home = () => {
         </PageActions> */}
         <HourLabels hoursToShow={hoursToShow} setHoursToShow={setHoursToShow} />
         <CalendarWrap>
-          <DayLabels>
-            {monthDays.map((date) => {
-              const day = format(date, 'd')
-              const dayOfWeek = format(date, 'EEEEE')
-              const isCurrentDay = isToday(date)
-
-              return (
-                <DayLabel key={day} isCurrentDay={isCurrentDay} isCurrentWeek={isThisWeek(date, { weekStartsOn: 1 })}>
-                  {day} {dayOfWeek}
-                </DayLabel>
-              )
-            })}
-          </DayLabels>
+          <DayLabels monthDays={monthDays} setDaysToShow={setDaysToShow} />
           <Calendar>
-            {monthDays.map((date) => {
+            {daysToShow.map((date) => {
               const day = format(date, 'd')
               const isCurrentDay = isToday(date)
 
