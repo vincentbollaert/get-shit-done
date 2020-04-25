@@ -1,7 +1,6 @@
 import { useState } from 'react'
 
-const useFilterHours = () => {
-  const hoursInDay = Array(24).fill(null).map((item, index) => index)
+const useFilterHours = (hoursInDay) => {
   const [hoursToDisplay, setHoursToDisplay] = useState(hoursInDay)
 
   const filterHours = ({ from, to }) => {
