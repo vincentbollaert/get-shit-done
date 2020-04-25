@@ -21,7 +21,7 @@ const DayLabel = styled.div`
   display: flex;
   flex-shrink: 0;
   flex-basis: 0;
-  border-left: 1px solid #333;
+  border-left: 1px solid transparent;
   justify-content: center;
   align-items: center;
   padding: 8px 4px 0;
@@ -51,6 +51,15 @@ const DayLabel = styled.div`
     };
   }
 
+  ${p => p.isBeingFiltered && `
+    padding-top: 16px;
+      padding-bottom: 16px;
+
+      &::before {
+        display: none;
+      };
+  `};
+
   ${p => p.isCurrentWeek && `
     flex-grow: 2;
   `};
@@ -68,12 +77,13 @@ const DayLabel = styled.div`
   `};
 
   &:hover {
-    background-color: #444;
+    background-color: ${p => p.isFiltered ? 'inherit' : '#444'};
+    cursor: ${p => p.isFiltered ? 'inherit' : 'pointer'};
   };
 
   ${p => p.isActive && `
     background-color: #444;
-    box-shadow: inset 4px 0 0 0px #333, inset -4px 0 0 0px #333
+    box-shadow: inset 0px 4px 0 0px #333, inset 0px -4px 0 0px #333;
   `};
 
   &::before {
@@ -88,13 +98,14 @@ const DayLabel = styled.div`
   };
 `
 
-const DayLabels = ({ monthDays, setDaysToShow }) => {
-  const [{ isFiltered, isBeingFiltered, from }, onFilter ] = UseFilterRange({ from: 0, to: 23, cb: setDaysToShow })
+const DayLabels = ({ daysToShow, setDaysToShow }) => {
+  console.log(daysToShow)
+  const [{ isFiltered, isBeingFiltered, from }, onFilter] = UseFilterRange({ from: 1, to: 23, cb: setDaysToShow })
   const [filteredRange, highlightFilteredRange] = UseHighlightFilteredRange({ isBeingFiltered, isFiltered, from })
   return (
     <Wrap>
-      {monthDays.map((date) => {
-        const day = format(date, 'd')
+      {daysToShow.map((date) => {
+        const day = Number(format(date, 'd'))
         const dayOfWeek = format(date, 'EEEEE')
         const isCurrentDay = isToday(date)
 
@@ -104,11 +115,12 @@ const DayLabels = ({ monthDays, setDaysToShow }) => {
             isCurrentDay={isCurrentDay}
             isCurrentWeek={isThisWeek(date, { weekStartsOn: 1 })}
             isFiltered={isFiltered}
+            isBeingFiltered={isBeingFiltered}
             isActive={filteredRange.includes(day)}
             onMouseEnter={highlightFilteredRange}
             onClick={() => onFilter(day)}
           >
-            {day} {dayOfWeek}
+            {day}
           </DayLabel>
         )
       })}
