@@ -82,7 +82,7 @@ const HourLabels = () => {
           isFiltered={isFiltered}
           isActive={filteredRange.includes(hour)}
           key={hour}
-          onMouseEnter={highlightFilteredRange}
+          onMouseEnter={() => highlightFilteredRange(hour)}
           onClick={() => onFilter(hour)}
         >
           {hour}

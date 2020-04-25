@@ -120,10 +120,10 @@ const DayLabels = () => {
             isFiltered={isFiltered}
             isBeingFiltered={isBeingFiltered}
             isActive={filteredRange.includes(day)}
-            onMouseEnter={highlightFilteredRange}
+            onMouseEnter={() => highlightFilteredRange(day)}
             onClick={() => onFilter(day)}
           >
-            {day}
+            {day} {dayOfWeek}
           </DayLabel>
         )
       })}
