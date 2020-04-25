@@ -70,15 +70,15 @@ const Cell = styled.div`
   `};
 `
 
-const data = {
-  sleep: [23, 0, 1, 2, 3, 4, 5, 6, 7],
-  morningRoutine: [8],
-  work: [9, 10, 11, 12, 13, 14, 15, 16],
-}
+// const data = {
+//   sleep: [23, 0, 1, 2, 3, 4, 5, 6, 7],
+//   morningRoutine: [8],
+//   work: [9, 10, 11, 12, 13, 14, 15, 16],
+// }
 
 const Calendar = ({ daysToShow, hoursToShow }) => {
-  const { tasksByDay } = useSelector(state => state.calendar)
-  console.log(tasksByDay)
+  const { allTasksByDay } = useSelector(state => state.calendar)
+  console.log(allTasksByDay)
 
   return (
     <Wrap>
@@ -86,7 +86,7 @@ const Calendar = ({ daysToShow, hoursToShow }) => {
         const day = format(date, 'd')
         const isCurrentDay = isToday(date)
         // get tasks for this day
-        const tasks = tasksByDay.find(x => x.date === date).tasks
+        const tasks = allTasksByDay.find(x => x.date === date).tasks
         console.log('today tasks', tasks)
 
         return (

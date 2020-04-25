@@ -1,13 +1,14 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit'
-import { MONTH_DAYS } from '../../constants'
+import { MONTH_DAYS, HOURS_IN_DAY } from '../../constants'
 
 
-// sleep: [23, 0, 1, 2, 3, 4, 5, 6, 7],
-// morningRoutine: [8],
-// work: [9, 10, 11, 12, 13, 14, 15, 16],
+// allTasks
+// move day filter in here
+// move hour filter here
+// filteredTasks = tasksByDay filtered by day and hours
 
 const initialState = {
-  tasksByDay: MONTH_DAYS.map((date) => ({
+  allTasksByDay: MONTH_DAYS.map((date) => ({
     tasks: [
       {
         time: [0, 7],
@@ -23,13 +24,16 @@ const initialState = {
       },
     ],
     date,
-  }))
+  })),
+  hoursAxis: HOURS_IN_DAY,
 }
 
 export const { reducer, actions } = createSlice({
   name: 'calendar',
   initialState,
   reducers: {
-
+    filterHours(state, { payload: { from, to } }) {
+      state.hoursAxis = HOURS_IN_DAY.filter(hour => hour >= from && hour <= to)
+    },
   }
 })
