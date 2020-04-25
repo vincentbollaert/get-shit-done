@@ -14,14 +14,12 @@ import Toast from '../../components/Toast/component'
 import useFilterHours from '../../hooks/useFilterHours'
 import CurrentTime from './CurrentTime/component'
 
-// import Sidebar from './Sidebar/component'
-// import Todos from './Todos/component'
-
 const Todos = React.lazy(() => import('./Todos/component'))
 const Sidebar = React.lazy(() => import('./Sidebar/component'))
 import HourLabels from './HourLabels/component'
 import DayLabels from './DayLabels/component'
 import { HOURS_IN_DAY } from '../../constants'
+import useFilterDays from '../../hooks/useFilterDays'
 
 const STYLE_SLEEP = '#5bccff38'
 const STYLE_WORK = '#efc55352'
@@ -108,33 +106,19 @@ const data = {
 }
 
 const Home = () => {
-  // const monthDaysTotal = getDaysInMonth(new Date())
-  // const monthDays = Array(monthDaysTotal).fill(null).map((day, index) => index + 1)
   const monthDays = eachDayOfInterval({
     start: sub(lastDayOfMonth(new Date()), { days: getDaysInMonth(new Date()) - 1 }),
     end: lastDayOfMonth(new Date())
   })
   const [hoursToShow, setHoursToShow] = useFilterHours(HOURS_IN_DAY)
-  const [daysToShow, setDaysToShow] = useFilterHours(monthDays)
-  console.log(hoursToShow)
+  const [daysToShow, setDaysToShow] = useFilterDays(monthDays)
 
   return (
     <PageWrap>
       <Wrap>
-        {/* <PageActions>
-          <RangeField
-            min={0}
-            max={23}
-            idFrom="min"
-            idTo="max"
-            valueFrom={hoursToShow[0]}
-            valueTo={hoursToShow[hoursToShow.length - 1]}
-            onChange={setHoursToShow}
-          />
-        </PageActions> */}
         <HourLabels hoursToShow={hoursToShow} setHoursToShow={setHoursToShow} />
         <CalendarWrap>
-          <DayLabels monthDays={monthDays} setDaysToShow={setDaysToShow} />
+          <DayLabels daysToShow={daysToShow} setDaysToShow={setDaysToShow} />
           <Calendar>
             {daysToShow.map((date) => {
               const day = format(date, 'd')
