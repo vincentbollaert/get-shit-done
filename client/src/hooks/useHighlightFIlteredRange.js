@@ -5,11 +5,14 @@ const UseSetCustomRangeLabels = ({ isBeingFiltered, isFiltered, from }) => {
 
   const updateList = (e) => {
     if (!isBeingFiltered) return
+    const fromFormatted = Number(from)
 
     const current = Number(e.target.innerHTML)
-    const fromToDifference = Math.max(current, from) - Math.min(current, from)
-    const differenceArray = Array(fromToDifference).fill(null).map((x, index) => Math.max(current, from) - index)
-    const updatedRange = [...new Set([from, ...differenceArray, current])]
+    const fromToDifference = Math.max(current, fromFormatted) - Math.min(current, fromFormatted)
+    // console.log('fromToDifference', fromToDifference, current, Math.max(current, fromFormatted))
+    const differenceArray = Array(fromToDifference).fill(null).map((x, index) => Math.max(current, fromFormatted) - index)
+    const updatedRange = [...new Set([fromFormatted, ...differenceArray, current])]
+    console.log(updatedRange)
     setFilteredRange(updatedRange)
   }
 
