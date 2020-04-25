@@ -1,5 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+
+import UseFilterRange from '../../../hooks/useFilterRange'
+import UseHighlightFilteredRange from '../../../hooks/useHighlightFIlteredRange'
 
 const Wrap = styled.div`
   display: flex;
@@ -21,15 +24,26 @@ const HourLabel = styled.div`
   transition: padding 0.1s ease-out;
 
   &:hover {
-    background-color: ${p => p.isCustomSet ? 'inherit' : '#444'};
-    cursor: ${p => p.isCustomSet ? 'inherit' : 'pointer'};
+    background-color: ${p => p.isFiltered ? 'inherit' : '#444'};
+    cursor: ${p => p.isFiltered ? 'inherit' : 'pointer'};
   };
 
   ${Wrap}:hover & {
     padding: 0 16px;
-
-    ${p => p.isCustomFrom && p.isFrom && 'background-color: #595959;'};
   };
+
+  ${p => p.isBeingFiltered && `
+    padding: 0 16px;
+
+    &::before {
+      display: none;
+    };
+  `};
+
+  ${p => p.isActive && `
+    background-color: #444;
+    box-shadow: inset 4px 0 0 0px #333, inset -4px 0 0 0px #333
+  `};
 
   &::before {
     display: block;
@@ -54,32 +68,19 @@ const HourLabel = styled.div`
 `
 
 const HourLabels = ({ hoursToShow, setHoursToShow }) => {
-  const [{ from, fromSet }, setFrom] = useState({ from: 0, fromSet: false })
-  const [{ to, toSet }, setTo] = useState({ to: 23, toSet: false })
-
-  const onClick = (hour) => {
-    if (!fromSet) {
-      setFrom({ from: hour, fromSet: true })
-    } else if (!toSet) {
-      setTo({ to: hour, toSet: true })
-      setHoursToShow({ from, to: hour })
-    }
-    if (fromSet && toSet) {
-      setFrom({ from: 0, fromSet: false })
-      setTo({ to: 23, toSet: false })
-      setHoursToShow({ from: 0, to: 23 })
-    }
-  }
+  const [{ isFiltered, isBeingFiltered, from }, onFilter ] = UseFilterRange({ from: 0, to: 23, cb: setHoursToShow })
+  const [filteredRange, highlightFilteredRange] = UseHighlightFilteredRange({ isBeingFiltered, isFiltered, from })
 
   return (
     <Wrap>
       {hoursToShow.map((hour) => (
         <HourLabel
-          isFrom={hour === from}
-          isCustomSet={fromSet && toSet}
-          isCustomFrom={fromSet && !toSet}
+          isBeingFiltered={isBeingFiltered}
+          isFiltered={isFiltered}
+          isActive={filteredRange.includes(hour)}
           key={hour}
-          onClick={() => onClick(hour)}
+          onMouseEnter={highlightFilteredRange}
+          onClick={() => onFilter(hour)}
         >
           {hour}
         </HourLabel>
