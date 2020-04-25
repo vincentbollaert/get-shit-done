@@ -1,8 +1,4 @@
 import React, { Suspense } from 'react'
-import getDaysInMonth from 'date-fns/getDaysInMonth'
-import eachDayOfInterval from 'date-fns/eachDayOfInterval'
-import lastDayOfMonth from 'date-fns/lastDayOfMonth'
-import sub from 'date-fns/sub'
 
 import styled from 'styled-components'
 import { WHITE } from '../../styles'
@@ -13,7 +9,7 @@ const Todos = React.lazy(() => import('./Todos'))
 const Sidebar = React.lazy(() => import('./Sidebar'))
 import HourLabels from './HourLabels'
 import DayLabels from './DayLabels'
-import { HOURS_IN_DAY } from '../../constants'
+import { HOURS_IN_DAY, MONTH_DAYS } from '../../constants'
 import useFilterDays from '../../hooks/useFilterDays'
 import Calendar from './Calendar'
 
@@ -38,12 +34,8 @@ const CalendarWrap = styled.div`
 `
 
 const Home = () => {
-  const monthDays = eachDayOfInterval({
-    start: sub(lastDayOfMonth(new Date()), { days: getDaysInMonth(new Date()) - 1 }),
-    end: lastDayOfMonth(new Date())
-  })
   const [hoursToShow, setHoursToShow] = useFilterHours(HOURS_IN_DAY)
-  const [daysToShow, setDaysToShow] = useFilterDays(monthDays)
+  const [daysToShow, setDaysToShow] = useFilterDays(MONTH_DAYS)
 
   return (
     <PageWrap>

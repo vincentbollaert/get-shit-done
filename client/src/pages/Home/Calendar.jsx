@@ -3,9 +3,11 @@ import styled from 'styled-components'
 import isToday from 'date-fns/isToday'
 import format from 'date-fns/format'
 import isThisWeek from 'date-fns/isThisWeek'
+import isEqual from 'date-fns/isEqual'
 import { WHITE } from '../../styles'
 
 import CurrentTime from './CurrentTime'
+import { useSelector } from 'react-redux'
 
 const STYLE_SLEEP = '#5bccff38'
 const STYLE_WORK = '#efc55352'
@@ -75,11 +77,17 @@ const data = {
 }
 
 const Calendar = ({ daysToShow, hoursToShow }) => {
+  const { tasksByDay } = useSelector(state => state.calendar)
+  console.log(tasksByDay)
+
   return (
     <Wrap>
       {daysToShow.map((date) => {
         const day = format(date, 'd')
         const isCurrentDay = isToday(date)
+        // get tasks for this day
+        const tasks = tasksByDay.find(x => x.date === date).tasks
+        console.log('today tasks', tasks)
 
         return (
           <Column
@@ -89,6 +97,25 @@ const Calendar = ({ daysToShow, hoursToShow }) => {
           >
             {isCurrentDay && <CurrentTime date={date} />}
             <HourSlots>
+              {hoursToShow.map((hour) => {
+                // show tasks corresponding to THIS hour
+                const task = tasks.find(x => x.time[0] <= hour && x.time[1] >= hour) || {}
+                const taskName = task.name || ''
+
+                return (
+                  <Cell
+                    key={hour}
+                    // accentColor={accentColor}
+                    // isFirst={isFirst}
+                    // isLast={isLast}
+                    // isOnly={isOnly}
+                  >
+                    {taskName}
+                  </Cell>
+                )
+              })}
+            </HourSlots>
+            {/* <HourSlots>
               {hoursToShow.map((hour) => {
                 let accentColor = null
                 let isFirst = false
@@ -114,7 +141,7 @@ const Calendar = ({ daysToShow, hoursToShow }) => {
                   <Cell key={hour} accentColor={accentColor} isFirst={isFirst} isLast={isLast} isOnly={isOnly}></Cell>
                 )
               })}
-            </HourSlots>
+            </HourSlots> */}
           </Column>
         )
       })}
