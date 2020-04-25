@@ -5,7 +5,7 @@ import format from 'date-fns/format'
 import isThisWeek from 'date-fns/isThisWeek'
 import { WHITE } from '../../styles'
 
-import CurrentTime from './CurrentTime/component'
+import CurrentTime from './CurrentTime'
 
 const STYLE_SLEEP = '#5bccff38'
 const STYLE_WORK = '#efc55352'

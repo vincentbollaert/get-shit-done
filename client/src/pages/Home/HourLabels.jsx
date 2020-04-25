@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
-import UseFilterRange from '../../../hooks/useFilterRange'
-import UseHighlightFilteredRange from '../../../hooks/useHighlightFIlteredRange'
+import UseFilterRange from '../../hooks/useFilterRange'
+import UseHighlightFilteredRange from '../../hooks/useHighlightFIlteredRange'
 
 const Wrap = styled.div`
   display: flex;

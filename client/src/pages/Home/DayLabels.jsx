@@ -4,9 +4,9 @@ import isToday from 'date-fns/isToday'
 import format from 'date-fns/format'
 import isThisWeek from 'date-fns/isThisWeek'
 
-import { WHITE } from '../../../styles'
-import UseFilterRange from '../../../hooks/useFilterRange'
-import UseHighlightFilteredRange from '../../../hooks/useHighlightFIlteredRange'
+import { WHITE } from '../../styles'
+import UseFilterRange from '../../hooks/useFilterRange'
+import UseHighlightFilteredRange from '../../hooks/useHighlightFIlteredRange'
 
 const Wrap = styled.div`
   display: flex;

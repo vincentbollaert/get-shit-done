@@ -9,10 +9,10 @@ import { WHITE } from '../../styles'
 import Toast from '../../components/Toast/component'
 import useFilterHours from '../../hooks/useFilterHours'
 
-const Todos = React.lazy(() => import('./Todos/component'))
-const Sidebar = React.lazy(() => import('./Sidebar/component'))
-import HourLabels from './HourLabels/component'
-import DayLabels from './DayLabels/component'
+const Todos = React.lazy(() => import('./Todos'))
+const Sidebar = React.lazy(() => import('./Sidebar'))
+import HourLabels from './HourLabels'
+import DayLabels from './DayLabels'
 import { HOURS_IN_DAY } from '../../constants'
 import useFilterDays from '../../hooks/useFilterDays'
 import Calendar from './Calendar'
