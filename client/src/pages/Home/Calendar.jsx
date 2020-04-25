@@ -72,16 +72,13 @@ const Cell = styled.div`
 
 const Calendar = () => {
   const { hoursAxis, daysAxis, allTasksByDay } = useSelector(state => state.calendar)
-  // console.log(allTasksByDay)
 
   return (
     <Wrap>
       {daysAxis.map((date) => {
         const day = format(date, 'd')
         const isCurrentDay = isToday(date)
-        // get tasks for this day
         const tasks = allTasksByDay.find(x => x.date === date).tasks
-        // console.log('today tasks', tasks)
 
         return (
           <Column

@@ -102,9 +102,9 @@ const DayLabel = styled.div`
 
 const DayLabels = () => {
   const { daysAxis } = useSelector(state => state.calendar)
-  console.log(daysAxis)
   const [{ isFiltered, isBeingFiltered, from }, onFilter] = UseFilterRange({ from: 1, to: 23, cb: actions.filterDays })
   const [filteredRange, highlightFilteredRange] = UseHighlightFilteredRange({ isBeingFiltered, isFiltered, from })
+
   return (
     <Wrap>
       {daysAxis.map((date) => {
