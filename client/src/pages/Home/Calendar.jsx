@@ -70,15 +70,9 @@ const Cell = styled.div`
   `};
 `
 
-// const data = {
-//   sleep: [23, 0, 1, 2, 3, 4, 5, 6, 7],
-//   morningRoutine: [8],
-//   work: [9, 10, 11, 12, 13, 14, 15, 16],
-// }
-
-const Calendar = ({ daysToShow, hoursToShow }) => {
-  const { allTasksByDay } = useSelector(state => state.calendar)
-  console.log(allTasksByDay)
+const Calendar = ({ daysToShow }) => {
+  const { hoursAxis, allTasksByDay } = useSelector(state => state.calendar)
+  // console.log(allTasksByDay)
 
   return (
     <Wrap>
@@ -87,7 +81,7 @@ const Calendar = ({ daysToShow, hoursToShow }) => {
         const isCurrentDay = isToday(date)
         // get tasks for this day
         const tasks = allTasksByDay.find(x => x.date === date).tasks
-        console.log('today tasks', tasks)
+        // console.log('today tasks', tasks)
 
         return (
           <Column
@@ -97,7 +91,7 @@ const Calendar = ({ daysToShow, hoursToShow }) => {
           >
             {isCurrentDay && <CurrentTime date={date} />}
             <HourSlots>
-              {hoursToShow.map((hour) => {
+              {hoursAxis.map((hour) => {
                 // show tasks corresponding to THIS hour
                 const task = tasks.find(x => x.time[0] <= hour && x.time[1] >= hour) || {}
                 const taskName = task.name || ''

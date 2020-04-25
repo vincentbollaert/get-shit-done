@@ -71,8 +71,8 @@ const HourLabel = styled.div`
 
 const HourLabels = () => {
   const { hoursAxis } = useSelector(state => state.calendar)
-  const [{ isFiltered, isBeingFiltered, fromCustom, from }, onFilter ] = UseFilterRange({ from: 0, to: 23, cb: actions.filterHours })
-  const [filteredRange, highlightFilteredRange] = UseHighlightFilteredRange({ isBeingFiltered, isFiltered, from: fromCustom || from })
+  const [{ isFiltered, isBeingFiltered, from }, onFilter ] = UseFilterRange({ from: 0, to: 23, cb: actions.filterHours })
+  const [filteredRange, highlightFilteredRange] = UseHighlightFilteredRange({ isBeingFiltered, isFiltered, from })
 
   return (
     <Wrap>

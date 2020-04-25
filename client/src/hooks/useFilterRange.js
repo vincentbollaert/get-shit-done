@@ -24,9 +24,8 @@ const UseRangeFilter = ({ from, to, cb }) => {
     {
       isFiltered: fromCustom !== undefined && toCustom !== undefined,
       isBeingFiltered: fromCustom !== undefined && toCustom === undefined,
-      fromCustom,
-      from: fromCustom,
-      to: toCustom,
+      from: fromCustom || fromDefault,
+      to: toCustom || toDefault,
     },
     onFilter,
   ]

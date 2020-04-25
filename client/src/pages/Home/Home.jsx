@@ -9,7 +9,7 @@ const Todos = React.lazy(() => import('./Todos'))
 const Sidebar = React.lazy(() => import('./Sidebar'))
 import HourLabels from './HourLabels'
 import DayLabels from './DayLabels'
-import { HOURS_IN_DAY, MONTH_DAYS } from '../../constants'
+import { MONTH_DAYS } from '../../constants'
 import useFilterDays from '../../hooks/useFilterDays'
 import Calendar from './Calendar'
 
@@ -34,16 +34,15 @@ const CalendarWrap = styled.div`
 `
 
 const Home = () => {
-  const [hoursToShow, setHoursToShow] = useFilterHours(HOURS_IN_DAY)
   const [daysToShow, setDaysToShow] = useFilterDays(MONTH_DAYS)
 
   return (
     <PageWrap>
       <Wrap>
-        <HourLabels hoursToShow={hoursToShow} setHoursToShow={setHoursToShow} />
+        <HourLabels />
         <CalendarWrap>
           <DayLabels daysToShow={daysToShow} setDaysToShow={setDaysToShow} />
-          <Calendar hoursToShow={hoursToShow} daysToShow={daysToShow} />
+          <Calendar daysToShow={daysToShow} />
         </CalendarWrap>
         <Toast />
       </Wrap>
