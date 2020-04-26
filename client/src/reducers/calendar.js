@@ -1,9 +1,9 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit'
 import format from 'date-fns/format'
-import { MONTH_DAYS, HOURS_IN_DAY } from '../constants'
+import { MONTH_DAYS, MONTH_DAYS_STRING, HOURS_IN_DAY } from '../constants'
 
 const initialState = {
-  allTasksByDay: MONTH_DAYS.map((dateString) => ({
+  allTasksByDay: MONTH_DAYS_STRING.map((dateString) => ({
     tasks: [
       {
         id: nanoid(),
@@ -14,7 +14,7 @@ const initialState = {
       {
         id: nanoid(),
         time: [7, 10],
-        name: 'morning',
+        name: 'morning routine',
         color: 'laurel_green',
       },
       {
@@ -27,7 +27,7 @@ const initialState = {
     dateString,
   })),
   hoursAxis: HOURS_IN_DAY,
-  daysAxis: MONTH_DAYS,
+  daysAxis: MONTH_DAYS_STRING,
 }
 
 export const { reducer, actions } = createSlice({
@@ -38,7 +38,9 @@ export const { reducer, actions } = createSlice({
       state.hoursAxis = HOURS_IN_DAY.filter(hour => hour >= from && hour <= to)
     },
     filterDays(state, { payload: { from, to } }) {
-      state.daysAxis = MONTH_DAYS.filter(day => format(day, 'd') >= from && format(day, 'd') <= to)
+      state.daysAxis = MONTH_DAYS
+        .filter(day => format(day, 'd') >= from && format(day, 'd') <= to)
+        .map(day => day.toString())
     },
   }
 })
