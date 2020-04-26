@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
-import { actions as todoActions } from '../../state/todos/reducer'
+import { actions as todoActions } from '../../reducers/todos'
 import { actions as toastActions } from '../../components/Toast/reducer'
 import { SIZE_XSM, QUICK_SILVER } from '../../styles'
 import binSvg from '../../assets/svg/bin.svg'
