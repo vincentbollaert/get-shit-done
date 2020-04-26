@@ -14,7 +14,7 @@ const initialState = {
       {
         id: nanoid(),
         time: [7, 10],
-        name: 'morning routine',
+        name: 'morning',
         color: 'laurel_green',
       },
       {
