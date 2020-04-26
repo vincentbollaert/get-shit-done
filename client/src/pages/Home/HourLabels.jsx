@@ -9,7 +9,8 @@ import { actions } from '../../state/calendar/reducer'
 const Wrap = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 12px 0;
+  padding-top: 35px;
+  padding-bottom: 12px;
   background-color: #333;
 `
 const HourLabel = styled.div`
