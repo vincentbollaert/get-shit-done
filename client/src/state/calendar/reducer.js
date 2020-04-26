@@ -3,7 +3,7 @@ import format from 'date-fns/format'
 import { MONTH_DAYS, HOURS_IN_DAY } from '../../constants'
 
 const initialState = {
-  allTasksByDay: MONTH_DAYS.map((date) => ({
+  allTasksByDay: MONTH_DAYS.map((dateString) => ({
     tasks: [
       {
         id: nanoid(),
@@ -21,7 +21,7 @@ const initialState = {
         name: 'work',
       },
     ],
-    date,
+    dateString,
   })),
   hoursAxis: HOURS_IN_DAY,
   daysAxis: MONTH_DAYS,

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import isToday from 'date-fns/isToday'
 import format from 'date-fns/format'
@@ -84,10 +84,11 @@ const Calendar = () => {
 
   return (
     <Wrap>
-      {daysAxis.map((date) => {
+      {daysAxis.map((dateString) => {
+        const date = new Date(dateString)
         const day = format(date, 'd')
         const isCurrentDay = isToday(date)
-        const tasks = allTasksByDay.find(x => x.date === date).tasks
+        const tasks = allTasksByDay.find(x => x.dateString === dateString).tasks
         const tasksFiltered = tasks.map(({ id, time, name }, taskI) => {
           const from = time[0]
           const to = time[1]
@@ -120,11 +121,11 @@ const Calendar = () => {
             <HourSlots>
               {tasksFiltered.map(({ id, heightInFlex, name, gapBefore, gapAfter }, taskI) => {
                 return (
-                  <>
+                  <Fragment key={id}>
                     {gapBefore > 0 && <Cell isGapBefore flex={gapBefore} />}
                     {heightInFlex > 0 && <Cell flex={heightInFlex}>{name}</Cell>}
                     {gapAfter > 0 && <Cell isGapAfter flex={gapAfter} />}
-                  </>
+                  </Fragment>
                 )
               })}
             </HourSlots>

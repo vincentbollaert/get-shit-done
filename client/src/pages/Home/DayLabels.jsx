@@ -107,7 +107,8 @@ const DayLabels = () => {
 
   return (
     <Wrap>
-      {daysAxis.map((date) => {
+      {daysAxis.map((dateString) => {
+        const date = new Date(dateString)
         const day = Number(format(date, 'd'))
         const dayOfWeek = format(date, 'EEEEE')
         const isCurrentDay = isToday(date)
