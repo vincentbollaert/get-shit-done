@@ -4,6 +4,8 @@ import isToday from 'date-fns/isToday'
 import format from 'date-fns/format'
 import isThisWeek from 'date-fns/isThisWeek'
 import isEqual from 'date-fns/isEqual'
+import { nanoid } from '@reduxjs/toolkit'
+
 import { WHITE } from '../../styles'
 
 import CurrentTime from './CurrentTime'
@@ -63,9 +65,10 @@ const Cell = styled.div`
   flex-basis: 0;
   align-items: center;
   border-radius: 2px;
-  box-shadow: inset 0 0 0 1px red;
+  box-shadow: inset 0 0 0 4px red;
 
-  ${p => p.isDummy && `box-shadow: inset 0 0 0 1px green`};
+  ${p => p.isGapBefore && `box-shadow: inset 0 0 0 4px green`};
+  ${p => p.isGapAfter && `box-shadow: inset 0 0 0 4px blue`};
 
   ${p => p.accentColor && `
     background-color: ${p.accentColor};
@@ -85,7 +88,27 @@ const Calendar = () => {
         const day = format(date, 'd')
         const isCurrentDay = isToday(date)
         const tasks = allTasksByDay.find(x => x.date === date).tasks
-        console.log(tasks)
+        const tasksFiltered = tasks.map(({ id, time, name }, taskI) => {
+          const from = time[0]
+          const to = time[1]
+          const isFirstTask = taskI === 0
+          const isLastTask = taskI === tasks.length - 1
+          const previousTo = !isFirstTask ? tasks[taskI - 1].time[1] : 0
+          const firstHour = hoursAxis[0]
+          const lastHourAdjusted = hoursAxis[hoursAxis.length - 1] + 1
+
+          let heightInFlex = Math.min(to, lastHourAdjusted) - Math.max(from, firstHour)
+          let gapBefore = Math.min(from - previousTo, from - firstHour, lastHourAdjusted - previousTo)
+          let gapAfter = isLastTask ? lastHourAdjusted - to : 0
+
+          return {
+            id,
+            heightInFlex,
+            name,
+            gapBefore,
+            gapAfter
+          }
+        })
 
         return (
           <Column
@@ -95,29 +118,12 @@ const Calendar = () => {
           >
             {isCurrentDay && <CurrentTime date={date} />}
             <HourSlots>
-              {tasks.map(({ time, name }, taskI) => {
-
-                // show these tasks
-                // use flex - determine height 
-                // flex value PER HOUR = hoursAxis length / tasks length
-                // each task gets [1] - [0] * ^ flex value
-                // if gap between tasks, fill with placeholder task flex = length
-                const isFirstTask = taskI === 0
-                const isLastTask = taskI === tasks.length - 1
-                // const 
-                const gapBefore = !isFirstTask && time[0] - tasks[taskI - 1].time[1]
-                const gapAfter = isLastTask && hoursAxis[hoursAxis.length - 1] + 1 - time[1]
-                console.log(hoursAxis)
-                // if (gapBefore) {
-                //   console.log('gapBefore is ' + gapBefore)
-                // }
+              {tasksFiltered.map(({ id, heightInFlex, name, gapBefore, gapAfter }, taskI) => {
                 return (
                   <>
-                    <Cell isDummy key={taskI} flex={gapBefore} />
-                    <Cell key={name} flex={time[1] - time[0]}>
-                      {name}
-                    </Cell>
-                    {isLastTask && <Cell isDummy key={taskI} flex={gapAfter} />}
+                    {gapBefore > 0 && <Cell isGapBefore flex={gapBefore} />}
+                    {heightInFlex > 0 && <Cell flex={heightInFlex}>{name}</Cell>}
+                    {gapAfter > 0 && <Cell isGapAfter flex={gapAfter} />}
                   </>
                 )
               })}
