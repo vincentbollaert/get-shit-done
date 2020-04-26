@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import UseFilterRange from '../../hooks/useFilterRange'
 import UseHighlightFilteredRange from '../../hooks/useHighlightFIlteredRange'
 import { useSelector } from 'react-redux'
-import { actions } from '../../state/calendar/reducer'
+import { actions } from '../../reducers/calendar'
 
 const Wrap = styled.div`
   display: flex;

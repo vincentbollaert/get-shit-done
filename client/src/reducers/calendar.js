@@ -1,6 +1,6 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit'
 import format from 'date-fns/format'
-import { MONTH_DAYS, HOURS_IN_DAY } from '../../constants'
+import { MONTH_DAYS, HOURS_IN_DAY } from '../constants'
 
 const initialState = {
   allTasksByDay: MONTH_DAYS.map((dateString) => ({
