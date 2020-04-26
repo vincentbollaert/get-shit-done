@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { SONIC_SILVER, PASTEL_GRAY, ONYX, JET, SIZE_XLG, ISABELLINE, QUICK_SILVER } from '../../../styles'
-import lisSvg from '../../../assets/svg/list.svg'
-import Svg from '../../../components/Svg/component'
+import { SONIC_SILVER, PASTEL_GRAY, ONYX, JET, SIZE_XLG, ISABELLINE, QUICK_SILVER } from '../../styles'
+import lisSvg from '../../assets/svg/list.svg'
+import Svg from '../../components/Svg/component'
 
 const Wrap = styled.div`
   z-index: 1;

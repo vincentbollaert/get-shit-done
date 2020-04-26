@@ -6,7 +6,7 @@ import store from './Root/store'
 import { reset } from '../styles'
 
 import { homePath } from './paths'
-import Home from '../pages/Home/component'
+import Home from '../pages/Home/Home'
 import SWUpdate from '../components/SWUpdate/component'
 import UseServiceWorker from '../hooks/useServiceWorker'
 

@@ -1,20 +1,22 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 
 const UseRangeFilter = ({ from, to, cb }) => {
+  const dispatch = useDispatch()
   const [{ fromDefault, toDefault }] = useState({ fromDefault: from, toDefault: to })
   const [{ fromCustom, toCustom}, applyFilters] = useState({}) 
 
   const onFilter = (hour) => {
     if (!fromCustom) {
       applyFilters({ fromCustom: hour })
-    } else {
+    } else if (!toCustom){
       applyFilters({ toCustom: hour, fromCustom })
-      cb({ from: Math.min(fromCustom, hour), to: Math.max(fromCustom, hour) })
+      dispatch(cb({ from: Math.min(fromCustom, hour), to: Math.max(fromCustom, hour) }))
     }
 
     if (fromCustom !== undefined && toCustom !== undefined) {
       applyFilters({})
-      cb({ from: fromDefault, to: toDefault })
+      dispatch(cb({ from: fromDefault, to: toDefault }))
     }
   }
 
