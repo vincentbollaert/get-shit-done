@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import isToday from 'date-fns/isToday'
 import format from 'date-fns/format'
-import isThisWeek from 'date-fns/isThisWeek'
 
 import { WHITE } from '../../styles'
 import UseFilterRange from '../../hooks/useFilterRange'
@@ -41,7 +40,13 @@ const DayLabel = styled.div`
 
   &:first-child {
     border-left: none;
+    flex-direction: row-reverse;
+    
     &::before {
+      display: none;
+    };
+    &::after {
+      content: '';
       position: static;
       width: 8px;
       background-color: transparent;
@@ -70,11 +75,13 @@ const DayLabel = styled.div`
 
   ${p => p.isCurrentDay && `
     flex-grow: 2;
-    border-left: 1px solid #333;
-    border-bottom: none;
-    padding-bottom: 4px;
+    ${!p.isActive && 'border-bottom: 4px solid #f7f7f7'};
     color: #333;
-    background-color: ${WHITE};
+    background-color: #f7f7f7;
+
+    &:hover {
+      border-bottom: 4px solid #333;
+    };
 
     & + ${DayLabel} {
       &::before {
@@ -84,13 +91,20 @@ const DayLabel = styled.div`
   `};
 
   &:hover {
-    background-color: ${p => p.isFiltered ? 'inherit' : '#444'};
-    cursor: ${p => p.isFiltered ? 'inherit' : 'pointer'};
+    color: #eee;
+    background-color: #444;
+
+    ${p => p.isFiltered  && `
+      background-color: inherit;
+      color: inherit;
+      cursor: inherit;
+    `};
   };
 
   ${p => p.isActive && `
     background-color: #444;
     box-shadow: inset 0px 4px 0 0px #333, inset 0px -4px 0 0px #333;
+    color: #eee;
   `};
 
   &::before {
@@ -123,7 +137,6 @@ const DayLabels = () => {
           <DayLabel
             key={day}
             isCurrentDay={isCurrentDay}
-            // isCurrentWeek={isThisWeek(date, { weekStartsOn: 1 })}
             isFiltered={isFiltered}
             isBeingFiltered={isBeingFiltered}
             isActive={filteredRange.includes(day)}

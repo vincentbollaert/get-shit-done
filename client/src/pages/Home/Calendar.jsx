@@ -2,11 +2,12 @@ import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import isToday from 'date-fns/isToday'
 import format from 'date-fns/format'
-import isThisWeek from 'date-fns/isThisWeek'
 
 import { WHITE, SIZE_XSM } from '../../styles'
 import CurrentTime from './CurrentTime'
 import { useSelector } from 'react-redux'
+
+const CN_HOUR_SLOTS = 'hour-slots'
 
 const Wrap = styled.div`
   display: flex;
@@ -30,10 +31,10 @@ const Column = styled.div`
 
   ${p => p.isCurrentDay && `
     flex-grow: 2;
-    border-left: 1px solid #333;
+    background-color: #f7f7f7;
 
-    & + ${Column} {
-      border-left: 1px solid #333;
+    .${CN_HOUR_SLOTS} * {
+      box-shadow: inset 0px 1px 0 0px #f7f7f7, inset 0px -1px 0 0px #f7f7f7 !important;
     };
   `};
 `
@@ -111,13 +112,9 @@ const Calendar = () => {
         })
 
         return (
-          <Column
-            key={day}
-            // isCurrentWeek={isThisWeek(date, { weekStartsOn: 1 })}
-            isCurrentDay={isCurrentDay}
-          >
+          <Column key={day} isCurrentDay={isCurrentDay}>
             {isCurrentDay && <CurrentTime date={date} />}
-            <HourSlots>
+            <HourSlots className={CN_HOUR_SLOTS}>
               {tasksFiltered.map(({ id, heightInFlex, name, gapBefore, gapAfter, color }) => {
                 return (
                   <Fragment key={id}>
