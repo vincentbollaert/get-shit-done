@@ -26,8 +26,9 @@ const DayLabel = styled.div`
   flex-basis: 0;
   justify-content: center;
   align-items: center;
-  padding: 8px 4px 0;
+  padding-top: 8px;
   border-bottom: 4px solid #333;
+  border-left: 1px solid transparent;
   cursor: pointer;
   transition: padding 0.1s ease-out;
 
@@ -39,6 +40,7 @@ const DayLabel = styled.div`
   }
 
   &:first-child {
+    border-left: none;
     &::before {
       position: static;
       width: 8px;
@@ -47,8 +49,7 @@ const DayLabel = styled.div`
   };
 
   ${Wrap}:hover & {
-    padding-top: 16px;
-    padding-bottom: 16px;
+    padding: 16px 0;
 
     &::before {
       display: none;
@@ -56,12 +57,11 @@ const DayLabel = styled.div`
   }
 
   ${p => p.isBeingFiltered && `
-    padding-top: 16px;
-      padding-bottom: 16px;
+    padding: 16px 0;
 
-      &::before {
-        display: none;
-      };
+    &::before {
+      display: none;
+    };
   `};
 
   ${p => p.isCurrentWeek && `
@@ -69,11 +69,12 @@ const DayLabel = styled.div`
   `};
 
   ${p => p.isCurrentDay && `
-    color: #333;
+    flex-grow: 2;
+    border-left: 1px solid #333;
     border-bottom: none;
     padding-bottom: 4px;
+    color: #333;
     background-color: ${WHITE};
-    box-shadow: inset 1px 0 0 0 #333;
 
     & + ${DayLabel} {
       &::before {

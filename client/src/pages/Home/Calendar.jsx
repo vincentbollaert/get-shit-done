@@ -29,6 +29,7 @@ const Column = styled.div`
   `};
 
   ${p => p.isCurrentDay && `
+    flex-grow: 2;
     border-left: 1px solid #333;
 
     & + ${Column} {
@@ -112,7 +113,7 @@ const Calendar = () => {
         return (
           <Column
             key={day}
-            isCurrentWeek={isThisWeek(date, { weekStartsOn: 1 })}
+            // isCurrentWeek={isThisWeek(date, { weekStartsOn: 1 })}
             isCurrentDay={isCurrentDay}
           >
             {isCurrentDay && <CurrentTime date={date} />}
