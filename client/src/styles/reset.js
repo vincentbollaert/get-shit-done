@@ -7,7 +7,7 @@ export default `
     height: 100%;
     background-color: ${WHITE_SMOKE};
     color: ${SONIC_SILVER};
-    font-family: 'Lato', sans-serif;
+    font-family: 'Barlow Semi Condensed', sans-serif;
     box-sizing: border-box;
     font-size: 62.5%;
   }
@@ -62,7 +62,7 @@ export default `
   h4,
   h5 {
     margin: 0;
-    font-family: 'Lato', sans-serif
+    font-family: 'Barlow Semi Condensed', sans-serif
   }
   p {
     margin: 0;
