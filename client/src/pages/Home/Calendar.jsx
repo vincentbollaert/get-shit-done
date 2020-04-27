@@ -4,7 +4,7 @@ import isToday from 'date-fns/isToday'
 import format from 'date-fns/format'
 import isThisWeek from 'date-fns/isThisWeek'
 
-import { WHITE } from '../../styles'
+import { WHITE, SIZE_XSM } from '../../styles'
 import CurrentTime from './CurrentTime'
 import { useSelector } from 'react-redux'
 
@@ -18,6 +18,7 @@ const Column = styled.div`
   flex-grow: 1;
   position: relative;
   border-left: 1px solid #eee;
+  width: 0;
 
   &:first-child {
     border-left: 0;
@@ -50,6 +51,11 @@ const HourSlots = styled.div`
     padding-left: 12px;
   };
 `
+const STYLE_ELLIPSIS = `
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`
 const Cell = styled.div`
   display: flex;
   flex-grow: ${p => p.flex};
@@ -60,6 +66,13 @@ const Cell = styled.div`
   border-radius: 2px;
   box-shadow: inset 0px 1px 0 0px ${WHITE}, inset 0px -1px 0 0px ${WHITE};
   background-color: ${p => p.accentColor};
+  display: block;
+  padding: 0 ${SIZE_XSM};
+  line-height: 1.5;
+  ${p => p.isSmall && `
+    line-height: 0.9;
+  `}
+  ${STYLE_ELLIPSIS};
 `
 
 const Calendar = () => {
@@ -108,7 +121,15 @@ const Calendar = () => {
                 return (
                   <Fragment key={id}>
                     {gapBefore > 0 && <Cell isGapBefore flex={gapBefore} />}
-                    {heightInFlex > 0 && <Cell flex={heightInFlex} accentColor={colors[color]}>{name}</Cell>}
+                    {heightInFlex > 0 && (
+                      <Cell
+                        flex={heightInFlex}
+                        accentColor={colors[color]}
+                        isSmall={hoursAxis.length > 16 && heightInFlex <= 0.25}
+                      >
+                        {name}
+                      </Cell>
+                    )}
                     {gapAfter > 0 && <Cell isGapAfter flex={gapAfter} />}
                   </Fragment>
                 )
