@@ -58,7 +58,7 @@ const Cell = styled.div`
   flex-basis: 0;
   align-items: center;
   border-radius: 2px;
-  box-shadow: inset 0px 2px 0 0px ${WHITE}, inset 0px -2px 0 0px ${WHITE};
+  box-shadow: inset 0px 1px 0 0px ${WHITE}, inset 0px -1px 0 0px ${WHITE};
   background-color: ${p => p.accentColor};
 `
 
