@@ -4,7 +4,7 @@ import differenceInMinutes from 'date-fns/differenceInMinutes'
 import startOfToday from 'date-fns/startOfToday'
 import format from 'date-fns/format'
 import add from 'date-fns/add'
-import { WHITE } from '../../styles'
+import { WHITE, GRANITE_GRAY, WHITE_SMOKE } from '../../styles'
 
 const Wrap = styled.div`
   position: absolute;
@@ -13,7 +13,7 @@ const Wrap = styled.div`
   left: 0;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #656565;
+  border-bottom: 1px solid #65656569;
 
   &::before {
     content: '';
@@ -24,7 +24,7 @@ const Wrap = styled.div`
     height: 8px;
     background: ${WHITE};
     border-radius: 50%;
-    box-shadow: inset 0 0 0 1px #656565;
+    box-shadow: inset 0 0 0 1px ${GRANITE_GRAY};
   };
 `
 const Time = styled.span`
@@ -32,8 +32,8 @@ const Time = styled.span`
   right: 0;
   padding: 4px 6px;
   font-size: 10px;
-  background: #656565;
-  color: #FFEB3B;
+  background: ${GRANITE_GRAY};
+  color: ${WHITE_SMOKE};
 `
 const MINUTES_IN_DAY = 1440
 
