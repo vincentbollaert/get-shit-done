@@ -9,6 +9,7 @@ import UseFilterRange from '../../hooks/useFilterRange'
 import UseHighlightFilteredRange from '../../hooks/useHighlightFIlteredRange'
 import { useSelector } from 'react-redux'
 import { actions } from '../../reducers/calendar'
+import { MONTH_DAYS } from '../../constants'
 
 const Wrap = styled.div`
   display: flex;
@@ -105,7 +106,8 @@ const DayLabel = styled.div`
 
 const DayLabels = () => {
   const { daysAxis } = useSelector(state => state.calendar)
-  const [{ isFiltered, isBeingFiltered, from }, onFilter] = UseFilterRange({ from: 1, to: 23, cb: actions.filterDays })
+  const [{ isFiltered, isBeingFiltered, from }, onFilter]
+    = UseFilterRange({ from: 1, to: MONTH_DAYS.length, cb: actions.filterDays })
   const [filteredRange, highlightFilteredRange] = UseHighlightFilteredRange({ isBeingFiltered, isFiltered, from })
 
   return (
