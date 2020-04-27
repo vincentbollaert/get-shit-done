@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 
 import styled from 'styled-components'
-import { WHITE } from '../../styles'
+import { WHITE, JET } from '../../styles'
 import Toast from '../../components/Toast/component'
 
 const Todos = React.lazy(() => import('./Todos'))
@@ -21,7 +21,7 @@ const Wrap = styled.div`
   flex-grow: 1;
   position: relative;
   width: 100%;
-  background-color: #333;
+  background-color: ${JET};
 `
 const CalendarWrap = styled.div`
   display: flex;

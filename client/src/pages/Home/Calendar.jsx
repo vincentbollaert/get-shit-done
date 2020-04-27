@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import isToday from 'date-fns/isToday'
 import format from 'date-fns/format'
 
-import { WHITE, SIZE_XSM } from '../../styles'
+import { WHITE, SIZE_XSM, WHITE_SMOKE, ISABELLINE } from '../../styles'
 import CurrentTime from './CurrentTime'
 import { useSelector } from 'react-redux'
 
@@ -18,7 +18,7 @@ const Column = styled.div`
   flex-direction: column;
   flex-grow: 1;
   position: relative;
-  border-left: 1px solid #eee;
+  border-left: 1px solid ${ISABELLINE};
   width: 0;
 
   &:first-child {
@@ -31,10 +31,10 @@ const Column = styled.div`
 
   ${p => p.isCurrentDay && `
     flex-grow: 2;
-    background-color: #f7f7f7;
+    background-color: ${WHITE_SMOKE};
 
     .${CN_HOUR_SLOTS} * {
-      box-shadow: inset 0px 1px 0 0px #f7f7f7, inset 0px -1px 0 0px #f7f7f7 !important;
+      box-shadow: inset 0px 1px 0 0px ${WHITE_SMOKE}, inset 0px -1px 0 0px ${WHITE_SMOKE} !important;
     };
   `};
 `
