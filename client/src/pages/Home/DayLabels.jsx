@@ -23,7 +23,6 @@ const DayLabel = styled.div`
   display: flex;
   flex-shrink: 0;
   flex-basis: 0;
-  border-left: 1px solid transparent;
   justify-content: center;
   align-items: center;
   padding: 8px 4px 0;
@@ -32,15 +31,17 @@ const DayLabel = styled.div`
   transition: padding 0.1s ease-out;
 
   &:last-child {
-    padding-right: 12px;
+    &:after {
+      content: "";
+      padding-right: 8px;
+    }
   }
 
   &:first-child {
-    padding-left: 12px;
-    border-left: 0;
-
     &::before {
-      display: none;
+      position: static;
+      width: 8px;
+      background-color: transparent;
     };
   };
 
@@ -69,7 +70,9 @@ const DayLabel = styled.div`
   ${p => p.isCurrentDay && `
     color: #333;
     border-bottom: none;
+    padding-bottom: 4px;
     background-color: ${WHITE};
+    box-shadow: inset 1px 0 0 0 #333;
 
     & + ${DayLabel} {
       &::before {
@@ -117,7 +120,7 @@ const DayLabels = () => {
           <DayLabel
             key={day}
             isCurrentDay={isCurrentDay}
-            isCurrentWeek={isThisWeek(date, { weekStartsOn: 1 })}
+            // isCurrentWeek={isThisWeek(date, { weekStartsOn: 1 })}
             isFiltered={isFiltered}
             isBeingFiltered={isBeingFiltered}
             isActive={filteredRange.includes(day)}
