@@ -7,13 +7,13 @@ const initialState = {
     tasks: [
       {
         id: nanoid(),
-        time: [0, 7],
+        time: [0, 6.75],
         name: 'sleep',
         color: 'bone',
       },
       {
         id: nanoid(),
-        time: [7, 7.25],
+        time: [6.75, 7.25],
         name: 'morning routine someting somethignsdsdssdsdsd',
         color: 'laurel_green',
       },
