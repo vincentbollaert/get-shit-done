@@ -2,19 +2,19 @@ import React from 'react'
 import styled from 'styled-components'
 import isToday from 'date-fns/isToday'
 import format from 'date-fns/format'
-import isThisWeek from 'date-fns/isThisWeek'
 
-import { WHITE } from '../../styles'
+import { ISABELLINE, WHITE_SMOKE, JET, ARSENIC, PASTEL_GRAY } from '../../styles'
 import UseFilterRange from '../../hooks/useFilterRange'
 import UseHighlightFilteredRange from '../../hooks/useHighlightFIlteredRange'
 import { useSelector } from 'react-redux'
 import { actions } from '../../reducers/calendar'
+import { MONTH_DAYS } from '../../constants'
 
 const Wrap = styled.div`
   display: flex;
   font-size: 10px;
-  color: #c4c4c4;
-  background: #333;
+  color: ${PASTEL_GRAY};
+  background: ${JET};
 `
 const DayLabel = styled.div`
   position: relative;
@@ -23,30 +23,38 @@ const DayLabel = styled.div`
   display: flex;
   flex-shrink: 0;
   flex-basis: 0;
-  border-left: 1px solid transparent;
   justify-content: center;
   align-items: center;
-  padding: 8px 4px 0;
-  border-bottom: 4px solid #333;
+  padding-top: 8px;
+  border-bottom: 4px solid ${JET};
+  border-left: 1px solid transparent;
   cursor: pointer;
   transition: padding 0.1s ease-out;
 
   &:last-child {
-    padding-right: 12px;
+    &:after {
+      content: "";
+      padding-right: 8px;
+    }
   }
 
   &:first-child {
-    padding-left: 12px;
-    border-left: 0;
-
+    border-left: none;
+    flex-direction: row-reverse;
+    
     &::before {
       display: none;
+    };
+    &::after {
+      content: '';
+      position: static;
+      width: 8px;
+      background-color: transparent;
     };
   };
 
   ${Wrap}:hover & {
-    padding-top: 16px;
-    padding-bottom: 16px;
+    padding: 16px 0;
 
     &::before {
       display: none;
@@ -54,12 +62,11 @@ const DayLabel = styled.div`
   }
 
   ${p => p.isBeingFiltered && `
-    padding-top: 16px;
-      padding-bottom: 16px;
+    padding: 16px 0;
 
-      &::before {
-        display: none;
-      };
+    &::before {
+      display: none;
+    };
   `};
 
   ${p => p.isCurrentWeek && `
@@ -67,9 +74,14 @@ const DayLabel = styled.div`
   `};
 
   ${p => p.isCurrentDay && `
-    color: #333;
-    border-bottom: none;
-    background-color: ${WHITE};
+    flex-grow: 2;
+    ${!p.isActive && `border-bottom: 4px solid ${WHITE_SMOKE}`};
+    color: ${JET};
+    background-color: ${WHITE_SMOKE};
+
+    &:hover {
+      border-bottom: 4px solid ${JET};
+    };
 
     & + ${DayLabel} {
       &::before {
@@ -79,13 +91,20 @@ const DayLabel = styled.div`
   `};
 
   &:hover {
-    background-color: ${p => p.isFiltered ? 'inherit' : '#444'};
-    cursor: ${p => p.isFiltered ? 'inherit' : 'pointer'};
+    color: ${ISABELLINE};
+    background-color: ${ARSENIC};
+
+    ${p => p.isFiltered  && `
+      background-color: inherit;
+      color: inherit;
+      cursor: inherit;
+    `};
   };
 
   ${p => p.isActive && `
-    background-color: #444;
-    box-shadow: inset 0px 4px 0 0px #333, inset 0px -4px 0 0px #333;
+    background-color: ${ARSENIC};
+    box-shadow: inset 0px 4px 0 0px ${JET}, inset 0px -4px 0 0px ${JET};
+    color: ${ISABELLINE};
   `};
 
   &::before {
@@ -102,7 +121,8 @@ const DayLabel = styled.div`
 
 const DayLabels = () => {
   const { daysAxis } = useSelector(state => state.calendar)
-  const [{ isFiltered, isBeingFiltered, from }, onFilter] = UseFilterRange({ from: 1, to: 23, cb: actions.filterDays })
+  const [{ isFiltered, isBeingFiltered, from }, onFilter]
+    = UseFilterRange({ from: 1, to: MONTH_DAYS.length, cb: actions.filterDays })
   const [filteredRange, highlightFilteredRange] = UseHighlightFilteredRange({ isBeingFiltered, isFiltered, from })
 
   return (
@@ -117,7 +137,6 @@ const DayLabels = () => {
           <DayLabel
             key={day}
             isCurrentDay={isCurrentDay}
-            isCurrentWeek={isThisWeek(date, { weekStartsOn: 1 })}
             isFiltered={isFiltered}
             isBeingFiltered={isBeingFiltered}
             isActive={filteredRange.includes(day)}

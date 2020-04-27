@@ -4,31 +4,36 @@ import differenceInMinutes from 'date-fns/differenceInMinutes'
 import startOfToday from 'date-fns/startOfToday'
 import format from 'date-fns/format'
 import add from 'date-fns/add'
+import { WHITE, GRANITE_GRAY, WHITE_SMOKE } from '../../styles'
 
 const Wrap = styled.div`
   position: absolute;
   top: ${p => p.top}%;
-  right: 0;
+  right: 0px;
   left: 0;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #65656569;
 
   &::before {
     content: '';
     position: absolute;
-    width: 5px;
-    height: 6px;
-    background: #333333;
+    left: -4px;
+    bottom: -4px;
+    width: 8px;
+    height: 8px;
+    background: ${WHITE};
     border-radius: 50%;
-    left: -3px;
-    top: -3px;
+    box-shadow: inset 0 0 0 1px ${GRANITE_GRAY};
   };
 `
 const Time = styled.span`
-  padding: 4px 8px;
-  font-size: 11px;
   position: absolute;
-  top: 0;
-  color: #333333;
-  transform: translateY(-50%);
+  right: 0;
+  padding: 4px 6px;
+  font-size: 10px;
+  background: ${GRANITE_GRAY};
+  color: ${WHITE_SMOKE};
 `
 const MINUTES_IN_DAY = 1440
 
@@ -44,7 +49,7 @@ const CurrentTime = () => {
   }
 
   useEffect(() => {
-    window.setInterval(updateTime, 1000)
+    // window.setInterval(updateTime, 1000)
   }, [])
 
   return (

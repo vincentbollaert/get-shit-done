@@ -2,11 +2,12 @@ import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import isToday from 'date-fns/isToday'
 import format from 'date-fns/format'
-import isThisWeek from 'date-fns/isThisWeek'
 
-import { WHITE } from '../../styles'
+import { WHITE, SIZE_XSM, WHITE_SMOKE, ISABELLINE } from '../../styles'
 import CurrentTime from './CurrentTime'
 import { useSelector } from 'react-redux'
+
+const CN_HOUR_SLOTS = 'hour-slots'
 
 const Wrap = styled.div`
   display: flex;
@@ -17,7 +18,8 @@ const Column = styled.div`
   flex-direction: column;
   flex-grow: 1;
   position: relative;
-  border-left: 1px solid #eee;
+  border-left: 1px solid ${ISABELLINE};
+  width: 0;
 
   &:first-child {
     border-left: 0;
@@ -28,10 +30,11 @@ const Column = styled.div`
   `};
 
   ${p => p.isCurrentDay && `
-    border-left: 1px solid #333;
+    flex-grow: 2;
+    background-color: ${WHITE_SMOKE};
 
-    & + ${Column} {
-      border-left: 1px solid #333;
+    .${CN_HOUR_SLOTS} * {
+      box-shadow: inset 0px 1px 0 0px ${WHITE_SMOKE}, inset 0px -1px 0 0px ${WHITE_SMOKE} !important;
     };
   `};
 `
@@ -50,6 +53,11 @@ const HourSlots = styled.div`
     padding-left: 12px;
   };
 `
+const STYLE_ELLIPSIS = `
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`
 const Cell = styled.div`
   display: flex;
   flex-grow: ${p => p.flex};
@@ -58,8 +66,15 @@ const Cell = styled.div`
   flex-basis: 0;
   align-items: center;
   border-radius: 2px;
-  box-shadow: inset 0px 2px 0 0px ${WHITE}, inset 0px -2px 0 0px ${WHITE};
+  box-shadow: inset 0px 1px 0 0px ${WHITE}, inset 0px -1px 0 0px ${WHITE};
   background-color: ${p => p.accentColor};
+  display: block;
+  padding: 0 ${SIZE_XSM};
+  line-height: 1.5;
+  ${p => p.isSmall && `
+    line-height: 0.9;
+  `}
+  ${STYLE_ELLIPSIS};
 `
 
 const Calendar = () => {
@@ -97,18 +112,22 @@ const Calendar = () => {
         })
 
         return (
-          <Column
-            key={day}
-            isCurrentWeek={isThisWeek(date, { weekStartsOn: 1 })}
-            isCurrentDay={isCurrentDay}
-          >
+          <Column key={day} isCurrentDay={isCurrentDay}>
             {isCurrentDay && <CurrentTime date={date} />}
-            <HourSlots>
+            <HourSlots className={CN_HOUR_SLOTS}>
               {tasksFiltered.map(({ id, heightInFlex, name, gapBefore, gapAfter, color }) => {
                 return (
                   <Fragment key={id}>
                     {gapBefore > 0 && <Cell isGapBefore flex={gapBefore} />}
-                    {heightInFlex > 0 && <Cell flex={heightInFlex} accentColor={colors[color]}>{name}</Cell>}
+                    {heightInFlex > 0 && (
+                      <Cell
+                        flex={heightInFlex}
+                        accentColor={colors[color]}
+                        isSmall={hoursAxis.length > 16 && heightInFlex <= 0.25}
+                      >
+                        {name}
+                      </Cell>
+                    )}
                     {gapAfter > 0 && <Cell isGapAfter flex={gapAfter} />}
                   </Fragment>
                 )

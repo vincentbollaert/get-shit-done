@@ -5,13 +5,14 @@ import UseFilterRange from '../../hooks/useFilterRange'
 import UseHighlightFilteredRange from '../../hooks/useHighlightFIlteredRange'
 import { useSelector } from 'react-redux'
 import { actions } from '../../reducers/calendar'
+import { JET, ARSENIC, PASTEL_GRAY } from '../../styles'
 
 const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   padding-top: 35px;
   padding-bottom: 12px;
-  background-color: #333;
+  background-color: ${JET};
 `
 const HourLabel = styled.div`
   position: relative;
@@ -19,15 +20,15 @@ const HourLabel = styled.div`
   justify-content: center;
   align-items: center;
   flex-grow: 1;
-  border-right: 4px solid #333;
+  border-right: 4px solid ${JET};
   padding-left: 8px;
   text-align: center;
   font-size: 10px;
-  color: #c4c4c4;
+  color: ${PASTEL_GRAY};
   transition: padding 0.1s ease-out;
 
   &:hover {
-    background-color: ${p => p.isFiltered ? 'inherit' : '#444'};
+    background-color: ${p => p.isFiltered ? 'inherit' : ARSENIC};
     cursor: ${p => p.isFiltered ? 'inherit' : 'pointer'};
   };
 
@@ -44,8 +45,8 @@ const HourLabel = styled.div`
   `};
 
   ${p => p.isActive && `
-    background-color: #444;
-    box-shadow: inset 4px 0 0 0px #333, inset -4px 0 0 0px #333
+    background-color: ${ARSENIC};
+    box-shadow: inset 4px 0 0 0px ${JET}, inset -4px 0 0 0px ${JET}
   `};
 
   &::before {
