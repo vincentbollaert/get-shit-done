@@ -12,9 +12,9 @@ const CN_HOUR_SLOTS = 'hour-slots'
 const Wrap = styled.div`
   display: flex;
   flex-grow: 1;
-  transform-origin: right;
+  transform-origin: ${p => p.axis === 'y' ? 'bottom' : 'right'};
   transition: transform ${STYLE_TRANSITION};
-  ${p => p.scale && `transform: scaleX(${p.scale})`};
+  ${p => p.scale && `transform: ${p.axis === 'y' ? `scaleY(${p.scale})` : `scaleX(${p.scale})`}`};
 `
 const Column = styled.div`
   display: flex;
@@ -80,12 +80,12 @@ const Cell = styled.div`
   ${STYLE_ELLIPSIS};
 `
 
-const Calendar = ({ scale }) => {
+const Calendar = ({ calendarAxis, scale }) => {
   const { colors } = useSelector(state => state.settings)
   const { hoursAxis, daysAxis, allTasksByDay } = useSelector(state => state.calendar)
 
   return (
-    <Wrap scale={scale}>
+    <Wrap scale={scale} axis={calendarAxis}>
       {daysAxis.map((dateString) => {
         const date = new Date(dateString)
         const day = format(date, 'd')

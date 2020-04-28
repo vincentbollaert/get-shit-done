@@ -44,13 +44,16 @@ const CalendarWrap = styled.div`
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [wrapScale, setWrapScale] = useScaleForTransition()
-  const [calendarScale, setCalendarScale] = useScaleForTransition()
+  const [{ scale: wrapScale, updateScale: setWrapScale }] = useScaleForTransition()
+  const [{ scale: calendarScale, axis: calendarAxis, updateScale: setCalendarScale }] = useScaleForTransition()
   const wrapRef = useRef(null)
   const calendarRef = useRef(null)
 
   const onHourLabelClick = ({ show }) => {
     setCalendarScale({ ref: calendarRef, inPixels: 26, show })
+  }
+  const onDayLabelsClick = ({ show, axis }) => {
+    setCalendarScale({ ref: calendarRef, inPixels: 26, show, axis })
   }
   const onSidebarClick = () => {
     setIsOpen(o => !o)
@@ -62,8 +65,8 @@ const Home = () => {
       <Wrap isOpen={isOpen} scale={wrapScale} ref={wrapRef}>
         <HourLabels handleClick={onHourLabelClick} />
         <CalendarWrap ref={calendarRef}>
-          <DayLabels />
-          <Calendar scale={calendarScale} />
+          <DayLabels handleClick={onDayLabelsClick} />
+          <Calendar calendarAxis={calendarAxis} scale={calendarScale} />
         </CalendarWrap>
         <Toast />
       </Wrap>
