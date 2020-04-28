@@ -21,10 +21,15 @@ const Wrap = styled.div`
   width: 24px;
   background-color: ${JET};
   transition: width ${STYLE_TRANSITION}, padding ${STYLE_TRANSITION};
+  
+  ${p => p.isBeingFiltered && `
+    padding-left: 0;
+    width: 50px;
+  `};
 
   &:hover {
-    width: 50px;
     padding-left: 0;
+    width: 50px;
   };
 `
 const HourLabel = styled.div`
@@ -43,12 +48,6 @@ const HourLabel = styled.div`
     cursor: ${p => p.isFiltered ? 'inherit' : 'pointer'};
   };
 
-  ${p => p.isBeingFiltered && `
-    &::before {
-      display: none;
-    };
-  `};
-
   ${p => p.isActive && `
     background-color: ${ARSENIC};
     box-shadow: inset 4px 0 0 0px ${JET}, inset -4px 0 0 0px ${JET}
@@ -65,9 +64,15 @@ const HourLabel = styled.div`
     background-color: #ffffff42;
 
     ${Wrap}:hover & {
-      content: none;
+      display: none;
     };
   };
+
+  ${p => p.isBeingFiltered && `
+    &::before {
+      display: none;
+    };
+  `};
 
   &:last-child {
     &::before {
@@ -82,11 +87,15 @@ const HourLabels = ({ handleClick }) => {
   const [filteredRange, highlightFilteredRange] = UseHighlightFilteredRange({ isBeingFiltered, isFiltered, from })
 
   const onClick = (hour) => {
-    handleClick()
+    // handleClick()
     onFilter(hour)
   }
   return (
-    <Wrap onMouseEnter={handleClick} onMouseLeave={handleClick}>
+    <Wrap
+      isBeingFiltered={isBeingFiltered}
+      onMouseEnter={() => handleClick({ show: true })}
+      onMouseLeave={() => handleClick({ show: isBeingFiltered })}
+    >
       {hoursAxis.map((hour) => (
         <HourLabel
           isBeingFiltered={isBeingFiltered}
