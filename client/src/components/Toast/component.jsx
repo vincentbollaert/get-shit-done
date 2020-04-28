@@ -34,6 +34,7 @@ const Prefix = styled.span`
   margin-right: ${SIZE_SM};
   border-right: 1px solid #ffffff5e;
   padding-right: ${SIZE_SM};
+  font-size: 14px;
   font-weight: bold;
 `
 const Message = styled.div`
@@ -44,12 +45,11 @@ const Message = styled.div`
 const Undo = styled.div`
   position: absolute;
   right: ${SIZE_LG};
-  padding: ${SIZE_SM} ${SIZE_MD};
+  padding: ${SIZE_SM} ${SIZE_LG};
   font-weight: bold;
   color: ${SUNSET_ORANGE};
   text-transform: uppercase;
   background-color: ${WHITE};
-  font-size: 10px;
   border-radius: 21px;
 `
 const TimeRemaining = styled.span`

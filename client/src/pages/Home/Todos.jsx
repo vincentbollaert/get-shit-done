@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { actions as todoActions } from '../../reducers/todos'
 import { actions as toastActions } from '../../components/Toast/reducer'
-import { SIZE_XSM, QUICK_SILVER } from '../../styles'
+import { SIZE_XSM, COOL_GRAY, RHYTHM } from '../../styles'
 import binSvg from '../../assets/svg/bin.svg'
 import Svg from '../../components/Svg/component'
 
@@ -23,14 +23,18 @@ const Todo = styled.div`
   line-height: 1.5;
 
   &:hover {
-    color: ${QUICK_SILVER};
+    color: ${COOL_GRAY};
   };
-`
-const Name = styled.div`
+
   ${p => p.isDone && `
-    opacity: 0.6;
+    color: ${RHYTHM};
+
+    &:hover {
+      color: ${RHYTHM};
+    };
   `};
 `
+const Name = styled.div``
 const Actions = styled.div`
   display: none;
   position: absolute;
@@ -62,8 +66,8 @@ const Todos = () => {
       
       <AddNewTodo addNewTodo={onAddNewTodo} />
       {todos.map(({ id, todoName, isDone }) => (
-        <Todo key={id}>
-          <Name isDone={isDone} onClick={() => dispatch(toggleIsDone(id))}>
+        <Todo isDone={isDone} key={id} onClick={() => dispatch(toggleIsDone(id))}>
+          <Name>
             {todoName}
           </Name>
           <Actions>
