@@ -1,7 +1,7 @@
 import React, { Suspense, useState, useRef } from 'react'
 
 import styled from 'styled-components'
-import { WHITE, JET, STYLE_TRANSITION, CHARCOAL } from '../../styles'
+import { WHITE, JET, STYLE_TRANSITION, CHARCOAL, STYLE_SIDEBAR_WIDTH_UNIT } from '../../styles'
 import Toast from '../../components/Toast/component'
 
 const Todos = React.lazy(() => import('./Todos'))
@@ -47,7 +47,7 @@ const Home = () => {
 
   const onSidebarClick = () => {
     setIsOpen(o => !o)
-    setScale({ ref: wrapRef, inPixels: 240 })
+    setScale({ ref: wrapRef, inPixels: STYLE_SIDEBAR_WIDTH_UNIT * 10 })
   }
 
   return (
