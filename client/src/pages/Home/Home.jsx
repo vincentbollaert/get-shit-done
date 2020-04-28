@@ -9,7 +9,7 @@ const Sidebar = React.lazy(() => import('./Sidebar'))
 import HourLabels from './HourLabels'
 import DayLabels from './DayLabels'
 import Calendar from './Calendar'
-import useConvertPXToScale from '../../hooks/useConvertPXToScale'
+import useScaleForTransition from '../../hooks/useScaleForTransition'
 
 
 const PageWrap = styled.div`
@@ -43,13 +43,13 @@ const CalendarWrap = styled.div`
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [wrapScale, setWrapScale] = useConvertPXToScale()
-  const [calendarScale, setCalendarScale] = useConvertPXToScale()
+  const [wrapScale, setWrapScale] = useScaleForTransition()
+  const [calendarScale, setCalendarScale] = useScaleForTransition()
   const wrapRef = useRef(null)
   const calendarRef = useRef(null)
 
-  const onHourLabelClick = () => {
-    setCalendarScale({ ref: calendarRef, inPixels: 26 })
+  const onHourLabelClick = ({ show }) => {
+    setCalendarScale({ ref: calendarRef, inPixels: 26, show })
   }
   const onSidebarClick = () => {
     setIsOpen(o => !o)
