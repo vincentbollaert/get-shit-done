@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import isToday from 'date-fns/isToday'
 import format from 'date-fns/format'
 
-import { WHITE, SIZE_XSM, WHITE_SMOKE, ISABELLINE } from '../../styles'
+import { WHITE, SIZE_XSM, WHITE_SMOKE, ISABELLINE, STYLE_TRANSITION } from '../../styles'
 import CurrentTime from './CurrentTime'
 import { useSelector } from 'react-redux'
 
@@ -12,6 +12,9 @@ const CN_HOUR_SLOTS = 'hour-slots'
 const Wrap = styled.div`
   display: flex;
   flex-grow: 1;
+  transform-origin: right;
+  transition: transform ${STYLE_TRANSITION};
+  ${p => p.scale && `transform: scaleX(${p.scale})`};
 `
 const Column = styled.div`
   display: flex;
@@ -77,12 +80,12 @@ const Cell = styled.div`
   ${STYLE_ELLIPSIS};
 `
 
-const Calendar = () => {
+const Calendar = ({ scale }) => {
   const { colors } = useSelector(state => state.settings)
   const { hoursAxis, daysAxis, allTasksByDay } = useSelector(state => state.calendar)
 
   return (
-    <Wrap>
+    <Wrap scale={scale}>
       {daysAxis.map((dateString) => {
         const date = new Date(dateString)
         const day = format(date, 'd')

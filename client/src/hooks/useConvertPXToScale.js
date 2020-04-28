@@ -1,16 +1,24 @@
 import { useState } from 'react'
 
 const UseConvertPXToScale = (initialValue) => {
-  const [state, setState] = useState(initialValue)
+  const [scaleSaved, setScale] = useState(initialValue)
+  const [isSaved, setIsSaved] = useState(false)
 
-  const setScale = ({ ref, inPixels }) => {
+  const updateScale = ({ ref, inPixels }) => {
+    console.log('in or out')
+    if (isSaved) {
+      setScale(1)
+      setIsSaved(false)
+      return
+    }
     const { width } = ref.current.getBoundingClientRect()
     const scale = 1 - inPixels / width
     const scaleRounded = Number(scale.toFixed(4))
-    setState(scaleRounded)
+    setScale(scaleRounded)
+    setIsSaved(true)
   }
 
-  return [state, setScale]
+  return [scaleSaved, updateScale]
 }
 
 export default UseConvertPXToScale
