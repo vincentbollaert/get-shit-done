@@ -5,14 +5,27 @@ import UseFilterRange from '../../hooks/useFilterRange'
 import UseHighlightFilteredRange from '../../hooks/useHighlightFIlteredRange'
 import { useSelector } from 'react-redux'
 import { actions } from '../../reducers/calendar'
-import { JET, ARSENIC, PASTEL_GRAY } from '../../styles'
+import { JET, ARSENIC, PASTEL_GRAY, STYLE_TRANSITION } from '../../styles'
 
 const Wrap = styled.div`
+  z-index: 1;
   display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
   flex-direction: column;
   padding-top: 35px;
   padding-bottom: 12px;
+  padding-left: 8px;
+  width: 24px;
   background-color: ${JET};
+  transition: width ${STYLE_TRANSITION}, padding ${STYLE_TRANSITION};
+
+  &:hover {
+    width: 50px;
+    padding-left: 0;
+  };
 `
 const HourLabel = styled.div`
   position: relative;
@@ -21,24 +34,16 @@ const HourLabel = styled.div`
   align-items: center;
   flex-grow: 1;
   border-right: 4px solid ${JET};
-  padding-left: 8px;
   text-align: center;
   font-size: 10px;
   color: ${PASTEL_GRAY};
-  transition: padding 0.1s ease-out;
 
   &:hover {
     background-color: ${p => p.isFiltered ? 'inherit' : ARSENIC};
     cursor: ${p => p.isFiltered ? 'inherit' : 'pointer'};
   };
 
-  ${Wrap}:hover & {
-    padding: 0 16px;
-  };
-
   ${p => p.isBeingFiltered && `
-    padding: 0 16px;
-
     &::before {
       display: none;
     };
@@ -71,13 +76,17 @@ const HourLabel = styled.div`
   };
 `
 
-const HourLabels = () => {
+const HourLabels = ({ handleClick }) => {
   const { hoursAxis } = useSelector(state => state.calendar)
   const [{ isFiltered, isBeingFiltered, from }, onFilter ] = UseFilterRange({ from: 0, to: 23, cb: actions.filterHours })
   const [filteredRange, highlightFilteredRange] = UseHighlightFilteredRange({ isBeingFiltered, isFiltered, from })
 
+  const onClick = (hour) => {
+    handleClick()
+    onFilter(hour)
+  }
   return (
-    <Wrap>
+    <Wrap onMouseEnter={handleClick} onMouseLeave={handleClick}>
       {hoursAxis.map((hour) => (
         <HourLabel
           isBeingFiltered={isBeingFiltered}
@@ -85,7 +94,7 @@ const HourLabels = () => {
           isActive={filteredRange.includes(hour)}
           key={hour}
           onMouseEnter={() => highlightFilteredRange(hour)}
-          onClick={() => onFilter(hour)}
+          onClick={() => onClick(hour)}
         >
           {hour}
         </HourLabel>

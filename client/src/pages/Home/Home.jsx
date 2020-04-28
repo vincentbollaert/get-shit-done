@@ -22,6 +22,7 @@ const Wrap = styled.div`
   display: flex;
   flex-grow: 1;
   position: relative;
+  padding-left: 24px;
   width: 100%;
   background-color: ${JET};
   will-change: padding;
@@ -42,21 +43,26 @@ const CalendarWrap = styled.div`
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [scaleToTransition, setScale] = useConvertPXToScale()
+  const [wrapScale, setWrapScale] = useConvertPXToScale()
+  const [calendarScale, setCalendarScale] = useConvertPXToScale()
   const wrapRef = useRef(null)
+  const calendarRef = useRef(null)
 
+  const onHourLabelClick = () => {
+    setCalendarScale({ ref: calendarRef, inPixels: 26 })
+  }
   const onSidebarClick = () => {
     setIsOpen(o => !o)
-    setScale({ ref: wrapRef, inPixels: STYLE_SIDEBAR_WIDTH_UNIT * 10 })
+    setWrapScale({ ref: wrapRef, inPixels: STYLE_SIDEBAR_WIDTH_UNIT * 10 })
   }
 
   return (
     <PageWrap>
-      <Wrap isOpen={isOpen} scale={scaleToTransition} ref={wrapRef}>
-        <HourLabels />
-        <CalendarWrap>
+      <Wrap isOpen={isOpen} scale={wrapScale} ref={wrapRef}>
+        <HourLabels handleClick={onHourLabelClick} />
+        <CalendarWrap ref={calendarRef}>
           <DayLabels />
-          <Calendar />
+          <Calendar scale={calendarScale} />
         </CalendarWrap>
         <Toast />
       </Wrap>
