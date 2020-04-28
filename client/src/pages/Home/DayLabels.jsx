@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import isToday from 'date-fns/isToday'
 import format from 'date-fns/format'
 
-import { ISABELLINE, WHITE_SMOKE, JET, ARSENIC, PASTEL_GRAY } from '../../styles'
+import { ISABELLINE, WHITE_SMOKE, JET, ARSENIC, PASTEL_GRAY, STYLE_TRANSITION } from '../../styles'
 import UseFilterRange from '../../hooks/useFilterRange'
 import UseHighlightFilteredRange from '../../hooks/useHighlightFIlteredRange'
 import { useSelector } from 'react-redux'
@@ -11,25 +11,39 @@ import { actions } from '../../reducers/calendar'
 import { MONTH_DAYS } from '../../constants'
 
 const Wrap = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 24px;
   display: flex;
+  height: 24px;
   font-size: 10px;
   color: ${PASTEL_GRAY};
   background: ${JET};
+  transition: height ${STYLE_TRANSITION}, padding ${STYLE_TRANSITION};
+  
+  ${p => p.isBeingFiltered && `
+    height: 50px;
+  `};
+
+  &:hover {
+    height: 50px;
+  };
 `
 const DayLabel = styled.div`
   position: relative;
-  text-align: center;
   flex-grow: 1;
   display: flex;
   flex-shrink: 0;
   flex-basis: 0;
   justify-content: center;
   align-items: center;
-  padding-top: 8px;
   border-bottom: 4px solid ${JET};
   border-left: 1px solid transparent;
+  padding-top: 8px;
+  text-align: center;
   cursor: pointer;
-  transition: padding 0.1s ease-out;
+  transition: padding ${STYLE_TRANSITION};
 
   &:last-child {
     &:after {
@@ -45,6 +59,7 @@ const DayLabel = styled.div`
     &::before {
       display: none;
     };
+
     &::after {
       content: '';
       position: static;
@@ -54,7 +69,7 @@ const DayLabel = styled.div`
   };
 
   ${Wrap}:hover & {
-    padding: 16px 0;
+    padding-top: 0;
 
     &::before {
       display: none;
@@ -62,8 +77,7 @@ const DayLabel = styled.div`
   }
 
   ${p => p.isBeingFiltered && `
-    padding: 16px 0;
-
+    padding-top: 16px;
     &::before {
       display: none;
     };
@@ -75,9 +89,9 @@ const DayLabel = styled.div`
 
   ${p => p.isCurrentDay && `
     flex-grow: 2;
-    ${!p.isActive && `border-bottom: 4px solid ${WHITE_SMOKE}`};
     color: ${JET};
     background-color: ${WHITE_SMOKE};
+    ${!p.isActive && `border-bottom: 4px solid ${WHITE_SMOKE}`};
 
     &:hover {
       border-bottom: 4px solid ${JET};
@@ -126,7 +140,7 @@ const DayLabels = () => {
   const [filteredRange, highlightFilteredRange] = UseHighlightFilteredRange({ isBeingFiltered, isFiltered, from })
 
   return (
-    <Wrap>
+    <Wrap isBeingFiltered={isBeingFiltered}>
       {daysAxis.map((dateString) => {
         const date = new Date(dateString)
         const day = Number(format(date, 'd'))

@@ -22,6 +22,7 @@ const Wrap = styled.div`
   display: flex;
   flex-grow: 1;
   position: relative;
+  padding-top: 24px;
   padding-left: 24px;
   width: 100%;
   background-color: ${JET};
