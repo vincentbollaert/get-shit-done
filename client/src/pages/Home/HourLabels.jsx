@@ -5,14 +5,32 @@ import UseFilterRange from '../../hooks/useFilterRange'
 import UseHighlightFilteredRange from '../../hooks/useHighlightFIlteredRange'
 import { useSelector } from 'react-redux'
 import { actions } from '../../reducers/calendar'
-import { JET, ARSENIC, PASTEL_GRAY } from '../../styles'
+import { JET, ARSENIC, PASTEL_GRAY, STYLE_TRANSITION } from '../../styles'
 
 const Wrap = styled.div`
+  z-index: 1;
   display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
   flex-direction: column;
   padding-top: 35px;
   padding-bottom: 12px;
+  padding-left: 8px;
+  width: 24px;
   background-color: ${JET};
+  transition: width ${STYLE_TRANSITION}, padding ${STYLE_TRANSITION};
+  
+  ${p => p.isBeingFiltered && `
+    padding-left: 0;
+    width: 50px;
+  `};
+
+  &:hover {
+    padding-left: 0;
+    width: 50px;
+  };
 `
 const HourLabel = styled.div`
   position: relative;
@@ -21,28 +39,14 @@ const HourLabel = styled.div`
   align-items: center;
   flex-grow: 1;
   border-right: 4px solid ${JET};
-  padding-left: 8px;
   text-align: center;
   font-size: 10px;
   color: ${PASTEL_GRAY};
-  transition: padding 0.1s ease-out;
 
   &:hover {
     background-color: ${p => p.isFiltered ? 'inherit' : ARSENIC};
     cursor: ${p => p.isFiltered ? 'inherit' : 'pointer'};
   };
-
-  ${Wrap}:hover & {
-    padding: 0 16px;
-  };
-
-  ${p => p.isBeingFiltered && `
-    padding: 0 16px;
-
-    &::before {
-      display: none;
-    };
-  `};
 
   ${p => p.isActive && `
     background-color: ${ARSENIC};
@@ -60,9 +64,15 @@ const HourLabel = styled.div`
     background-color: #ffffff42;
 
     ${Wrap}:hover & {
-      content: none;
+      display: none;
     };
   };
+
+  ${p => p.isBeingFiltered && `
+    &::before {
+      display: none;
+    };
+  `};
 
   &:last-child {
     &::before {
@@ -71,13 +81,17 @@ const HourLabel = styled.div`
   };
 `
 
-const HourLabels = () => {
+const HourLabels = ({ onHover }) => {
   const { hoursAxis } = useSelector(state => state.calendar)
   const [{ isFiltered, isBeingFiltered, from }, onFilter ] = UseFilterRange({ from: 0, to: 23, cb: actions.filterHours })
   const [filteredRange, highlightFilteredRange] = UseHighlightFilteredRange({ isBeingFiltered, isFiltered, from })
 
   return (
-    <Wrap>
+    <Wrap
+      isBeingFiltered={isBeingFiltered}
+      onMouseEnter={() => onHover({ axis: 'x' })}
+      onMouseLeave={() => onHover({ isReset: !isBeingFiltered, axis: 'x' })}
+    >
       {hoursAxis.map((hour) => (
         <HourLabel
           isBeingFiltered={isBeingFiltered}

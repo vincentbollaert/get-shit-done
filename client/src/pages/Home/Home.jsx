@@ -9,7 +9,7 @@ const Sidebar = React.lazy(() => import('./Sidebar'))
 import HourLabels from './HourLabels'
 import DayLabels from './DayLabels'
 import Calendar from './Calendar'
-import useConvertPXToScale from '../../hooks/useConvertPXToScale'
+import useScaleForTransition from '../../hooks/useScaleForTransition'
 
 
 const PageWrap = styled.div`
@@ -22,13 +22,15 @@ const Wrap = styled.div`
   display: flex;
   flex-grow: 1;
   position: relative;
+  padding-top: 24px;
+  padding-left: 24px;
   width: 100%;
   background-color: ${JET};
   will-change: padding;
   transform-origin: left;
   transition: transform ${STYLE_TRANSITION};
   ${p => p.isOpen && `
-    transform: scaleX(${p.scale});
+    transform: scale(${p.scaleTest.x}, ${p.scaleTest.y});
   `};
 `
 const CalendarWrap = styled.div`
@@ -42,27 +44,32 @@ const CalendarWrap = styled.div`
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [scaleToTransition, setScale] = useConvertPXToScale()
+  const [{ scale: wrapScale, updateScale: setWrapScale }] = useScaleForTransition()
+  const [{ scale: calendarScale, updateScale: setCalendarScale }] = useScaleForTransition()
   const wrapRef = useRef(null)
+  const calendarRef = useRef(null)
 
-  const onSidebarClick = () => {
+  const onSetCalendarScale = ({ isReset, axis }) => {
+    setCalendarScale({ ref: calendarRef, inPixels: 26, isReset, axis })
+  }
+  const onSidebarToggle = () => {
     setIsOpen(o => !o)
-    setScale({ ref: wrapRef, inPixels: STYLE_SIDEBAR_WIDTH_UNIT * 10 })
+    setWrapScale({ ref: wrapRef, inPixels: STYLE_SIDEBAR_WIDTH_UNIT * 10, axis: 'x' })
   }
 
   return (
     <PageWrap>
-      <Wrap isOpen={isOpen} scale={scaleToTransition} ref={wrapRef}>
-        <HourLabels />
-        <CalendarWrap>
-          <DayLabels />
-          <Calendar />
+      <Wrap isOpen={isOpen} scaleTest={wrapScale} ref={wrapRef}>
+        <HourLabels onHover={onSetCalendarScale} />
+        <CalendarWrap ref={calendarRef}>
+          <DayLabels onHover={onSetCalendarScale} />
+          <Calendar scale={calendarScale} />
         </CalendarWrap>
         <Toast />
       </Wrap>
       
       <Suspense fallback={<div />}>
-        <Sidebar isOpen={isOpen} setIsOpen={onSidebarClick}>
+        <Sidebar isOpen={isOpen} setIsOpen={onSidebarToggle}>
           <Todos />
         </Sidebar>
       </Suspense>

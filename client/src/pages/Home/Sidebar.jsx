@@ -8,6 +8,7 @@ import {
   STYLE_SIDEBAR_WIDTH_UNIT,
   ROMAN_SILVER,
   INDEPENDENCE,
+  LAVENDER,
 } from '../../styles'
 import lisSvg from '../../assets/svg/list.svg'
 import Svg from '../../components/Svg/component'
@@ -16,12 +17,14 @@ const Wrap = styled.div`
   z-index: 1;
   position: relative;
   display: flex;
+  font-size: 13px;
+  color: ${LAVENDER};
 `
 const Tabs = styled.div`
   z-index: 1;
   height: 100%;
   background-color: ${CHARCOAL};
-  width: 40px;
+  width: 5rem;
   align-items: center;
   justify-content: center;
   display: flex;

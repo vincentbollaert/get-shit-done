@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import isToday from 'date-fns/isToday'
 import format from 'date-fns/format'
 
-import { WHITE, SIZE_XSM, WHITE_SMOKE, ISABELLINE } from '../../styles'
+import { WHITE, SIZE_XSM, WHITE_SMOKE, ISABELLINE, STYLE_TRANSITION } from '../../styles'
 import CurrentTime from './CurrentTime'
 import { useSelector } from 'react-redux'
 
@@ -12,6 +12,9 @@ const CN_HOUR_SLOTS = 'hour-slots'
 const Wrap = styled.div`
   display: flex;
   flex-grow: 1;
+  transform-origin: bottom right;
+  transition: transform ${STYLE_TRANSITION};
+  transform: ${p => `scale(${p.x}, ${p.y})`};
 `
 const Column = styled.div`
   display: flex;
@@ -71,24 +74,26 @@ const Cell = styled.div`
   display: block;
   padding: 0 ${SIZE_XSM};
   line-height: 1.5;
+  color: ${p => p.textColor};
   ${p => p.isSmall && `
-    line-height: 0.9;
+    line-height: 0.8;
+    font-size: 11px;
   `}
   ${STYLE_ELLIPSIS};
 `
 
-const Calendar = () => {
+const Calendar = ({ scale: { x, y } }) => {
   const { colors } = useSelector(state => state.settings)
   const { hoursAxis, daysAxis, allTasksByDay } = useSelector(state => state.calendar)
 
   return (
-    <Wrap>
+    <Wrap x={x} y={y}>
       {daysAxis.map((dateString) => {
         const date = new Date(dateString)
         const day = format(date, 'd')
         const isCurrentDay = isToday(date)
         const tasks = allTasksByDay.find(x => x.dateString === dateString).tasks
-        const tasksFiltered = tasks.map(({ id, time, name, color }, taskI) => {
+        const tasksFiltered = tasks.map(({ id, time, name, color, textColor }, taskI) => {
           const from = time[0]
           const to = time[1]
           const isFirstTask = taskI === 0
@@ -108,6 +113,7 @@ const Calendar = () => {
             gapBefore,
             gapAfter,
             color,
+            textColor,
           }
         })
 
@@ -115,7 +121,7 @@ const Calendar = () => {
           <Column key={day} isCurrentDay={isCurrentDay}>
             {isCurrentDay && <CurrentTime date={date} />}
             <HourSlots className={CN_HOUR_SLOTS}>
-              {tasksFiltered.map(({ id, heightInFlex, name, gapBefore, gapAfter, color }) => {
+              {tasksFiltered.map(({ id, heightInFlex, name, gapBefore, gapAfter, color, textColor }) => {
                 return (
                   <Fragment key={id}>
                     {gapBefore > 0 && <Cell isGapBefore flex={gapBefore} />}
@@ -123,6 +129,7 @@ const Calendar = () => {
                       <Cell
                         flex={heightInFlex}
                         accentColor={colors[color]}
+                        textColor={textColor}
                         isSmall={hoursAxis.length > 16 && heightInFlex <= 0.25}
                       >
                         {name}
