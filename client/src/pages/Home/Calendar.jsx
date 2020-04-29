@@ -74,6 +74,7 @@ const Cell = styled.div`
   display: block;
   padding: 0 ${SIZE_XSM};
   line-height: 1.5;
+  color: ${p => p.textColor};
   ${p => p.isSmall && `
     line-height: 0.9;
   `}
@@ -91,7 +92,7 @@ const Calendar = ({ calendarAxis, scale }) => {
         const day = format(date, 'd')
         const isCurrentDay = isToday(date)
         const tasks = allTasksByDay.find(x => x.dateString === dateString).tasks
-        const tasksFiltered = tasks.map(({ id, time, name, color }, taskI) => {
+        const tasksFiltered = tasks.map(({ id, time, name, color, textColor }, taskI) => {
           const from = time[0]
           const to = time[1]
           const isFirstTask = taskI === 0
@@ -111,6 +112,7 @@ const Calendar = ({ calendarAxis, scale }) => {
             gapBefore,
             gapAfter,
             color,
+            textColor,
           }
         })
 
@@ -118,7 +120,7 @@ const Calendar = ({ calendarAxis, scale }) => {
           <Column key={day} isCurrentDay={isCurrentDay}>
             {isCurrentDay && <CurrentTime date={date} />}
             <HourSlots className={CN_HOUR_SLOTS}>
-              {tasksFiltered.map(({ id, heightInFlex, name, gapBefore, gapAfter, color }) => {
+              {tasksFiltered.map(({ id, heightInFlex, name, gapBefore, gapAfter, color, textColor }) => {
                 return (
                   <Fragment key={id}>
                     {gapBefore > 0 && <Cell isGapBefore flex={gapBefore} />}
@@ -126,6 +128,7 @@ const Calendar = ({ calendarAxis, scale }) => {
                       <Cell
                         flex={heightInFlex}
                         accentColor={colors[color]}
+                        textColor={textColor}
                         isSmall={hoursAxis.length > 16 && heightInFlex <= 0.25}
                       >
                         {name}
