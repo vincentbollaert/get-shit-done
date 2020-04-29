@@ -1,22 +1,19 @@
 import { useState } from 'react'
 
-const UseConvertPXToScale = (initialValue) => {
-  const [scaleSaved, setScale] = useState(initialValue)
-  const [axisSaved, setAxis] = useState('x')
+const UseConvertPXToScale = () => {
+  const [{ x, y }, set] = useState({ x: 1, y: 1 })
 
-  const updateScale = ({ ref, inPixels, show, axis }) => {
-    if (show === false) {
-      setScale(1)
-      return
+  const updateScale = ({ ref, inPixels, isReset, axis }) => {
+    if (isReset) {
+      return set({ x: 1, y: 1 })
     }
     const { width, height } = ref.current.getBoundingClientRect()
     const scale = 1 - inPixels / (axis === 'y' ? height : width)
     const scaleRounded = Number(scale.toFixed(4))
-    setScale(scaleRounded)
-    if (axis === 'y') setAxis('y')
+    set({ x, y, [axis]: scaleRounded })
   }
 
-  return [{ axis: axisSaved, scale: scaleSaved, updateScale }]
+  return [{ scale: { x, y }, updateScale }]
 }
 
 export default UseConvertPXToScale
