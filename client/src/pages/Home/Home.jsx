@@ -5,7 +5,7 @@ import { WHITE, JET, STYLE_TRANSITION, CHARCOAL, STYLE_SIDEBAR_WIDTH_UNIT } from
 import Toast from '../../components/Toast/component'
 
 const Todos = React.lazy(() => import('./Todos'))
-const Sidebar = React.lazy(() => import('./Sidebar'))
+import Sidebar from './Sidebar'
 import HourLabels from './HourLabels'
 import DayLabels from './DayLabels'
 import Calendar from './Calendar'
@@ -68,11 +68,11 @@ const Home = () => {
         <Toast />
       </Wrap>
       
-      <Suspense fallback={<div />}>
-        <Sidebar isOpen={isOpen} setIsOpen={onSidebarToggle}>
+      <Sidebar isOpen={isOpen} setIsOpen={onSidebarToggle}>
+        <Suspense fallback={<div />}>
           <Todos />
-        </Sidebar>
-      </Suspense>
+        </Suspense>
+      </Sidebar>
     </PageWrap>
   )
 }
