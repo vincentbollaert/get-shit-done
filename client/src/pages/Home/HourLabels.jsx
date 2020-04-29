@@ -81,20 +81,16 @@ const HourLabel = styled.div`
   };
 `
 
-const HourLabels = ({ handleClick }) => {
+const HourLabels = ({ onHover }) => {
   const { hoursAxis } = useSelector(state => state.calendar)
   const [{ isFiltered, isBeingFiltered, from }, onFilter ] = UseFilterRange({ from: 0, to: 23, cb: actions.filterHours })
   const [filteredRange, highlightFilteredRange] = UseHighlightFilteredRange({ isBeingFiltered, isFiltered, from })
 
-  const onClick = (hour) => {
-    // handleClick()
-    onFilter(hour)
-  }
   return (
     <Wrap
       isBeingFiltered={isBeingFiltered}
-      onMouseEnter={() => handleClick({ show: true })}
-      onMouseLeave={() => handleClick({ show: isBeingFiltered })}
+      onMouseEnter={() => onHover({ axis: 'x' })}
+      onMouseLeave={() => onHover({ isReset: !isBeingFiltered, axis: 'x' })}
     >
       {hoursAxis.map((hour) => (
         <HourLabel
@@ -103,7 +99,7 @@ const HourLabels = ({ handleClick }) => {
           isActive={filteredRange.includes(hour)}
           key={hour}
           onMouseEnter={() => highlightFilteredRange(hour)}
-          onClick={() => onClick(hour)}
+          onClick={() => onFilter(hour)}
         >
           {hour}
         </HourLabel>

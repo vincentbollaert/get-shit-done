@@ -133,7 +133,7 @@ const DayLabel = styled.div`
   };
 `
 
-const DayLabels = ({ handleClick }) => {
+const DayLabels = ({ onHover }) => {
   const { daysAxis } = useSelector(state => state.calendar)
   const [{ isFiltered, isBeingFiltered, from }, onFilter]
     = UseFilterRange({ from: 1, to: MONTH_DAYS.length, cb: actions.filterDays })
@@ -142,8 +142,8 @@ const DayLabels = ({ handleClick }) => {
   return (
     <Wrap
       isBeingFiltered={isBeingFiltered}
-      onMouseEnter={() => handleClick({ axis: 'y', show: true })}
-      onMouseLeave={() => handleClick({ axis: 'y', show: isBeingFiltered })}
+      onMouseEnter={() => onHover({ axis: 'y'})}
+      onMouseLeave={() => onHover({ isReset: !isBeingFiltered, axis: 'y' })}
     >
       {daysAxis.map((dateString) => {
         const date = new Date(dateString)

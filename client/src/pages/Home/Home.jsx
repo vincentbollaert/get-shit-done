@@ -30,7 +30,7 @@ const Wrap = styled.div`
   transform-origin: left;
   transition: transform ${STYLE_TRANSITION};
   ${p => p.isOpen && `
-    transform: scaleX(${p.scale});
+    transform: scale(${p.scaleTest.x}, ${p.scaleTest.y});
   `};
 `
 const CalendarWrap = styled.div`
@@ -45,34 +45,31 @@ const CalendarWrap = styled.div`
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [{ scale: wrapScale, updateScale: setWrapScale }] = useScaleForTransition()
-  const [{ scale: calendarScale, axis: calendarAxis, updateScale: setCalendarScale }] = useScaleForTransition()
+  const [{ scale: calendarScale, updateScale: setCalendarScale }] = useScaleForTransition()
   const wrapRef = useRef(null)
   const calendarRef = useRef(null)
 
-  const onHourLabelClick = ({ show }) => {
-    setCalendarScale({ ref: calendarRef, inPixels: 26, show })
+  const onSetCalendarScale = ({ isReset, axis }) => {
+    setCalendarScale({ ref: calendarRef, inPixels: 26, isReset, axis })
   }
-  const onDayLabelsClick = ({ show, axis }) => {
-    setCalendarScale({ ref: calendarRef, inPixels: 26, show, axis })
-  }
-  const onSidebarClick = () => {
+  const onSidebarToggle = () => {
     setIsOpen(o => !o)
-    setWrapScale({ ref: wrapRef, inPixels: STYLE_SIDEBAR_WIDTH_UNIT * 10 })
+    setWrapScale({ ref: wrapRef, inPixels: STYLE_SIDEBAR_WIDTH_UNIT * 10, axis: 'x' })
   }
 
   return (
     <PageWrap>
-      <Wrap isOpen={isOpen} scale={wrapScale} ref={wrapRef}>
-        <HourLabels handleClick={onHourLabelClick} />
+      <Wrap isOpen={isOpen} scaleTest={wrapScale} ref={wrapRef}>
+        <HourLabels onHover={onSetCalendarScale} />
         <CalendarWrap ref={calendarRef}>
-          <DayLabels handleClick={onDayLabelsClick} />
-          <Calendar calendarAxis={calendarAxis} scale={calendarScale} />
+          <DayLabels onHover={onSetCalendarScale} />
+          <Calendar scale={calendarScale} />
         </CalendarWrap>
         <Toast />
       </Wrap>
       
       <Suspense fallback={<div />}>
-        <Sidebar isOpen={isOpen} setIsOpen={onSidebarClick}>
+        <Sidebar isOpen={isOpen} setIsOpen={onSidebarToggle}>
           <Todos />
         </Sidebar>
       </Suspense>
