@@ -76,7 +76,8 @@ const Cell = styled.div`
   line-height: 1.5;
   color: ${p => p.textColor};
   ${p => p.isSmall && `
-    line-height: 0.9;
+    line-height: 0.8;
+    font-size: 11px;
   `}
   ${STYLE_ELLIPSIS};
 `
