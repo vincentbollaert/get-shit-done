@@ -50,37 +50,7 @@ const Calendar = ({ scale: { x, y } }) => {
           }
         })
 
-        return (
-          <CalendarColumn key={day} isCurrentDay={isCurrentDay} date={date} tasksFiltered={tasksFiltered} />
-          // <Column key={day} isCurrentDay={isCurrentDay}>
-          //   {isCurrentDay && <CurrentTime date={date} />}
-          //   <HourSlots
-          //     onMouseEnter={event => updatePlaceholderTask({ event, day })}
-          //     onMouseLeave={event => removePlaceholderTask({ event, day })}
-          //     className={CN_HOUR_SLOTS}
-          //   >
-          //     <PlaceholderTask />
-          //     {tasksFiltered.map(({ id, heightInFlex, name, gapBefore, gapAfter, color, textColor }) => {
-          //       return (
-          //         <Fragment key={id}>
-          //           {gapBefore > 0 && <Cell isGapBefore flex={gapBefore} />}
-          //           {heightInFlex > 0 && (
-          //             <Cell
-          //               flex={heightInFlex}
-          //               accentColor={colors[color]}
-          //               textColor={textColor}
-          //               isSmall={hoursAxis.length > 16 && heightInFlex <= 0.25}
-          //             >
-          //               {name}
-          //             </Cell>
-          //           )}
-          //           {gapAfter > 0 && <Cell isGapAfter flex={gapAfter} />}
-          //         </Fragment>
-          //       )
-          //     })}
-          //   </HourSlots>
-          // </Column>
-        )
+        return <CalendarColumn key={day} isCurrentDay={isCurrentDay} date={date} tasksFiltered={tasksFiltered} />
       })}
     </Wrap>
   )
