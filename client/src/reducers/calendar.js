@@ -22,83 +22,83 @@ const colors = {
 const initialState = {
   allTasksByDay: MONTH_DAYS_STRING.map((dateString) => ({
     tasks: [
-      {
-        id: nanoid(),
-        time: [0, 6.75],
-        name: 'sleep',
-        color: colors.dummy1,
-        textColor: colorDarken(dummyColorsYeye[colors.dummy1], -80),
-      },
-      {
-        id: nanoid(),
-        time: [6.75, 7.25],
-        name: 'morning routine someting somethignsdsdssdsdsd',
-        color: colors.dummy2,
-        textColor: colorDarken(dummyColorsYeye[colors.dummy2], -80),
-      },
-      {
-        id: nanoid(),
-        time: [7.25, 8],
-        name: 'something after morning',
-        color: colors.dummy3,
-        textColor: colorDarken(dummyColorsYeye[colors.dummy3], -80),
-      },
-      {
-        id: nanoid(),
-        time: [8, 12],
-        name: 'another thing',
-        color: colors.dummy4,
-        textColor: colorDarken(dummyColorsYeye[colors.dummy4], -80),
-      },
-      {
-        id: nanoid(),
-        time: [12, 17],
-        name: 'work',
-        color: colors.dummy5,
-        textColor: colorDarken(dummyColorsYeye[colors.dummy5], -80),
-      },
-      {
-        id: nanoid(),
-        time: [17, 17.5],
-        name: 'work',
-        color: colors.dummy6,
-        textColor: colorDarken(dummyColorsYeye[colors.dummy6], -80),
-      },
-      {
-        id: nanoid(),
-        time: [18, 19],
-        name: 'work',
-        color: colors.dummy7,
-        textColor: colorDarken(dummyColorsYeye[colors.dummy7], -80),
-      },
-      {
-        id: nanoid(),
-        time: [19, 21],
-        name: 'work',
-        color: colors.dummy8,
-        textColor: colorDarken(dummyColorsYeye[colors.dummy8], -80),
-      },
-      {
-        id: nanoid(),
-        time: [21, 21.25],
-        name: 'work',
-        color: colors.dummy9,
-        textColor: colorDarken(dummyColorsYeye[colors.dummy9], -80),
-      },
-      {
-        id: nanoid(),
-        time: [21.25, 22],
-        name: 'work',
-        color: colors.dummy10,
-        textColor: colorDarken(dummyColorsYeye[colors.dummy10], -80),
-      },
-      {
-        id: nanoid(),
-        time: [22, 24],
-        name: 'work',
-        color: colors.dummy11,
-        textColor: colorDarken(dummyColorsYeye[colors.dummy11], -80),
-      },
+      // {
+      //   id: nanoid(),
+      //   time: [0, 6],
+      //   name: 'sleep',
+      //   color: colors.dummy1,
+      //   textColor: colorDarken(dummyColorsYeye[colors.dummy1], -80),
+      // },
+      // {
+      //   id: nanoid(),
+      //   time: [6, 7],
+      //   name: 'morning routine',
+      //   color: colors.dummy2,
+      //   textColor: colorDarken(dummyColorsYeye[colors.dummy2], -80),
+      // },
+      // {
+      //   id: nanoid(),
+      //   time: [7, 10],
+      //   name: 'dev: typescript, tests',
+      //   color: colors.dummy3,
+      //   textColor: colorDarken(dummyColorsYeye[colors.dummy3], -80),
+      // },
+      // {
+      //   id: nanoid(),
+      //   time: [10, 10.5],
+      //   name: 'break',
+      //   color: colors.dummy4,
+      //   textColor: colorDarken(dummyColorsYeye[colors.dummy4], -80),
+      // },
+      // {
+      //   id: nanoid(),
+      //   time: [10.5, 13],
+      //   name: 'dev: typescript, tests',
+      //   color: colors.dummy5,
+      //   textColor: colorDarken(dummyColorsYeye[colors.dummy5], -80),
+      // },
+      // {
+      //   id: nanoid(),
+      //   time: [13, 13.5],
+      //   name: 'break',
+      //   color: colors.dummy6,
+      //   textColor: colorDarken(dummyColorsYeye[colors.dummy6], -80),
+      // },
+      // {
+      //   id: nanoid(),
+      //   time: [13.5, 18],
+      //   name: 'dev: courses',
+      //   color: colors.dummy7,
+      //   textColor: colorDarken(dummyColorsYeye[colors.dummy7], -80),
+      // },
+      // {
+      //   id: nanoid(),
+      //   time: [18, 19],
+      //   name: 'cooking, mai',
+      //   color: colors.dummy8,
+      //   textColor: colorDarken(dummyColorsYeye[colors.dummy8], -80),
+      // },
+      // {
+      //   id: nanoid(),
+      //   time: [19, 20.5],
+      //   name: 'interpersonal courses',
+      //   color: colors.dummy7,
+      //   textColor: colorDarken(dummyColorsYeye[colors.dummy7], -80),
+      // },
+      // {
+      //   id: nanoid(),
+      //   time: [20.5,21],
+      //   name: 'shower, prepare for relax',
+      //   color: colors.dummy8,
+      //   textColor: colorDarken(dummyColorsYeye[colors.dummy8], -80),
+      // },
+      // {
+      //   id: nanoid(),
+      //   time: [21, 22],
+      //   name: 'relax',
+      //   color: colors.dummy9,
+      //   textColor: colorDarken(dummyColorsYeye[colors.dummy9], -80),
+      // },
     ],
     dateString,
   })),
@@ -118,5 +118,14 @@ export const { reducer, actions } = createSlice({
         .filter(day => format(day, 'd') >= from && format(day, 'd') <= to)
         .map(day => day.toString())
     },
+    addTask(state, { payload: { name, group, from, to } }) {
+      state.allTasksByDay[0].tasks.push({
+        id: nanoid(),
+        time: [from, to],
+        name,
+        color: colors.dummy9,
+        textColor: colorDarken(dummyColorsYeye[colors.dummy9], -80),
+      })
+    }
   }
 })

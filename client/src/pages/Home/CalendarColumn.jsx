@@ -4,7 +4,10 @@ import format from 'date-fns/format'
 
 import { WHITE, SIZE_XSM, WHITE_SMOKE, ISABELLINE } from '../../styles'
 import CurrentTime from './CurrentTime'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import Modal from '../../components/Modal/component'
+import AddNewCalendarTask from './AddNewCalendarTask'
+import { actions } from '../../reducers/calendar'
 
 const CN_HOUR_SLOTS = 'hour-slots'
 
@@ -91,6 +94,8 @@ const Cell = styled.div`
 `
 
 const CalendarColumn = ({ isCurrentDay, tasksFiltered, date }) => {
+  const dispatch = useDispatch()
+  const [showModal, toggleModal] = useState(false)
   const [y, setY] = useState(0)
   const hourSlotsRef = useRef(null)
   const { colors } = useSelector(state => state.settings)
@@ -119,7 +124,13 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered, date }) => {
   function addTask() {
     const timeStart = 24 / (hourSlotsRef.current.getBoundingClientRect().height / y)
     const timeStartRounded = Number(timeStart.toFixed(1))
+    toggleModal(true)
     console.log('add task @ ' + timeStartRounded)
+  }
+
+  function addNewCalendarTask(test) {
+    console.log(test)
+    dispatch(actions.addTask(test))
   }
 
   return (
@@ -151,6 +162,12 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered, date }) => {
           )
         })}
       </HourSlots>
+      
+      {showModal && (
+        <Modal isVisible title="add new task" onOverlayToggle={() => toggleModal(false)}>
+          <AddNewCalendarTask addNewCalendarTask={addNewCalendarTask} />
+        </Modal>
+      )}
     </Wrap>
   )
 }
