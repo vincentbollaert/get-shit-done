@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import {
   SIZE_XLG,
@@ -11,7 +11,9 @@ import {
   LAVENDER,
 } from '../../styles'
 import lisSvg from '../../assets/svg/list.svg'
+import fullscreenSvg from '../../assets/svg/fullscreen.svg'
 import Svg from '../../components/Svg/component'
+import UseFullscreenToggle from '../../hooks/useFullscreenToggle'
 
 const Wrap = styled.div`
   z-index: 1;
@@ -29,7 +31,10 @@ const Tabs = styled.div`
   justify-content: center;
   display: flex;
 `
-
+const Toggles = styled.div`
+  position: absolute;
+  top: 16px;
+`
 const Tasks = styled.div`
   display: flex;
   align-items: center;
@@ -54,9 +59,20 @@ const Tasks = styled.div`
     };
   `};
 `
-const SvgStyled = styled(Svg)`
-  width: 1.6rem;
-  height: 1.6rem;
+const Toggle = styled(Svg)`
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+
+  ${p => p.isActive && `
+    svg {
+      fill: ${ISABELLINE};
+    };
+  `};
+`
+const Tab = styled(Svg)`
+  width: 2rem;
+  height: 2rem;
 `
 
 const Content = styled.div`
@@ -79,12 +95,16 @@ const Content = styled.div`
 `
 
 const Sidebar = ({ isOpen, setIsOpen, children }) => {
+  const [isFullscreen, setIsFullscreen] = UseFullscreenToggle(false)
 
   return (
     <Wrap>
       <Tabs>
+        <Toggles>
+          <Toggle isActive={isFullscreen} svg={fullscreenSvg} onClick={setIsFullscreen} />
+        </Toggles>
         <Tasks isOpen={isOpen} onClick={setIsOpen}>
-          <SvgStyled svg={lisSvg} />
+          <Tab svg={lisSvg} />
         </Tasks>
       </Tabs>
       <Content isOpen={isOpen}>
