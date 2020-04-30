@@ -58,6 +58,7 @@ const PlaceholderTask = styled.div`
   left: 4px;
   background-color: red;
   height: 19.4px;
+  /* transform: translateY(-100%); */
 
   ${HourSlots}:hover & {
     display: flex;
@@ -91,7 +92,7 @@ const Cell = styled.div`
 
 const CalendarColumn = ({ isCurrentDay, tasksFiltered, date }) => {
   const [y, setY] = useState(0)
-  const wrapRef = useRef(null)
+  const hourSlotsRef = useRef(null)
   const { colors } = useSelector(state => state.settings)
   const { hoursAxis } = useSelector(state => state.calendar)
   const day = format(date, 'd')
@@ -104,7 +105,8 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered, date }) => {
     const HALF_HOUR_PX = 19.4
     const columnTopPx = event.currentTarget.getBoundingClientRect().top
     const placeholderY = event.clientY - columnTopPx
-    const nearest25 = HALF_HOUR_PX * Math.round(placeholderY / HALF_HOUR_PX)
+    // const nearest25 = HALF_HOUR_PX * Math.round(placeholderY / HALF_HOUR_PX)
+    const nearest25 = Math.floor(placeholderY / HALF_HOUR_PX) * HALF_HOUR_PX
     const isNewNearest = nearest25 !== y
     if (isNewNearest) setY(nearest25)
     // console.log(nearest25)
@@ -115,14 +117,16 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered, date }) => {
   }
 
   function addTask() {
-    const topInTime = (y / wrapRef.current.getBoundingClientRect().height) * 24
-    console.log('add task @ ' + topInTime)
+    const timeStart = 24 / (hourSlotsRef.current.getBoundingClientRect().height / y)
+    const timeStartRounded = Number(timeStart.toFixed(1))
+    console.log('add task @ ' + timeStartRounded)
   }
 
   return (
-    <Wrap isCurrentDay={isCurrentDay} ref={wrapRef}>
+    <Wrap isCurrentDay={isCurrentDay}>
       {isCurrentDay && <CurrentTime date={date} />}
       <HourSlots
+        ref={hourSlotsRef}
         onMouseMove={event => updatePlaceholderTask({ event, day })}
         onMouseLeave={event => removePlaceholderTask({ event, day })}
         className={CN_HOUR_SLOTS}
