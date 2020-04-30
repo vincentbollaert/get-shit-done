@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import format from 'date-fns/format'
 
@@ -37,8 +37,10 @@ const Wrap = styled.div`
 const HourSlots = styled.div`
   flex-grow: 1;
   display: flex;
+  position: relative;
   flex-direction: column;
-  padding: 12px 4px;
+  margin: 12px 0;
+  padding: 0 4px;
 
   ${Wrap}:last-child & {
     padding-right: 12px;
@@ -50,11 +52,12 @@ const HourSlots = styled.div`
 `
 const PlaceholderTask = styled.div`
   display: none;
-  top: ${p => p.top};
+  position: absolute;
+  top: ${p => p.top}px;
   right: 4px;
   left: 4px;
   background-color: red;
-  height: 3%;
+  height: 19.4px;
 
   ${HourSlots}:hover & {
     display: flex;
@@ -87,27 +90,44 @@ const Cell = styled.div`
 `
 
 const CalendarColumn = ({ isCurrentDay, tasksFiltered, date }) => {
+  const [y, setY] = useState(0)
+  const wrapRef = useRef(null)
   const { colors } = useSelector(state => state.settings)
   const { hoursAxis } = useSelector(state => state.calendar)
   const day = format(date, 'd')
 
+  useEffect(() => {
+    console.log('updated: ', y)
+  }, [y])
+
   function updatePlaceholderTask({ event, day }) {
-    console.log(event, day)
+    const HALF_HOUR_PX = 19.4
+    const columnTopPx = event.currentTarget.getBoundingClientRect().top
+    const placeholderY = event.clientY - columnTopPx
+    const nearest25 = HALF_HOUR_PX * Math.round(placeholderY / HALF_HOUR_PX)
+    const isNewNearest = nearest25 !== y
+    if (isNewNearest) setY(nearest25)
+    // console.log(nearest25)
   }
 
   function removePlaceholderTask({ event, day }) {
-    console.log('remove node')
+    // console.log('remove node')
+  }
+
+  function addTask() {
+    const topInTime = (y / wrapRef.current.getBoundingClientRect().height) * 24
+    console.log('add task @ ' + topInTime)
   }
 
   return (
-    <Wrap isCurrentDay={isCurrentDay}>
+    <Wrap isCurrentDay={isCurrentDay} ref={wrapRef}>
       {isCurrentDay && <CurrentTime date={date} />}
       <HourSlots
-        onMouseEnter={event => updatePlaceholderTask({ event, day })}
+        onMouseMove={event => updatePlaceholderTask({ event, day })}
         onMouseLeave={event => removePlaceholderTask({ event, day })}
         className={CN_HOUR_SLOTS}
       >
-        <PlaceholderTask />
+        <PlaceholderTask top={y} onClick={addTask} />
         {tasksFiltered.map(({ id, heightInFlex, name, gapBefore, gapAfter, color, textColor }) => {
           return (
             <Fragment key={id}>
