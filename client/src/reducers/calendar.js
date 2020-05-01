@@ -75,31 +75,31 @@ const initialState = {
         },
         {
           id: nanoid(),
-          time: [14.5, 18],
+          time: [14.5, 18.5],
           name: 'dev: get shit together',
           color: colors.dummy8,
           textColor: colorDarken(dummyColorsYeye[colors.dummy8], -80),
         },
         {
           id: nanoid(),
-          time: [18, 20.5],
-          name: 'interpersonal courses',
-          color: colors.dummy7,
+          time: [18.5, 19],
+          name: 'break',
+          color: colors.dummy9,
           textColor: colorDarken(dummyColorsYeye[colors.dummy7], -80),
         },
         {
           id: nanoid(),
-          time: [20.5,21],
-          name: 'shower, prepare for relax',
-          color: colors.dummy8,
-          textColor: colorDarken(dummyColorsYeye[colors.dummy8], -80),
+          time: [19,21],
+          name: 'courses: interpersonal',
+          color: colors.dummy10,
+          textColor: colorDarken(dummyColorsYeye[colors.dummy10], -80),
         },
         {
           id: nanoid(),
           time: [21, 22],
           name: 'relax',
-          color: colors.dummy9,
-          textColor: colorDarken(dummyColorsYeye[colors.dummy9], -80),
+          color: colors.dummy11,
+          textColor: colorDarken(dummyColorsYeye[colors.dummy11], -80),
         },
       ]
     }
@@ -205,16 +205,17 @@ export const { reducer, actions } = createSlice({
         .filter(day => format(day, 'd') >= from && format(day, 'd') <= to)
         .map(day => day.toString())
     },
-    addTask(state, { payload: { name, dateString, group, from, to, color }}) {
-      const { colorName, colorValue } = color
+    addTask(state, { payload: { name, dateString, group, from, to }}) {
+      const { color } = group
       const taskToUpdate = state.allTasksByDay.find(tasksByDay => tasksByDay.dateString === dateString)
-      
+
       taskToUpdate.tasks.push({
         id: nanoid(),
         time: [from, to],
         name,
-        color: colorName,
-        textColor: colorDarken(colorValue, -80),
+        group: group.name,
+        color: color.name,
+        textColor: colorDarken(color.value, -80),
       })
     }
   }
