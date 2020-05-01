@@ -69,7 +69,6 @@ const Field = ({
   const [value, setValue] = useState(defaultValue)
   const hasValue = (value !== undefined && value !== '')
   const onChange = (event) => { setValue(event.target.value) }
-  console.log(defaultValue)
 
   return (
     <Wrap isInForm={isInForm} theme={theme} className={className}>

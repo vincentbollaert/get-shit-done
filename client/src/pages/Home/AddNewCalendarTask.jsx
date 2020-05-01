@@ -2,13 +2,13 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
 import TextField from '../../components/form/Field/component'
-import { SIZE_MD } from '../../styles'
+import Button from '../../components/Button/component'
 
 const Form = styled.form``
 function AddNewCalendarTask({ from, addNewTask }) {
   const { register, handleSubmit, errors } = useForm({ defaultValues: { from } })
   const onSubmit = data => addNewTask(data)
-  // const errorMessage = (errors.task || {}).type
+  const isError = Object.entries(errors).length > 0
   
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -16,16 +16,16 @@ function AddNewCalendarTask({ from, addNewTask }) {
         isInForm
         theme='light'
         name="task"
-        placeholder="add task"
-        // errorMessage={errorMessage}
+        placeholder="name"
+        errorMessage={errors.task?.type}
         inputRef={register({ required: true, maxLength: 80 })}
       />
       <TextField
         isInForm
         theme='light'
         name="group"
-        placeholder="add group"
-        // errorMessage={errorMessage}
+        placeholder="group"
+        errorMessage={errors.group?.type}
         inputRef={register({ required: true, maxLength: 80 })}
       />
       <TextField
@@ -34,8 +34,8 @@ function AddNewCalendarTask({ from, addNewTask }) {
         theme='light'
         name="from"
         type='number'
-        placeholder="from"
-        // errorMessage={errorMessage}
+        placeholder="time from"
+        errorMessage={errors.from?.type}
         inputRef={register({ required: true, maxLength: 80 })}
       />
       <TextField
@@ -43,11 +43,11 @@ function AddNewCalendarTask({ from, addNewTask }) {
         theme='light'
         name="to"
         type='number'
-        placeholder="to"
-        // errorMessage={errorMessage}
+        placeholder="time to"
+        errorMessage={errors.to?.type}
         inputRef={register({ required: true, maxLength: 80 })}
       />
-      <input type="submit" />
+      <Button isDisabled={isError} isInForm type="submit">Add new task</Button>
     </Form>
   )
 }

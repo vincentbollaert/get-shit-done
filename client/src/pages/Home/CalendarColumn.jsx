@@ -175,7 +175,7 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered, dateString }) => {
       </HourSlots>
       
       {showModal && (
-        <Modal isVisible title="add new task" onOverlayToggle={() => toggleModal(false)}>
+        <Modal isVisible title="task details" onOverlayToggle={() => toggleModal(false)}>
           <AddNewCalendarTask from={newTaskFrom} addNewTask={addNewTask} />
         </Modal>
       )}
