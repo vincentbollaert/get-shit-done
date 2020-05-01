@@ -1,9 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { bool, string, func, node } from 'prop-types'
 import styled from 'styled-components'
 import { SIZE_XLG, SONIC_SILVER, GRAY_X11, DARK_TRANSPARENT } from '../../styles'
-// import closeSvg from '../../assets/svg/close.html'
+import closeSvg from '../../assets/svg/close.svg'
 import Svg from '../Svg/component'
 
 const Wrap = styled.div`
@@ -40,6 +39,7 @@ const InnerWrap = styled.div`
 const Header = styled.header`
   display: flex;
   padding: ${SIZE_XLG};
+  padding-bottom: 0;
   line-height: 1rem;
   text-transform: uppercase;
   font-weight: bold;
@@ -48,7 +48,7 @@ const Header = styled.header`
 `
 
 const Content = styled.div`
-  padding-bottom: ${SIZE_XLG};
+  padding: ${SIZE_XLG};
   color: ${SONIC_SILVER};
 `
 
@@ -81,7 +81,7 @@ const Modal = ({ isVisible, title, children, onOverlayToggle }) => (
         <InnerWrap>
           <Header>
             {title}
-            {/* <Icon svg={closeSvg} onClick={onOverlayToggle} /> */}
+            <Icon svg={closeSvg} onClick={onOverlayToggle} />
           </Header>
           <Content>{children}</Content>
         </InnerWrap>
