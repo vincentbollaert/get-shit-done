@@ -24,6 +24,7 @@ export const SIZE_XLG = `${SIZE_XLG_UNIT}rem`
 
 
 // colors
+export const CAPRI = '#3dc3ff'
 export const SKY_BLUE = '#78E0FF'
 export const LIGHT_SEA_GREEN = '#21baa6'
 export const AMAZONITE = '#03d2b6'
