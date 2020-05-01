@@ -4,9 +4,7 @@ import styled from 'styled-components'
 import TextField from '../../components/form/Field/component'
 import { SIZE_MD } from '../../styles'
 
-const Form = styled.form`
-  margin-bottom: ${SIZE_MD};
-`
+const Form = styled.form``
 function AddNewCalendarTask({ from, addNewTask }) {
   const { register, handleSubmit, errors } = useForm({ defaultValues: { from } })
   const onSubmit = data => addNewTask(data)
@@ -15,21 +13,25 @@ function AddNewCalendarTask({ from, addNewTask }) {
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <TextField
-        theme='dark'
+        isInForm
+        theme='light'
         name="task"
         placeholder="add task"
         // errorMessage={errorMessage}
         inputRef={register({ required: true, maxLength: 80 })}
       />
       <TextField
-        theme='dark'
+        isInForm
+        theme='light'
         name="group"
         placeholder="add group"
         // errorMessage={errorMessage}
         inputRef={register({ required: true, maxLength: 80 })}
       />
       <TextField
-        theme='dark'
+        isInForm
+        defaultValue={from}
+        theme='light'
         name="from"
         type='number'
         placeholder="from"
@@ -37,7 +39,8 @@ function AddNewCalendarTask({ from, addNewTask }) {
         inputRef={register({ required: true, maxLength: 80 })}
       />
       <TextField
-        theme='dark'
+        isInForm
+        theme='light'
         name="to"
         type='number'
         placeholder="to"
