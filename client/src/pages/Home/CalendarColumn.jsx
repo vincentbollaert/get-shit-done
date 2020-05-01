@@ -93,13 +93,15 @@ const Cell = styled.div`
   ${STYLE_ELLIPSIS};
 `
 
-const CalendarColumn = ({ isCurrentDay, tasksFiltered, date }) => {
+const CalendarColumn = ({ isCurrentDay, tasksFiltered, dateString }) => {
   const dispatch = useDispatch()
   const [showModal, toggleModal] = useState(false)
   const [y, setY] = useState(0)
   const hourSlotsRef = useRef(null)
   const { colors } = useSelector(state => state.settings)
   const { hoursAxis } = useSelector(state => state.calendar)
+
+  const date= new Date()
   const day = format(date, 'd')
 
   useEffect(() => {
@@ -130,7 +132,12 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered, date }) => {
 
   function addNewCalendarTask(test) {
     console.log(test)
-    dispatch(actions.addTask(test))
+    const newTask = {
+      ...test,
+      dateString,
+    }
+    dispatch(actions.addTask(newTask))
+    toggleModal(false)
   }
 
   return (

@@ -50,7 +50,7 @@ const Calendar = ({ scale: { x, y } }) => {
           }
         })
 
-        return <CalendarColumn key={day} isCurrentDay={isCurrentDay} date={date} tasksFiltered={tasksFiltered} />
+        return <CalendarColumn key={day} isCurrentDay={isCurrentDay} dateString={dateString} tasksFiltered={tasksFiltered} />
       })}
     </Wrap>
   )
