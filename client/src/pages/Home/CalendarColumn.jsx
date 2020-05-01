@@ -59,7 +59,9 @@ const PlaceholderTask = styled.div`
   top: ${p => p.top}px;
   right: 4px;
   left: 4px;
-  background-color: red;
+  background-color: #eee;
+  box-shadow: inset 0px 1px 0 0px ${WHITE}, inset 0px -1px 0 0px ${WHITE}, 0px 1px 0 0px ${WHITE}, 0px -1px 0 0px ${WHITE};
+  border-radius: 2px;
   height: 19.4px;
   /* transform: translateY(-100%); */
 
