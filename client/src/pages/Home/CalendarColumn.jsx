@@ -57,13 +57,12 @@ const PlaceholderTask = styled.div`
   display: none;
   position: absolute;
   top: ${p => p.top}px;
-  right: 4px;
-  left: 4px;
+  right: 0;
+  left: 0;
   background-color: #eee;
-  box-shadow: inset 0px 1px 0 0px ${WHITE}, inset 0px -1px 0 0px ${WHITE}, 0px 1px 0 0px ${WHITE}, 0px -1px 0 0px ${WHITE};
+  box-shadow: inset 4px 1px 0 0px #fff, inset -4px -1px 0 0px #fff, 0px 1px 0 0px #fff, 0px -1px 0 0px #fff;
   border-radius: 2px;
   height: 19.4px;
-  /* transform: translateY(-100%); */
 
   ${HourSlots}:hover & {
     display: flex;
@@ -175,7 +174,7 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered, dateString }) => {
       </HourSlots>
       
       {showModal && (
-        <Modal isVisible title="task details" onOverlayToggle={() => toggleModal(false)}>
+        <Modal title="task details" width={17} onOverlayToggle={() => toggleModal(false)}>
           <AddNewCalendarTask from={newTaskFrom} addNewTask={addNewTask} />
         </Modal>
       )}
