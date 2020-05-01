@@ -20,6 +20,14 @@ const Wrap = styled.div`
   display: flex;
   position: relative;
   color: ${p => p.theme === 'light' ? STYLE_COLOR_LIGHT : STYLE_COLOR_DARK};
+
+  ${p => p.isInForm && `
+    margin-top: ${SIZE_SM};
+
+    &:first-child {
+      margin-top: 0;
+    };
+  `};
 `
 const Input = styled.input`
   padding-top: ${SIZE_SM};
@@ -46,13 +54,25 @@ const SvgStyled = styled(Svg)`
   top: 50%;
   fill: ${GRAY_X11};
 `
-const Field = ({ theme, name, type = 'text', placeholder, svg, errorMessage, className, inputRef }) => {
-  const [value, setValue] = useState('')
+const Field = ({
+  isInForm,
+  theme,
+  name,
+  type = 'text',
+  defaultValue,
+  placeholder,
+  svg,
+  errorMessage,
+  className,
+  inputRef,
+}) => {
+  const [value, setValue] = useState(defaultValue)
   const hasValue = (value !== undefined && value !== '')
   const onChange = (event) => { setValue(event.target.value) }
+  console.log(defaultValue)
 
   return (
-    <Wrap theme={theme} className={className}>
+    <Wrap isInForm={isInForm} theme={theme} className={className}>
       <Placeholder theme={theme} hasValue={hasValue}>{placeholder}</Placeholder>
       <Input name={name} type={type} isError={errorMessage} onChange={onChange} ref={inputRef} />
       {svg && <SvgStyled svg={svg} size={1.2} className={CN_FIELD_SVG} />}
