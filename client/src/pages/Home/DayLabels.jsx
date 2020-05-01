@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import isToday from 'date-fns/isToday'
 import format from 'date-fns/format'
 
-import { ISABELLINE, WHITE_SMOKE, JET, ARSENIC, PASTEL_GRAY, STYLE_TRANSITION } from '../../styles'
+import { ISABELLINE, WHITE_SMOKE, JET, ARSENIC, PASTEL_GRAY, STYLE_TRANSITION, WHITE } from '../../styles'
 import UseFilterRange from '../../hooks/useFilterRange'
 import UseHighlightFilteredRange from '../../hooks/useHighlightFIlteredRange'
 import { useSelector } from 'react-redux'
@@ -90,9 +90,9 @@ const DayLabel = styled.div`
 
   ${p => p.isCurrentDay && `
     flex-grow: 2;
+    background-color: ${WHITE};
     color: ${JET};
-    background-color: ${WHITE_SMOKE};
-    ${!p.isActive && `border-bottom: 4px solid ${WHITE_SMOKE}`};
+    ${!p.isActive && `border-bottom: 4px solid ${WHITE}`};
 
     &:hover {
       border-bottom: 4px solid ${JET};
