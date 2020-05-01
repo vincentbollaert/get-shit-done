@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { SIZE_MD, SIZE_XLG, WHITE, SKY_BLUE, SIZE_LG, SIZE_SM } from '../../styles'
+import { SIZE_MD, SIZE_XLG, WHITE, CHARCOAL, SIZE_LG, SIZE_SM } from '../../styles'
 
 const Wrap = styled.div`
   z-index: 1;
   position: absolute;
-  left: 24px;
+  left: 48px;
   bottom: 24px;
   display: flex;
   align-items: center;
@@ -17,14 +17,14 @@ const InnerWrap = styled.div`
   width: 100%;
   width: 26rem;
   line-height: 1.4;
-  background: ${SKY_BLUE};
+  background: ${CHARCOAL};
   color: ${WHITE};
   border-radius: 2px;
   transition: opacity 0.2s ease-out;
   box-shadow: 0px -3px 6px -1px #ffc0c06b;
 
   &:hover {
-    opacity: 0.5;
+    opacity: 0.8;
   };
 `
 const Message = styled.div`
@@ -37,7 +37,7 @@ const Undo = styled.div`
   right: ${SIZE_LG};
   padding: ${SIZE_SM} ${SIZE_MD};
   font-weight: bold;
-  color: ${SKY_BLUE};
+  color: ${CHARCOAL};
   text-transform: uppercase;
   background-color: ${WHITE};
   font-size: 10px;
