@@ -21,6 +21,7 @@ export const Wrap = styled.div`
   display: flex;
   position: relative;
   color: ${p => p.theme === 'light' ? STYLE_COLOR_LIGHT : STYLE_COLOR_DARK};
+  outline: none;
 
   ${p => p.isInForm && `
     margin-top: ${SIZE_SM};
