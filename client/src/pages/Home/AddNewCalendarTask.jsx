@@ -4,16 +4,22 @@ import styled from 'styled-components'
 import TextField from '../../components/form/Field/component'
 import Button from '../../components/Button/component'
 import Colorpicker from '../../components/Colorpicker/component'
+import { useSelector } from 'react-redux'
+import Dropdown from '../../components/form/Dropdown'
 
 const Form = styled.form``
 function AddNewCalendarTask({ from, addNewTask }) {
   const [[colorName, colorValue], setSelectedColor] = useState([])
+  const [selectedGroup, setSelectedGroup] = useState(undefined)
+  const { groups } = useSelector(state => state.settings)
   const { register, handleSubmit, errors } = useForm({ defaultValues: { from } })
   const onSubmit = data => addNewTask({
     ...data,
     color: { colorName, colorValue },
   })
   const isError = Object.entries(errors).length > 0
+
+  console.log('selectedGroup', selectedGroup)
 
 
   return (
@@ -34,6 +40,7 @@ function AddNewCalendarTask({ from, addNewTask }) {
         errorMessage={errors.group?.type}
         inputRef={register({ required: true, maxLength: 80 })}
       />
+      <Dropdown list={groups} label="select group" displayName="name" onSelect={setSelectedGroup} />
       <TextField
         isInForm
         defaultValue={from}
