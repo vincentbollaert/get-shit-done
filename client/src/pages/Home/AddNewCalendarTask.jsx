@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
 import TextField from '../../components/form/Field/component'
 import Button from '../../components/Button/component'
+import Colorpicker from '../../components/Colorpicker/component'
 
 const Form = styled.form``
 function AddNewCalendarTask({ from, addNewTask }) {
@@ -15,9 +16,9 @@ function AddNewCalendarTask({ from, addNewTask }) {
       <TextField
         isInForm
         theme='light'
-        name="task"
+        name="name"
         placeholder="name"
-        errorMessage={errors.task?.type}
+        errorMessage={errors.name?.type}
         inputRef={register({ required: true, maxLength: 80 })}
       />
       <TextField
@@ -47,6 +48,7 @@ function AddNewCalendarTask({ from, addNewTask }) {
         errorMessage={errors.to?.type}
         inputRef={register({ required: true, maxLength: 80 })}
       />
+      <Colorpicker />
       <Button isDisabled={isError} isInForm type="submit">Add new task</Button>
     </Form>
   )
