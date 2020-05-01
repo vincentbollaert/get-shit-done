@@ -1,27 +1,21 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
 import TextField from '../../components/form/Field/component'
 import Button from '../../components/Button/component'
-import Colorpicker from '../../components/Colorpicker/component'
-import { useSelector } from 'react-redux'
 import Dropdown from '../../components/form/Dropdown'
 
 const Form = styled.form``
 
 function AddNewCalendarTask({ from, addNewTask }) {
-  const [[colorName, colorValue], setSelectedColor] = useState([])
   const [selectedGroup, setSelectedGroup] = useState(undefined)
   const { groups } = useSelector(state => state.settings)
   const { register, handleSubmit, errors } = useForm({ defaultValues: { from } })
   const onSubmit = data => addNewTask({
     ...data,
-    color: { colorName, colorValue },
+    group: selectedGroup,
   })
-  const isError = Object.entries(errors).length > 0
-
-  console.log('selectedGroup', selectedGroup)
-
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -31,14 +25,6 @@ function AddNewCalendarTask({ from, addNewTask }) {
         name="name"
         placeholder="name"
         errorMessage={errors.name?.type}
-        inputRef={register({ required: true, maxLength: 80 })}
-      />
-      <TextField
-        isInForm
-        theme='light'
-        name="group"
-        placeholder="group"
-        errorMessage={errors.group?.type}
         inputRef={register({ required: true, maxLength: 80 })}
       />
       <Dropdown
@@ -54,7 +40,6 @@ function AddNewCalendarTask({ from, addNewTask }) {
         defaultValue={from}
         theme='light'
         name="from"
-        type='number'
         placeholder="time from"
         errorMessage={errors.from?.type}
         inputRef={register({ required: true, maxLength: 80 })}
@@ -63,13 +48,18 @@ function AddNewCalendarTask({ from, addNewTask }) {
         isInForm
         theme='light'
         name="to"
-        type='number'
         placeholder="time to"
         errorMessage={errors.to?.type}
         inputRef={register({ required: true, maxLength: 80 })}
       />
-      <Colorpicker selectedColor={colorValue} setSelectedColor={setSelectedColor} />
-      <Button isDisabled={isError} isInForm accentColor={selectedGroup?.color.value} type="submit">Add new task</Button>
+      <Button
+        isDisabled={Object.entries(errors).length > 0}
+        isInForm
+        accentColor={selectedGroup?.color.value}
+        type="submit"
+      >
+        Add new task
+      </Button>
     </Form>
   )
 }

@@ -103,38 +103,23 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered, dateString }) => {
   const { colors } = useSelector(state => state.settings)
   const { hoursAxis } = useSelector(state => state.calendar)
 
-  const date= new Date()
-  const day = format(date, 'd')
-
-  useEffect(() => {
-    console.log('updated: ', y)
-  }, [y])
-
-  function updatePlaceholderTask({ event, day }) {
+  function updatePlaceholderTask(event) {
     const HALF_HOUR_PX = 19.4
     const columnTopPx = event.currentTarget.getBoundingClientRect().top
     const placeholderY = event.clientY - columnTopPx
-    // const nearest25 = HALF_HOUR_PX * Math.round(placeholderY / HALF_HOUR_PX)
     const nearest25 = Math.floor(placeholderY / HALF_HOUR_PX) * HALF_HOUR_PX
     const isNewNearest = nearest25 !== y
     if (isNewNearest) setY(nearest25)
-    // console.log(nearest25)
-  }
-
-  function removePlaceholderTask({ event, day }) {
-    // console.log('remove node')
   }
 
   function addTask() {
     const timeStart = 24 / (hourSlotsRef.current.getBoundingClientRect().height / y)
     const timeStartRounded = Number(timeStart.toFixed(1))
     setNewTaskFrom(timeStartRounded)
-    console.log('add task @ ' + timeStartRounded)
     toggleModal(true)
   }
 
   function addNewTask(test) {
-    console.log(test)
     const newTask = {
       ...test,
       dateString,
@@ -145,11 +130,10 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered, dateString }) => {
 
   return (
     <Wrap isCurrentDay={isCurrentDay}>
-      {isCurrentDay && <CurrentTime date={date} />}
+      {isCurrentDay && <CurrentTime />}
       <HourSlots
         ref={hourSlotsRef}
-        onMouseMove={event => updatePlaceholderTask({ event, day })}
-        onMouseLeave={event => removePlaceholderTask({ event, day })}
+        onMouseMove={updatePlaceholderTask}
         className={CN_HOUR_SLOTS}
       >
         <PlaceholderTask top={y} onClick={addTask} />
