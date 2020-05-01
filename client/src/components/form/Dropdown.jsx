@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import chevronDownSvg from '../../assets/svg/chevron-down.svg'
+import Placeholder from './Placeholder/component'
 import { SvgStyled, Input, Wrap } from './shared'
+import { CAPRI, WHITE, ISABELLINE } from '../../styles'
 
+const Header = styled.div`
+  width: 100%;
+`
 const List = styled.div`
   display: ${p => p.isOpen ? 'flex' : 'none'};
   position: absolute;
@@ -18,11 +23,11 @@ const List = styled.div`
 `
 const Item = styled.div`
   padding: 4px;
-  color: ${p => p.isActive ? 'pink' : '#eee'};
+  color: ${p => p.isActive ? CAPRI : ISABELLINE};
   cursor: pointer;
 
   &:hover {
-    color: ${p => p.isActive ? 'pink' : '#fff'};
+    color: ${p => p.isActive ? CAPRI : WHITE};
   };
 `
 const Dropdown = ({ theme, isInForm, label, displayName, list, onSelect }) => {
@@ -35,11 +40,11 @@ const Dropdown = ({ theme, isInForm, label, displayName, list, onSelect }) => {
   }
   return (
     <Wrap theme={theme} isInForm={isInForm} tabIndex={0} onBlur={() => setIsOpen(false)}>
-    {/* <Wrap> */}
-      <Input as="div" onClick={() => setIsOpen(!isOpen)}>
-        {activeItem[displayName] || label}
-        <SvgStyled svg={chevronDownSvg} />
-      </Input>
+      <Header onClick={() => setIsOpen(!isOpen)}>
+        <Placeholder theme={theme} hasValue={activeItem.id !== undefined && activeItem.id !== ''}>{label}</Placeholder>
+        <Input as="div">{activeItem[displayName]}</Input>
+        <SvgStyled them="light" svg={chevronDownSvg} />
+      </Header>
       <List isOpen={isOpen}>
         {list.map((item) => {
           const { id } = item
