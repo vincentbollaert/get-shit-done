@@ -28,11 +28,12 @@ const Wrap = styled.div`
 const Overlay = styled.div`
   width: 100%;
   height: 100%;
-  background-color: ${DARK_TRANSPARENT};
+  background-color: rgba(255, 255, 255, 0.3);
 `
 const ModalWrap = styled.div`
   display: flex;
   position: fixed;
+  width: ${p => `${p.width}rem` || 'auto'};
   flex-grow: 1;
   flex-direction: column;
   text-transform: none;
@@ -85,12 +86,11 @@ const Icon = styled(Svg)`
   };
 `
 
-const Modal = ({ isVisible, title, children, onOverlayToggle }) => (
+const Modal = ({ title, width, children, onOverlayToggle }) => (
   ReactDOM.createPortal(
-    !isVisible ? null :
     <Wrap>
       <Overlay onClick={onOverlayToggle} />
-      <ModalWrap tabIndex={0}>
+      <ModalWrap width={width} tabIndex={0}>
         <InnerWrap>
           <Header>
             {title}

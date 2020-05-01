@@ -8,7 +8,7 @@ import { actions } from '../../reducers/calendar'
 import { JET, ARSENIC, PASTEL_GRAY, STYLE_TRANSITION } from '../../styles'
 
 const Wrap = styled.div`
-  z-index: 1;
+  z-index: 2;
   display: flex;
   position: absolute;
   top: 0;

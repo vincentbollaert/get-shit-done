@@ -12,6 +12,7 @@ import { MONTH_DAYS } from '../../constants'
 
 const Wrap = styled.div`
   position: absolute;
+  z-index: 2;
   top: 0;
   right: 0;
   left: 24px;
