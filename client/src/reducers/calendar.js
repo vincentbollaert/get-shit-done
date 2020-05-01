@@ -85,7 +85,7 @@ const initialState = {
           time: [18.5, 19],
           name: 'break',
           color: colors.dummy9,
-          textColor: colorDarken(dummyColorsYeye[colors.dummy7], -80),
+          textColor: colorDarken(dummyColorsYeye[colors.dummy9], -80),
         },
         {
           id: nanoid(),
