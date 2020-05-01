@@ -44,11 +44,11 @@ const After = styled.div`
 `
 const Dropdown = ({ theme, isInForm, label, displayName, list, onSelect }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [activeItem, setActiveId] = useState({})
+  const [activeItem, setActiveItem] = useState({})
 
-  function onItemSelect(id) {
-    setActiveId(id)
-    onSelect(id)
+  function onItemSelect(item) {
+    setActiveItem(item)
+    onSelect(item)
     setIsOpen(false)
   }
   return (
