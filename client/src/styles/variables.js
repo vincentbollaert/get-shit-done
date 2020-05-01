@@ -5,7 +5,7 @@ export const FONT_SIZE___SM = '0.9rem'
 export const FONT_SIZE__SM = '1rem'
 export const FONT_SIZE_SM = '1.1rem'
 export const FONT_SIZE_MD = '1.2rem'
-export const FONT_SIZE_LG = '1.4rem'
+export const FONT_SIZE_LG = '1.3rem'
 export const FONT_SIZE__LG = '1.6rem'
 
 
@@ -24,6 +24,7 @@ export const SIZE_XLG = `${SIZE_XLG_UNIT}rem`
 
 
 // colors
+export const CAPRI = '#3dc3ff'
 export const SKY_BLUE = '#78E0FF'
 export const LIGHT_SEA_GREEN = '#21baa6'
 export const AMAZONITE = '#03d2b6'

@@ -16,7 +16,7 @@ import Svg from '../../components/Svg/component'
 import UseFullscreenToggle from '../../hooks/useFullscreenToggle'
 
 const Wrap = styled.div`
-  z-index: 1;
+  z-index: 2;
   position: relative;
   display: flex;
   font-size: 13px;

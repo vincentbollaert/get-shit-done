@@ -3,6 +3,8 @@ import { string, number, func, bool } from 'prop-types'
 import styled from 'styled-components'
 import { SONIC_SILVER, SUNSET_ORANGE, GAINSBORO, JET } from '../../styles'
 
+export const CN_SVG = 'svg'
+
 const Wrap = styled.span`
   display: flex;
   flex-shrink: 0;
@@ -25,7 +27,7 @@ const Svg = ({ isDanger, theme, svg, size, className, onClick }) => (
     isDanger={isDanger}
     theme={theme}
     size={size}
-    className={className}
+    className={`${className} ${CN_SVG}`}
     onClick={onClick}
     dangerouslySetInnerHTML={{ __html: svg }}
   />

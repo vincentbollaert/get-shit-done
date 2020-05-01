@@ -7,6 +7,7 @@ import add from 'date-fns/add'
 import { WHITE, GRANITE_GRAY, WHITE_SMOKE } from '../../styles'
 
 const Wrap = styled.div`
+  z-index: 1;
   position: absolute;
   top: ${p => p.top}%;
   right: 0px;

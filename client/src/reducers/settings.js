@@ -95,6 +95,32 @@ const initialState = {
     beige: 'rgb(226, 236, 213)',
     beau_blue: 'rgb(193, 206, 212)',
   },
+  groups: [
+    {
+      id: nanoid(),
+      name: 'essentials',
+      color: {
+        name: 'aero_blue',
+        value: 'rgb(216, 255, 230)',
+      }
+    },
+    {
+      id: nanoid(),
+      name: 'work',
+      color: {
+        name: 'misty_rose',
+        value: 'rgb(255, 232, 229)',
+      },
+    },
+    {
+      id: nanoid(),
+      name: 'health',
+      color: {
+        name: 'honeydrew',
+        value: 'rgb(242, 255, 230)',
+      },
+    },
+  ]
 }
 
 export const { reducer, actions } = createSlice({
