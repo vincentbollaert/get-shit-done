@@ -1,24 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import chevronDownSvg from '../../assets/svg/chevron-down.svg'
-import Svg from '../Svg/component'
+import { SvgStyled, Input, Wrap } from './shared'
 
-const Wrap = styled.div`
-  position: relative;
-  margin-top: 8px;
-`
-const Header = styled.div`
-  display: flex;
-  color: white;
-  height: 32px;
-  align-items: center;
-  padding-top: 8px;
-`
-const Toggle = styled(Svg)`
-  margin-left: auto;
-  width: 12px;
-  height: 12px;
-`
 const List = styled.div`
   display: ${p => p.isOpen ? 'flex' : 'none'};
   position: absolute;
@@ -41,7 +25,7 @@ const Item = styled.div`
     color: ${p => p.isActive ? 'pink' : '#fff'};
   };
 `
-const Dropdown = ({ label, displayName, list, onSelect }) => {
+const Dropdown = ({ theme, isInForm, label, displayName, list, onSelect }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [activeItem, setActiveId] = useState({})
 
@@ -50,12 +34,12 @@ const Dropdown = ({ label, displayName, list, onSelect }) => {
     onSelect(id)
   }
   return (
-    <Wrap tabIndex={0} onBlur={() => setIsOpen(false)}>
+    <Wrap theme={theme} isInForm={isInForm} tabIndex={0} onBlur={() => setIsOpen(false)}>
     {/* <Wrap> */}
-      <Header onClick={() => setIsOpen(!isOpen)}>
+      <Input as="div" onClick={() => setIsOpen(!isOpen)}>
         {activeItem[displayName] || label}
-        <Toggle svg={chevronDownSvg} />
-      </Header>
+        <SvgStyled svg={chevronDownSvg} />
+      </Input>
       <List isOpen={isOpen}>
         {list.map((item) => {
           const { id } = item
