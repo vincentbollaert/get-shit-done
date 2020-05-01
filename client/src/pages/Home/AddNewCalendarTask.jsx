@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
 import TextField from '../../components/form/Field/component'
@@ -7,10 +7,15 @@ import Colorpicker from '../../components/Colorpicker/component'
 
 const Form = styled.form``
 function AddNewCalendarTask({ from, addNewTask }) {
+  const [[colorName, colorValue], setSelectedColor] = useState([])
   const { register, handleSubmit, errors } = useForm({ defaultValues: { from } })
-  const onSubmit = data => addNewTask(data)
+  const onSubmit = data => addNewTask({
+    ...data,
+    color: { colorName, colorValue },
+  })
   const isError = Object.entries(errors).length > 0
-  
+
+
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <TextField
@@ -48,7 +53,7 @@ function AddNewCalendarTask({ from, addNewTask }) {
         errorMessage={errors.to?.type}
         inputRef={register({ required: true, maxLength: 80 })}
       />
-      <Colorpicker />
+      <Colorpicker selectedColor={colorValue} setSelectedColor={setSelectedColor} />
       <Button isDisabled={isError} isInForm type="submit">Add new task</Button>
     </Form>
   )

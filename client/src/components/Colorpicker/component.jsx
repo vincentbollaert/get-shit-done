@@ -36,21 +36,20 @@ const Color = styled.div`
   };
 `
 
-const Colorpicker = ({ selectColor }) => {
+const Colorpicker = ({ selectedColor, setSelectedColor }) => {
   const { colors } = useSelector(state => state.settings)
   const [isOpen, toggleIsOpen] = useState(false)
-  const [selectedColor, setSelectedColor] = useState(false)
 
   function handleClick(color) {
     setSelectedColor(color)
-    selectColor(color)
+    toggleIsOpen(false)
   }
   return (
     <Wrap>
-      <Toggle color={colors[selectedColor]} onClick={() => toggleIsOpen(!isOpen)}></Toggle>
+      <Toggle color={selectedColor} onClick={() => toggleIsOpen(!isOpen)}></Toggle>
       <Colors isOpen={isOpen}>
         {Object.entries(colors).map(([key, value]) => (
-          <Color color={value} key={key} onClick={() => handleClick(key)} />
+          <Color color={value} key={key} onClick={() => handleClick([key, value])} />
         ))}
       </Colors>
     </Wrap>

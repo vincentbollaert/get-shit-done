@@ -40,49 +40,49 @@ const initialState = {
         },
         {
           id: nanoid(),
-          time: [8.5, 10],
-          name: 'dev: typescript, tests',
+          time: [8.5, 11.25],
+          name: 'dev: get shit together',
           color: colors.dummy3,
           textColor: colorDarken(dummyColorsYeye[colors.dummy3], -80),
         },
         {
           id: nanoid(),
-          time: [10, 10.5],
+          time: [11.25, 12],
           name: 'break',
           color: colors.dummy4,
           textColor: colorDarken(dummyColorsYeye[colors.dummy4], -80),
         },
         {
           id: nanoid(),
-          time: [10.5, 13],
-          name: 'dev: typescript, tests',
+          time: [12, 12.5],
+          name: 'dev: get shit together',
           color: colors.dummy5,
           textColor: colorDarken(dummyColorsYeye[colors.dummy5], -80),
         },
         {
           id: nanoid(),
-          time: [13, 13.5],
-          name: 'break',
+          time: [12.5, 14],
+          name: 'dev/lunch',
           color: colors.dummy6,
           textColor: colorDarken(dummyColorsYeye[colors.dummy6], -80),
         },
         {
           id: nanoid(),
-          time: [13.5, 18],
-          name: 'dev: courses',
+          time: [14, 14.5],
+          name: 'shower',
           color: colors.dummy7,
           textColor: colorDarken(dummyColorsYeye[colors.dummy7], -80),
         },
         {
           id: nanoid(),
-          time: [18, 19],
-          name: 'cooking, mai',
+          time: [14.5, 18],
+          name: 'dev: get shit together',
           color: colors.dummy8,
           textColor: colorDarken(dummyColorsYeye[colors.dummy8], -80),
         },
         {
           id: nanoid(),
-          time: [19, 20.5],
+          time: [18, 20.5],
           name: 'interpersonal courses',
           color: colors.dummy7,
           textColor: colorDarken(dummyColorsYeye[colors.dummy7], -80),
@@ -205,14 +205,16 @@ export const { reducer, actions } = createSlice({
         .filter(day => format(day, 'd') >= from && format(day, 'd') <= to)
         .map(day => day.toString())
     },
-    addTask(state, { payload: { name, dateString, group, from, to } }) {
+    addTask(state, { payload: { name, dateString, group, from, to, color }}) {
+      const { colorName, colorValue } = color
       const taskToUpdate = state.allTasksByDay.find(tasksByDay => tasksByDay.dateString === dateString)
+      
       taskToUpdate.tasks.push({
         id: nanoid(),
         time: [from, to],
         name,
-        color: colors.dummy9,
-        textColor: colorDarken(dummyColorsYeye[colors.dummy9], -80),
+        color: colorName,
+        textColor: colorDarken(colorValue, -80),
       })
     }
   }
