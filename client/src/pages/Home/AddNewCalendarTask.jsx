@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux'
 import Dropdown from '../../components/form/Dropdown'
 
 const Form = styled.form``
+
 function AddNewCalendarTask({ from, addNewTask }) {
   const [[colorName, colorValue], setSelectedColor] = useState([])
   const [selectedGroup, setSelectedGroup] = useState(undefined)
@@ -68,7 +69,7 @@ function AddNewCalendarTask({ from, addNewTask }) {
         inputRef={register({ required: true, maxLength: 80 })}
       />
       <Colorpicker selectedColor={colorValue} setSelectedColor={setSelectedColor} />
-      <Button isDisabled={isError} isInForm type="submit">Add new task</Button>
+      <Button isDisabled={isError} isInForm accentColor={selectedGroup?.color.value} type="submit">Add new task</Button>
     </Form>
   )
 }

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import chevronDownSvg from '../../assets/svg/chevron-down.svg'
 import Placeholder from './Placeholder/component'
 import { SvgStyled, Input, Wrap } from './shared'
-import { CAPRI, WHITE, ISABELLINE } from '../../styles'
+import { WHITE, ISABELLINE } from '../../styles'
 
 const Header = styled.div`
   width: 100%;
@@ -52,10 +52,20 @@ const Dropdown = ({ theme, isInForm, label, displayName, list, onSelect }) => {
     setIsOpen(false)
   }
   return (
-    <Wrap theme={theme} isInForm={isInForm} tabIndex={0} onBlur={() => setIsOpen(false)}>
+    <Wrap
+      theme={theme}
+      isInForm={isInForm}
+      tabIndex={0}
+      onBlur={() => setIsOpen(false)}
+    >
     {/* <Wrap theme={theme} isInForm={isInForm}> */}
       <Header color={activeItem.color?.value} onClick={() => setIsOpen(!isOpen)}>
-        <Placeholder theme={theme} hasValue={activeItem.id !== undefined && activeItem.id !== ''}>{label}</Placeholder>
+        <Placeholder
+          theme={theme}
+          hasValue={activeItem.id !== undefined && activeItem.id !== ''}
+        >
+          {label}
+        </Placeholder>
         <Input as="div">{activeItem[displayName]}</Input>
         <SvgStyled them="light" svg={chevronDownSvg} />
       </Header>
