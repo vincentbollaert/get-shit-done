@@ -1,7 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
-import { SIZE_XLG, SONIC_SILVER, GRAY_X11, DARK_TRANSPARENT } from '../../styles'
+import {
+  SIZE_XLG,
+  SONIC_SILVER,
+  DARK_TRANSPARENT,
+  ISABELLINE,
+  RHYTHM,
+  CHARCOAL,
+  FONT_SIZE_LG,
+  SIZE_MD,
+} from '../../styles'
 import closeSvg from '../../assets/svg/close.svg'
 import Svg from '../Svg/component'
 
@@ -28,8 +37,8 @@ const ModalWrap = styled.div`
   flex-direction: column;
   text-transform: none;
   outline: none;
-  background-color: #fff;
-  box-shadow: 3px 3px 11px -9px #00000054;
+  background-color: ${CHARCOAL};
+  box-shadow: 3px 3px 8px -5px ${CHARCOAL};
 `
 
 const InnerWrap = styled.div`
@@ -38,11 +47,12 @@ const InnerWrap = styled.div`
 
 const Header = styled.header`
   display: flex;
+  align-items: center;
   padding: ${SIZE_XLG};
   padding-bottom: 0;
-  line-height: 1rem;
+  font-size: ${FONT_SIZE_LG};
+  color: ${ISABELLINE};
   text-transform: uppercase;
-  font-weight: bold;
   white-space: nowrap;
   user-select: none;
 `
@@ -53,18 +63,21 @@ const Content = styled.div`
 `
 
 const Icon = styled(Svg)`
+  position: absolute;
+  right: ${SIZE_MD};
   display: flex;
   box-sizing: content-box;
   margin-left: auto;
   padding-left: 2rem;
   width: 1rem;
   height: 1rem;
-  fill: #e8e8e8;
+  padding: ${SIZE_MD};
+  fill: ${RHYTHM};
   cursor: pointer;
   visibility: hidden;
 
   &:hover {
-    fill: ${GRAY_X11};
+    fill: ${ISABELLINE};
   };
 
   ${ModalWrap}:hover & {
