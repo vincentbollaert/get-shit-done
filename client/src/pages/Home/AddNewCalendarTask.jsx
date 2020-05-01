@@ -40,7 +40,14 @@ function AddNewCalendarTask({ from, addNewTask }) {
         errorMessage={errors.group?.type}
         inputRef={register({ required: true, maxLength: 80 })}
       />
-      <Dropdown list={groups} label="select group" displayName="name" onSelect={setSelectedGroup} />
+      <Dropdown
+        isInForm
+        theme="light"
+        label="select group"
+        list={groups}
+        displayName="name"
+        onSelect={setSelectedGroup}
+      />
       <TextField
         isInForm
         defaultValue={from}
