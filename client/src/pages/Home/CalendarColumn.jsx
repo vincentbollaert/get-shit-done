@@ -97,6 +97,7 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered, dateString }) => {
   const dispatch = useDispatch()
   const [showModal, toggleModal] = useState(false)
   const [y, setY] = useState(0)
+  const [newTaskFrom, setNewTaskFrom] = useState(0)
   const hourSlotsRef = useRef(null)
   const { colors } = useSelector(state => state.settings)
   const { hoursAxis } = useSelector(state => state.calendar)
@@ -126,11 +127,12 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered, dateString }) => {
   function addTask() {
     const timeStart = 24 / (hourSlotsRef.current.getBoundingClientRect().height / y)
     const timeStartRounded = Number(timeStart.toFixed(1))
-    toggleModal(true)
+    setNewTaskFrom(timeStartRounded)
     console.log('add task @ ' + timeStartRounded)
+    toggleModal(true)
   }
 
-  function addNewCalendarTask(test) {
+  function addNewTask(test) {
     console.log(test)
     const newTask = {
       ...test,
@@ -172,7 +174,7 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered, dateString }) => {
       
       {showModal && (
         <Modal isVisible title="add new task" onOverlayToggle={() => toggleModal(false)}>
-          <AddNewCalendarTask addNewCalendarTask={addNewCalendarTask} />
+          <AddNewCalendarTask from={newTaskFrom} addNewTask={addNewTask} />
         </Modal>
       )}
     </Wrap>

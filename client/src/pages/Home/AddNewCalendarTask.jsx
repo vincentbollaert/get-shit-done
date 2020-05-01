@@ -7,9 +7,9 @@ import { SIZE_MD } from '../../styles'
 const Form = styled.form`
   margin-bottom: ${SIZE_MD};
 `
-function AddNewCalendarTask({ addNewCalendarTask }) {
-  const { register, handleSubmit, errors } = useForm()
-  const onSubmit = data => addNewCalendarTask(data)
+function AddNewCalendarTask({ from, addNewTask }) {
+  const { register, handleSubmit, errors } = useForm({ defaultValues: { from } })
+  const onSubmit = data => addNewTask(data)
   // const errorMessage = (errors.task || {}).type
   
   return (
