@@ -5,7 +5,7 @@ export const FONT_SIZE___SM = '0.9rem'
 export const FONT_SIZE__SM = '1rem'
 export const FONT_SIZE_SM = '1.1rem'
 export const FONT_SIZE_MD = '1.2rem'
-export const FONT_SIZE_LG = '1.4rem'
+export const FONT_SIZE_LG = '1.3rem'
 export const FONT_SIZE__LG = '1.6rem'
 
 
