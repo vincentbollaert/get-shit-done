@@ -27,7 +27,7 @@ const InnerWrap = styled.div`
   box-shadow: 0px -3px 6px -1px #ffc0c06b;
 
   &:hover {
-    opacity: 0.5;
+    opacity: 0.8;
   };
 `
 const Prefix = styled.span`
