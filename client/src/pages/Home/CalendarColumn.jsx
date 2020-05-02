@@ -1,8 +1,7 @@
-import React, { Fragment, useState, useRef, useEffect } from 'react'
+import React, { Fragment, useState, useRef } from 'react'
 import styled from 'styled-components'
-import format from 'date-fns/format'
 
-import { WHITE, SIZE_XSM, WHITE_SMOKE, ISABELLINE } from '../../styles'
+import { WHITE, SIZE_XSM, CHARCOAL, ISABELLINE } from '../../styles'
 import CurrentTime from './CurrentTime'
 import { useSelector, useDispatch } from 'react-redux'
 import Modal from '../../components/Modal/component'
@@ -29,11 +28,11 @@ const Wrap = styled.div`
 
   ${p => p.isCurrentDay && `
     flex-grow: 2;
-    background-color: ${WHITE_SMOKE};
+    // background-color: ${CHARCOAL};
 
-    .${CN_HOUR_SLOTS} * {
-      box-shadow: inset 0px 1px 0 0px ${WHITE_SMOKE}, inset 0px -1px 0 0px ${WHITE_SMOKE} !important;
-    };
+    // .${CN_HOUR_SLOTS} * {
+    //   box-shadow: inset 0px 1px 0 0px ${CHARCOAL}, inset 0px -1px 0 0px ${CHARCOAL} !important;
+    // };
   `};
 `
 
@@ -74,6 +73,8 @@ const STYLE_ELLIPSIS = `
   text-overflow: ellipsis;
 `
 const Cell = styled.div`
+  z-index: 1;
+  position: relative;
   display: flex;
   flex-grow: ${p => p.flex};
   justify-content: center;
@@ -136,7 +137,6 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered, dateString }) => {
         onMouseMove={updatePlaceholderTask}
         className={CN_HOUR_SLOTS}
       >
-        <PlaceholderTask top={y} onClick={addTask} />
         {tasksFiltered.map(({ id, heightInFlex, name, gapBefore, gapAfter, color, textColor }) => {
           return (
             <Fragment key={id}>
@@ -155,6 +155,7 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered, dateString }) => {
             </Fragment>
           )
         })}
+        <PlaceholderTask top={y} onClick={addTask} />
       </HourSlots>
       
       {showModal && (
