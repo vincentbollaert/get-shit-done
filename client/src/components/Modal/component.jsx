@@ -4,12 +4,12 @@ import styled from 'styled-components'
 import {
   SIZE_XLG,
   SONIC_SILVER,
-  DARK_TRANSPARENT,
   ISABELLINE,
   RHYTHM,
   CHARCOAL,
   FONT_SIZE_LG,
   SIZE_MD,
+  STYLE_TRANSITION,
 } from '../../styles'
 import closeSvg from '../../assets/svg/close.svg'
 import Svg from '../Svg/component'
@@ -24,11 +24,12 @@ const Wrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background-color ${STYLE_TRANSITION};
 `
 const Overlay = styled.div`
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.3);
+  /* background-color: rgba(255, 255, 255, 0.3); */
 `
 const ModalWrap = styled.div`
   display: flex;
