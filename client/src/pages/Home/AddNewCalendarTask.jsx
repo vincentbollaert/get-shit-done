@@ -11,16 +11,24 @@ const Form = styled.form``
 
 function AddNewCalendarTask() {
   const dispatch = useDispatch()
-  const { taskBeingPrepared: { from } } = useSelector(state => state.calendar)
+  const { taskBeingPrepared: { time } } = useSelector(state => state.calendar)
 
 
-  const [selectedGroup, setSelectedGroup] = useState(undefined)
+  const [selectedGroup, setSelectedGroup] = useState()
   const { groups } = useSelector(state => state.settings)
-  const { register, handleSubmit, errors } = useForm({ defaultValues: { from } })
+  const { register, handleSubmit, errors, getValues } = useForm({ defaultValues: { from: time[0] } })
   const onSubmit = data => dispatch(actions.addTask({
     ...data,
     group: selectedGroup,
   }))
+
+  function bubbleValue({ name, value }) {
+    console.log('in add', name, value, getValues(), selectedGroup)
+    dispatch(actions.prepareTask({
+      ...getValues(),
+      group: selectedGroup,
+    }))
+  }
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -31,6 +39,7 @@ function AddNewCalendarTask() {
         placeholder="name"
         errorMessage={errors.name?.type}
         inputRef={register({ required: true, maxLength: 80 })}
+        bubbleValue={bubbleValue}
       />
       <Dropdown
         isInForm
@@ -42,7 +51,7 @@ function AddNewCalendarTask() {
       />
       <TextField
         isInForm
-        defaultValue={from}
+        defaultValue={time[0]}
         theme='light'
         name="from"
         placeholder="time from"

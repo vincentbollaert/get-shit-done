@@ -207,15 +207,15 @@ export const { reducer, actions } = createSlice({
         .filter(day => format(day, 'd') >= from && format(day, 'd') <= to)
         .map(day => day.toString())
     },
-    prepareTask(state, { payload: { name, dateString, group, from, to } }) {
-      console.log('being prepared', { name, dateString, group, from, to })
+    prepareTask(state, { payload: { name, group, from, to } }) {
+      console.log('being prepared', { name, group, from, to })
+      const isColorSelected = group?.color
       const taskBeingPrepared = {
         time: [from, 16],
-        name: 'something name',
-        group: 'some group',
-        color: 'light_cyan_2',
-        textColor: colorDarken('rgb(211, 233, 236)', -80),
-        dateString,
+        name,
+        group: group?.name,
+        color: group?.color.name,
+        textColor: isColorSelected ? colorDarken(group?.color.value, -80) : 'red',
       }
       state.taskBeingPrepared = taskBeingPrepared
     },
