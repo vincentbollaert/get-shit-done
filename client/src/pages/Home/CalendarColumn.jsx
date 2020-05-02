@@ -1,12 +1,10 @@
 import React, { Fragment, useState, useRef, memo } from 'react'
 import styled from 'styled-components'
 
-import { WHITE, SIZE_SM, CHARCOAL, ISABELLINE } from '../../styles'
+import { WHITE, SIZE_SM, CHARCOAL, ISABELLINE, STYLE_ELLIPSIS } from '../../styles'
 import CurrentTime from './CurrentTime'
-import { useSelector, useDispatch } from 'react-redux'
-import Modal from '../../components/Modal/component'
-import AddNewCalendarTask from './AddNewCalendarTask'
-import { actions } from '../../reducers/calendar'
+import { useSelector } from 'react-redux'
+import PlaceholderTask from './PlaceholderTask'
 
 const CN_HOUR_SLOTS = 'hour-slots'
 
@@ -51,26 +49,6 @@ const HourSlots = styled.div`
     padding-left: 12px;
   };
 `
-const PlaceholderTask = styled.div`
-  display: ${p => p.isBeingPrepared ? 'flex' : 'none'};
-  position: absolute;
-  top: ${p => p.top}px;
-  right: 0;
-  left: 0;
-  background-color: #eee;
-  box-shadow: inset 4px 1px 0 0px #fff, inset -4px -1px 0 0px #fff, 0px 1px 0 0px #fff, 0px -1px 0 0px #fff;
-  border-radius: 2px;
-  height: 19.4px;
-
-  ${HourSlots}:hover & {
-    display: flex;
-  };
-`
-const STYLE_ELLIPSIS = `
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`
 const Cell = styled.div`
   z-index: ${p => p.isGap ? 0 : 1};
   position: relative;
@@ -95,27 +73,20 @@ const Cell = styled.div`
 `
 
 const CalendarColumn = ({ isCurrentDay, tasksFiltered }) => {
-  const dispatch = useDispatch()
-  const [isTaskBeingPrepared, setTaskBeingPrepared] = useState(false)
+  const { taskBeingPrepared } = useSelector(state => state.calendar)
   const [y, setY] = useState(0)
   const hourSlotsRef = useRef(null)
   const { colors } = useSelector(state => state.settings)
-  const { hoursAxis, taskBeingPrepared } = useSelector(state => state.calendar)
+  const { hoursAxis } = useSelector(state => state.calendar)
 
   function updatePlaceholderTask(event) {
+    if (taskBeingPrepared !== undefined) return
     const HALF_HOUR_PX = 19.4
     const columnTopPx = event.currentTarget.getBoundingClientRect().top
     const placeholderY = event.clientY - columnTopPx
     const nearest25 = Math.floor(placeholderY / HALF_HOUR_PX) * HALF_HOUR_PX
     const isNewNearest = nearest25 !== y
     if (isNewNearest) setY(nearest25)
-  }
-
-  function onPrepareNewTask() {
-    const timeStart = 24 / (hourSlotsRef.current.getBoundingClientRect().height / y)
-    const timeStartRounded = Number(timeStart.toFixed(1))
-    setTaskBeingPrepared(true)
-    dispatch(actions.prepareTask({ from: timeStartRounded}))
   }
 
   return (
@@ -144,26 +115,8 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered }) => {
             </Fragment>
           )
         })}
-        <PlaceholderTask
-          isBeingPrepared={isTaskBeingPrepared}
-          top={y}
-          onClick={onPrepareNewTask}
-        >
-          {taskBeingPrepared.name}
-        </PlaceholderTask>
+        <PlaceholderTask hourSlotsRef={hourSlotsRef} y={y} />
       </HourSlots>
-      
-      {isTaskBeingPrepared && (
-        <Modal title="task details" width={17} onOverlayToggle={() => setTaskBeingPrepared(false)}>
-          <AddNewCalendarTask />
-        </Modal>
-      )}
-      
-      {/* {isBeingEdited && (
-        <Modal title="task editroar" width={17} onOverlayToggle={() => setBeingEdited(false)}>
-          <EditCalendarTask editTask={editTask} />
-        </Modal>
-      )} */}
     </Wrap>
   )
 }
