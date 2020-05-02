@@ -53,7 +53,7 @@ const HourSlots = styled.div`
   };
 `
 const PlaceholderTask = styled.div`
-  display: none;
+  display: ${p => p.isBeingAdded ? 'flex' : 'none'};
   position: absolute;
   top: ${p => p.top}px;
   right: 0;
@@ -113,7 +113,7 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered, dateString }) => {
     if (isNewNearest) setY(nearest25)
   }
 
-  function addTask() {
+  function prepareNewTask() {
     const timeStart = 24 / (hourSlotsRef.current.getBoundingClientRect().height / y)
     const timeStartRounded = Number(timeStart.toFixed(1))
     setNewTaskFrom(timeStartRounded)
@@ -155,7 +155,7 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered, dateString }) => {
             </Fragment>
           )
         })}
-        <PlaceholderTask top={y} onClick={addTask} />
+        <PlaceholderTask isBeingAdded={showModal} top={y} onClick={prepareNewTask} />
       </HourSlots>
       
       {showModal && (
