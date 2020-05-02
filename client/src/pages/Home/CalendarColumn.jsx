@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useRef } from 'react'
 import styled from 'styled-components'
 
-import { WHITE, SIZE_XSM, CHARCOAL, ISABELLINE } from '../../styles'
+import { WHITE, SIZE_SM, CHARCOAL, ISABELLINE } from '../../styles'
 import CurrentTime from './CurrentTime'
 import { useSelector, useDispatch } from 'react-redux'
 import Modal from '../../components/Modal/component'
@@ -42,7 +42,6 @@ const HourSlots = styled.div`
   position: relative;
   flex-direction: column;
   margin: 12px 0;
-  padding: 0 4px;
 
   ${Wrap}:last-child & {
     padding-right: 12px;
@@ -73,7 +72,7 @@ const STYLE_ELLIPSIS = `
   text-overflow: ellipsis;
 `
 const Cell = styled.div`
-  z-index: 1;
+  z-index: ${p => p.isGap ? 0 : 1};
   position: relative;
   display: flex;
   flex-grow: ${p => p.flex};
@@ -82,10 +81,10 @@ const Cell = styled.div`
   flex-basis: 0;
   align-items: center;
   border-radius: 2px;
-  box-shadow: inset 0px 1px 0 0px ${WHITE}, inset 0px -1px 0 0px ${WHITE};
+  box-shadow: inset 4px 1px 0 0 ${WHITE}, inset -4px -1px 0 0 ${WHITE};
   background-color: ${p => p.accentColor};
   display: block;
-  padding: 0 ${SIZE_XSM};
+  padding: 0 ${SIZE_SM};
   line-height: 1.5;
   color: ${p => p.textColor};
   ${p => p.isSmall && `
@@ -140,7 +139,7 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered, dateString }) => {
         {tasksFiltered.map(({ id, heightInFlex, name, gapBefore, gapAfter, color, textColor }) => {
           return (
             <Fragment key={id}>
-              {gapBefore > 0 && <Cell isGapBefore flex={gapBefore} />}
+              {gapBefore > 0 && <Cell isGap flex={gapBefore} />}
               {heightInFlex > 0 && (
                 <Cell
                   flex={heightInFlex}
@@ -151,7 +150,7 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered, dateString }) => {
                   {name}
                 </Cell>
               )}
-              {gapAfter > 0 && <Cell isGapAfter flex={gapAfter} />}
+              {gapAfter > 0 && <Cell isGap flex={gapAfter} />}
             </Fragment>
           )
         })}
