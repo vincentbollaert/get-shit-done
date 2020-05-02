@@ -20,7 +20,7 @@ const colors = {
   dummy11: dummyColors[generateRandomIndex()],
 }
 const initialState = {
-  taskBeingPrepared: {},
+  taskBeingPrepared: undefined,
   taskBeingEdited: {},
   allTasksByDay: MONTH_DAYS_STRING.map((dateString, index) => {
     let tasks = []
@@ -218,6 +218,9 @@ export const { reducer, actions } = createSlice({
         textColor: isColorSelected ? colorDarken(group?.color.value, -80) : 'red',
       }
       state.taskBeingPrepared = taskBeingPrepared
+    },
+    removePreparedTask(state) {
+      state.taskBeingPrepared = undefined
     },
     addTask(state, { payload: { name, dateString, group, from, to }}) {
       const { color } = group
