@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
@@ -9,26 +9,20 @@ import { actions } from '../../reducers/calendar'
 
 const Form = styled.form``
 
-function AddNewCalendarTask() {
+function AddNewCalendarTask({ timeFrom }) {
   const dispatch = useDispatch()
-  const { taskBeingPrepared: { time } } = useSelector(state => state.calendar)
-
-
   const [selectedGroup, setSelectedGroup] = useState()
   const { groups } = useSelector(state => state.settings)
-  const { register, handleSubmit, errors, getValues } = useForm({ defaultValues: { from: time[0] } })
-  const onSubmit = data => dispatch(actions.addTask({
-    ...data,
-    group: selectedGroup,
-  }))
+  const { register, handleSubmit, errors, watch } = useForm({ defaultValues: { from: timeFrom } })
+  const onSubmit = data => dispatch(actions.addTask(data))
+  const watchedFields = watch()
 
-  function bubbleValue({ name, value }) {
-    console.log('in add', name, value, getValues(), selectedGroup)
+  useEffect(() => {
     dispatch(actions.prepareTask({
-      ...getValues(),
+      ...watchedFields,
       group: selectedGroup,
     }))
-  }
+  }, [watchedFields, selectedGroup])
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -39,19 +33,19 @@ function AddNewCalendarTask() {
         placeholder="name"
         errorMessage={errors.name?.type}
         inputRef={register({ required: true, maxLength: 80 })}
-        bubbleValue={bubbleValue}
       />
       <Dropdown
         isInForm
         theme="light"
         label="select group"
         list={groups}
-        displayName="name"
-        onSelect={setSelectedGroup}
+        listKey="name"
+        onSelect={group => setSelectedGroup(group)}
+        inputRef={register({ required: true, maxLength: 80 })}
       />
       <TextField
         isInForm
-        defaultValue={time[0]}
+        defaultValue={timeFrom}
         theme='light'
         name="from"
         placeholder="time from"
@@ -69,7 +63,7 @@ function AddNewCalendarTask() {
       <Button
         isDisabled={Object.entries(errors).length > 0}
         isInForm
-        accentColor={selectedGroup?.color.value}
+        accentColor={selectedGroup?.group?.color.value}
         type="submit"
       >
         Add new task
@@ -78,4 +72,4 @@ function AddNewCalendarTask() {
   )
 }
 
-export default AddNewCalendarTask
+export default memo(AddNewCalendarTask)
