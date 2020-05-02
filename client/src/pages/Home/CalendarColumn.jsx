@@ -52,7 +52,7 @@ const HourSlots = styled.div`
   };
 `
 const PlaceholderTask = styled.div`
-  display: ${p => p.isBeingAdded ? 'flex' : 'none'};
+  display: ${p => p.isBeingPrepared ? 'flex' : 'none'};
   position: absolute;
   top: ${p => p.top}px;
   right: 0;
@@ -96,12 +96,12 @@ const Cell = styled.div`
 
 const CalendarColumn = ({ isCurrentDay, tasksFiltered, dateString }) => {
   const dispatch = useDispatch()
-  const [showModal, toggleModal] = useState(false)
+  const [isTaskBeingPrepared, setTaskBeingPrepared] = useState(false)
   const [y, setY] = useState(0)
-  const [newTaskFrom, setNewTaskFrom] = useState(0)
+  // const [newTaskFrom, setNewTaskFrom] = useState(0)
   const hourSlotsRef = useRef(null)
   const { colors } = useSelector(state => state.settings)
-  const { hoursAxis } = useSelector(state => state.calendar)
+  const { hoursAxis, taskBeingPrepared } = useSelector(state => state.calendar)
 
   function updatePlaceholderTask(event) {
     const HALF_HOUR_PX = 19.4
@@ -112,20 +112,11 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered, dateString }) => {
     if (isNewNearest) setY(nearest25)
   }
 
-  function prepareNewTask() {
+  function onPrepareNewTask() {
     const timeStart = 24 / (hourSlotsRef.current.getBoundingClientRect().height / y)
     const timeStartRounded = Number(timeStart.toFixed(1))
-    setNewTaskFrom(timeStartRounded)
-    toggleModal(true)
-  }
-
-  function addNewTask(test) {
-    const newTask = {
-      ...test,
-      dateString,
-    }
-    dispatch(actions.addTask(newTask))
-    toggleModal(false)
+    setTaskBeingPrepared(true)
+    dispatch(actions.prepareTask({ dateString, from: timeStartRounded}))
   }
 
   return (
@@ -154,14 +145,20 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered, dateString }) => {
             </Fragment>
           )
         })}
-        <PlaceholderTask isBeingAdded={showModal} top={y} onClick={prepareNewTask} />
+        <PlaceholderTask isBeingPrepared={isTaskBeingPrepared} top={y} onClick={onPrepareNewTask} />
       </HourSlots>
       
-      {showModal && (
-        <Modal title="task details" width={17} onOverlayToggle={() => toggleModal(false)}>
-          <AddNewCalendarTask from={newTaskFrom} addNewTask={addNewTask} />
+      {isTaskBeingPrepared && (
+        <Modal title="task details" width={17} onOverlayToggle={() => setTaskBeingPrepared(false)}>
+          <AddNewCalendarTask />
         </Modal>
       )}
+      
+      {/* {isBeingEdited && (
+        <Modal title="task editroar" width={17} onOverlayToggle={() => setBeingEdited(false)}>
+          <EditCalendarTask editTask={editTask} />
+        </Modal>
+      )} */}
     </Wrap>
   )
 }

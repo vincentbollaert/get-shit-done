@@ -20,6 +20,8 @@ const colors = {
   dummy11: dummyColors[generateRandomIndex()],
 }
 const initialState = {
+  taskBeingPrepared: {},
+  taskBeingEdited: {},
   allTasksByDay: MONTH_DAYS_STRING.map((dateString, index) => {
     let tasks = []
     if (index === 0) {
@@ -149,22 +151,22 @@ const initialState = {
         },
         {
           id: nanoid(),
-          time: [12.5, 18],
+          time: [12.5, 14],
           name: 'dev: get shit done',
           color: colors.dummy7,
           textColor: colorDarken(dummyColorsYeye[colors.dummy7], -80),
         },
         {
           id: nanoid(),
-          time: [18, 19],
+          time: [14, 15],
           name: 'cooking, mai',
           color: colors.dummy8,
           textColor: colorDarken(dummyColorsYeye[colors.dummy8], -80),
         },
         {
           id: nanoid(),
-          time: [19, 20.5],
-          name: 'interpersonal courses',
+          time: [15, 18],
+          name: 'dev: get shit done',
           color: colors.dummy7,
           textColor: colorDarken(dummyColorsYeye[colors.dummy7], -80),
         },
@@ -205,10 +207,23 @@ export const { reducer, actions } = createSlice({
         .filter(day => format(day, 'd') >= from && format(day, 'd') <= to)
         .map(day => day.toString())
     },
+    prepareTask(state, { payload: { name, dateString, group, from, to } }) {
+      console.log('being prepared', { name, dateString, group, from, to })
+      const taskBeingPrepared = {
+        time: [from, 16],
+        name: 'something name',
+        group: 'some group',
+        color: 'light_cyan_2',
+        textColor: colorDarken('rgb(211, 233, 236)', -80),
+        dateString,
+      }
+      state.taskBeingPrepared = taskBeingPrepared
+    },
     addTask(state, { payload: { name, dateString, group, from, to }}) {
       const { color } = group
       const taskToUpdate = state.allTasksByDay.find(tasksByDay => tasksByDay.dateString === dateString)
 
+      state.taskBeingEdited = {}
       taskToUpdate.tasks.push({
         id: nanoid(),
         time: [from, to],

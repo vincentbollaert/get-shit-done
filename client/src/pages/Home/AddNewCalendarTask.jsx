@@ -1,21 +1,26 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
 import TextField from '../../components/form/Field/component'
 import Button from '../../components/Button/component'
 import Dropdown from '../../components/form/Dropdown'
+import { actions } from '../../reducers/calendar'
 
 const Form = styled.form``
 
-function AddNewCalendarTask({ from, addNewTask }) {
+function AddNewCalendarTask() {
+  const dispatch = useDispatch()
+  const { taskBeingPrepared: { from } } = useSelector(state => state.calendar)
+
+
   const [selectedGroup, setSelectedGroup] = useState(undefined)
   const { groups } = useSelector(state => state.settings)
   const { register, handleSubmit, errors } = useForm({ defaultValues: { from } })
-  const onSubmit = data => addNewTask({
+  const onSubmit = data => dispatch(actions.addTask({
     ...data,
     group: selectedGroup,
-  })
+  }))
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
