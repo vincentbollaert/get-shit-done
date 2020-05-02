@@ -9,6 +9,9 @@ const Header = styled.div`
   width: 100%;
   color: ${p => p.color};
 `
+const InputHidden = styled.input`
+  display: none;
+`
 const List = styled.div`
   display: ${p => p.isOpen ? 'flex' : 'none'};
   position: absolute;
@@ -42,7 +45,7 @@ const After = styled.div`
   position: absolute;
   right: 0;
 `
-const Dropdown = ({ theme, isInForm, label, displayName, list, onSelect }) => {
+const Dropdown = ({ theme, isInForm, label, name, list, listKey, onSelect, inputRef }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [activeItem, setActiveItem] = useState({})
 
@@ -66,7 +69,8 @@ const Dropdown = ({ theme, isInForm, label, displayName, list, onSelect }) => {
         >
           {label}
         </Placeholder>
-        <Input as="div">{activeItem[displayName]}</Input>
+        <Input as="div">{activeItem[listKey]}</Input>
+        {name && <InputHidden name={name} type="text" ref={inputRef} value={activeItem[listKey] || ''} />}
         <SvgStyled them="light" svg={chevronDownSvg} />
       </Header>
       <List isOpen={isOpen}>
@@ -80,7 +84,7 @@ const Dropdown = ({ theme, isInForm, label, displayName, list, onSelect }) => {
               onClick={() => onItemSelect(item)}
               key={id}
             >
-              {item[displayName]}
+              {item[listKey]}
               <After color={color.value} />
             </Item>
           )
