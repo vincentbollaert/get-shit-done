@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useRef } from 'react'
+import React, { Fragment, useState, useRef, memo } from 'react'
 import styled from 'styled-components'
 
 import { WHITE, SIZE_SM, CHARCOAL, ISABELLINE } from '../../styles'
@@ -94,11 +94,10 @@ const Cell = styled.div`
   ${STYLE_ELLIPSIS};
 `
 
-const CalendarColumn = ({ isCurrentDay, tasksFiltered, dateString }) => {
+const CalendarColumn = ({ isCurrentDay, tasksFiltered }) => {
   const dispatch = useDispatch()
   const [isTaskBeingPrepared, setTaskBeingPrepared] = useState(false)
   const [y, setY] = useState(0)
-  // const [newTaskFrom, setNewTaskFrom] = useState(0)
   const hourSlotsRef = useRef(null)
   const { colors } = useSelector(state => state.settings)
   const { hoursAxis, taskBeingPrepared } = useSelector(state => state.calendar)
@@ -116,7 +115,7 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered, dateString }) => {
     const timeStart = 24 / (hourSlotsRef.current.getBoundingClientRect().height / y)
     const timeStartRounded = Number(timeStart.toFixed(1))
     setTaskBeingPrepared(true)
-    dispatch(actions.prepareTask({ dateString, from: timeStartRounded}))
+    dispatch(actions.prepareTask({ from: timeStartRounded}))
   }
 
   return (
@@ -145,7 +144,13 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered, dateString }) => {
             </Fragment>
           )
         })}
-        <PlaceholderTask isBeingPrepared={isTaskBeingPrepared} top={y} onClick={onPrepareNewTask} />
+        <PlaceholderTask
+          isBeingPrepared={isTaskBeingPrepared}
+          top={y}
+          onClick={onPrepareNewTask}
+        >
+          {taskBeingPrepared.name}
+        </PlaceholderTask>
       </HourSlots>
       
       {isTaskBeingPrepared && (
@@ -163,4 +168,4 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered, dateString }) => {
   )
 }
 
-export default CalendarColumn
+export default memo(CalendarColumn)
