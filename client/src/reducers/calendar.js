@@ -165,26 +165,79 @@ const initialState = {
         },
         {
           id: nanoid(),
-          time: [15, 18],
+          time: [15, 19],
           name: 'dev: get shit done',
-          color: colors.dummy7,
-          textColor: colorDarken(dummyColorsYeye[colors.dummy7], -80),
-        },
-        {
-          id: nanoid(),
-          time: [20.5,21],
-          name: 'shower, prepare for relax',
-          color: colors.dummy8,
-          textColor: colorDarken(dummyColorsYeye[colors.dummy8], -80),
-        },
-        {
-          id: nanoid(),
-          time: [21, 22],
-          name: 'relax',
           color: colors.dummy9,
           textColor: colorDarken(dummyColorsYeye[colors.dummy9], -80),
         },
+        {
+          id: nanoid(),
+          time: [19, 23],
+          name: 'relax pt 1',
+          color: colors.dummy10,
+          textColor: colorDarken(dummyColorsYeye[colors.dummy10], -80),
+        },
       ]
+    }
+      if (index === 2) {
+        tasks = [
+          {
+            id: nanoid(),
+            time: [0, 8],
+            name: 'sleep',
+            color: colors.dummy1,
+            textColor: colorDarken(dummyColorsYeye[colors.dummy1], -80),
+          },
+          {
+            id: nanoid(),
+            time: [8, 8.5],
+            name: 'in bed watch upskill',
+            color: colors.dummy2,
+            textColor: colorDarken(dummyColorsYeye[colors.dummy2], -80),
+          },
+          {
+            id: nanoid(),
+            time: [8.5, 9.5],
+            name: 'morning routine',
+            color: colors.dummy3,
+            textColor: colorDarken(dummyColorsYeye[colors.dummy3], -80),
+          },
+          {
+            id: nanoid(),
+            time: [9.5, 11.5],
+            name: 'watch upskill',
+            color: colors.dummy4,
+            textColor: colorDarken(dummyColorsYeye[colors.dummy4], -80),
+          },
+          {
+            id: nanoid(),
+            time: [11.5, 14],
+            name: 'dev: get shit done',
+            color: colors.dummy7,
+            textColor: colorDarken(dummyColorsYeye[colors.dummy7], -80),
+          },
+          {
+            id: nanoid(),
+            time: [14, 15],
+            name: 'cooking, mai',
+            color: colors.dummy8,
+            textColor: colorDarken(dummyColorsYeye[colors.dummy8], -80),
+          },
+          {
+            id: nanoid(),
+            time: [15, 19],
+            name: 'dev: get shit done',
+            color: colors.dummy9,
+            textColor: colorDarken(dummyColorsYeye[colors.dummy9], -80),
+          },
+          {
+            id: nanoid(),
+            time: [19, 23],
+            name: 'relax pt 1',
+            color: colors.dummy10,
+            textColor: colorDarken(dummyColorsYeye[colors.dummy10], -80),
+          },
+        ]
     }
     return {
       tasks,
