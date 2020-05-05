@@ -9,12 +9,15 @@ import { actions } from '../../reducers/calendar'
 
 const Form = styled.form``
 
-function AddNewCalendarTask({ timeFrom }) {
+function AddNewCalendarTask({ dateString, timeFrom, onModalClose }) {
   const dispatch = useDispatch()
   const [selectedGroup, setSelectedGroup] = useState()
   const { groups } = useSelector(state => state.settings)
   const { register, handleSubmit, errors, watch } = useForm({ defaultValues: { from: timeFrom } })
-  const onSubmit = data => dispatch(actions.addTask(data))
+  const onSubmit = data => {
+    dispatch(actions.addTask({ ...data, dateString, group: selectedGroup }))
+    onModalClose()
+  }
   const watchedFields = watch()
 
   useEffect(() => {

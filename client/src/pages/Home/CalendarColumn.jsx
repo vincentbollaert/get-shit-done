@@ -128,7 +128,7 @@ const CalendarColumn = ({ dateString, isCurrentDay, tasksFiltered }) => {
             </Fragment>
           )
         })}
-        <PlaceholderTask hourSlotsRef={hourSlotsRef} y={y} />
+        <PlaceholderTask dateString={dateString} hourSlotsRef={hourSlotsRef} y={y} />
       
         {isEditModalOpen && (
           <Modal
