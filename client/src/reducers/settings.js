@@ -114,10 +114,42 @@ const initialState = {
     },
     {
       id: nanoid(),
+      name: 'improvement',
+      color: {
+        name: 'columbia_blue',
+        value: 'rgb(215, 241, 255)',
+      },
+    },
+    {
+      id: nanoid(),
+      name: 'leasure',
+      color: {
+        name: 'beau_blue',
+        value: 'rgb(193, 206, 212)',
+      },
+    },
+    {
+      id: nanoid(),
+      name: 'productivity break',
+      color: {
+        name: 'aero_blue_2',
+        value: 'rgb(202, 248, 236)',
+      },
+    },
+    {
+      id: nanoid(),
       name: 'health',
       color: {
         name: 'honeydrew',
         value: 'rgb(242, 255, 230)',
+      },
+    },
+    {
+      id: nanoid(),
+      name: 'laze',
+      color: {
+        name: 'light_cyan',
+        value: 'rgb(202, 247, 255)',
       },
     },
   ]
