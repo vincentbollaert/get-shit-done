@@ -3,8 +3,11 @@ import styled from 'styled-components'
 
 import { WHITE, SIZE_SM, CHARCOAL, ISABELLINE, STYLE_ELLIPSIS } from '../../styles'
 import CurrentTime from './CurrentTime'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import PlaceholderTask from './PlaceholderTask'
+import { actions } from '../../reducers/calendar'
+import Modal from '../../components/Modal/component'
+import EditCalendarTask from './EditCalendarTask'
 
 const CN_HOUR_SLOTS = 'hour-slots'
 
@@ -72,12 +75,14 @@ const Cell = styled.div`
   ${STYLE_ELLIPSIS};
 `
 
-const CalendarColumn = ({ isCurrentDay, tasksFiltered }) => {
-  const { taskBeingPrepared } = useSelector(state => state.calendar)
-  const [y, setY] = useState(0)
-  const hourSlotsRef = useRef(null)
+const CalendarColumn = ({ dateString, isCurrentDay, tasksFiltered }) => {
+  const { hoursAxis, taskBeingEdited, taskBeingPrepared } = useSelector(state => state.calendar)
   const { colors } = useSelector(state => state.settings)
-  const { hoursAxis } = useSelector(state => state.calendar)
+  const dispatch = useDispatch()
+
+  const [y, setY] = useState(0)
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+  const hourSlotsRef = useRef(null)
 
   function updatePlaceholderTask(event) {
     if (taskBeingPrepared !== undefined) return
@@ -87,6 +92,12 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered }) => {
     const nearest25 = Math.floor(placeholderY / HALF_HOUR_PX) * HALF_HOUR_PX
     const isNewNearest = nearest25 !== y
     if (isNewNearest) setY(nearest25)
+  }
+
+  function onEditTask(id) {
+    console.log('edit task', id)
+    setIsEditModalOpen(true)
+    dispatch(actions.editTask({ id, dateString }))
   }
 
   return (
@@ -107,6 +118,7 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered }) => {
                   accentColor={colors[color]}
                   textColor={textColor}
                   isSmall={hoursAxis.length > 16 && heightInFlex <= 0.25}
+                  onClick={() => onEditTask(id)}
                 >
                   {name}
                 </Cell>
@@ -116,6 +128,16 @@ const CalendarColumn = ({ isCurrentDay, tasksFiltered }) => {
           )
         })}
         <PlaceholderTask hourSlotsRef={hourSlotsRef} y={y} />
+      
+        {isEditModalOpen && (
+          <Modal
+            title="task details"
+            width={17}
+            onOverlayToggle={() => setIsEditModalOpen(false)}
+          >
+            <EditCalendarTask taskBeingEdited={taskBeingEdited} />
+          </Modal>
+        )}
       </HourSlots>
     </Wrap>
   )

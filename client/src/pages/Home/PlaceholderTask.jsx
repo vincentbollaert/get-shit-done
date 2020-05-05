@@ -58,7 +58,6 @@ const PlaceholderTask = ({ hourSlotsRef, y }) => {
       
       {isModalOpen && (
         <Modal
-          timeFrom={timeFrom}
           title="task details"
           width={17}
           onOverlayToggle={onModalClose}

@@ -26,7 +26,7 @@ const Calendar = ({ scale: { x, y } }) => {
         const day = format(date, 'd')
         const isCurrentDay = isToday(date)
         const tasks = allTasksByDay.find(x => x.dateString === dateString).tasks
-        const tasksFiltered = tasks.map(({ id, time, name, color, textColor }, taskI) => {
+        const tasksFiltered = tasks.map(({ id, time, ...rest }, taskI) => {
           const from = time[0]
           const to = time[1]
           const isFirstTask = taskI === 0
@@ -42,11 +42,9 @@ const Calendar = ({ scale: { x, y } }) => {
           return {
             id,
             heightInFlex,
-            name,
             gapBefore,
             gapAfter,
-            color,
-            textColor,
+            ...rest,
           }
         })
 
