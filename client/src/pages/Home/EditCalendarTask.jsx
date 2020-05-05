@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from 'react'
+import React, { useState, memo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
@@ -9,28 +9,32 @@ import { actions } from '../../reducers/calendar'
 
 const Form = styled.form``
 
-function AddNewCalendarTask({ dateString, timeFrom, onModalClose }) {
+function AddNewCalendarTask({ dateString, taskBeingEdited }) {
   const dispatch = useDispatch()
-  const [selectedGroup, setSelectedGroup] = useState()
+  const [selectedGroup, setSelectedGroup] = useState(taskBeingEdited.group)
   const { groups } = useSelector(state => state.settings)
-  const { register, handleSubmit, errors, watch } = useForm({ defaultValues: { from: timeFrom } })
-  const onSubmit = data => {
-    dispatch(actions.addTask({ ...data, dateString, group: selectedGroup }))
-    onModalClose()
-  }
-  const watchedFields = watch()
-
-  useEffect(() => {
-    dispatch(actions.prepareTask({
-      ...watchedFields,
-      group: selectedGroup,
-    }))
-  }, [watchedFields, selectedGroup])
+  const { id, time, name, group } = taskBeingEdited
+  const onSubmit = data => dispatch(actions.saveTask({
+    id,
+    group: selectedGroup,
+    dateString,
+    ...data,
+  }))
+  
+  const { register, handleSubmit, errors } = useForm({
+    defaultValues: {
+      from: time[0],
+      to: time[1],
+      name,
+      group,
+    }
+  })
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <TextField
         isInForm
+        defaultValue={name}
         theme='light'
         name="name"
         placeholder="name"
@@ -43,12 +47,13 @@ function AddNewCalendarTask({ dateString, timeFrom, onModalClose }) {
         label="select group"
         list={groups}
         listKey="name"
-        onSelect={group => setSelectedGroup(group)}
+        activeItem={groups.find(x => x.name === group)}
+        onSelect={group => setSelectedGroup(group.name)}
         inputRef={register({ required: true, maxLength: 80 })}
       />
       <TextField
         isInForm
-        defaultValue={timeFrom}
+        defaultValue={time[0]}
         theme='light'
         name="from"
         placeholder="time from"
@@ -57,6 +62,7 @@ function AddNewCalendarTask({ dateString, timeFrom, onModalClose }) {
       />
       <TextField
         isInForm
+        defaultValue={time[1]}
         theme='light'
         name="to"
         placeholder="time to"
@@ -69,7 +75,7 @@ function AddNewCalendarTask({ dateString, timeFrom, onModalClose }) {
         accentColor={selectedGroup?.group?.color.value}
         type="submit"
       >
-        Add new task
+        Save task
       </Button>
     </Form>
   )
