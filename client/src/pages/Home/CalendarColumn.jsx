@@ -2,6 +2,7 @@ import React, { Fragment, useState, useRef, memo } from 'react'
 import styled from 'styled-components'
 
 import { WHITE, SIZE_SM, CHARCOAL, ISABELLINE, STYLE_ELLIPSIS } from '../../styles'
+import { colorDarken } from '../../utils/colorDarken'
 import CurrentTime from './CurrentTime'
 import { useSelector, useDispatch } from 'react-redux'
 import PlaceholderTask from './PlaceholderTask'
@@ -67,17 +68,17 @@ const Cell = styled.div`
   display: block;
   padding: 0 ${SIZE_SM};
   line-height: 1.5;
-  color: ${p => p.textColor};
+  color: ${p => p.accentColor ? colorDarken(p.accentColor, -80) : 'red'};
   ${p => p.isSmall && `
     line-height: 0.8;
     font-size: 11px;
-  `}
+  `};
   ${STYLE_ELLIPSIS};
 `
 
 const CalendarColumn = ({ dateString, isCurrentDay, tasksFiltered }) => {
   const { hoursAxis, taskBeingEdited, taskBeingPrepared } = useSelector(state => state.calendar)
-  const { colors } = useSelector(state => state.settings)
+  const { groups } = useSelector(state => state.settings)
   const dispatch = useDispatch()
 
   const [y, setY] = useState(0)
@@ -108,15 +109,15 @@ const CalendarColumn = ({ dateString, isCurrentDay, tasksFiltered }) => {
         onMouseMove={updatePlaceholderTask}
         className={CN_HOUR_SLOTS}
       >
-        {tasksFiltered.map(({ id, heightInFlex, name, gapBefore, gapAfter, color, textColor }) => {
+        {tasksFiltered.map(({ id, heightInFlex, name, group, gapBefore, gapAfter, }) => {
+          const { color: { value } } = groups.find(x => x.name === group)
           return (
             <Fragment key={id}>
               {gapBefore > 0 && <Cell isGap flex={gapBefore} />}
               {heightInFlex > 0 && (
                 <Cell
                   flex={heightInFlex}
-                  accentColor={colors[color]}
-                  textColor={textColor}
+                  accentColor={value}
                   isSmall={hoursAxis.length > 16 && heightInFlex <= 0.25}
                   onClick={() => onEditTask(id)}
                 >
