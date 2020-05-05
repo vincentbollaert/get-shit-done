@@ -116,8 +116,8 @@ const initialState = {
       id: nanoid(),
       name: 'improvement',
       color: {
-        name: 'columbia_blue',
-        value: 'rgb(215, 241, 255)',
+        name: 'mimi_pink',
+        value: 'rgb(255, 212, 219)',
       },
     },
     {
@@ -140,8 +140,8 @@ const initialState = {
       id: nanoid(),
       name: 'health',
       color: {
-        name: 'honeydrew',
-        value: 'rgb(242, 255, 230)',
+        name: 'teagreen',
+        value: 'rgb(199, 229, 199)',
       },
     },
     {
