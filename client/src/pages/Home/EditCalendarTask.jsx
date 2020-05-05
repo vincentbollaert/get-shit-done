@@ -55,6 +55,7 @@ function AddNewCalendarTask({ taskBeingEdited }) {
         label="select group"
         list={groups}
         listKey="name"
+        activeItem={groups.find(x => x.name === group)}
         onSelect={group => setSelectedGroup(group)}
         inputRef={register({ required: true, maxLength: 80 })}
       />

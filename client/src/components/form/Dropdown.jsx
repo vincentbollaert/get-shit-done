@@ -45,9 +45,9 @@ const After = styled.div`
   position: absolute;
   right: 0;
 `
-const Dropdown = ({ theme, isInForm, label, name, list, listKey, onSelect, inputRef }) => {
+const Dropdown = ({ theme, isInForm, activeItem = {}, label, name, list, listKey, onSelect, inputRef }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [activeItem, setActiveItem] = useState({})
+  const [activeItemUpdated, setActiveItem] = useState(activeItem)
 
   function onItemSelect(item) {
     setActiveItem(item)
@@ -62,15 +62,15 @@ const Dropdown = ({ theme, isInForm, label, name, list, listKey, onSelect, input
       onBlur={() => setIsOpen(false)}
     >
     {/* <Wrap theme={theme} isInForm={isInForm}> */}
-      <Header color={activeItem.color?.value} onClick={() => setIsOpen(!isOpen)}>
+      <Header color={activeItemUpdated.color?.value} onClick={() => setIsOpen(!isOpen)}>
         <Placeholder
           theme={theme}
-          hasValue={activeItem.id !== undefined && activeItem.id !== ''}
+          hasValue={activeItemUpdated.id !== undefined && activeItemUpdated.id !== ''}
         >
           {label}
         </Placeholder>
-        <Input as="div">{activeItem[listKey]}</Input>
-        {name && <InputHidden name={name} type="text" ref={inputRef} value={activeItem[listKey] || ''} />}
+        <Input as="div">{activeItemUpdated[listKey]}</Input>
+        {name && <InputHidden name={name} type="text" ref={inputRef} value={activeItemUpdated[listKey] || ''} />}
         <SvgStyled them="light" svg={chevronDownSvg} />
       </Header>
       <List isOpen={isOpen}>
@@ -79,8 +79,8 @@ const Dropdown = ({ theme, isInForm, label, name, list, listKey, onSelect, input
 
           return (
             <Item
-              isActive={id === activeItem.id}
-              color={activeItem.color?.value}
+              isActive={id === activeItemUpdated.id}
+              color={activeItemUpdated.color?.value}
               onClick={() => onItemSelect(item)}
               key={id}
             >
