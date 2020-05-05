@@ -136,7 +136,7 @@ const CalendarColumn = ({ dateString, isCurrentDay, tasksFiltered }) => {
             width={17}
             onOverlayToggle={() => setIsEditModalOpen(false)}
           >
-            <EditCalendarTask taskBeingEdited={taskBeingEdited} />
+            <EditCalendarTask dateString={dateString} taskBeingEdited={taskBeingEdited} />
           </Modal>
         )}
       </HourSlots>

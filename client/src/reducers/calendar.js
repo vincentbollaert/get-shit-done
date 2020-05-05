@@ -261,20 +261,20 @@ const initialState = {
         },
         {
           id: nanoid(),
-          time: [12, 15],
+          time: [12, 13],
           name: 'dev: get shit done',
           group: 'improvement',
         },
         {
           id: nanoid(),
-          time: [17, 18.5],
-          name: 'relax',
-          group: 'productivity break',
+          time: [13, 14],
+          name: 'lunch',
+          group: 'essentials',
         },
         {
           id: nanoid(),
-          time: [18.5, 20],
-          name: 'watch upskill fp',
+          time: [14, 20],
+          name: 'dev: get shit done',
           group: 'improvement',
         },
         {
@@ -312,7 +312,6 @@ export const { reducer, actions } = createSlice({
         time: [from, 16],
         name,
         group: group?.name,
-        color: group?.color.name,
       }
       state.taskBeingPrepared = taskBeingPrepared
     },
@@ -324,17 +323,36 @@ export const { reducer, actions } = createSlice({
         .filter(x => x.dateString === dateString)[0].tasks
         .find(x => x.id === id)
     },
+    saveTask(state, { payload: { id, name, dateString, group, from, to }}) {
+      return {
+        ...state,
+        allTasksByDay: state.allTasksByDay.map((day) => {
+          if (day.dateString !== dateString) return day
+          return {
+            ...day,
+            tasks: day.tasks.map((task) => {
+              if (task.id !== id) return task
+              return {
+                ...task,
+                name,
+                group,
+                time: [Number(from), Number(to)]
+              }
+            })
+          }
+        }),
+      }
+    },
     addTask(state, { payload: { name, dateString, group, from, to }}) {
-      const { color } = group
-      const taskToUpdate = state.allTasksByDay.find(tasksByDay => tasksByDay.dateString === dateString)
+      console.log(name, dateString, group, from, to)
+      const dayToUpdate = state.allTasksByDay.find(tasksByDay => tasksByDay.dateString === dateString)
 
       state.taskBeingEdited = {}
-      taskToUpdate.tasks.push({
+      dayToUpdate.tasks.push({
         id: nanoid(),
         time: [from, to],
         name,
         group: group.name,
-        color: color.name,
       })
     }
   }
