@@ -10,6 +10,13 @@ export const FONT_SIZE__LG = '1.6rem'
 
 
 // units
+export const SIZE = {
+  xsm: '0.4rem',
+  sm: '0.8rem',
+  md: '1.2rem',
+  lg: '1.6rem',
+  xlg: '2.4rem',
+}
 export const SIZE_XSM_UNIT = 0.4
 export const SIZE_SM_UNIT = 0.8
 export const SIZE_MD_UNIT = 1.2

@@ -1,6 +1,6 @@
 // https://gist.github.com/vincentbollaert/e90def9b351d8d97c90ef7cfd887685e
 
-import { WHITE_SMOKE, SONIC_SILVER } from './variables'
+import { SIZE, WHITE_SMOKE, SONIC_SILVER } from './variables'
 
 export default `
   html {
@@ -10,6 +10,13 @@ export default `
     font-family: 'Barlow Semi Condensed', sans-serif;
     box-sizing: border-box;
     font-size: 62.5%;
+
+    --size-xsm: ${SIZE.xsm};
+    --size-sm: ${SIZE.sm};
+    --size-md: ${SIZE.md};
+    --size-lg: ${SIZE.lg};
+    --size-xlg: ${SIZE.xlg};
+
 
     --capri: #3dc3ff;
     --sky-blue: #78E0FF;
