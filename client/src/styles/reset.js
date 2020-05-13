@@ -10,6 +10,43 @@ export default `
     font-family: 'Barlow Semi Condensed', sans-serif;
     box-sizing: border-box;
     font-size: 62.5%;
+
+    --capri: #3dc3ff;
+    --sky-blue: #78E0FF;
+    --light-sea-green: #21baa6;
+    --amazonite: #03d2b6;
+    --steel-blue: #607D8B;
+
+    --pastel-green: #7bd37c;
+    --sunset-orange: #ff5d5d;
+    --red-orange: #ff4d4d;
+    --very-light-tangelo: #ffae74;
+
+    --white: #fff;
+    --white-smoke: #f5f5f5;
+    --snow: #fafafa;
+    --isabelline: #eee;
+    --lavender: #e2e7f9;
+    --gainsboro: #dedede;
+    --pastel-gray: #ccc;
+    --gray-x11: #bbb;
+    --quick-silver: #a2a2a2;
+    --rhythm: #71788f;
+    --sonic-silver: #787878;
+    --sonic-silver-transparency: #f5f5f573;
+    --roman-silver: #838899;
+    --cool-gray: #8f99b9;
+    --granite-gray: #666;
+    --arsenic: #444;
+    --onyx: #393939;
+    --independence: #4f5466;
+    --jet: #333;
+    --charcoal: #3d4150;
+    --charleston-green: #282828;
+    --charleston-green-2: #2d2d2d;
+    --raisin-black: #222121;
+    --eerie-black: #1e1e1e;
+    --dark-transparency: rgba(0, 0, 0, 0.4);
   }
   *,
   *::after,
