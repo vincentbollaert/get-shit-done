@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { actions as todoActions } from '../../reducers/todos'
 import { actions as toastActions } from '../../components/Toast/reducer'
-import { SIZE_XSM, COOL_GRAY, RHYTHM } from '../../styles'
 import binSvg from '../../assets/svg/bin.svg'
 import Svg from '../../components/Svg/component'
 
@@ -18,19 +17,19 @@ const Todo = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  padding: ${SIZE_XSM} 1.6rem ${SIZE_XSM} 0;
+  padding: var(--size-xsm) var(--size-lg) var(--size-xsm) 0;
   cursor: pointer;
   line-height: 1.5;
 
   &:hover {
-    color: ${COOL_GRAY};
+    color: var(--cool-gray);
   };
 
   ${p => p.isDone && `
-    color: ${RHYTHM};
+    color: var(--rhythm);
 
     &:hover {
-      color: ${RHYTHM};
+      color: var(--rhythm);
     };
   `};
 `

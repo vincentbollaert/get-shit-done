@@ -1,7 +1,7 @@
 import React, { Suspense, useState, useRef } from 'react'
 
 import styled from 'styled-components'
-import { WHITE, JET, STYLE_TRANSITION, CHARCOAL, STYLE_SIDEBAR_WIDTH_UNIT } from '../../styles'
+import { STYLE_TRANSITION, STYLE_SIDEBAR_WIDTH_UNIT } from '../../styles'
 import Toast from '../../components/Toast/component'
 
 const Todos = React.lazy(() => import('./Todos'))
@@ -16,7 +16,7 @@ const PageWrap = styled.div`
   display: flex;
   overflow: hidden;
   position: relative;
-  background-color: ${CHARCOAL};
+  background-color: var(--charcoal);
 `
 const Wrap = styled.div`
   display: flex;
@@ -25,7 +25,7 @@ const Wrap = styled.div`
   padding-top: 24px;
   padding-left: 24px;
   width: 100%;
-  background-color: ${JET};
+  background-color: var(--jet);
   will-change: padding;
   transform-origin: left;
   transition: transform ${STYLE_TRANSITION};
@@ -39,7 +39,7 @@ const CalendarWrap = styled.div`
   flex-grow: 1;
   width: 100%;
   height: 100%;
-  background-color: ${WHITE};
+  background-color: var(--white);
 `
 
 const Home = () => {

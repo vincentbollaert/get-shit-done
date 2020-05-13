@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useRef, memo } from 'react'
 import styled from 'styled-components'
 
-import { WHITE, SIZE_SM, CHARCOAL, ISABELLINE, STYLE_ELLIPSIS } from '../../styles'
+import { STYLE_ELLIPSIS } from '../../styles'
 import { colorDarken } from '../../utils/colorDarken'
 import CurrentTime from './CurrentTime'
 import { useSelector, useDispatch } from 'react-redux'
@@ -17,7 +17,7 @@ const Wrap = styled.div`
   flex-direction: column;
   flex-grow: 1;
   position: relative;
-  border-left: 1px solid ${ISABELLINE};
+  border-left: 1px solid var(--isabelline);
   width: 0;
 
   &:first-child {
@@ -30,10 +30,10 @@ const Wrap = styled.div`
 
   ${p => p.isCurrentDay && `
     flex-grow: 2;
-    // background-color: ${CHARCOAL};
+    // background-color: var(--charcoal);
 
     // .${CN_HOUR_SLOTS} * {
-    //   box-shadow: inset 0px 1px 0 0px ${CHARCOAL}, inset 0px -1px 0 0px ${CHARCOAL} !important;
+    //   box-shadow: inset 0px 1px 0 0px var(--charcoal), inset 0px -1px 0 0px var(--charcoal) !important;
     // };
   `};
 `
@@ -63,10 +63,10 @@ const Cell = styled.div`
   flex-basis: 0;
   align-items: center;
   border-radius: 2px;
-  box-shadow: inset 4px 1px 0 0 ${WHITE}, inset -4px -1px 0 0 ${WHITE};
+  box-shadow: inset 4px 1px 0 0 var(--white), inset -4px -1px 0 0 var(--white);
   background-color: ${p => p.accentColor};
   display: block;
-  padding: 0 ${SIZE_SM};
+  padding: 0 var(--size-sm);
   line-height: 1.5;
   color: ${p => p.accentColor ? colorDarken(p.accentColor, -80) : 'red'};
   ${p => p.isSmall && `

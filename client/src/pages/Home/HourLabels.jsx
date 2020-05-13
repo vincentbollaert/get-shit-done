@@ -5,7 +5,7 @@ import UseFilterRange from '../../hooks/useFilterRange'
 import UseHighlightFilteredRange from '../../hooks/useHighlightFIlteredRange'
 import { useSelector } from 'react-redux'
 import { actions } from '../../reducers/calendar'
-import { JET, ARSENIC, PASTEL_GRAY, STYLE_TRANSITION } from '../../styles'
+import { STYLE_TRANSITION } from '../../styles'
 
 const Wrap = styled.div`
   z-index: 2;
@@ -19,7 +19,7 @@ const Wrap = styled.div`
   padding-bottom: 12px;
   padding-left: 8px;
   width: 24px;
-  background-color: ${JET};
+  background-color: var(--jet);
   transition: width ${STYLE_TRANSITION}, padding ${STYLE_TRANSITION};
   
   ${p => p.isBeingFiltered && `
@@ -38,19 +38,19 @@ const HourLabel = styled.div`
   justify-content: center;
   align-items: center;
   flex-grow: 1;
-  border-right: 4px solid ${JET};
+  border-right: 4px solid var(--jet);
   text-align: center;
   font-size: 10px;
-  color: ${PASTEL_GRAY};
+  color: var(--pastel-gray);
 
   &:hover {
-    background-color: ${p => p.isFiltered ? 'inherit' : ARSENIC};
+    background-color: ${p => p.isFiltered ? 'inherit' : 'var(--arsenic)'};
     cursor: ${p => p.isFiltered ? 'inherit' : 'pointer'};
   };
 
   ${p => p.isActive && `
-    background-color: ${ARSENIC};
-    box-shadow: inset 4px 0 0 0px ${JET}, inset -4px 0 0 0px ${JET}
+    background-color: var(--arsenic);
+    box-shadow: inset 4px 0 0 0px var(--jet), inset -4px 0 0 0px var(--jet)
   `};
 
   &::before {
