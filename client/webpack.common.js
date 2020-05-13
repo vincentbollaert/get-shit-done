@@ -54,7 +54,6 @@ const config = {
   },
 
   plugins: [
-    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
     new webpack.ContextReplacementPlugin(
       /date\-fns[\/\\]/,
       new RegExp(`[/\\\\\](${supportedLocales.join('|')})[/\\\\\]`)
