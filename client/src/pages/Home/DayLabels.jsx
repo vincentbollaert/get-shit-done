@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import isToday from 'date-fns/isToday'
 import format from 'date-fns/format'
 
-import { ISABELLINE, WHITE_SMOKE, JET, ARSENIC, PASTEL_GRAY, STYLE_TRANSITION, WHITE } from '../../styles'
+import { STYLE_TRANSITION } from '../../styles'
 import UseFilterRange from '../../hooks/useFilterRange'
 import UseHighlightFilteredRange from '../../hooks/useHighlightFIlteredRange'
 import { useSelector } from 'react-redux'
@@ -19,8 +19,8 @@ const Wrap = styled.div`
   display: flex;
   height: 24px;
   font-size: 10px;
-  color: ${PASTEL_GRAY};
-  background: ${JET};
+  color: var(--pastel-gray);
+  background: var(--jet);
   transition: height ${STYLE_TRANSITION}, padding ${STYLE_TRANSITION};
   
   ${p => p.isBeingFiltered && `
@@ -39,7 +39,7 @@ const DayLabel = styled.div`
   flex-basis: 0;
   justify-content: center;
   align-items: center;
-  border-bottom: 4px solid ${JET};
+  border-bottom: 4px solid var(--jet);
   border-left: 1px solid transparent;
   padding-top: 8px;
   text-align: center;
@@ -90,12 +90,12 @@ const DayLabel = styled.div`
 
   ${p => p.isCurrentDay && `
     flex-grow: 2;
-    background-color: ${WHITE};
-    color: ${JET};
-    ${!p.isActive && `border-bottom: 4px solid ${WHITE}`};
+    background-color: var(--white);
+    color: var(--jet);
+    ${!p.isActive && 'border-bottom: 4px solid var(--white)'};
 
     &:hover {
-      border-bottom: 4px solid ${JET};
+      border-bottom: 4px solid var(--jet);
     };
 
     & + ${DayLabel} {
@@ -106,8 +106,8 @@ const DayLabel = styled.div`
   `};
 
   &:hover {
-    color: ${ISABELLINE};
-    background-color: ${ARSENIC};
+    color: var(--isabelline);
+    background-color: var(--arsenic);
 
     ${p => p.isFiltered  && `
       background-color: inherit;
@@ -117,9 +117,9 @@ const DayLabel = styled.div`
   };
 
   ${p => p.isActive && `
-    background-color: ${ARSENIC};
-    box-shadow: inset 0px 4px 0 0px ${JET}, inset 0px -4px 0 0px ${JET};
-    color: ${ISABELLINE};
+    background-color: var(--arsenic);
+    box-shadow: inset 0px 4px 0 0px var(--jet), inset 0px -4px 0 0px var(--jet);
+    color: var(--isabelline);
   `};
 
   &::before {
