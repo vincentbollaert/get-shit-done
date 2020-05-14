@@ -1,8 +1,7 @@
 import React, { Fragment, useState, useRef, memo } from 'react'
 import styled from 'styled-components'
 
-import { STYLE_ELLIPSIS } from '../../styles'
-import { rgbAdjust } from '../../styles'
+import { rgbAdjust, ellipsis } from '../../styles'
 import CurrentTime from './CurrentTime'
 import { useSelector, useDispatch } from 'react-redux'
 import PlaceholderTask from './PlaceholderTask'
@@ -54,6 +53,7 @@ const HourSlots = styled.div`
   };
 `
 const Cell = styled.div`
+  ${ellipsis()};
   z-index: ${p => p.isGap ? 0 : 1};
   position: relative;
   display: flex;
@@ -69,11 +69,11 @@ const Cell = styled.div`
   padding: 0 var(--size-sm);
   line-height: 1.5;
   color: ${p => p.accentColor ? rgbAdjust(p.accentColor, -80) : 'red'};
+
   ${p => p.isSmall && `
     line-height: 0.8;
     font-size: 11px;
   `};
-  ${STYLE_ELLIPSIS};
 `
 
 const CalendarColumn = ({ dateString, isCurrentDay, tasksFiltered }) => {

@@ -7,27 +7,29 @@ export function rgbAdjust(color, amount) {
   return `rgb(${colorValuesUpdated})`
 }
 
-export function abs([top, right, bottom, left]) {
-  return `
-    position: absolute;
-    top: ${top};
-    right: ${right};
-    bottom: ${bottom};
-    left: ${left};
-  `
-}
+export const abs = ([top, right, bottom, left]) => `
+  position: absolute;
+  top: ${top};
+  right: ${right};
+  bottom: ${bottom};
+  left: ${left};
+`
 
-export function flex({ grow, shrink, basis, isCenter }) {
-  return `
-    display: flex;
-    flex-grow: ${grow};
-    flex-shrink: ${shrink};
-    flex-basis: ${basis};
+export const flex = ({ grow, shrink, basis, isCenter }) => `
+  display: flex;
+  flex-grow: ${grow};
+  flex-shrink: ${shrink};
+  flex-basis: ${basis};
 
-    ${isCenter && `
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    `};
-  `
-}
+  ${isCenter && `
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  `};
+`
+
+export const ellipsis = () => `
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`
