@@ -1,7 +1,6 @@
 import React from 'react'
 import { string, number, func, bool } from 'prop-types'
 import styled from 'styled-components'
-import { SONIC_SILVER, SUNSET_ORANGE, GAINSBORO, JET } from '../../styles'
 
 export const CN_SVG = 'svg'
 
@@ -10,10 +9,10 @@ const Wrap = styled.span`
   flex-shrink: 0;
   width: ${props => props.size}rem;
   height: ${props => props.size}rem;
-  fill: ${p => p.theme === 'light' ? SONIC_SILVER : 'red'};
+  fill: ${p => p.theme === 'light' ? 'var(--sonic-silver)' : 'red'};
 
   &:hover {
-    fill: ${p => p.isDanger ? SUNSET_ORANGE : p.theme === 'light' ? GAINSBORO : JET};
+    fill: ${p => p.isDanger ? 'var(--sunset-orange)' : p.theme === 'light' ? 'var(--gainsboro)' : 'var(--jet)'};
   };
 
   svg {

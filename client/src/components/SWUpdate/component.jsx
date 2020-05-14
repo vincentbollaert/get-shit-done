@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { SIZE_MD, SIZE_XLG, WHITE, CHARCOAL, SIZE_LG, SIZE_SM } from '../../styles'
 
 const Wrap = styled.div`
   z-index: 1;
@@ -12,13 +11,13 @@ const Wrap = styled.div`
   cursor: pointer;
 `
 const InnerWrap = styled.div`
-  padding: ${SIZE_XLG};
+  padding: var(--size-xlg);
   padding-right: 10rem;
   width: 100%;
   width: 26rem;
   line-height: 1.4;
-  background: ${CHARCOAL};
-  color: ${WHITE};
+  background: var(--charcoal);
+  color: var(--white);
   border-radius: 2px;
   transition: opacity 0.2s ease-out;
   box-shadow: 0px -3px 6px -1px #ffc0c06b;
@@ -34,12 +33,12 @@ const Message = styled.div`
 `
 const Undo = styled.div`
   position: absolute;
-  right: ${SIZE_LG};
-  padding: ${SIZE_SM} ${SIZE_MD};
+  right: var(--size-lg);
+  padding: var(--size-sm) var(--size-md);
   font-weight: bold;
-  color: ${CHARCOAL};
+  color: var(--charcoal);
   text-transform: uppercase;
-  background-color: ${WHITE};
+  background-color: var(--white);
   font-size: 10px;
   border-radius: 21px;
 `

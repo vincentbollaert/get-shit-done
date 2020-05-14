@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { CHARCOAL } from '../../styles'
 
 const Wrap = styled.div`
   position: relative;
@@ -15,15 +14,15 @@ const Toggle = styled.div`
 const Colors = styled.div`
   display: ${p => p.isOpen ? 'flex' : 'none'};
   width: 208px;
-  background-color: ${CHARCOAL};
+  background-color: var(--charcoal);
   position: absolute;
   top: 0;
   left: 100%;
   flex-wrap: wrap;
   padding: 4px;
   margin-left: 28px;
-  background: ${CHARCOAL};
-  box-shadow: 3px 3px 8px -5px ${CHARCOAL};
+  background: var(--charcoal);
+  box-shadow: 3px 3px 8px -5px var(--charcoal);
 `
 const Color = styled.div`
   width: 40px;
@@ -32,7 +31,7 @@ const Color = styled.div`
 
   &:hover {
     z-index: 1;
-    box-shadow: 0 0 0 1px ${CHARCOAL};
+    box-shadow: 0 0 0 1px var(--charcoal);
   };
 `
 

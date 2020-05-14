@@ -1,6 +1,14 @@
 // https://gist.github.com/vincentbollaert/e90def9b351d8d97c90ef7cfd887685e
 
 // font-size
+export const FONT_SIZE = {
+  xxsm: '0.9rem',
+  xsm: '1rem',
+  sm: '1.1rem',
+  md: '1.2rem',
+  lg: '1.3rem',
+  xlg: '1.6rem',
+}
 export const FONT_SIZE___SM = '0.9rem'
 export const FONT_SIZE__SM = '1rem'
 export const FONT_SIZE_SM = '1.1rem'

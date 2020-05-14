@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import chevronDownSvg from '../../assets/svg/chevron-down.svg'
 import Placeholder from './Placeholder/component'
 import { SvgStyled, Input, Wrap } from './shared'
-import { WHITE, ISABELLINE } from '../../styles'
 
 const Header = styled.div`
   width: 100%;
@@ -30,11 +29,11 @@ const Item = styled.div`
   display: flex;
   align-items: center;
   padding: 4px;
-  color: ${p => p.isActive ? p.color : ISABELLINE};
+  color: ${p => p.isActive ? p.color : 'var(--isabelline)'};
   cursor: pointer;
 
   &:hover {
-    color: ${p => p.isActive ? p.color : WHITE};
+    color: ${p => p.isActive ? p.color : 'var(--white)'};
   };
 `
 const After = styled.div`
