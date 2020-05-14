@@ -681,9 +681,27 @@ const initialState = {
         },
         {
           id: nanoid(),
-          time: [8.5, 10],
+          time: [8.5, 9],
           name: 'dev: get shit done',
+          group: 'improvement',
+        },
+        {
+          id: nanoid(),
+          time: [9.5, 10.5],
+          name: 'morning routine',
           group: 'essentials',
+        },
+        {
+          id: nanoid(),
+          time: [10.5, 11.5],
+          name: 'pool',
+          group: 'leasure',
+        },
+        {
+          id: nanoid(),
+          time: [12, 15],
+          name: 'dev: get shit done',
+          group: 'improvement',
         },
       ]
     }
