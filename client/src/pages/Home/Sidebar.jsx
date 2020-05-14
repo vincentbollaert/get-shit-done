@@ -40,13 +40,13 @@ const Tasks = styled.div`
 
   &:hover {
     svg {
-      fill: var(--isabellene);
+      fill: var(--isabelline);
     };
   };
 
   ${p => p.isOpen && `
     svg {
-      fill: var(--isabellene);
+      fill: var(--isabelline);
     };
   `};
 `
@@ -57,7 +57,7 @@ const Toggle = styled(Svg)`
 
   ${p => p.isActive && `
     svg {
-      fill: var(--isabellene);
+      fill: var(--isabelline);
     };
   `};
 `
@@ -74,7 +74,7 @@ const Content = styled.div`
   flex-direction: column;
   padding: var(--size-xlg);
   width: ${STYLE_SIDEBAR_WIDTH_UNIT}rem;
-  color: var(--isabellene);
+  color: var(--isabelline);
   background-color: var(--charcoal);
   box-shadow: inset -1px 0 0 0px var(--independence); 
   transform: translateX(100%);

@@ -44,7 +44,7 @@ const Header = styled.header`
   padding: var(--size-xlg);
   padding-bottom: 0;
   font-size: var(--font-size-lg);
-  color: var(--isabeline);
+  color: var(--isabelline);
   text-transform: uppercase;
   white-space: nowrap;
   user-select: none;
@@ -70,7 +70,7 @@ const Icon = styled(Svg)`
   visibility: hidden;
 
   &:hover {
-    fill: var(--isabeline);
+    fill: var(--isabelline);
   };
 
   ${ModalWrap}:hover & {
