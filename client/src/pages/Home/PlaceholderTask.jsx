@@ -5,7 +5,7 @@ import { actions } from '../../reducers/calendar'
 import { STYLE_ELLIPSIS } from '../../styles'
 import Modal from '../../components/Modal/component'
 import AddNewCalendarTask from './AddNewCalendarTask'
-import { colorDarken } from '../../utils/colorDarken'
+import { rgbAdjust } from '../../styles'
 
 const PlaceholderTaskWrap = styled.div`
   display: ${p => p.isBeingPrepared ? 'block' : 'none'};
@@ -15,7 +15,7 @@ const PlaceholderTaskWrap = styled.div`
   left: 0;
   padding: 0 var(--size-sm);
   line-height: 1.5;
-  color: ${p => p.accentColor ? colorDarken(p.accentColor, -80) : 'red'};
+  color: ${p => p.accentColor ? rgbAdjust(p.accentColor, -80) : 'red'};
   background-color: ${p => p.accentColor || '#eee'};
   box-shadow: inset 4px 1px 0 0px var(--white), inset -4px -1px 0 0px var(--white), 0px 1px 0 0px var(--white), 0px -1px 0 0px var(--white);
   border-radius: 2px;

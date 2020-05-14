@@ -8,13 +8,11 @@ import UseHighlightFilteredRange from '../../hooks/useHighlightFIlteredRange'
 import { useSelector } from 'react-redux'
 import { actions } from '../../reducers/calendar'
 import { MONTH_DAYS } from '../../constants'
+import { abs, flex } from '../../styles'
 
 const Wrap = styled.div`
-  position: absolute;
+  ${abs([0, 0, , '2.4rem'])};
   z-index: 2;
-  top: 0;
-  right: 0;
-  left: 24px;
   display: flex;
   height: 24px;
   font-size: 10px;
@@ -31,17 +29,11 @@ const Wrap = styled.div`
   };
 `
 const DayLabel = styled.div`
+  ${flex({ grow: 1, shrink: 0, basis: 0, isCenter: true })};
   position: relative;
-  flex-grow: 1;
-  display: flex;
-  flex-shrink: 0;
-  flex-basis: 0;
-  justify-content: center;
-  align-items: center;
   border-bottom: 4px solid var(--jet);
   border-left: 1px solid transparent;
   padding-top: 8px;
-  text-align: center;
   cursor: pointer;
   transition: padding var(--transition);
 

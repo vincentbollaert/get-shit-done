@@ -2,7 +2,7 @@ import React, { Fragment, useState, useRef, memo } from 'react'
 import styled from 'styled-components'
 
 import { STYLE_ELLIPSIS } from '../../styles'
-import { colorDarken } from '../../utils/colorDarken'
+import { rgbAdjust } from '../../styles'
 import CurrentTime from './CurrentTime'
 import { useSelector, useDispatch } from 'react-redux'
 import PlaceholderTask from './PlaceholderTask'
@@ -68,7 +68,7 @@ const Cell = styled.div`
   display: block;
   padding: 0 var(--size-sm);
   line-height: 1.5;
-  color: ${p => p.accentColor ? colorDarken(p.accentColor, -80) : 'red'};
+  color: ${p => p.accentColor ? rgbAdjust(p.accentColor, -80) : 'red'};
   ${p => p.isSmall && `
     line-height: 0.8;
     font-size: 11px;
