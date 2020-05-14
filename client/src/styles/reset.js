@@ -10,7 +10,6 @@ export default `
     font-family: 'Barlow Semi Condensed', sans-serif;
     box-sizing: border-box;
     font-size: 62.5%;
-
     
     --font-size-xxsm: ${FONT_SIZE.xxsm};
     --font-size-xsm: ${FONT_SIZE.xsm};
@@ -24,7 +23,6 @@ export default `
     --size-md: ${SIZE.md};
     --size-lg: ${SIZE.lg};
     --size-xlg: ${SIZE.xlg};
-
 
     --capri: #3dc3ff;
     --sky-blue: #78E0FF;
@@ -62,6 +60,8 @@ export default `
     --raisin-black: #222121;
     --eerie-black: #1e1e1e;
     --dark-transparency: rgba(0, 0, 0, 0.4);
+
+    --transition: 0.2s ease-out;
   }
   *,
   *::after,

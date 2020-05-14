@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import isToday from 'date-fns/isToday'
 import format from 'date-fns/format'
 
-import { STYLE_TRANSITION } from '../../styles'
 import UseFilterRange from '../../hooks/useFilterRange'
 import UseHighlightFilteredRange from '../../hooks/useHighlightFIlteredRange'
 import { useSelector } from 'react-redux'
@@ -21,7 +20,7 @@ const Wrap = styled.div`
   font-size: 10px;
   color: var(--pastel-gray);
   background: var(--jet);
-  transition: height ${STYLE_TRANSITION}, padding ${STYLE_TRANSITION};
+  transition: height var(--transition), padding var(--transition);
   
   ${p => p.isBeingFiltered && `
     height: 50px;
@@ -44,7 +43,7 @@ const DayLabel = styled.div`
   padding-top: 8px;
   text-align: center;
   cursor: pointer;
-  transition: padding ${STYLE_TRANSITION};
+  transition: padding var(--transition);
 
   &:last-child {
     &:after {

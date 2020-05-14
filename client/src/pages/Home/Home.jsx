@@ -1,7 +1,7 @@
 import React, { Suspense, useState, useRef } from 'react'
 
 import styled from 'styled-components'
-import { STYLE_TRANSITION, STYLE_SIDEBAR_WIDTH_UNIT } from '../../styles'
+import { STYLE_SIDEBAR_WIDTH_UNIT } from '../../styles'
 import Toast from '../../components/Toast/component'
 
 const Todos = React.lazy(() => import('./Todos'))
@@ -28,7 +28,7 @@ const Wrap = styled.div`
   background-color: var(--jet);
   will-change: padding;
   transform-origin: left;
-  transition: transform ${STYLE_TRANSITION};
+  transition: transform var(--transition);
   ${p => p.isOpen && `
     transform: scale(${p.scaleTest.x}, ${p.scaleTest.y});
   `};

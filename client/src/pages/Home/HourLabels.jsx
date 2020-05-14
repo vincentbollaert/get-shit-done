@@ -5,7 +5,6 @@ import UseFilterRange from '../../hooks/useFilterRange'
 import UseHighlightFilteredRange from '../../hooks/useHighlightFIlteredRange'
 import { useSelector } from 'react-redux'
 import { actions } from '../../reducers/calendar'
-import { STYLE_TRANSITION } from '../../styles'
 
 const Wrap = styled.div`
   z-index: 2;
@@ -20,7 +19,7 @@ const Wrap = styled.div`
   padding-left: 8px;
   width: 24px;
   background-color: var(--jet);
-  transition: width ${STYLE_TRANSITION}, padding ${STYLE_TRANSITION};
+  transition: width var(--transition), padding var(--transition);
   
   ${p => p.isBeingFiltered && `
     padding-left: 0;

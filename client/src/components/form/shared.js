@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { INDEPENDENCE, ISABELLINE, SUNSET_ORANGE, SIZE_XSM, SIZE_SM, SONIC_SILVER, GAINSBORO } from '../../styles'
+import { INDEPENDENCE, ISABELLINE, SUNSET_ORANGE, GAINSBORO } from '../../styles'
 import Svg, { CN_SVG } from '../Svg/component'
 
 export const STYLE_COLOR_LIGHT = ISABELLINE
@@ -24,7 +24,7 @@ export const Wrap = styled.div`
   outline: none;
 
   ${p => p.isInForm && `
-    margin-top: ${SIZE_SM};
+    margin-top: var(--size-sm);
 
     &:first-child {
       margin-top: 0;
@@ -35,7 +35,7 @@ export const Wrap = styled.div`
 export const Input = styled.input`
   display: flex;
   align-items: center;
-  padding-top: ${SIZE_SM};
+  padding-top: var(--size-sm);
   width: 100%;
   height: ${STYLE_HEIGHT};
   box-shadow: ${p => p.isError ? STYLE_UNDERLINE_ERROR : STYLE_UNDERLINE_LIGHT};
@@ -47,7 +47,7 @@ export const Input = styled.input`
       box-shadow: ${STYLE_UNDERLINE_HOVER_LIGHT};
 
       & ~ .${CN_SVG} {
-        fill: ${SONIC_SILVER};
+        fill: var(--sonic-silver);
       };
     `};
   };
@@ -55,7 +55,7 @@ export const Input = styled.input`
 
 export const SvgStyled = styled(Svg)`
   position: absolute;
-  right: ${SIZE_XSM};
+  right: var(--size-xsm);
   transform: translate(0, -50%);
   top: 50%;
   width: 1.2rem;
@@ -63,7 +63,7 @@ export const SvgStyled = styled(Svg)`
 
   ${Wrap}:hover & {
     svg {
-      fill: ${GAINSBORO};
+      fill: var(--gainsboro);
     };
   };
 `

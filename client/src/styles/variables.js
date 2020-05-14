@@ -9,13 +9,6 @@ export const FONT_SIZE = {
   lg: '1.3rem',
   xlg: '1.6rem',
 }
-export const FONT_SIZE___SM = '0.9rem'
-export const FONT_SIZE__SM = '1rem'
-export const FONT_SIZE_SM = '1.1rem'
-export const FONT_SIZE_MD = '1.2rem'
-export const FONT_SIZE_LG = '1.3rem'
-export const FONT_SIZE__LG = '1.6rem'
-
 
 // units
 export const SIZE = {
@@ -30,12 +23,6 @@ export const SIZE_SM_UNIT = 0.8
 export const SIZE_MD_UNIT = 1.2
 export const SIZE_LG_UNIT = 1.6
 export const SIZE_XLG_UNIT = 2.4
-
-export const SIZE_XSM = `${SIZE_XSM_UNIT}rem`
-export const SIZE_SM = `${SIZE_SM_UNIT}rem`
-export const SIZE_MD = `${SIZE_MD_UNIT}rem`
-export const SIZE_LG = `${SIZE_LG_UNIT}rem`
-export const SIZE_XLG = `${SIZE_XLG_UNIT}rem`
 
 
 // colors
@@ -76,9 +63,6 @@ export const RAISIN_BLACK = '#222121'
 export const EERIE_BLACK = '#1e1e1e'
 export const DARK_TRANSPARENT = 'rgba(0, 0, 0, 0.4)'
 
-
-// styles
-export const BOX_SHADOW_LIGHT = '0 2px 11px -7px #0000004f'
 
 // scrollbar
 export const SCROLLBARS_MIN_LIGHT = `

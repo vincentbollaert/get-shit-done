@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
-import { STYLE_TRANSITION } from '../../styles'
 import closeSvg from '../../assets/svg/close.svg'
 import Svg from '../Svg/component'
 
@@ -15,7 +14,7 @@ const Wrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background-color ${STYLE_TRANSITION};
+  transition: background-color var(--transition);
 `
 const Overlay = styled.div`
   width: 100%;
