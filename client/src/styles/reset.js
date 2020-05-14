@@ -1,12 +1,12 @@
 // https://gist.github.com/vincentbollaert/e90def9b351d8d97c90ef7cfd887685e
 
-import { SIZE, FONT_SIZE, WHITE_SMOKE, SONIC_SILVER } from './variables'
+import { UNIT_SIZE, FONT_SIZE } from './variables'
 
 export default `
   html {
     height: 100%;
-    background-color: ${WHITE_SMOKE};
-    color: ${SONIC_SILVER};
+    background-color: var(--white-smoke);
+    color: var(--sonic-silver);
     font-family: 'Barlow Semi Condensed', sans-serif;
     box-sizing: border-box;
     font-size: 62.5%;
@@ -18,11 +18,11 @@ export default `
     --font-size-lg: ${FONT_SIZE.lg};
     --font-size-xlg: ${FONT_SIZE.xlg};
 
-    --size-xsm: ${SIZE.xsm};
-    --size-sm: ${SIZE.sm};
-    --size-md: ${SIZE.md};
-    --size-lg: ${SIZE.lg};
-    --size-xlg: ${SIZE.xlg};
+    --size-xsm: ${UNIT_SIZE.xsm};
+    --size-sm: ${UNIT_SIZE.sm};
+    --size-md: ${UNIT_SIZE.md};
+    --size-lg: ${UNIT_SIZE.lg};
+    --size-xlg: ${UNIT_SIZE.xlg};
 
     --capri: #3dc3ff;
     --sky-blue: #78E0FF;
@@ -75,7 +75,7 @@ export default `
     -webkit-font-smoothing: antialiased;
   }
   a {
-    color: ${SONIC_SILVER};
+    color: var(--sonic-silver);
     text-decoration: none;
     cursor: pointer;
   }
@@ -127,13 +127,5 @@ export default `
   }
   th {
     text-align: left;
-  }
-  td {
-    padding: 11px 0;
-
-    &:hover {
-      color: transparent;
-      background-color: #eee;
-    }
   }
 `
