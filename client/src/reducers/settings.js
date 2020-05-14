@@ -44,8 +44,8 @@ const initialState = {
       id: nanoid(),
       name: 'work',
       color: {
-        name: 'misty_rose',
-        value: 'rgb(255, 232, 229)',
+        name: 'blanched_almond',
+        value: 'rgb(251, 231, 198)',
       },
     },
     {
@@ -86,6 +86,14 @@ const initialState = {
       color: {
         name: 'light_cyan',
         value: 'rgb(202, 247, 255)',
+      },
+    },
+    {
+      id: nanoid(),
+      name: 'planning',
+      color: {
+        name: 'azure',
+        value: 'rgb(242, 255, 255)',
       },
     },
   ]

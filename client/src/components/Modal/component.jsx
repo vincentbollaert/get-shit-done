@@ -1,16 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
-import {
-  SIZE_XLG,
-  SONIC_SILVER,
-  ISABELLINE,
-  RHYTHM,
-  CHARCOAL,
-  FONT_SIZE_LG,
-  SIZE_MD,
-  STYLE_TRANSITION,
-} from '../../styles'
 import closeSvg from '../../assets/svg/close.svg'
 import Svg from '../Svg/component'
 
@@ -24,7 +14,7 @@ const Wrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background-color ${STYLE_TRANSITION};
+  transition: background-color var(--transition);
 `
 const Overlay = styled.div`
   width: 100%;
@@ -39,8 +29,8 @@ const ModalWrap = styled.div`
   flex-direction: column;
   text-transform: none;
   outline: none;
-  background-color: ${CHARCOAL};
-  box-shadow: 3px 3px 8px -5px ${CHARCOAL};
+  background-color: var(--charcoal);
+  box-shadow: 3px 3px 8px -5px var(--charcoal);
 `
 
 const InnerWrap = styled.div`
@@ -50,36 +40,36 @@ const InnerWrap = styled.div`
 const Header = styled.header`
   display: flex;
   align-items: center;
-  padding: ${SIZE_XLG};
+  padding: var(--size-xlg);
   padding-bottom: 0;
-  font-size: ${FONT_SIZE_LG};
-  color: ${ISABELLINE};
+  font-size: var(--font-size-lg);
+  color: var(--isabelline);
   text-transform: uppercase;
   white-space: nowrap;
   user-select: none;
 `
 
 const Content = styled.div`
-  padding: ${SIZE_XLG};
-  color: ${SONIC_SILVER};
+  padding: var(--size-xlg);
+  color: var(--sonic-silver);
 `
 
 const Icon = styled(Svg)`
   position: absolute;
-  right: ${SIZE_MD};
+  right: var(--size-md);
   display: flex;
   box-sizing: content-box;
   margin-left: auto;
   padding-left: 2rem;
   width: 1rem;
   height: 1rem;
-  padding: ${SIZE_MD};
-  fill: ${RHYTHM};
+  padding: var(--size-md);
+  fill: var(--rhythm);
   cursor: pointer;
   visibility: hidden;
 
   &:hover {
-    fill: ${ISABELLINE};
+    fill: var(--isabelline);
   };
 
   ${ModalWrap}:hover & {

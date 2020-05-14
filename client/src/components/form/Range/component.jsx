@@ -1,9 +1,8 @@
 import React from 'react'
 import { string, number, func } from 'prop-types'
 import styled from 'styled-components'
-import { WHITE, SKY_BLUE } from '../../../styles'
 
-const STYLE_COLOR_PRIMARY = SKY_BLUE
+const STYLE_COLOR_PRIMARY = 'red'
 const STYLE_THUMB_SIZE = '3rem'
 const STYLE_TRACK_HEIGHT = '0.9rem'
 const STYLE_TRACK_BG = 'rgba(209, 209, 209, 0.5)'
@@ -52,7 +51,7 @@ const Thumb = styled.div`
   width: ${STYLE_THUMB_SIZE};
   height: ${STYLE_THUMB_SIZE};
   border-radius: 50%;
-  background-color: ${WHITE};
+  background-color: var(--white);
   font-weight: bold;
   color: ${STYLE_COLOR_PRIMARY};
   font-size: 11px;

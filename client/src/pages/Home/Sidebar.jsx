@@ -1,15 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import {
-  SIZE_XLG,
-  ISABELLINE,
-  STYLE_TRANSITION,
-  CHARCOAL,
-  STYLE_SIDEBAR_WIDTH_UNIT,
-  ROMAN_SILVER,
-  INDEPENDENCE,
-  LAVENDER,
-} from '../../styles'
+import { STYLE_SIDEBAR_WIDTH_UNIT } from '../../styles'
 import lisSvg from '../../assets/svg/list.svg'
 import fullscreenSvg from '../../assets/svg/fullscreen.svg'
 import Svg from '../../components/Svg/component'
@@ -20,12 +11,12 @@ const Wrap = styled.div`
   position: relative;
   display: flex;
   font-size: 13px;
-  color: ${LAVENDER};
+  color: var(--lavender);
 `
 const Tabs = styled.div`
   z-index: 1;
   height: 100%;
-  background-color: ${CHARCOAL};
+  background-color: var(--charcoal);
   width: 5rem;
   align-items: center;
   justify-content: center;
@@ -44,18 +35,18 @@ const Tasks = styled.div`
   cursor: pointer;
 
   svg {
-    fill: ${ROMAN_SILVER};
+    fill: var(--roman-silver);
   };
 
   &:hover {
     svg {
-      fill: ${ISABELLINE};
+      fill: var(--isabelline);
     };
   };
 
   ${p => p.isOpen && `
     svg {
-      fill: ${ISABELLINE};
+      fill: var(--isabelline);
     };
   `};
 `
@@ -66,7 +57,7 @@ const Toggle = styled(Svg)`
 
   ${p => p.isActive && `
     svg {
-      fill: ${ISABELLINE};
+      fill: var(--isabelline);
     };
   `};
 `
@@ -81,13 +72,13 @@ const Content = styled.div`
   right: 100%;
   bottom: 0;
   flex-direction: column;
-  padding: ${SIZE_XLG};
+  padding: var(--size-xlg);
   width: ${STYLE_SIDEBAR_WIDTH_UNIT}rem;
-  color: ${ISABELLINE};
-  background-color: ${CHARCOAL};
-  box-shadow: inset -1px 0 0 0px ${INDEPENDENCE}; 
+  color: var(--isabelline);
+  background-color: var(--charcoal);
+  box-shadow: inset -1px 0 0 0px var(--independence); 
   transform: translateX(100%);
-  transition: transform ${STYLE_TRANSITION};
+  transition: transform var(--transition);
 
   ${p => p.isOpen && `
     transform: translateX(0);

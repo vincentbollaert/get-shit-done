@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { actions } from '../../reducers/calendar'
-import { STYLE_ELLIPSIS, SIZE_SM } from '../../styles'
+import { STYLE_ELLIPSIS } from '../../styles'
 import Modal from '../../components/Modal/component'
 import AddNewCalendarTask from './AddNewCalendarTask'
 import { colorDarken } from '../../utils/colorDarken'
@@ -13,11 +13,11 @@ const PlaceholderTaskWrap = styled.div`
   top: ${p => p.top}px;
   right: 0;
   left: 0;
-  padding: 0 ${SIZE_SM};
+  padding: 0 var(--size-sm);
   line-height: 1.5;
   color: ${p => p.accentColor ? colorDarken(p.accentColor, -80) : 'red'};
   background-color: ${p => p.accentColor || '#eee'};
-  box-shadow: inset 4px 1px 0 0px #fff, inset -4px -1px 0 0px #fff, 0px 1px 0 0px #fff, 0px -1px 0 0px #fff;
+  box-shadow: inset 4px 1px 0 0px var(--white), inset -4px -1px 0 0px var(--white), 0px 1px 0 0px var(--white), 0px -1px 0 0px var(--white);
   border-radius: 2px;
   height: 19.4px;
   ${STYLE_ELLIPSIS};

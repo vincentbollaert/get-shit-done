@@ -1,6 +1,5 @@
 import React, { useEffect, memo, useState, useRef } from 'react'
 import styled from 'styled-components'
-import { SIZE_MD, SIZE_XLG, WHITE, SUNSET_ORANGE, SIZE_LG, SIZE_SM, SIZE_XSM } from '../../styles'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { actions } from './reducer'
@@ -15,13 +14,13 @@ const Wrap = styled.div`
   cursor: pointer;
 `
 const InnerWrap = styled.div`
-  padding: ${SIZE_XLG};
+  padding: var(--size-xlg);
   padding-right: 10rem;
   width: 100%;
   width: 32rem;
   line-height: 1.4;
-  background: ${SUNSET_ORANGE};
-  color: ${WHITE};
+  background: var(--sunset-orange);
+  color: var(--white);
   border-radius: 2px;
   transition: opacity 0.2s ease-out;
   box-shadow: 0px -3px 6px -1px #ffc0c06b;
@@ -31,9 +30,9 @@ const InnerWrap = styled.div`
   };
 `
 const Prefix = styled.span`
-  margin-right: ${SIZE_SM};
+  margin-right: var(--size-sm);
   border-right: 1px solid #ffffff5e;
-  padding-right: ${SIZE_SM};
+  padding-right: var(--size-sm);
   font-size: 14px;
   font-weight: bold;
 `
@@ -44,16 +43,16 @@ const Message = styled.div`
 `
 const Undo = styled.div`
   position: absolute;
-  right: ${SIZE_LG};
-  padding: ${SIZE_SM} ${SIZE_LG};
+  right: var(--size-lg);
+  padding: var(--size-sm) var(--size-lg);
   font-weight: bold;
-  color: ${SUNSET_ORANGE};
+  color: var(--sunset-orange);
   text-transform: uppercase;
-  background-color: ${WHITE};
+  background-color: var(--white);
   border-radius: 21px;
 `
 const TimeRemaining = styled.span`
-  margin-left: ${SIZE_XSM};
+  margin-left: var(--size-xsm);
   font-weight: bold;
 `
 

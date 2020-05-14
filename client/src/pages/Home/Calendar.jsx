@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import isToday from 'date-fns/isToday'
 import format from 'date-fns/format'
 
-import { STYLE_TRANSITION } from '../../styles'
 import { useSelector } from 'react-redux'
 import CalendarColumn from './CalendarColumn'
 
@@ -12,7 +11,7 @@ const Wrap = styled.div`
   display: flex;
   flex-grow: 1;
   transform-origin: bottom right;
-  transition: transform ${STYLE_TRANSITION};
+  transition: transform var(--transition);
   transform: ${p => `scale(${p.x}, ${p.y})`};
 `
 

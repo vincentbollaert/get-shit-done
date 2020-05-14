@@ -1,29 +1,28 @@
 import React from 'react'
 import styled from 'styled-components'
-import { SIZE_LG, SIZE_XLG, LAVENDER, FONT_SIZE_MD, CAPRI, INDEPENDENCE, WHITE } from '../../styles'
 import { colorDarken } from '../../utils/colorDarken'
 
 const Wrap = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 ${SIZE_LG};
+  padding: 0 var(--size-lg);
   padding-bottom: 1px;
   height: 3rem;
   border-radius: 1.5rem;
-  background-color: ${CAPRI};
+  background-color: var(--capri);
   color: rgba(255, 255, 255, 0.9);
-  font-size: ${FONT_SIZE_MD};
+  font-size: var(--font-size-md);
   text-transform: uppercase;
   cursor: pointer;
 
   ${p => p.isInForm && `
-    margin-top: ${SIZE_XLG};
+    margin-top: var(--size-xlg);
   `};
 
   &:hover {
     background-color: #58cbff;
-    color: ${WHITE};
+    color: var(--white);
   };
 
   ${p => p.accentColor && `
@@ -38,8 +37,8 @@ const Wrap = styled.button`
 
   &:disabled {
     pointer-events: none;
-    background-color: ${INDEPENDENCE};
-    color: ${LAVENDER};
+    background-color: var(--independence);
+    color: var(--lavender);
   };
 `
 const Button = ({ isDisabled, isInForm, accentColor, type = 'button', children, onClick }) => (

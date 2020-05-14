@@ -1,15 +1,67 @@
 // https://gist.github.com/vincentbollaert/e90def9b351d8d97c90ef7cfd887685e
 
-import { WHITE_SMOKE, SONIC_SILVER } from './variables'
+import { UNIT_SIZE, FONT_SIZE } from './variables'
 
 export default `
   html {
     height: 100%;
-    background-color: ${WHITE_SMOKE};
-    color: ${SONIC_SILVER};
+    background-color: var(--white-smoke);
+    color: var(--sonic-silver);
     font-family: 'Barlow Semi Condensed', sans-serif;
     box-sizing: border-box;
     font-size: 62.5%;
+    
+    --font-size-xxsm: ${FONT_SIZE.xxsm};
+    --font-size-xsm: ${FONT_SIZE.xsm};
+    --font-size-sm: ${FONT_SIZE.sm};
+    --font-size-md: ${FONT_SIZE.md};
+    --font-size-lg: ${FONT_SIZE.lg};
+    --font-size-xlg: ${FONT_SIZE.xlg};
+
+    --size-xsm: ${UNIT_SIZE.xsm};
+    --size-sm: ${UNIT_SIZE.sm};
+    --size-md: ${UNIT_SIZE.md};
+    --size-lg: ${UNIT_SIZE.lg};
+    --size-xlg: ${UNIT_SIZE.xlg};
+
+    --capri: #3dc3ff;
+    --sky-blue: #78E0FF;
+    --light-sea-green: #21baa6;
+    --amazonite: #03d2b6;
+    --steel-blue: #607D8B;
+
+    --pastel-green: #7bd37c;
+    --sunset-orange: #ff5d5d;
+    --red-orange: #ff4d4d;
+    --very-light-tangelo: #ffae74;
+
+    --white: #fff;
+    --white-smoke: #f5f5f5;
+    --snow: #fafafa;
+    --isabelline: #eee;
+    --lavender: #e2e7f9;
+    --gainsboro: #dedede;
+    --pastel-gray: #ccc;
+    --gray-x11: #bbb;
+    --quick-silver: #a2a2a2;
+    --rhythm: #71788f;
+    --sonic-silver: #787878;
+    --sonic-silver-transparency: #f5f5f573;
+    --roman-silver: #838899;
+    --cool-gray: #8f99b9;
+    --granite-gray: #666;
+    --arsenic: #444;
+    --onyx: #393939;
+    --independence: #4f5466;
+    --jet: #333;
+    --charcoal: #3d4150;
+    --charleston-green: #282828;
+    --charleston-green-2: #2d2d2d;
+    --raisin-black: #222121;
+    --eerie-black: #1e1e1e;
+    --dark-transparency: rgba(0, 0, 0, 0.4);
+
+    --transition: 0.2s ease-out;
   }
   *,
   *::after,
@@ -23,7 +75,7 @@ export default `
     -webkit-font-smoothing: antialiased;
   }
   a {
-    color: ${SONIC_SILVER};
+    color: var(--sonic-silver);
     text-decoration: none;
     cursor: pointer;
   }
@@ -75,13 +127,5 @@ export default `
   }
   th {
     text-align: left;
-  }
-  td {
-    padding: 11px 0;
-
-    &:hover {
-      color: transparent;
-      background-color: #eee;
-    }
   }
 `
