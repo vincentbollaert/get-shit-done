@@ -1,16 +1,16 @@
 import styled from 'styled-components'
 
-import { INDEPENDENCE, ISABELLINE, SUNSET_ORANGE, GAINSBORO } from '../../styles'
 import Svg, { CN_SVG } from '../Svg/component'
 
-export const STYLE_COLOR_LIGHT = ISABELLINE
+export const STYLE_COLOR_LIGHT = 'var(--isabelline)'
 export const STYLE_COLOR_DARK = 'red'
 
+const STYLE_BOX_SHADOW_OFFSET = '0 2px 0 -1px'
 export const STYLE_BORDER_COLOR = 'rgba(213, 213, 213, 0.62)'
 
-export const STYLE_UNDERLINE_LIGHT = `0 2px 0 -1px ${INDEPENDENCE}`
-export const STYLE_UNDERLINE_HOVER_LIGHT = `0 2px 0 -1px ${GAINSBORO}`
-export const STYLE_UNDERLINE_ERROR = `0 2px 0 -1px ${SUNSET_ORANGE}`
+export const STYLE_UNDERLINE_LIGHT = `${STYLE_BOX_SHADOW_OFFSET} var(--independence)`
+export const STYLE_UNDERLINE_HOVER_LIGHT = `${STYLE_BOX_SHADOW_OFFSET} var(--gainsboro)`
+export const STYLE_UNDERLINE_ERROR = `${STYLE_BOX_SHADOW_OFFSET} var(--sunset-orange)`
 
 export const STYLE_PLACEHOLDER_COLOR_DARK = 'rgba(0, 0, 0, 0.3)'
 export const STYLE_PLACEHOLDER_COLOR_LIGHT = 'rgba(255, 255, 255, 0.6)'
