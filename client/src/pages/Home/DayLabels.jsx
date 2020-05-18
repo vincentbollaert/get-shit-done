@@ -8,10 +8,13 @@ import UseHighlightFilteredRange from '../../hooks/useHighlightFIlteredRange'
 import { useSelector } from 'react-redux'
 import { actions } from '../../reducers/calendar'
 import { MONTH_DAYS } from '../../constants'
-import { abs, flex } from '../../styles'
+import { flex } from '../../styles'
 
 const Wrap = styled.div`
-  ${abs([0, 0, , '2.4rem'])};
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 2.4rem;
   z-index: 2;
   display: flex;
   height: 24px;

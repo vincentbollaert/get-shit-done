@@ -7,14 +7,6 @@ export function rgbAdjust(color, amount) {
   return `rgb(${colorValuesUpdated})`
 }
 
-export const abs = ([top, right, bottom, left]) => `
-  position: absolute;
-  top: ${top};
-  right: ${right};
-  bottom: ${bottom};
-  left: ${left};
-`
-
 export const flex = ({ grow, shrink, basis, isCenter }) => `
   display: flex;
   flex-grow: ${grow};
