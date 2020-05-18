@@ -46,14 +46,3 @@ export const SCROLLBARS_MIN_LIGHT = `
     background-color: transparent;
   }
 `
-
-// media queries
-const customMediaQuery = (minWidth) =>
-  `@media (min-width: ${minWidth}px)`
-
-export const media = {
-  custom: customMediaQuery,
-  sm: customMediaQuery(540),
-  md: customMediaQuery(940),
-  lg: customMediaQuery(1140),
-}

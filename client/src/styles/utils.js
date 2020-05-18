@@ -1,4 +1,5 @@
 // https://jsperf.com/color-darken
+
 export function rgbAdjust(color, amount) {
   const colorValues = color.match(/[0-9]+/g).map(x => Number(x))
   const primary = Math.max(...colorValues)
@@ -25,3 +26,12 @@ export const ellipsis = () => `
   overflow: hidden;
   text-overflow: ellipsis;
 `
+
+const customMediaQuery = minWidth => `@media (min-width: ${minWidth}px)`
+
+export const media = {
+  custom: customMediaQuery,
+  sm: customMediaQuery(540),
+  md: customMediaQuery(940),
+  lg: customMediaQuery(1140),
+}
