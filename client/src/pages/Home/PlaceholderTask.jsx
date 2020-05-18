@@ -2,12 +2,12 @@ import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { actions } from '../../reducers/calendar'
-import { STYLE_ELLIPSIS } from '../../styles'
 import Modal from '../../components/Modal/component'
 import AddNewCalendarTask from './AddNewCalendarTask'
-import { colorDarken } from '../../utils/colorDarken'
+import { rgbAdjust, ellipsis } from '../../styles'
 
 const PlaceholderTaskWrap = styled.div`
+  ${ellipsis()};
   display: ${p => p.isBeingPrepared ? 'block' : 'none'};
   position: absolute;
   top: ${p => p.top}px;
@@ -15,12 +15,11 @@ const PlaceholderTaskWrap = styled.div`
   left: 0;
   padding: 0 var(--size-sm);
   line-height: 1.5;
-  color: ${p => p.accentColor ? colorDarken(p.accentColor, -80) : 'red'};
+  color: ${p => p.accentColor ? rgbAdjust(p.accentColor, -80) : 'red'};
   background-color: ${p => p.accentColor || '#eee'};
   box-shadow: inset 4px 1px 0 0px var(--white), inset -4px -1px 0 0px var(--white), 0px 1px 0 0px var(--white), 0px -1px 0 0px var(--white);
   border-radius: 2px;
   height: 19.4px;
-  ${STYLE_ELLIPSIS};
 
   .hour-slots:hover & {
     display: flex;

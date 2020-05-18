@@ -699,7 +699,53 @@ const initialState = {
         },
         {
           id: nanoid(),
-          time: [12, 15],
+          time: [12, 13.5],
+          name: 'dev: get shit done',
+          group: 'improvement',
+        },
+        {
+          id: nanoid(),
+          time: [13.5, 14],
+          name: 'lunch with mai',
+          group: 'leasure',
+        },
+      ]
+    }
+    if (index === 17) {
+      tasks = [
+        {
+          id: nanoid(),
+          time: [0, 9],
+          name: 'sleep',
+          group: 'essentials',
+        },
+        {
+          id: nanoid(),
+          time: [9, 9.5],
+          name: 'relax in bed',
+          group: 'laze',
+        },
+        {
+          id: nanoid(),
+          time: [9.5, 10.5],
+          name: 'morning routine',
+          group: 'essentials',
+        },
+        {
+          id: nanoid(),
+          time: [10.5, 11.5],
+          name: 'breakfast eat out',
+          group: 'essentials',
+        },
+        {
+          id: nanoid(),
+          time: [11.5, 13.5],
+          name: 'planning/admin',
+          group: 'planning',
+        },
+        {
+          id: nanoid(),
+          time: [13.5, 15],
           name: 'dev: get shit done',
           group: 'improvement',
         },

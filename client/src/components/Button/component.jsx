@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { colorDarken } from '../../utils/colorDarken'
+import { rgbAdjust } from '../../styles'
 
 const Wrap = styled.button`
   display: flex;
@@ -27,11 +27,11 @@ const Wrap = styled.button`
 
   ${p => p.accentColor && `
     background-color: ${p.accentColor};
-    color: ${colorDarken(p.accentColor, -100)};
+    color: ${rgbAdjust(p.accentColor, -100)};
 
     &:hover {
-      background-color: ${colorDarken(p.accentColor, -20)};
-      color: ${colorDarken(p.accentColor, -120)};
+      background-color: ${rgbAdjust(p.accentColor, -20)};
+      color: ${rgbAdjust(p.accentColor, -120)};
     };
   `};
 
