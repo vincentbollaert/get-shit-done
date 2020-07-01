@@ -5,7 +5,7 @@ import HtmlWebPackPlugin from 'html-webpack-plugin'
 import path from 'path'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 
-const entryPath = './src/index.jsx'
+const entryPath = './src/index.tsx'
 const outputPath = './public'
 const PUBLIC_PATH = '/'
 
@@ -29,7 +29,7 @@ const config = {
   },
 
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
 
   module: {
@@ -38,7 +38,11 @@ const config = {
       { test: /\.html$/, use: 'html-loader' },
       { test: /\.md$/, use: [ 'html-loader', 'highlight-loader', 'markdown-loader'] },
       { test: /\.svg$/, use: 'raw-loader' },
-
+      {
+        test: /\.ts(x?)$/,
+        exclude: /node_modules/,
+        use: 'ts-loader',
+      },
       {
         test: /\.(woff|ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         use: 'file-loader',
