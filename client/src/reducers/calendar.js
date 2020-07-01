@@ -1896,8 +1896,20 @@ const initialState = {
         },
         {
           id: nanoid(),
-          time: [11, 16],
-          name: 'UNSURE',
+          time: [11, 15],
+          name: 'docker upskill',
+          group: 'improvement',
+        },
+        {
+          id: nanoid(),
+          time: [15, 15.5],
+          name: 'get lunch',
+          group: 'essentials',
+        },
+        {
+          id: nanoid(),
+          time: [15.5, 17],
+          name: 'frontend upskill',
           group: 'improvement',
         },
       ]
