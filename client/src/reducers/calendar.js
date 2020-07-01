@@ -1861,6 +1861,47 @@ const initialState = {
         },
       ]
     }
+  
+    if (index === 30) {
+      tasks = [
+        {
+          id: nanoid(),
+          time: [0, 7],
+          name: 'sleep',
+          group: 'essentials',
+        },
+        {
+          id: nanoid(),
+          time: [7, 7.75],
+          name: 'lie in bed',
+          group: 'laze',
+        },
+        {
+          id: nanoid(),
+          time: [7.75, 8.5],
+          name: 'morning routine',
+          group: 'essentials',
+        },
+        {
+          id: nanoid(),
+          time: [8.5, 8.75],
+          name: 'get to work',
+          group: 'essentials',
+        },
+        {
+          id: nanoid(),
+          time: [8.75, 11],
+          name: 'windows admin',
+          group: 'essentials',
+        },
+        {
+          id: nanoid(),
+          time: [11, 16],
+          name: 'UNSURE',
+          group: 'improvement',
+        },
+      ]
+    }
 
     return {
       tasks,
