@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 import closeSvg from '../../assets/svg/close.svg'
@@ -21,7 +21,7 @@ const Overlay = styled.div`
   height: 100%;
   /* background-color: rgba(255, 255, 255, 0.3); */
 `
-const ModalWrap = styled.div`
+const ModalWrap = styled.div<{ width: number }>`
   display: flex;
   position: fixed;
   width: ${p => `${p.width}rem` || 'auto'};
@@ -76,8 +76,14 @@ const Icon = styled(Svg)`
     visibility: visible;
   };
 `
+interface Props {
+  title: string,
+  width: number,
+  children: any,
+  onOverlayToggle: any,
+}
 
-const Modal = ({ title, width, children, onOverlayToggle }) => (
+const Modal: FC<Props> = ({ title, width, children, onOverlayToggle }) => (
   ReactDOM.createPortal(
     <Wrap>
       <Overlay onClick={onOverlayToggle} />

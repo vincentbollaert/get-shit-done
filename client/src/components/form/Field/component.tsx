@@ -1,11 +1,24 @@
-import React, { memo, useState } from 'react'
+import React, { FC, memo, useState } from 'react'
 
 import Placeholder from '../Placeholder/component'
 import { SvgStyled, Input, Wrap } from '../shared'
 import ErrorField from '../../error/Field/component'
 
+interface Props {
+  isInForm: boolean,
+  theme: string,
+  name: string,
+  type: string = 'text',
+  defaultValue: string,
+  placeholder: string,
+  svg: string,
+  errorMessage: string,
+  className?: string,
+  inputRef: any,
+  bubbleValue: any,
+}
 
-const Field = ({
+const Field: FC<Props> = ({
   isInForm,
   theme,
   name,

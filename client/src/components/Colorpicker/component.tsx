@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 
@@ -11,7 +11,7 @@ const Toggle = styled.div`
   height: 16px;
   border-radius: 50%;
 `
-const Colors = styled.div`
+const Colors = styled.div<{ isOpen: boolean }>`
   display: ${p => p.isOpen ? 'flex' : 'none'};
   width: 208px;
   background-color: var(--charcoal);
@@ -34,12 +34,16 @@ const Color = styled.div`
     box-shadow: 0 0 0 1px var(--charcoal);
   };
 `
+interface Props {
+  selectedColor: string,
+  setSelectedColor: any,
+}
 
-const Colorpicker = ({ selectedColor, setSelectedColor }) => {
+const Colorpicker: FC<Props> = ({ selectedColor, setSelectedColor }) => {
   const { colors } = useSelector(state => state.settings)
   const [isOpen, toggleIsOpen] = useState(false)
 
-  function handleClick(color) {
+  function handleClick(color: string) {
     setSelectedColor(color)
     toggleIsOpen(false)
   }

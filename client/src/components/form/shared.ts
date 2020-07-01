@@ -17,7 +17,7 @@ export const STYLE_PLACEHOLDER_COLOR_LIGHT = 'rgba(255, 255, 255, 0.6)'
 export const STYLE_HEIGHT = '3.2rem'
 
 
-export const Wrap = styled.div`
+export const Wrap = styled.div<{ isInForm: boolean }>`
   display: flex;
   position: relative;
   color: ${p => p.theme === 'light' ? STYLE_COLOR_LIGHT : STYLE_COLOR_DARK};
@@ -32,7 +32,7 @@ export const Wrap = styled.div`
   `};
 `
 
-export const Input = styled.input`
+export const Input = styled.input<{ isError: boolean }>`
   display: flex;
   align-items: center;
   padding-top: var(--size-sm);

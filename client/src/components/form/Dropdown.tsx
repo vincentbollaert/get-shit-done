@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, FC } from 'react'
 import styled from 'styled-components'
 import chevronDownSvg from '../../assets/svg/chevron-down.svg'
 import Placeholder from './Placeholder/component'
@@ -11,7 +11,7 @@ const Header = styled.div`
 const InputHidden = styled.input`
   display: none;
 `
-const List = styled.div`
+const List = styled.div<{ isOpen: boolean }>`
   display: ${p => p.isOpen ? 'flex' : 'none'};
   position: absolute;
   flex-direction: column;
@@ -24,7 +24,7 @@ const List = styled.div`
   border-radius: 2px;
   box-shadow: 3px 3px 8px -5px #343742;
 `
-const Item = styled.div`
+const Item = styled.div<{ isActive: boolean, color: string }>`
   position: relative;
   display: flex;
   align-items: center;
@@ -44,7 +44,20 @@ const After = styled.div`
   position: absolute;
   right: 0;
 `
-const Dropdown = ({ theme, isInForm, activeItem = {}, label, name, list, listKey, onSelect, inputRef }) => {
+
+interface Props {
+  theme: string,
+  isInForm: boolean,
+  activeItem? = {},
+  label: string,
+  name: string,
+  list: any,
+  listKey: string,
+  onSelect: any,
+  inputRef: any,
+}
+
+const Dropdown: FC<Props> = ({ theme, isInForm, activeItem = {}, label, name, list, listKey, onSelect, inputRef }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [activeItemUpdated, setActiveItem] = useState(activeItem)
 

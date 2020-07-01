@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { FC, useState, useCallback } from 'react'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { actions } from '../../reducers/calendar'
@@ -6,7 +6,7 @@ import Modal from '../../components/Modal/component'
 import AddNewCalendarTask from './AddNewCalendarTask'
 import { rgbAdjust, ellipsis } from '../../styles'
 
-const PlaceholderTaskWrap = styled.div`
+const PlaceholderTaskWrap = styled.div<{ isBeingPrepared: boolean, accentColor: string }>`
   ${ellipsis()};
   display: ${p => p.isBeingPrepared ? 'block' : 'none'};
   position: absolute;
@@ -26,7 +26,13 @@ const PlaceholderTaskWrap = styled.div`
   };
 `
 
-const PlaceholderTask = ({ dateString, hourSlotsRef, y }) => {
+interface Props {
+  dateString: string,
+  hourSlotsRef: any,
+  y: number
+}
+
+const PlaceholderTask: FC<Props> = ({ dateString, hourSlotsRef, y }) => {
   const { taskBeingPrepared = {} } = useSelector(state => state.calendar)
   const { groups } = useSelector(state => state.settings)
   const [{ isModalOpen, timeFrom }, setState] = useState({ isModalOpen: false, timeFrom: undefined })
