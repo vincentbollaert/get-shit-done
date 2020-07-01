@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { FC } from 'react'
 import styled from 'styled-components'
 import { rgbAdjust } from '../../styles'
 
-const Wrap = styled.button`
+const Wrap = styled.button<{ isInForm: boolean, accentColor: string }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,7 +41,17 @@ const Wrap = styled.button`
     color: var(--lavender);
   };
 `
-const Button = ({ isDisabled, isInForm, accentColor, type = 'button', children, onClick }) => (
+
+interface Props {
+  isDisabled: boolean,
+  isInForm: boolean,
+  accentColor: string,
+  type: string = 'button',
+  children: any,
+  onClick: any
+}
+
+const Button: FC<Props> = ({ isDisabled, isInForm, accentColor, type = 'button', children, onClick }) => (
   <Wrap
     disabled={isDisabled}
     isInForm={isInForm}

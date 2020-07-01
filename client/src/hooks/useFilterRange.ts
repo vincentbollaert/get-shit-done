@@ -1,6 +1,11 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
+interface Props {
+  from: number,
+  to: number,
+  cb: any,
+}
 const UseRangeFilter = ({ from, to, cb }) => {
   const dispatch = useDispatch()
   const [{ fromDefault, toDefault }] = useState({ fromDefault: from, toDefault: to })

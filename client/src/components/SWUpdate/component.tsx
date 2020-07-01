@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, FC } from 'react'
 import styled from 'styled-components'
 
 const Wrap = styled.div`
@@ -43,7 +43,7 @@ const Undo = styled.div`
   border-radius: 21px;
 `
 
-function SWUpdate({ isUpdateAvailable }) {
+const SWUpdate: FC<{ isUpdateAvailable: boolean }> = ({ isUpdateAvailable }) => {
   const [doNotUpdate, setDoNotUpdate] = useState(false)
   const onReload = () => window.location.reload(true)
   const onRemove = () => { setDoNotUpdate(true) }

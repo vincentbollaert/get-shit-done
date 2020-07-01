@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import { STYLE_PLACEHOLDER_COLOR_DARK, STYLE_PLACEHOLDER_COLOR_LIGHT } from '../shared'
 
-export default styled.div`
+export default styled.div<{ isError: boolean, hasValue: boolean }>`
   position: absolute;
   top: 50%;
   left: 0;

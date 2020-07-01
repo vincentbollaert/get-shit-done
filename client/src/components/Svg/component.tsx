@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { string, number, func, bool } from 'prop-types'
 import styled from 'styled-components'
 
 export const CN_SVG = 'svg'
 
-const Wrap = styled.span`
+const Wrap = styled.span<{ size: number, isDanger: boolean, theme: string }>`
   display: flex;
   flex-shrink: 0;
   width: ${props => props.size}rem;
@@ -21,7 +21,16 @@ const Wrap = styled.span`
   };
 `
 
-const Svg = ({ isDanger, theme, svg, size, className, onClick }) => (
+interface Props {
+  isDanger: boolean,
+  theme: string,
+  svg: string,
+  size: number,
+  className?: string,
+  onClick: any,
+}
+
+const Svg: FC<Props> = ({ isDanger, theme, svg, size, className, onClick }) => (
   <Wrap
     isDanger={isDanger}
     theme={theme}
