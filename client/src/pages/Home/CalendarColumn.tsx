@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useRef, memo } from 'react'
+import React, { Fragment, useState, useRef, memo, FC } from 'react'
 import styled from 'styled-components'
 
 import { rgbAdjust, ellipsis } from '../../styles'
@@ -8,10 +8,12 @@ import PlaceholderTask from './PlaceholderTask'
 import { actions } from '../../reducers/calendar'
 import Modal from '../../components/Modal/component'
 import EditCalendarTask from './EditCalendarTask'
+import { number } from 'prop-types'
+import { RootState } from '../../Application/Root/reducers'
 
 const CN_HOUR_SLOTS = 'hour-slots'
 
-const Wrap = styled.div`
+const Wrap = styled.div<{ isCurrentWeek: boolean, isCurrentDay: boolean }>`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -52,7 +54,7 @@ const HourSlots = styled.div`
     padding-left: 12px;
   };
 `
-const Cell = styled.div`
+const Cell = styled.div<{ isGap: boolean, flex: number, accentColor: string, isSmall: boolean }>`
   ${ellipsis()};
   z-index: ${p => p.isGap ? 0 : 1};
   position: relative;
@@ -75,10 +77,15 @@ const Cell = styled.div`
     font-size: 11px;
   `};
 `
+interface Props {
+  dateString: string,
+  isCurrentDay: boolean,
+  tasksFiltered: any,
+}
 
-const CalendarColumn = ({ dateString, isCurrentDay, tasksFiltered }) => {
-  const { hoursAxis, taskBeingEdited, taskBeingPrepared } = useSelector(state => state.calendar)
-  const { groups } = useSelector(state => state.settings)
+const CalendarColumn: FC<Props> = ({ dateString, isCurrentDay, tasksFiltered }) => {
+  const { hoursAxis, taskBeingEdited, taskBeingPrepared } = useSelector((state: RootState) => state.calendar)
+  const { groups } = useSelector((state: RootState) => state.settings)
   const dispatch = useDispatch()
 
   const [y, setY] = useState(0)

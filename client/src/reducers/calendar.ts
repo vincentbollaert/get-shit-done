@@ -1149,720 +1149,720 @@ const initialState = {
     //     },
     //   ]
     // }
-    if (index === 7) {
-      tasks = [
-        {
-          id: nanoid(),
-          time: [0, 7],
-          name: 'sleep',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [7, 8.25],
-          name: 'morning routine',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [8.25, 8.5],
-          name: 'get to work',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [8.5, 9.5],
-          name: 'work morning routine',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [9.5, 12],
-          name: 'courses - fs for fed',
-          group: 'improvement',
-        },
-      ]
-    }
-    if (index === 8) {
-      tasks = [
-        {
-          id: nanoid(),
-          time: [0, 7],
-          name: 'sleep',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [7, 7.25],
-          name: 'lie in bed',
-          group: 'laze',
-        },
-        {
-          id: nanoid(),
-          time: [7.25, 8],
-          name: 'morning routine',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [8, 9],
-          name: 'work morning routine',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [9, 12],
-          name: 'courses - fs for fed',
-          group: 'improvement',
-        },
-        {
-          id: nanoid(),
-          time: [12, 12.5],
-          name: 'relax',
-          group: 'laze',
-        },
-        {
-          id: nanoid(),
-          time: [12.5, 14.5],
-          name: 'courses - fs for fed',
-          group: 'improvement',
-        },
-        {
-          id: nanoid(),
-          time: [14.5, 18],
-          name: 'Hang out with Mai',
-          group: 'leasure',
-        },
-        {
-          id: nanoid(),
-          time: [18, 20.5],
-          name: 'courses - fs for fed',
-          group: 'improvement',
-        },
-        {
-          id: nanoid(),
-          time: [20.5, 23],
-          name: 'relax',
-          group: 'laze',
-        },
-      ]
-    }
+    // if (index === 7) {
+    //   tasks = [
+    //     {
+    //       id: nanoid(),
+    //       time: [0, 7],
+    //       name: 'sleep',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [7, 8.25],
+    //       name: 'morning routine',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [8.25, 8.5],
+    //       name: 'get to work',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [8.5, 9.5],
+    //       name: 'work morning routine',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [9.5, 12],
+    //       name: 'courses - fs for fed',
+    //       group: 'improvement',
+    //     },
+    //   ]
+    // }
+    // if (index === 8) {
+    //   tasks = [
+    //     {
+    //       id: nanoid(),
+    //       time: [0, 7],
+    //       name: 'sleep',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [7, 7.25],
+    //       name: 'lie in bed',
+    //       group: 'laze',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [7.25, 8],
+    //       name: 'morning routine',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [8, 9],
+    //       name: 'work morning routine',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [9, 12],
+    //       name: 'courses - fs for fed',
+    //       group: 'improvement',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [12, 12.5],
+    //       name: 'relax',
+    //       group: 'laze',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [12.5, 14.5],
+    //       name: 'courses - fs for fed',
+    //       group: 'improvement',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [14.5, 18],
+    //       name: 'Hang out with Mai',
+    //       group: 'leasure',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [18, 20.5],
+    //       name: 'courses - fs for fed',
+    //       group: 'improvement',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [20.5, 23],
+    //       name: 'relax',
+    //       group: 'laze',
+    //     },
+    //   ]
+    // }
 
-    if (index === 9) {
-      tasks = [
-        {
-          id: nanoid(),
-          time: [0, 8.5],
-          name: 'sleep',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [8.5, 9],
-          name: 'morning routine',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [9, 11],
-          name: 'get to work, relax',
-          group: 'laze',
-        },
-        {
-          id: nanoid(),
-          time: [11, 13],
-          name: 'courses - fs for fed',
-          group: 'improvement',
-        },
-        {
-          id: nanoid(),
-          time: [13, 16],
-          name: 'courses - k hands on',
-          group: 'improvement',
-        },
-        {
-          id: nanoid(),
-          time: [16, 16.5],
-          name: 'get some food',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [16.5, 17],
-          name: 'get home, relax',
-          group: 'laze',
-        },
-        {
-          id: nanoid(),
-          time: [17, 18.5],
-          name: 'clean flat, shower',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [18.5, 20.5],
-          name: 'courses - k hands on',
-          group: 'improvement',
-        },
-        {
-          id: nanoid(),
-          time: [20.5, 22],
-          name: 'relax',
-          group: 'laze',
-        },
-      ]
-    }
+    // if (index === 9) {
+    //   tasks = [
+    //     {
+    //       id: nanoid(),
+    //       time: [0, 8.5],
+    //       name: 'sleep',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [8.5, 9],
+    //       name: 'morning routine',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [9, 11],
+    //       name: 'get to work, relax',
+    //       group: 'laze',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [11, 13],
+    //       name: 'courses - fs for fed',
+    //       group: 'improvement',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [13, 16],
+    //       name: 'courses - k hands on',
+    //       group: 'improvement',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [16, 16.5],
+    //       name: 'get some food',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [16.5, 17],
+    //       name: 'get home, relax',
+    //       group: 'laze',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [17, 18.5],
+    //       name: 'clean flat, shower',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [18.5, 20.5],
+    //       name: 'courses - k hands on',
+    //       group: 'improvement',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [20.5, 22],
+    //       name: 'relax',
+    //       group: 'laze',
+    //     },
+    //   ]
+    // }
   
-    if (index === 10) {
-      tasks = [
-        {
-          id: nanoid(),
-          time: [0, 6.75],
-          name: 'sleep',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [6.75, 7.75],
-          name: 'morning routine',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [7.75, 8.25],
-          name: 'breakfast - pho',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [8.25, 9],
-          name: 'get to work, relax',
-          group: 'laze',
-        },
-        {
-          id: nanoid(),
-          time: [9, 15.25],
-          name: 'courses - k hands on',
-          group: 'improvement',
-        },
-        {
-          id: nanoid(),
-          time: [15.25, 15.75],
-          name: 'relax',
-          group: 'laze',
-        },
-        {
-          id: nanoid(),
-          time: [15.75, 18.75],
-          name: 'courses - k hands on',
-          group: 'improvement',
-        },
-        {
-          id: nanoid(),
-          time: [18.75, 19.75],
-          name: 'windows update',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [19.75, 20.5],
-          name: 'supper - pho',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [20.5, 23],
-          name: 'relax',
-          group: 'laze',
-        },
-      ]
-    }
+    // if (index === 10) {
+    //   tasks = [
+    //     {
+    //       id: nanoid(),
+    //       time: [0, 6.75],
+    //       name: 'sleep',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [6.75, 7.75],
+    //       name: 'morning routine',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [7.75, 8.25],
+    //       name: 'breakfast - pho',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [8.25, 9],
+    //       name: 'get to work, relax',
+    //       group: 'laze',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [9, 15.25],
+    //       name: 'courses - k hands on',
+    //       group: 'improvement',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [15.25, 15.75],
+    //       name: 'relax',
+    //       group: 'laze',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [15.75, 18.75],
+    //       name: 'courses - k hands on',
+    //       group: 'improvement',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [18.75, 19.75],
+    //       name: 'windows update',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [19.75, 20.5],
+    //       name: 'supper - pho',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [20.5, 23],
+    //       name: 'relax',
+    //       group: 'laze',
+    //     },
+    //   ]
+    // }
   
-    if (index === 11) {
-      tasks = [
-        {
-          id: nanoid(),
-          time: [0, 7.75],
-          name: 'sleep',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [7.75, 8.25],
-          name: 'lie in bed',
-          group: 'laze',
-        },
-        {
-          id: nanoid(),
-          time: [8.25, 9.25],
-          name: 'morning routine',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [9.25, 9.5],
-          name: 'get to work',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [9.5, 10],
-          name: 'work start routine',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [10, 14],
-          name: 'work start routine',
-          group: 'improvement',
-        },
-        {
-          id: nanoid(),
-          time: [14, 15],
-          name: 'take a break',
-          group: 'laze',
-        },
-        {
-          id: nanoid(),
-          time: [15, 18],
-          name: 'courses - k hands on',
-          group: 'improvement',
-        },
-        {
-          id: nanoid(),
-          time: [18, 23],
-          name: 'go home, do not sure yet',
-          group: 'laze',
-        },
-      ]
-    }
+    // if (index === 11) {
+    //   tasks = [
+    //     {
+    //       id: nanoid(),
+    //       time: [0, 7.75],
+    //       name: 'sleep',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [7.75, 8.25],
+    //       name: 'lie in bed',
+    //       group: 'laze',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [8.25, 9.25],
+    //       name: 'morning routine',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [9.25, 9.5],
+    //       name: 'get to work',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [9.5, 10],
+    //       name: 'work start routine',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [10, 14],
+    //       name: 'work start routine',
+    //       group: 'improvement',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [14, 15],
+    //       name: 'take a break',
+    //       group: 'laze',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [15, 18],
+    //       name: 'courses - k hands on',
+    //       group: 'improvement',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [18, 23],
+    //       name: 'go home, do not sure yet',
+    //       group: 'laze',
+    //     },
+    //   ]
+    // }
   
-    if (index === 13) {
-      tasks = [
-        {
-          id: nanoid(),
-          time: [0, 6.5],
-          name: 'sleep',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [11, 15],
-          name: 'courses - k hands on',
-          group: 'improvement',
-        },
-      ]
-    }
+    // if (index === 13) {
+    //   tasks = [
+    //     {
+    //       id: nanoid(),
+    //       time: [0, 6.5],
+    //       name: 'sleep',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [11, 15],
+    //       name: 'courses - k hands on',
+    //       group: 'improvement',
+    //     },
+    //   ]
+    // }
   
-    if (index === 14) {
-      tasks = [
-        {
-          id: nanoid(),
-          time: [0, 7],
-          name: 'sleep',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [7, 9],
-          name: 'lie in bed',
-          group: 'laze',
-        },
-        {
-          id: nanoid(),
-          time: [9, 10],
-          name: 'morning routine',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [11, 16.5], // so much fucking hassle with this outdated course. also, fuck that idiot that cannot make coffee
-          name: 'courses - k hands on',
-          group: 'improvement',
-        },
-      ]
-    }
+    // if (index === 14) {
+    //   tasks = [
+    //     {
+    //       id: nanoid(),
+    //       time: [0, 7],
+    //       name: 'sleep',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [7, 9],
+    //       name: 'lie in bed',
+    //       group: 'laze',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [9, 10],
+    //       name: 'morning routine',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [11, 16.5], // so much fucking hassle with this outdated course. also, fuck that idiot that cannot make coffee
+    //       name: 'courses - k hands on',
+    //       group: 'improvement',
+    //     },
+    //   ]
+    // }
   
-    if (index === 15) {
-      tasks = [
-        {
-          id: nanoid(),
-          time: [0, 7],
-          name: 'sleep',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [7, 8.5],
-          name: 'lie in bed',
-          group: 'laze',
-        },
-        {
-          id: nanoid(),
-          time: [8.5, 9.5],
-          name: 'morning routine',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [9.5, 9.75],
-          name: 'get to work',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [9.75, 10.5],
-          name: 'work morning routine',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [10.5, 14],
-          name: 'courses - k hands on',
-          group: 'improvement',
-        },
-        {
-          id: nanoid(),
-          time: [14, 14.5],
-          name: 'break',
-          group: 'laze',
-        },
-        {
-          id: nanoid(),
-          time: [14.5, 18.5],
-          name: 'courses - k hands on',
-          group: 'improvement',
-        },
-        {
-          id: nanoid(),
-          time: [18.5, 19],
-          name: 'eat beefsteak',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [19, 20.5],
-          name: 'watch tech youtube',
-          group: 'improvement',
-        },
-      ]
-    }
+    // if (index === 15) {
+    //   tasks = [
+    //     {
+    //       id: nanoid(),
+    //       time: [0, 7],
+    //       name: 'sleep',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [7, 8.5],
+    //       name: 'lie in bed',
+    //       group: 'laze',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [8.5, 9.5],
+    //       name: 'morning routine',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [9.5, 9.75],
+    //       name: 'get to work',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [9.75, 10.5],
+    //       name: 'work morning routine',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [10.5, 14],
+    //       name: 'courses - k hands on',
+    //       group: 'improvement',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [14, 14.5],
+    //       name: 'break',
+    //       group: 'laze',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [14.5, 18.5],
+    //       name: 'courses - k hands on',
+    //       group: 'improvement',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [18.5, 19],
+    //       name: 'eat beefsteak',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [19, 20.5],
+    //       name: 'watch tech youtube',
+    //       group: 'improvement',
+    //     },
+    //   ]
+    // }
   
-    if (index === 16) {
-      tasks = [
-        {
-          id: nanoid(),
-          time: [0, 7],
-          name: 'sleep',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [7, 7.25],
-          name: 'lie in bed',
-          group: 'laze',
-        },
-        {
-          id: nanoid(),
-          time: [7.25, 8],
-          name: 'morning routine',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [8, 8.25],
-          name: 'breakfast - pho',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [8.25, 8.5],
-          name: 'get to work',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [8.5, 8.75],
-          name: 'work morning routine',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [8.75, 9.5],
-          name: 'watch youtube',
-          group: 'laze',
-        },
-        {
-          id: nanoid(),
-          time: [9.5, 12.75],
-          name: 'courses - k hands on',
-          group: 'improvement',
-        },
-        {
-          id: nanoid(),
-          time: [12.75, 13.5],
-          name: 'break',
-          group: 'laze',
-        },
-        {
-          id: nanoid(),
-          time: [13.5, 17],
-          name: 'courses - k hands on',
-          group: 'improvement',
-        },
-        {
-          id: nanoid(),
-          time: [17, 23],
-          name: 'break',
-          group: 'laze',
-        },
-      ]
-    }
+    // if (index === 16) {
+    //   tasks = [
+    //     {
+    //       id: nanoid(),
+    //       time: [0, 7],
+    //       name: 'sleep',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [7, 7.25],
+    //       name: 'lie in bed',
+    //       group: 'laze',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [7.25, 8],
+    //       name: 'morning routine',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [8, 8.25],
+    //       name: 'breakfast - pho',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [8.25, 8.5],
+    //       name: 'get to work',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [8.5, 8.75],
+    //       name: 'work morning routine',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [8.75, 9.5],
+    //       name: 'watch youtube',
+    //       group: 'laze',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [9.5, 12.75],
+    //       name: 'courses - k hands on',
+    //       group: 'improvement',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [12.75, 13.5],
+    //       name: 'break',
+    //       group: 'laze',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [13.5, 17],
+    //       name: 'courses - k hands on',
+    //       group: 'improvement',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [17, 23],
+    //       name: 'break',
+    //       group: 'laze',
+    //     },
+    //   ]
+    // }
   
-    if (index === 18) {
-      tasks = [
-        {
-          id: nanoid(),
-          time: [0, 4.5],
-          name: 'sleep',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [4.5, 5],
-          name: 'morning routine',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [5, 5.75],
-          name: 'youtube',
-          group: 'laze',
-        },
-        {
-          id: nanoid(),
-          time: [5.75, 6.5],
-          name: 'courses - k hands on',
-          group: 'improvement',
-        },
-        {
-          id: nanoid(),
-          time: [6.5, 8],
-          name: 'relax',
-          group: 'laze',
-        },
-        {
-          id: nanoid(),
-          time: [8, 8.25],
-          name: 'get to work',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [8.25, 8.5],
-          name: 'work morning routine',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [8.5, 12.5],
-          name: 'courses - k hands on',
-          group: 'improvement',
-        },
-        {
-          id: nanoid(),
-          time: [12.5, 12.75],
-          name: 'relax',
-          group: 'laze',
-        },
-        {
-          id: nanoid(),
-          time: [12.75, 13.5],
-          name: 'courses - k hands on',
-          group: 'improvement',
-        },
-      ]
-    }
+    // if (index === 18) {
+    //   tasks = [
+    //     {
+    //       id: nanoid(),
+    //       time: [0, 4.5],
+    //       name: 'sleep',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [4.5, 5],
+    //       name: 'morning routine',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [5, 5.75],
+    //       name: 'youtube',
+    //       group: 'laze',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [5.75, 6.5],
+    //       name: 'courses - k hands on',
+    //       group: 'improvement',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [6.5, 8],
+    //       name: 'relax',
+    //       group: 'laze',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [8, 8.25],
+    //       name: 'get to work',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [8.25, 8.5],
+    //       name: 'work morning routine',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [8.5, 12.5],
+    //       name: 'courses - k hands on',
+    //       group: 'improvement',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [12.5, 12.75],
+    //       name: 'relax',
+    //       group: 'laze',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [12.75, 13.5],
+    //       name: 'courses - k hands on',
+    //       group: 'improvement',
+    //     },
+    //   ]
+    // }
   
-    if (index === 21) {
-      tasks = [
-        {
-          id: nanoid(),
-          time: [9, 14],
-          name: 'munich apartment/tax',
-          group: 'essentials',
-        },
-      ]
-    }
+    // if (index === 21) {
+    //   tasks = [
+    //     {
+    //       id: nanoid(),
+    //       time: [9, 14],
+    //       name: 'munich apartment/tax',
+    //       group: 'essentials',
+    //     },
+    //   ]
+    // }
   
-    if (index === 22) {
-      tasks = [
-        {
-          id: nanoid(),
-          time: [10, 13],
-          name: 'munich apartment/tax',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [13, 19],
-          name: 'courses - k hands on',
-          group: 'improvement',
-        },
-      ]
-    }
+    // if (index === 22) {
+    //   tasks = [
+    //     {
+    //       id: nanoid(),
+    //       time: [10, 13],
+    //       name: 'munich apartment/tax',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [13, 19],
+    //       name: 'courses - k hands on',
+    //       group: 'improvement',
+    //     },
+    //   ]
+    // }
   
-    if (index === 23) {
-      tasks = [
-        {
-          id: nanoid(),
-          time: [0, 6.5],
-          name: 'sleep',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [6.5, 7],
-          name: 'lie in bed',
-          group: 'laze',
-        },
-        {
-          id: nanoid(),
-          time: [7, 7.5],
-          name: 'morning routine rushed',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [7.5, 8],
-          name: 'breakfast - pho',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [8, 8.25],
-          name: 'walk to work',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [8.25, 8.5],
-          name: 'work morning routine',
-          group: 'essentials',
-        },
-        {
-          id: nanoid(),
-          time: [8.5, 9.5],
-          name: 'youtube',
-          group: 'laze',
-        },
-        {
-          id: nanoid(),
-          time: [9.5, 13],
-          name: 'organise fullstack notes',
-          group: 'improvement',
-        },
-        {
-          id: nanoid(),
-          time: [13, 13.5],
-          name: 'break',
-          group: 'laze',
-        },
-        {
-          id: nanoid(),
-          time: [13.5, 16.5],
-          name: 'youtube fullstack',
-          group: 'improvement',
-        },
-        {
-          id: nanoid(),
-          time: [16.5, 17],
-          name: 'break',
-          group: 'laze',
-        },
-        {
-          id: nanoid(),
-          time: [17, 19.75],
-          name: 'youtube fullstack',
-          group: 'improvement',
-        },
-      ]
-    }
+    // if (index === 23) {
+    //   tasks = [
+    //     {
+    //       id: nanoid(),
+    //       time: [0, 6.5],
+    //       name: 'sleep',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [6.5, 7],
+    //       name: 'lie in bed',
+    //       group: 'laze',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [7, 7.5],
+    //       name: 'morning routine rushed',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [7.5, 8],
+    //       name: 'breakfast - pho',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [8, 8.25],
+    //       name: 'walk to work',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [8.25, 8.5],
+    //       name: 'work morning routine',
+    //       group: 'essentials',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [8.5, 9.5],
+    //       name: 'youtube',
+    //       group: 'laze',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [9.5, 13],
+    //       name: 'organise fullstack notes',
+    //       group: 'improvement',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [13, 13.5],
+    //       name: 'break',
+    //       group: 'laze',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [13.5, 16.5],
+    //       name: 'youtube fullstack',
+    //       group: 'improvement',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [16.5, 17],
+    //       name: 'break',
+    //       group: 'laze',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [17, 19.75],
+    //       name: 'youtube fullstack',
+    //       group: 'improvement',
+    //     },
+    //   ]
+    // }
   
-    if (index === 24) {
-      tasks = [
-        {
-          id: nanoid(),
-          time: [12, 16.5],
-          name: 'youtube fullstack',
-          group: 'improvement',
-        },
-      ]
-    }
+    // if (index === 24) {
+    //   tasks = [
+    //     {
+    //       id: nanoid(),
+    //       time: [12, 16.5],
+    //       name: 'youtube fullstack',
+    //       group: 'improvement',
+    //     },
+    //   ]
+    // }
   
-    if (index === 25) {
-      tasks = [
-        {
-          id: nanoid(),
-          time: [13.5, 19],
-          name: 'youtube fullstack',
-          group: 'improvement',
-        },
-      ]
-    }
+    // if (index === 25) {
+    //   tasks = [
+    //     {
+    //       id: nanoid(),
+    //       time: [13.5, 19],
+    //       name: 'youtube fullstack',
+    //       group: 'improvement',
+    //     },
+    //   ]
+    // }
   
-    if (index === 27) {
-      tasks = [
-        {
-          id: nanoid(),
-          time: [13, 16],
-          name: 'upskill admin',
-          group: 'improvement',
-        },
-      ]
-    }
+    // if (index === 27) {
+    //   tasks = [
+    //     {
+    //       id: nanoid(),
+    //       time: [13, 16],
+    //       name: 'upskill admin',
+    //       group: 'improvement',
+    //     },
+    //   ]
+    // }
   
-    if (index === 28) {
-      tasks = [
-        {
-          id: nanoid(),
-          time: [9, 10.5],
-          name: 'relocation admin',
-          group: 'improvement',
-        },
-        {
-          id: nanoid(),
-          time: [10.5, 11.5],
-          name: 'upskill admin',
-          group: 'improvement',
-        },
-        {
-          id: nanoid(),
-          time: [11.5, 16.5],
-          name: 'algorithms',
-          group: 'improvement',
-        },
-      ]
-    }
+    // if (index === 28) {
+    //   tasks = [
+    //     {
+    //       id: nanoid(),
+    //       time: [9, 10.5],
+    //       name: 'relocation admin',
+    //       group: 'improvement',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [10.5, 11.5],
+    //       name: 'upskill admin',
+    //       group: 'improvement',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [11.5, 16.5],
+    //       name: 'algorithms',
+    //       group: 'improvement',
+    //     },
+    //   ]
+    // }
   
-    if (index === 29) {
-      tasks = [
-        {
-          id: nanoid(),
-          time: [11, 12.5],
-          name: 'relocation admin',
-          group: 'improvement',
-        },
-        {
-          id: nanoid(),
-          time: [12.5, 15.5],
-          name: 'algorithms',
-          group: 'improvement',
-        },
-      ]
-    }
+    // if (index === 29) {
+    //   tasks = [
+    //     {
+    //       id: nanoid(),
+    //       time: [11, 12.5],
+    //       name: 'relocation admin',
+    //       group: 'improvement',
+    //     },
+    //     {
+    //       id: nanoid(),
+    //       time: [12.5, 15.5],
+    //       name: 'algorithms',
+    //       group: 'improvement',
+    //     },
+    //   ]
+    // }
   
-    if (index === 30) {
+    if (index === 0) {
       tasks = [
         {
           id: nanoid(),
@@ -1908,9 +1908,56 @@ const initialState = {
         },
         {
           id: nanoid(),
-          time: [15.5, 17],
+          time: [15.5, 19.5],
           name: 'frontend upskill',
           group: 'improvement',
+        },
+      ]
+    }
+  
+    if (index === 1) {
+      tasks = [
+        {
+          id: nanoid(),
+          time: [0, 6.5],
+          name: 'sleep',
+          group: 'essentials',
+        },
+        {
+          id: nanoid(),
+          time: [6.5, 7.25],
+          name: 'lie in bed',
+          group: 'laze',
+        },
+        {
+          id: nanoid(),
+          time: [7.25, 8.5],
+          name: 'morning routine',
+          group: 'essentials',
+        },
+        {
+          id: nanoid(),
+          time: [8.5, 9],
+          name: 'breakfast - pho',
+          group: 'essentials',
+        },
+        {
+          id: nanoid(),
+          time: [9, 9.25],
+          name: 'get to work',
+          group: 'essentials',
+        },
+        {
+          id: nanoid(),
+          time: [9.25, 10],
+          name: 'laze',
+          group: 'essentials',
+        },
+        {
+          id: nanoid(),
+          time: [10, 14],
+          name: 'frontend upskill',
+          group: 'essentials',
         },
       ]
     }

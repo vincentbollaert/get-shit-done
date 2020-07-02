@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react'
 
-const UseSetCustomRangeLabels = ({ isBeingFiltered, isFiltered, from }) => {
+interface Params {
+  isBeingFiltered: boolean,
+  isFiltered: boolean,
+  from: number,
+}
+const UseSetCustomRangeLabels = ({ isBeingFiltered, isFiltered, from }: Params) => {
   const [filteredRange, setFilteredRange] = useState([])
 
   const updateList = (current) => {

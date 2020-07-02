@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { FC } from 'react'
 import styled from 'styled-components'
 
 import UseFilterRange from '../../hooks/useFilterRange'
 import UseHighlightFilteredRange from '../../hooks/useHighlightFIlteredRange'
 import { useSelector } from 'react-redux'
 import { actions } from '../../reducers/calendar'
+import { RootState } from '../../Application/Root/reducers'
 
-const Wrap = styled.div`
+const Wrap = styled.div<{ isBeingFiltered: boolean }>`
   z-index: 2;
   display: flex;
   position: absolute;
@@ -31,7 +32,7 @@ const Wrap = styled.div`
     width: 50px;
   };
 `
-const HourLabel = styled.div`
+const HourLabel = styled.div<{ isFiltered: boolean, isActive: boolean, isBeingFiltered: boolean }>`
   position: relative;
   display: flex;
   justify-content: center;
@@ -80,8 +81,12 @@ const HourLabel = styled.div`
   };
 `
 
-const HourLabels = ({ onHover }) => {
-  const { hoursAxis } = useSelector(state => state.calendar)
+interface Props {
+  onHover: any,
+}
+
+const HourLabels: FC<Props> = ({ onHover }) => {
+  const { hoursAxis } = useSelector((state: RootState) => state.calendar)
   const [{ isFiltered, isBeingFiltered, from }, onFilter ] = UseFilterRange({ from: 0, to: 23, cb: actions.filterHours })
   const [filteredRange, highlightFilteredRange] = UseHighlightFilteredRange({ isBeingFiltered, isFiltered, from })
 

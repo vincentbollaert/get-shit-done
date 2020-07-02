@@ -43,15 +43,15 @@ const Wrap = styled.button<{ isInForm: boolean, accentColor: string }>`
 `
 
 interface Props {
-  isDisabled: boolean,
-  isInForm: boolean,
-  accentColor: string,
-  type: string = 'button',
+  isDisabled?: boolean,
+  isInForm?: boolean,
+  accentColor?: string,
+  type: 'submit' | 'button' | 'reset',
   children: any,
-  onClick: any
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }
 
-const Button: FC<Props> = ({ isDisabled, isInForm, accentColor, type = 'button', children, onClick }) => (
+const Button: FC<Props> = ({ isDisabled, isInForm, accentColor, type, children, onClick }) => (
   <Wrap
     disabled={isDisabled}
     isInForm={isInForm}

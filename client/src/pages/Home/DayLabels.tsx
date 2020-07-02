@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import styled from 'styled-components'
 import isToday from 'date-fns/isToday'
 import format from 'date-fns/format'
@@ -9,8 +9,9 @@ import { useSelector } from 'react-redux'
 import { actions } from '../../reducers/calendar'
 import { MONTH_DAYS } from '../../constants'
 import { flex } from '../../styles'
+import { RootState } from '../../Application/Root/reducers'
 
-const Wrap = styled.div`
+const Wrap = styled.div<{ isBeingFiltered: boolean }>`
   position: absolute;
   top: 0;
   right: 0;
@@ -31,7 +32,7 @@ const Wrap = styled.div`
     height: 50px;
   };
 `
-const DayLabel = styled.div`
+const DayLabel = styled.div<{ isBeingFiltered: boolean, isCurrentWeek: boolean, isCurrentDay: boolean, isActive: boolean, isFiltered: boolean }>`
   ${flex({ grow: 1, shrink: 0, basis: 0, isCenter: true })};
   position: relative;
   border-bottom: 4px solid var(--jet);
@@ -127,9 +128,12 @@ const DayLabel = styled.div`
     background-color: #ffffff42;
   };
 `
+interface Props {
+  onHover: any,
+}
 
-const DayLabels = ({ onHover }) => {
-  const { daysAxis } = useSelector(state => state.calendar)
+const DayLabels: FC<Props> = ({ onHover }) => {
+  const { daysAxis } = useSelector((state: RootState) => state.calendar)
   const [{ isFiltered, isBeingFiltered, from }, onFilter]
     = UseFilterRange({ from: 1, to: MONTH_DAYS.length, cb: actions.filterDays })
   const [filteredRange, highlightFilteredRange] = UseHighlightFilteredRange({ isBeingFiltered, isFiltered, from })

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { actions } from './reducer'
+import { RootState } from '../../Application/Root/reducers'
 
 const Wrap = styled.div`
   z-index: 1;
@@ -60,7 +61,7 @@ function Toast() {
   const timeoutIdRef = useRef(null)
   const timeRemainingRef = useRef(null)
   const [timeRemaining, setTimeRemaining] = useState(5)
-  const { message, messagePrefix } = useSelector(state => state.toast.toast)
+  const { message, messagePrefix } = useSelector((state: RootState) => state.toast.toast)
   const dispatch = useDispatch()
   timeRemainingRef.current = timeRemaining
 

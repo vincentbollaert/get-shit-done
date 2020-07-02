@@ -5,9 +5,12 @@ import { reducer as todos } from '../../reducers/todos'
 import { reducer as calendar } from '../../reducers/calendar'
 import { reducer as toast } from '../../components/Toast/reducer'
 
-export default combineReducers({
+const rootReducer = combineReducers({
   settings,
   todos: undoable(todos),
   calendar,
   toast,
 })
+
+export default rootReducer
+export type RootState = ReturnType<typeof rootReducer>

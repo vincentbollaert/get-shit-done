@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import styled from 'styled-components'
 import { STYLE_SIDEBAR_WIDTH_UNIT } from '../../styles'
 import lisSvg from '../../assets/svg/list.svg'
@@ -26,7 +26,7 @@ const Toggles = styled.div`
   position: absolute;
   top: 16px;
 `
-const Tasks = styled.div`
+const Tasks = styled.div<{ isOpen: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,7 +50,7 @@ const Tasks = styled.div`
     };
   `};
 `
-const Toggle = styled(Svg)`
+const Toggle = styled(Svg)<{ isActive: boolean }>`
   width: 2rem;
   height: 2rem;
   cursor: pointer;
@@ -66,7 +66,7 @@ const Tab = styled(Svg)`
   height: 2rem;
 `
 
-const Content = styled.div`
+const Content = styled.div<{ isOpen: boolean }>`
   position: absolute;
   top: 0;
   right: 100%;
@@ -85,7 +85,13 @@ const Content = styled.div`
   `};
 `
 
-const Sidebar = ({ isOpen, setIsOpen, children }) => {
+interface Props {
+  isOpen: boolean,
+  setIsOpen: any,
+  children: any,
+}
+
+const Sidebar: FC<Props> = ({ isOpen, setIsOpen, children }) => {
   const [isFullscreen, setIsFullscreen] = UseFullscreenToggle(false)
 
   return (

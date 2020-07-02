@@ -18,7 +18,7 @@ const PageWrap = styled.div`
   position: relative;
   background-color: var(--charcoal);
 `
-const Wrap = styled.div`
+const Wrap = styled.div<{ isOpen: boolean, scaleTest: any }>`
   display: flex;
   flex-grow: 1;
   position: relative;

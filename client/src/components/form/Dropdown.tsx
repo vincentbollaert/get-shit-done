@@ -44,24 +44,28 @@ const After = styled.div`
   position: absolute;
   right: 0;
 `
-
-interface Props {
+interface IItem {
+  id: number,
+  color?: { value: string },
+  [key: string]: any,
+}
+interface IProps {
   theme: string,
-  isInForm: boolean,
-  activeItem? = {},
+  isInForm?: boolean,
+  activeItem?: any,
   label: string,
-  name: string,
+  name?: string,
   list: any,
   listKey: string,
-  onSelect: any,
-  inputRef: any,
+  onSelect({ id, color }: IItem): void,
+  inputRef(instance: HTMLInputElement): void,
 }
 
-const Dropdown: FC<Props> = ({ theme, isInForm, activeItem = {}, label, name, list, listKey, onSelect, inputRef }) => {
+const Dropdown: FC<IProps> = ({ theme, isInForm, activeItem = {}, label, name, list, listKey, onSelect, inputRef }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [activeItemUpdated, setActiveItem] = useState(activeItem)
 
-  function onItemSelect(item) {
+  function onItemSelect(item: IItem): void {
     setActiveItem(item)
     onSelect(item)
     setIsOpen(false)
@@ -83,10 +87,10 @@ const Dropdown: FC<Props> = ({ theme, isInForm, activeItem = {}, label, name, li
         </Placeholder>
         <Input as="div">{activeItemUpdated[listKey]}</Input>
         {name && <InputHidden name={name} type="text" ref={inputRef} value={activeItemUpdated[listKey] || ''} />}
-        <SvgStyled them="light" svg={chevronDownSvg} />
+        <SvgStyled theme="light" svg={chevronDownSvg} />
       </Header>
       <List isOpen={isOpen}>
-        {list.map((item) => {
+        {list.map((item: IItem) => {
           const { id, color } = item
 
           return (

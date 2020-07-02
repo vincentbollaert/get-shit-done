@@ -32,7 +32,7 @@ export const Wrap = styled.div<{ isInForm: boolean }>`
   `};
 `
 
-export const Input = styled.input<{ isError: boolean }>`
+export const Input = styled.input<{ isError?: boolean }>`
   display: flex;
   align-items: center;
   padding-top: var(--size-sm);

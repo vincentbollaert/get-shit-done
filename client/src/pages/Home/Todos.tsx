@@ -7,13 +7,14 @@ import binSvg from '../../assets/svg/bin.svg'
 import Svg from '../../components/Svg/component'
 
 import AddNewTodo from './AddNewTodo'
+import { RootState } from '../../Application/Root/reducers'
 
 const Title = styled.div`
   font-weight: bold;
   text-transform: uppercase;
   margin-bottom: 3.4rem;
 `
-const Todo = styled.div`
+const Todo = styled.div<{ isDone: boolean }>`
   position: relative;
   display: flex;
   align-items: center;
@@ -51,7 +52,7 @@ const Remove = styled(Svg)`
 
 const Todos = () => {
   const { add, remove, toggleIsDone } = todoActions
-  const { todos } = useSelector(state => state.todos.present)
+  const { todos } = useSelector((state: RootState) => state.todos.present)
   const dispatch = useDispatch()
   const onAddNewTodo = ({ todo }) => { dispatch(add(todo)) }
   const onRemoveTodo = (id, name) => {
