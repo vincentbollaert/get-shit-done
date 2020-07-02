@@ -5,6 +5,7 @@ import { actions } from '../../reducers/calendar'
 import Modal from '../../components/Modal/component'
 import AddNewCalendarTask from './AddNewCalendarTask'
 import { rgbAdjust, ellipsis } from '../../styles'
+import { RootState } from '../../Application/Root/reducers'
 
 const PlaceholderTaskWrap = styled.div<{ isBeingPrepared: boolean, accentColor: string }>`
   ${ellipsis()};
@@ -33,8 +34,8 @@ interface Props {
 }
 
 const PlaceholderTask: FC<Props> = ({ dateString, hourSlotsRef, y }) => {
-  const { taskBeingPrepared = {} } = useSelector(state => state.calendar)
-  const { groups } = useSelector(state => state.settings)
+  const { taskBeingPrepared = {} } = useSelector((state: RootState) => state.calendar)
+  const { groups } = useSelector((state: RootState) => state.settings)
   const [{ isModalOpen, timeFrom }, setState] = useState({ isModalOpen: false, timeFrom: undefined })
   const dispatch = useDispatch()
 

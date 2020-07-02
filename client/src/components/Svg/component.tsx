@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import { string, number, func, bool } from 'prop-types'
 import styled from 'styled-components'
 
 export const CN_SVG = 'svg'
@@ -22,15 +21,15 @@ const Wrap = styled.span<{ size: number, isDanger: boolean, theme: string }>`
 `
 
 interface Props {
-  isDanger: boolean,
-  theme: string,
+  isDanger?: boolean,
+  theme?: string,
   svg: string,
-  size: number,
+  size?: number,
   className?: string,
-  onClick: any,
+  onClick?(event: React.MouseEvent<HTMLSpanElement, MouseEvent>): void,
 }
 
-const Svg: FC<Props> = ({ isDanger, theme, svg, size, className, onClick }) => (
+const Svg: FC<Props> = ({ isDanger, theme = 'light', svg, size = 2.4, className, onClick }) => (
   <Wrap
     isDanger={isDanger}
     theme={theme}
@@ -40,22 +39,5 @@ const Svg: FC<Props> = ({ isDanger, theme, svg, size, className, onClick }) => (
     dangerouslySetInnerHTML={{ __html: svg }}
   />
 )
-
-Svg.propTypes = {
-  isDanger: bool,
-  theme: string,
-  svg: string.isRequired,
-  size: number,
-  onClick: func,
-  className: string,
-}
-
-Svg.defaultProps = {
-  isDanger: false,
-  theme: 'light',
-  size: 2.4,
-  onClick() {},
-  className: undefined,
-}
 
 export default Svg

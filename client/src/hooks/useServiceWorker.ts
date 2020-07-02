@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const UseUpdateServiceWorker = (initialState) => {
+const UseUpdateServiceWorker = (initialState: boolean) => {
   const [state, setState] = useState(initialState)
 
   useEffect(() => {

@@ -5,7 +5,7 @@ import startOfToday from 'date-fns/startOfToday'
 import format from 'date-fns/format'
 import add from 'date-fns/add'
 
-const Wrap = styled.div`
+const Wrap = styled.div<{ top: number }>`
   z-index: 2;
   position: absolute;
   top: ${p => p.top}%;

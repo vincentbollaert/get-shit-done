@@ -3,7 +3,7 @@ import { useState } from 'react'
 const UseConvertPXToScale = () => {
   const [{ x, y }, set] = useState({ x: 1, y: 1 })
 
-  const updateScale = ({ ref, inPixels, isReset, axis }) => {
+  const updateScale = ({ ref, inPixels, isReset, axis }: { inPixels: number, isReset: boolean, axis: string }) => {
     if (isReset) {
       return set({ x: 1, y: 1 })
     }

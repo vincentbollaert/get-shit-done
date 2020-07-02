@@ -8,14 +8,13 @@ interface Props {
   isInForm: boolean,
   theme: string,
   name: string,
-  type: string = 'text',
-  defaultValue: string,
+  type?: string,
+  defaultValue?: string,
   placeholder: string,
-  svg: string,
+  svg?: string,
   errorMessage: string,
   className?: string,
   inputRef: any,
-  bubbleValue: any,
 }
 
 const Field: FC<Props> = ({
@@ -29,14 +28,12 @@ const Field: FC<Props> = ({
   errorMessage,
   className,
   inputRef,
-  bubbleValue,
 }) => {
   const [value, setValue] = useState(defaultValue)
   const hasValue = (value !== undefined && value !== '')
   const onChange = (event) => {
     const { name, value } = event.target
     setValue(value)
-    bubbleValue && bubbleValue({ name, value })
   }
 
   return (

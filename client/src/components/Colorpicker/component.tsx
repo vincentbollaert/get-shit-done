@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
+import { RootState } from '../../Application/Root/reducers'
 
 const Wrap = styled.div`
   position: relative;
@@ -24,7 +25,7 @@ const Colors = styled.div<{ isOpen: boolean }>`
   background: var(--charcoal);
   box-shadow: 3px 3px 8px -5px var(--charcoal);
 `
-const Color = styled.div`
+const Color = styled.div<{ color: string }>`
   width: 40px;
   height: 40px;
   background-color: ${p => p.color};
@@ -36,11 +37,11 @@ const Color = styled.div`
 `
 interface Props {
   selectedColor: string,
-  setSelectedColor: any,
+  setSelectedColor (color: string): void,
 }
 
 const Colorpicker: FC<Props> = ({ selectedColor, setSelectedColor }) => {
-  const { colors } = useSelector(state => state.settings)
+  const { colors } = useSelector((state: RootState) => state.settings)
   const [isOpen, toggleIsOpen] = useState(false)
 
   function handleClick(color: string) {
@@ -52,7 +53,7 @@ const Colorpicker: FC<Props> = ({ selectedColor, setSelectedColor }) => {
       <Toggle color={selectedColor} onClick={() => toggleIsOpen(!isOpen)}></Toggle>
       <Colors isOpen={isOpen}>
         {Object.entries(colors).map(([key, value]) => (
-          <Color color={value} key={key} onClick={() => handleClick([key, value])} />
+          <Color color={value} key={key} onClick={() => handleClick(value)} /> // potential bug
         ))}
       </Colors>
     </Wrap>
