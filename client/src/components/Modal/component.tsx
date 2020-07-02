@@ -80,7 +80,7 @@ interface Props {
   title: string,
   width: number,
   children: any,
-  onOverlayToggle: any,
+  onOverlayToggle(event: React.MouseEvent<HTMLSpanElement, MouseEvent>): void,
 }
 
 const Modal: FC<Props> = ({ title, width, children, onOverlayToggle }) => (

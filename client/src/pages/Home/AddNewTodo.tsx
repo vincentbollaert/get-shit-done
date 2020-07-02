@@ -6,9 +6,14 @@ import TextField from '../../components/form/Field/component'
 const Form = styled.form`
   margin-bottom: var(--size-md);
 `
-const AddNewTodo: FC<{ addNewTodo: any }> = (({ addNewTodo }) => {
+
+interface IProps {
+  addNewTodo(data: any): void
+}
+
+const AddNewTodo: FC<IProps> = (({ addNewTodo }) => {
   const { register, handleSubmit, errors } = useForm()
-  const onSubmit = data => addNewTodo(data)
+  const onSubmit = (data: any) => addNewTodo(data)
   const errorMessage = (errors.todo || {}).type
   
   return (

@@ -129,7 +129,7 @@ const DayLabel = styled.div<{ isBeingFiltered: boolean, isCurrentWeek: boolean, 
   };
 `
 interface Props {
-  onHover: any,
+  onHover({}: { axis: string, isReset?: boolean }): void,
 }
 
 const DayLabels: FC<Props> = ({ onHover }) => {
