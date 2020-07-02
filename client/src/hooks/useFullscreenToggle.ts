@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
-const UseFullscreenToggle = (initialState: boolean) => {
+const UseFullscreenToggle = (initialState: boolean): [boolean, () => void] => {
   const [state, setIsFullscreen] = useState(initialState)
 
-  function toggleFullScreen() {
+  function toggleFullScreen(): void {
     if (!document.fullscreenElement) {
         setIsFullscreen(true)
         document.documentElement.requestFullscreen()

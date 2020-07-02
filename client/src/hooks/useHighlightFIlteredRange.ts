@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
 
 interface Params {
-  isBeingFiltered: boolean,
-  isFiltered: boolean,
+  isBeingFiltered?: boolean,
+  isFiltered?: boolean,
   from: number,
 }
 const UseSetCustomRangeLabels = ({ isBeingFiltered, isFiltered, from }: Params) => {
-  const [filteredRange, setFilteredRange] = useState([])
+  const [filteredRange, setFilteredRange] = useState([]) // find out how to TS useState
 
-  const updateList = (current) => {
+  const updateList = (current: number) => {
     if (!isBeingFiltered) return
     const fromFormatted = Number(from)
     const fromToDifference = Math.max(current, fromFormatted) - Math.min(current, fromFormatted)

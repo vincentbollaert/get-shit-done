@@ -20,7 +20,7 @@ const AddNewCalendarTask: FC<Props> = ({ dateString, taskBeingEdited }) => {
   const [selectedGroup, setSelectedGroup] = useState(taskBeingEdited.group)
   const { groups } = useSelector((state: RootState) => state.settings)
   const { id, time, name, group } = taskBeingEdited
-  const onSubmit = data => dispatch(actions.saveTask({
+  const onSubmit = (data: any) => dispatch(actions.saveTask({
     id,
     group: selectedGroup,
     dateString,

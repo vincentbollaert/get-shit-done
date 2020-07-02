@@ -82,7 +82,7 @@ const HourLabel = styled.div<{ isFiltered: boolean, isActive: boolean, isBeingFi
 `
 
 interface Props {
-  onHover: any,
+  onHover({}: { axis: string, isReset?: boolean }): void,
 }
 
 const HourLabels: FC<Props> = ({ onHover }) => {

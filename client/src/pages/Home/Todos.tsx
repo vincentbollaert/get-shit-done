@@ -49,12 +49,17 @@ const Remove = styled(Svg)`
   height: 1.6rem;
   cursor: pointer;
 `
+interface Todo {
+  id: string,
+  todoName: string,
+  isDone?: boolean,
+}
 
 const Todos = () => {
   const { add, remove, toggleIsDone } = todoActions
   const { todos } = useSelector((state: RootState) => state.todos.present)
   const dispatch = useDispatch()
-  const onAddNewTodo = ({ todo }) => { dispatch(add(todo)) }
+  const onAddNewTodo = ({ todo }: { todo: any }) => { dispatch(add(todo)) }
   const onRemoveTodo = (id, name) => {
     dispatch(remove(id))
     dispatch(toastActions.addToast({ prefix: 'task removed', message: name }))
@@ -65,7 +70,7 @@ const Todos = () => {
       <Title>Todos</Title>
       
       <AddNewTodo addNewTodo={onAddNewTodo} />
-      {todos.map(({ id, todoName, isDone }) => (
+      {todos.map(({ id, todoName, isDone }: Todo) => (
         <Todo isDone={isDone} key={id} onClick={() => dispatch(toggleIsDone(id))}>
           <Name>
             {todoName}

@@ -1,17 +1,19 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { number } from 'prop-types'
 
-interface Props {
+interface IProps {
   from: number,
   to: number,
   cb: any,
 }
-const UseRangeFilter = ({ from, to, cb }) => {
+
+const UseRangeFilter = ({ from, to, cb }: IProps) => {
   const dispatch = useDispatch()
   const [{ fromDefault, toDefault }] = useState({ fromDefault: from, toDefault: to })
-  const [{ fromCustom, toCustom}, applyFilters] = useState({}) 
+  const [{ fromCustom, toCustom }, applyFilters] = useState({})
 
-  const onFilter = (hour) => {
+  const onFilter = (hour: number) => {
     if (!fromCustom) {
       applyFilters({ fromCustom: hour })
     } else if (!toCustom){
@@ -33,7 +35,7 @@ const UseRangeFilter = ({ from, to, cb }) => {
       to: toCustom || toDefault,
     },
     onFilter,
-  ]
+  ] as const
 }
 
 export default UseRangeFilter

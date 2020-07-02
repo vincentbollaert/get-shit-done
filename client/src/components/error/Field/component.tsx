@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 export const CN_ERROR_FIELD = 'error-field'
 
-const Wrap = styled.div<{ isInfoVariant: boolean }>`
+const Wrap = styled.div<{ isInfoVariant?: boolean }>`
   position: absolute;
   top: 100%;
   right: 0;
@@ -12,7 +12,7 @@ const Wrap = styled.div<{ isInfoVariant: boolean }>`
   color: ${props => props.isInfoVariant ? 'var(--very-light-tangelo)' : 'var(--sunset-orange)'};
 `
 interface Props {
-  errorMessage: string,
+  errorMessage?: string,
   className?: string,
 }
 

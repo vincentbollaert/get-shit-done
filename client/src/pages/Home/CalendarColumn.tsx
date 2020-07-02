@@ -8,12 +8,11 @@ import PlaceholderTask from './PlaceholderTask'
 import { actions } from '../../reducers/calendar'
 import Modal from '../../components/Modal/component'
 import EditCalendarTask from './EditCalendarTask'
-import { number } from 'prop-types'
 import { RootState } from '../../Application/Root/reducers'
 
 const CN_HOUR_SLOTS = 'hour-slots'
 
-const Wrap = styled.div<{ isCurrentWeek: boolean, isCurrentDay: boolean }>`
+const Wrap = styled.div<{ isCurrentWeek?: boolean, isCurrentDay: boolean }>`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -54,7 +53,7 @@ const HourSlots = styled.div`
     padding-left: 12px;
   };
 `
-const Cell = styled.div<{ isGap: boolean, flex: number, accentColor: string, isSmall: boolean }>`
+const Cell = styled.div<{ isGap?: boolean, flex: number, accentColor?: string, isSmall?: boolean }>`
   ${ellipsis()};
   z-index: ${p => p.isGap ? 0 : 1};
   position: relative;
@@ -77,10 +76,19 @@ const Cell = styled.div<{ isGap: boolean, flex: number, accentColor: string, isS
     font-size: 11px;
   `};
 `
+
+interface Task {
+  id: string,
+  heightInFlex: number,
+  name: string,
+  group: string,
+  gapBefore: number,
+  gapAfter: number,
+}
 interface Props {
   dateString: string,
   isCurrentDay: boolean,
-  tasksFiltered: any,
+  tasksFiltered: Task[],
 }
 
 const CalendarColumn: FC<Props> = ({ dateString, isCurrentDay, tasksFiltered }) => {
@@ -92,7 +100,7 @@ const CalendarColumn: FC<Props> = ({ dateString, isCurrentDay, tasksFiltered }) 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const hourSlotsRef = useRef(null)
 
-  function updatePlaceholderTask(event) {
+  function updatePlaceholderTask(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     if (taskBeingPrepared !== undefined) return
     const HALF_HOUR_PX = 19.4
     const columnTopPx = event.currentTarget.getBoundingClientRect().top
@@ -116,7 +124,7 @@ const CalendarColumn: FC<Props> = ({ dateString, isCurrentDay, tasksFiltered }) 
         onMouseMove={updatePlaceholderTask}
         className={CN_HOUR_SLOTS}
       >
-        {tasksFiltered.map(({ id, heightInFlex, name, group, gapBefore, gapAfter, }) => {
+        {tasksFiltered.map(({ id, heightInFlex, name, group, gapBefore, gapAfter }) => {
           const { color: { value } } = groups.find(x => x.name === group)
           return (
             <Fragment key={id}>

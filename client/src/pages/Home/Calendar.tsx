@@ -17,7 +17,10 @@ const Wrap = styled.div<{ x: number, y: number }>`
 `
 
 interface Props {
-  scale: any,
+  scale: {
+    x: number,
+    y: number,
+  },
 } 
 
 const Calendar: FC<Props> = ({ scale: { x, y } }) => {
