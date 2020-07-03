@@ -20,7 +20,7 @@ export const { reducer, actions } = createSlice({
       }
     },
     removeToast(state) {
-      state.toast = {}
+      state = initialState
     },
   }
 })
