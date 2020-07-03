@@ -1,7 +1,11 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit'
 
 const initialState = {
-  toast: {}
+  toast: {
+    id: nanoid(),
+    message: '',
+    messagePrefix: '',
+  }
 }
 
 export const { reducer, actions } = createSlice({

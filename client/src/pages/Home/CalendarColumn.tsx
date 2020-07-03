@@ -110,7 +110,7 @@ const CalendarColumn: FC<Props> = ({ dateString, isCurrentDay, tasksFiltered }) 
     if (isNewNearest) setY(nearest25)
   }
 
-  function onEditTask(id) {
+  function onEditTask(id: string) {
     console.log('edit task', id)
     setIsEditModalOpen(true)
     dispatch(actions.editTask({ id, dateString }))

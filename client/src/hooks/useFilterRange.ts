@@ -11,7 +11,7 @@ interface IProps {
 const UseRangeFilter = ({ from, to, cb }: IProps) => {
   const dispatch = useDispatch()
   const [{ fromDefault, toDefault }] = useState({ fromDefault: from, toDefault: to })
-  const [{ fromCustom, toCustom }, applyFilters] = useState({})
+  const [{ fromCustom, toCustom }, applyFilters] = useState<any>() // TODO: fix this
 
   const onFilter = (hour: number) => {
     if (!fromCustom) {
