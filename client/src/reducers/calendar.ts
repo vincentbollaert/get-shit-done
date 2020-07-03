@@ -2,11 +2,25 @@ import { createSlice, nanoid } from '@reduxjs/toolkit'
 import format from 'date-fns/format'
 import { MONTH_DAYS, MONTH_DAYS_STRING, HOURS_IN_DAY } from '../constants'
 
-const initialState = {
+interface Task {
+  id: string,
+  time: number[],
+  name: string,
+  group: string
+}
+interface IInitialState {
+  taskBeingPrepared: any,
+  taskBeingEdited: any,
+  allTasksByDay: { tasks: Task[],
+  dateString: string }[],
+  hoursAxis: number[],
+  daysAxis: string[],
+}
+const initialState: IInitialState = {
   taskBeingPrepared: undefined,
   taskBeingEdited: {},
   allTasksByDay: MONTH_DAYS_STRING.map((dateString, index) => {
-    let tasks = []
+    let tasks: Task[] = []
     // if (index === 0) {
     //   tasks = [
     //     {
@@ -1955,9 +1969,68 @@ const initialState = {
         },
         {
           id: nanoid(),
-          time: [10, 14],
+          time: [10, 16],
+          name: 'frontend upskill',
+          group: 'upskill',
+        },
+        {
+          id: nanoid(),
+          time: [16, 16.5],
+          name: 'lunch',
+          group: 'essentials',
+        },
+        {
+          id: nanoid(),
+          time: [16.5, 18],
           name: 'frontend upskill',
           group: 'essentials',
+        },
+      ]
+    }
+  
+    if (index === 2) {
+      tasks = [
+        {
+          id: nanoid(),
+          time: [0, 6.5],
+          name: 'sleep',
+          group: 'essentials',
+        },
+        {
+          id: nanoid(),
+          time: [6.5, 7.25],
+          name: 'lie in bed',
+          group: 'laze',
+        },
+        {
+          id: nanoid(),
+          time: [7.25, 8.25],
+          name: 'morning routine',
+          group: 'essentials',
+        },
+        {
+          id: nanoid(),
+          time: [8.25, 8.75],
+          name: 'breakfast - pho',
+          group: 'essentials',
+        },
+        {
+          id: nanoid(),
+          time: [8.75, 9],
+          name: 'get to work',
+          group: 'essentials',
+        },
+        {
+          id: nanoid(),
+          time: [9, 10],
+          name: 'laze',
+          group: 'essentials',
+        },
+        {
+          id: nanoid(),
+          time: [10, 16],
+          name: 'frontend upskill',
+          group: 'upskill',
         },
       ]
     }

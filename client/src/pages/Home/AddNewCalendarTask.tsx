@@ -18,9 +18,9 @@ interface Props {
 
 const AddNewCalendarTask: FC<Props> = ({ dateString, timeFrom, onModalClose }) => {
   const dispatch = useDispatch()
-  const [selectedGroup, setSelectedGroup] = useState()
+  const [selectedGroup, setSelectedGroup] = useState<any>()
   const { groups } = useSelector((state: RootState) => state.settings)
-  const { register, handleSubmit, errors, watch } = useForm({ defaultValues: { from: timeFrom } })
+  const { register, handleSubmit, errors, watch } = useForm({ defaultValues: { from: timeFrom, to: '', name: '' } }) // fix this. is not correct shape
   const onSubmit = (data: any) => {
     dispatch(actions.addTask({ ...data, dateString, group: selectedGroup }))
     onModalClose()

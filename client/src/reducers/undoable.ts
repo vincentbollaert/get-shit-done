@@ -1,12 +1,12 @@
 // https://redux.js.org/recipes/implementing-undo-history/
 
-function undoable(reducer) {
-  const initialState = {
+function undoable(reducer: any) {
+  const initialState: { past: any, present: any } = {
     past: [],
     present: reducer(undefined, {}),
   }
 
-  return function(state = initialState, action) {
+  return function(state = initialState, action: any) {
     const { past, present } = state
 
     switch (action.type) {

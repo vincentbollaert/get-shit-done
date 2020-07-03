@@ -7,7 +7,7 @@ import AddNewCalendarTask from './AddNewCalendarTask'
 import { rgbAdjust, ellipsis } from '../../styles'
 import { RootState } from '../../Application/Root/reducers'
 
-const PlaceholderTaskWrap = styled.div<{ isBeingPrepared: boolean, accentColor: string }>`
+const PlaceholderTaskWrap = styled.div<{ isBeingPrepared: boolean, accentColor: string, top: number }>`
   ${ellipsis()};
   display: ${p => p.isBeingPrepared ? 'block' : 'none'};
   position: absolute;

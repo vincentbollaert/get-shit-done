@@ -5,8 +5,8 @@ interface Params {
   isFiltered?: boolean,
   from: number,
 }
-const UseSetCustomRangeLabels = ({ isBeingFiltered, isFiltered, from }: Params) => {
-  const [filteredRange, setFilteredRange] = useState([]) // find out how to TS useState
+const UseSetCustomRangeLabels = ({ isBeingFiltered, isFiltered, from }: Params): [number[], (current: number) => void] => {
+  const [filteredRange, setFilteredRange] = useState<number[]>([])
 
   const updateList = (current: number) => {
     if (!isBeingFiltered) return

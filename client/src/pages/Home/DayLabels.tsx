@@ -32,7 +32,7 @@ const Wrap = styled.div<{ isBeingFiltered: boolean }>`
     height: 50px;
   };
 `
-const DayLabel = styled.div<{ isBeingFiltered: boolean, isCurrentWeek: boolean, isCurrentDay: boolean, isActive: boolean, isFiltered: boolean }>`
+const DayLabel = styled.div<{ isBeingFiltered: boolean, isCurrentWeek?: boolean, isCurrentDay: boolean, isActive: boolean, isFiltered: boolean }>`
   ${flex({ grow: 1, shrink: 0, basis: 0, isCenter: true })};
   position: relative;
   border-bottom: 4px solid var(--jet);
@@ -93,7 +93,7 @@ const DayLabel = styled.div<{ isBeingFiltered: boolean, isCurrentWeek: boolean, 
       border-bottom: 4px solid var(--jet);
     };
 
-    & + ${DayLabel} {
+    & + .day-label-should-be-component-butTS {
       &::before {
         display: none;
       };
