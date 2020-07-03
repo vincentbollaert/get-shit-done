@@ -1971,7 +1971,7 @@ const initialState: IInitialState = {
           id: nanoid(),
           time: [10, 16],
           name: 'frontend upskill',
-          group: 'upskill',
+          group: 'improvement',
         },
         {
           id: nanoid(),
@@ -2030,7 +2030,7 @@ const initialState: IInitialState = {
           id: nanoid(),
           time: [10, 16],
           name: 'frontend upskill',
-          group: 'upskill',
+          group: 'improvement',
         },
       ]
     }
